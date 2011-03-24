@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://mt2win1:8090/TranslationService/Service.asmx?wsdl" docRef="http://mt2win1:8090/TranslationService/Service.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://mt2win1:8090/TranslationService/Service.asmx" xmlns:q1="http://www.tilde.com/" binding="q1:TranslationServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://mt2win1:8090/TranslationService/Service.asmx" xmlns:q2="http://www.tilde.com/" binding="q2:TranslationServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

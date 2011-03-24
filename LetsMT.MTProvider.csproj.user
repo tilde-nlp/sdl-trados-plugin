@@ -1,0 +1,6 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartAction>Project</StartAction>
+    <StartProgram>C:\Program Files\SDL\SDL MultiTerm\MultiTermSideBySide\Launch.exe" 2009 -close -execute "C:\Program Files\SDL\SDL Trados Studio\Studio1\SDLTradosStudio.exe</StartProgram>
+  </PropertyGroup>
+</Project>
