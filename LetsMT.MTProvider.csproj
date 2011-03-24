@@ -125,11 +125,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\TranslationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="band_aid.ico" />
@@ -147,13 +142,6 @@
     <None Include="Service References\LetsMTWebService\configuration.svcinfo" />
     <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
     <None Include="Service References\LetsMTWebService\service.disco" />
-    <None Include="Service References\TranslationService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\TranslationService\configuration.svcinfo" />
-    <None Include="Service References\TranslationService\configuration91.svcinfo" />
-    <None Include="Service References\TranslationService\Service.disco" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -206,17 +194,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\LetsMTWebService\service.wsdl" />
-    <None Include="Service References\TranslationService\LetsMT.MTProvider.TranslationService.SystemConfiguration.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TranslationService\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\LetsMTWebService\" />
-    <WCFMetadataStorage Include="Service References\TranslationService\" />
   </ItemGroup>
   <PropertyGroup>
     <CreatePluginPackage>true</CreatePluginPackage>
