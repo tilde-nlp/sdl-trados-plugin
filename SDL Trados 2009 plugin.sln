@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsMT.MTProvider", "LetsMT.MTProvider.csproj", "{5DF3208A-65A1-4988-B997-C361FC9C5A0A}"
 EndProject
 Global
@@ -8,8 +8,8 @@ Global
 		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://luke:8080/
-		SccProjectUniqueName0 = LetsMT.MTProvider.csproj
 		SccLocalPath0 = .
+		SccProjectUniqueName1 = LetsMT.MTProvider.csproj
 		SccLocalPath1 = .
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

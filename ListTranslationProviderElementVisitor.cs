@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Sdl.LanguagePlatform.Core;
 
@@ -8,7 +7,7 @@ namespace LetsMT.MTProvider
 {
     class ListTranslationProviderElementVisitor : ISegmentElementVisitor
     {
-        private ListTranslationOptions _options;
+        //private ListTranslationOptions _options;
         private string _plainText;
         
         public string PlainText
@@ -32,9 +31,9 @@ namespace LetsMT.MTProvider
             _plainText = "";
         }
 
-        public ListTranslationProviderElementVisitor(ListTranslationOptions options)
+        public ListTranslationProviderElementVisitor(/*ListTranslationOptions options*/)
         {
-            _options = options;
+            //_options = options;
         }
 
         #region ISegmentElementVisitor Members

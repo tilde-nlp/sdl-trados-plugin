@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Sdl.LanguagePlatform.Core;
 using Sdl.Core.Globalization;
@@ -21,78 +20,22 @@ namespace LetsMT.MTProvider
         #region "PrivateMembers"
         private LetsMTTranslationProvider _provider;
         private LanguagePair _languageDirection;
-        private ListTranslationOptions _options;
         private ListTranslationProviderElementVisitor _visitor;
-        //private TranslationService.TranslationServiceSoapClient _service;
-        private LetsMTWebService.TranslationWebServiceSoapClient _service;
-        //private Dictionary<string, string> _listOfTranslations;
-        
-        /// <summary>
-        /// Callback used to validate the certificate in an SSL conversation. This validator recognises all certificates as valid.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="certificate"></param>
-        /// <param name="chain"></param>
-        /// <param name="policyErrors"></param>
-        /// <returns></returns>
-        private static bool ValidateRemoteCertificate(
-        object sender,
-            X509Certificate certificate,
-            X509Chain chain,
-            SslPolicyErrors policyErrors
-        )
-        {
-            return true;
-        }
-
         #endregion
 
         #region "ITranslationProviderLanguageDirection Members"
 
         /// <summary>
-        /// Instantiates the variables and fills the list file content into
-        /// a Dictionary collection object.
+        /// Instantiates the variables and fills the list file content into a Dictionary collection object.
         /// </summary>
         /// <param name="provider"></param>
         /// <param name="languages"></param>
-        #region "ListTranslationProviderLanguageDirection"
         public ListTranslationProviderLanguageDirection(LetsMTTranslationProvider provider, LanguagePair languages)
         {
             _provider = provider;
             _languageDirection = languages;
-
-            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-
-            // Attach custom Certificate validator to pass validation of untrusted development certificate 
-            // TODO: This should be removed when trusted CA certificate will be used (or callback method have to do harder checking)
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
-
-            //_options = _provider.Options;
-            _visitor = new ListTranslationProviderElementVisitor(_options);
-            //System.ServiceModel.Channels.Binding binding = new System.ServiceModel.BasicHttpBinding();
-            //EndpointAddress endpoint = new EndpointAddress(resourceManager.GetString("TranslationServiceUrl"));
-            //_service = new TranslationService.TranslationServiceSoapClient(binding, endpoint);
-
-            // create Web Service client
-            string url = resourceManager.GetString("LetsMTWebServiceUrl");
-            System.ServiceModel.Channels.Binding binding = new System.ServiceModel.BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            EndpointAddress endpoint = new EndpointAddress(url);
-            //System.ServiceModel.HttpTransportSecurity.ClientCredentialType.
-
-            _service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
-            // provide authentication
-            NetworkCredential netCredential = new NetworkCredential(Properties.Settings.Default.user, Properties.Settings.Default.password, "");
-            _service.ClientCredentials.Windows.ClientCredential = netCredential.GetCredential(new Uri(url), "Basic");
-
-            File.WriteAllLines(@"c:\Temp\LetsMT.log", new string[] { 
-                url,
-                Properties.Settings.Default.applicationID, 
-                Properties.Settings.Default.systemID,
-                Properties.Settings.Default.user, 
-                Properties.Settings.Default.password }, Encoding.UTF8);
+            _visitor = new ListTranslationProviderElementVisitor(/*_options*/);
         }
-
-        #endregion
 
         public System.Globalization.CultureInfo SourceLanguage
         {
@@ -110,8 +53,7 @@ namespace LetsMT.MTProvider
         }
 
         /// <summary>
-        /// Performs the actual search by looping through the
-        /// delimited segment pairs contained in the text file.
+        /// Performs the actual search by looping through the delimited segment pairs contained in the text file.
         /// Depening on the search mode, a segment lookup (with exact machting) or a source / target
         /// concordance search is done.
         /// </summary>
@@ -134,7 +76,7 @@ namespace LetsMT.MTProvider
             results.SourceSegment = segment.Duplicate();
 
             Segment translation = new Segment(_languageDirection.TargetCulture);
-            string translText = _service.Translate(Properties.Settings.Default.applicationID, Properties.Settings.Default.systemID, _visitor.PlainText, "");
+            string translText = _provider.TranslateText(_languageDirection, _visitor.PlainText);
             translation.Add(translText);
             results.Add(CreateSearchResult(segment, translation));
             
