@@ -43,7 +43,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>$(LOCALAPPDATA)\SDL\SDL Trados Studio\9\Plugins\Packages\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,7 +52,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>$(LOCALAPPDATA)\SDL\SDL Trados Studio\9\Plugins\Packages\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -220,7 +220,8 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\9\Sdl.Core.PluginFramework.Build.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem rmdir /s /q "C:\Users\karlis.salitis\AppData\Local\SDL\SDL Trados Studio\9\Plugins\Unpacked\LetsMT.MTProvider"</PostBuildEvent>
+    <PostBuildEvent>rmdir /s /q "%25userprofile%25\AppData\Local\SDL\SDL Trados Studio\9\Plugins\Unpacked\LetsMT.MTProvider"
+copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trados Studio\9\Plugins\Packages\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
