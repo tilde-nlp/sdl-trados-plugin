@@ -12,12 +12,15 @@ namespace LetsMT.MTProvider
         private string m_systemFriendlyName;
         //System description
         private string m_systemFriendlyDescription;
+        //Online status
+        private string m_systemOnlineStatus;
 
-        public CMtSystem(string strSystemId, string strFriendlyName, string strFriendlyDescription)
+        public CMtSystem(string strSystemId, string strFriendlyName, string strFriendlyDescription, string strOnlineStatus)
         {
             m_systemId = strSystemId;
             m_systemFriendlyName = strFriendlyName;
             m_systemFriendlyDescription = strFriendlyDescription;
+            m_systemOnlineStatus = strOnlineStatus;
         }
 
         //Returns true if this system has the needed id
@@ -41,7 +44,7 @@ namespace LetsMT.MTProvider
         //Returns system as list item for listbox
         public ListItem GetListItem()
         {
-            return new ListItem(m_systemFriendlyName, m_systemId);
+            return new ListItem(string.Format("{0} ({1})", m_systemFriendlyName, m_systemOnlineStatus), m_systemId);
         }
     }
 }

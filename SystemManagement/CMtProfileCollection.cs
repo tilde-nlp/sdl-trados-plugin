@@ -57,8 +57,20 @@ namespace LetsMT.MTProvider
                 string strSysId = system.ID;
                 string strSysFriendlyName = system.Title.Value;
                 string strSysDescription = system.Description.Value;
+                string strSysOnlineStatus = "unknown";
 
-                CMtSystem refSystem = refProfile.AddSystem(strSysId, strSysFriendlyName, strSysDescription);
+                System.Collections.IEnumerator metaEnum = system.Metadata.GetEnumerator();
+                while(metaEnum.MoveNext())
+                {
+                    LetsMTWebService.ObjectProperty prop = metaEnum.Current as LetsMTWebService.ObjectProperty;
+                    if(prop.key == "status")
+                    {
+                        strSysOnlineStatus = prop.Value;
+                        break;
+                    }
+                }
+
+                CMtSystem refSystem = refProfile.AddSystem(strSysId, strSysFriendlyName, strSysDescription, strSysOnlineStatus);
 
                 m_systemList.Add(refSystem);
             }

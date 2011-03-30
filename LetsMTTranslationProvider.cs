@@ -91,14 +91,22 @@ namespace LetsMT.MTProvider
             return bCredentialsValid;
         }
 
-        public void GetProfileList()
+        public void DownloadProfileList(bool bForce = false)
         {
-            if (m_profileCollection != null)
+            if (m_profileCollection != null && !bForce)
                 return;
+
+            string state = null;
+
+            if(m_profileCollection != null)
+                 state = SerializeState();
 
             LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(null, null);
 
             m_profileCollection = new CMtProfileCollection(mtList);
+
+            if (state != null)
+                LoadState(state);
         }
 
         #region "ITranslationProvider Members"
@@ -110,7 +118,7 @@ namespace LetsMT.MTProvider
         public void LoadState(string translationProviderState)
         {
             if (m_profileCollection == null)
-                GetProfileList();
+                DownloadProfileList();
 
             m_profileCollection.DeserializeState(translationProviderState);
         }
@@ -118,7 +126,7 @@ namespace LetsMT.MTProvider
         public string SerializeState()
         {
             if (m_profileCollection == null)
-                GetProfileList();
+                DownloadProfileList();
 
             string state = m_profileCollection.SerializeState();
             
@@ -137,7 +145,7 @@ namespace LetsMT.MTProvider
         public bool SupportsLanguageDirection(LanguagePair languageDirection)
         {
             if (m_profileCollection == null)
-                GetProfileList();
+                DownloadProfileList();
 
             return m_profileCollection.HasProfile(languageDirection);
         }

@@ -67,7 +67,7 @@ namespace LetsMT.MTProvider
             if (editProvider == null)
                 return false;
 
-            editProvider.GetProfileList();
+            editProvider.DownloadProfileList(true);
 
             SettingsForm settings = new SettingsForm(ref editProvider, languagePairs);
             if(settings.ShowDialog(owner) == DialogResult.OK)

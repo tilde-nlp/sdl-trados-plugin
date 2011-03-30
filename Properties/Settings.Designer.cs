@@ -22,53 +22,5 @@ namespace LetsMT.MTProvider.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("bob")]
-        public string user {
-            get {
-                return ((string)(this["user"]));
-            }
-            set {
-                this["user"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("m")]
-        public string password {
-            get {
-                return ((string)(this["password"]));
-            }
-            set {
-                this["password"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Tilde")]
-        public string applicationID {
-            get {
-                return ((string)(this["applicationID"]));
-            }
-            set {
-                this["applicationID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("system-en-lv-it")]
-        public string systemID {
-            get {
-                return ((string)(this["systemID"]));
-            }
-            set {
-                this["systemID"] = value;
-            }
-        }
     }
 }

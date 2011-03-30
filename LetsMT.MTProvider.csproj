@@ -23,7 +23,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -221,7 +221,7 @@
   <Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\9\Sdl.Core.PluginFramework.Build.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem rmdir /s /q "%25userprofile%25\AppData\Local\SDL\SDL Trados Studio\9\Plugins\Unpacked\LetsMT.MTProvider"
-copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trados Studio\9\Plugins\Packages\"</PostBuildEvent>
+rem copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trados Studio\9\Plugins\Packages\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
