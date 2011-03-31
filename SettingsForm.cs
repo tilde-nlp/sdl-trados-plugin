@@ -14,6 +14,7 @@ namespace LetsMT.MTProvider
     {
         private LetsMTTranslationProvider m_translationProvider;
         private Dictionary<string, string> m_checkedState;
+        private LanguagePair[] m_pairs;
 
         public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs)
         {
@@ -30,9 +31,18 @@ namespace LetsMT.MTProvider
             wndProfileProperties.ValueMember = "value";
 
             m_translationProvider = editProvider;
-
-            List<ListItem> profiles = m_translationProvider.m_profileCollection.GetProfileList();
+            m_pairs = languagePairs;
             m_checkedState = new Dictionary<string, string>();
+
+            FillProfileList();
+        }
+
+        private void FillProfileList()
+        {
+            wndTranslationDirections.Items.Clear();
+            wndProfileProperties.Items.Clear();
+
+            List<ListItem> profiles = m_translationProvider.m_profileCollection.GetProfileList(wndRunningSystems.Checked);
 
             foreach (ListItem item in profiles)
             {
@@ -42,9 +52,9 @@ namespace LetsMT.MTProvider
             //Select the profile if only one given (settings clicked on specific profile)
             bool bHasSelection = false;
 
-            if (languagePairs.Length == 1)
+            if (m_pairs.Length == 1)
             {
-                string singleLang = languagePairs[0].SourceCulture.TwoLetterISOLanguageName + " - " + languagePairs[0].TargetCulture.TwoLetterISOLanguageName;
+                string singleLang = string.Format("{0} - {1}", m_pairs[0].SourceCulture.TwoLetterISOLanguageName, m_pairs[0].TargetCulture.TwoLetterISOLanguageName);
                 int index = -1;
                 foreach (object addedProfile in wndTranslationDirections.Items)
                 {
@@ -57,11 +67,11 @@ namespace LetsMT.MTProvider
                         break;
                     }
                 }
-                
+
             }
-            
+
             //Select the first profile from global settings
-            if(!bHasSelection)
+            if (!bHasSelection)
             {
                 if (wndTranslationDirections.Items.Count > 0)
                     wndTranslationDirections.SetSelected(0, true);
@@ -79,7 +89,7 @@ namespace LetsMT.MTProvider
 
                 string valSelected = item.Value.ToString();
 
-                List<ListItem> systems = m_translationProvider.m_profileCollection.GetProfileSystemList(valSelected);
+                List<ListItem> systems = m_translationProvider.m_profileCollection.GetProfileSystemList(valSelected, wndRunningSystems.Checked);
 
                 foreach (ListItem system in systems)
                 {
@@ -165,6 +175,11 @@ namespace LetsMT.MTProvider
                 m_checkedState[profile.Value] = strNewValue;
             else
                 m_checkedState.Add(profile.Value, strNewValue);            
+        }
+
+        private void wndRunningSystems_CheckedChanged(object sender, EventArgs e)
+        {
+            FillProfileList();
         }
     }
 

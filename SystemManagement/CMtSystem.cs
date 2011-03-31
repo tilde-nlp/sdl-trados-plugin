@@ -41,6 +41,12 @@ namespace LetsMT.MTProvider
             return m_systemFriendlyDescription;
         }
 
+        //Returns online status
+        public string GetOnlineStatus()
+        {
+            return m_systemOnlineStatus;
+        }
+
         //Returns system as list item for listbox
         public ListItem GetListItem()
         {

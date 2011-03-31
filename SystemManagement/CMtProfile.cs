@@ -39,6 +39,23 @@ namespace LetsMT.MTProvider
             return IsProfile(profile);
         }
 
+        //Checks if profile has running systems
+        public bool HasOnlineSystems()
+        {
+            bool bHasRunningSystem = false;
+
+            foreach (CMtSystem system in m_availableSystems)
+            {
+                if (system.GetOnlineStatus() == "running")
+                {
+                    bHasRunningSystem = true;
+                    break;
+                }
+            }
+
+            return bHasRunningSystem;
+        }
+
         //Gets list item for listbox
         public ListItem GetListItem()
         {
@@ -90,13 +107,14 @@ namespace LetsMT.MTProvider
         }
 
         //Gets all systems available for this profile as list items
-        public List<ListItem> GetSystemList()
+        public List<ListItem> GetSystemList(bool bFiltered)
         {
             List<ListItem> systems = new List<ListItem>();
 
             foreach(CMtSystem system in m_availableSystems)
             {
-                systems.Add(system.GetListItem());
+                if (!bFiltered || system.GetOnlineStatus() == "running")
+                    systems.Add(system.GetListItem());
             }
 
             return systems;

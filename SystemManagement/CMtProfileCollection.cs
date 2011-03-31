@@ -77,20 +77,21 @@ namespace LetsMT.MTProvider
         }
 
         //Get profiles as listbox items
-        public List<ListItem> GetProfileList()
+        public List<ListItem> GetProfileList(bool bFiltered = false)
         {
             List<ListItem> profiles = new List<ListItem>();
 
             foreach (CMtProfile profile in m_profileList)
             {
-                profiles.Add(profile.GetListItem());
+                if(!bFiltered || profile.HasOnlineSystems())
+                    profiles.Add(profile.GetListItem());
             }
 
             return profiles;
         }
 
         //Get systems of the required profile as listbox items
-        public List<ListItem> GetProfileSystemList(string strProfileId)
+        public List<ListItem> GetProfileSystemList(string strProfileId, bool bFiltered = false)
         {
             List<ListItem> systems = new List<ListItem>();
 
@@ -98,7 +99,7 @@ namespace LetsMT.MTProvider
             {
                 if (profile.IsProfile(strProfileId))
                 {
-                    systems = profile.GetSystemList();
+                    systems = profile.GetSystemList(bFiltered);
                     break;
                 }
             }

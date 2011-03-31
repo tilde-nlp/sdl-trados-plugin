@@ -33,6 +33,7 @@
             this.wndDescription = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.wndRunningSystems = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // wndTranslationDirections
@@ -65,7 +66,8 @@
             this.wndDescription.Name = "wndDescription";
             this.wndDescription.ReadOnly = true;
             this.wndDescription.Size = new System.Drawing.Size(371, 112);
-            this.wndDescription.TabIndex = 2;
+            this.wndDescription.TabIndex = 5;
+            this.wndDescription.TabStop = false;
             // 
             // btnOk
             // 
@@ -87,11 +89,25 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // wndRunningSystems
+            // 
+            this.wndRunningSystems.AutoSize = true;
+            this.wndRunningSystems.Checked = true;
+            this.wndRunningSystems.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.wndRunningSystems.Location = new System.Drawing.Point(12, 307);
+            this.wndRunningSystems.Name = "wndRunningSystems";
+            this.wndRunningSystems.Size = new System.Drawing.Size(153, 17);
+            this.wndRunningSystems.TabIndex = 2;
+            this.wndRunningSystems.Text = "Show only running systems";
+            this.wndRunningSystems.UseVisualStyleBackColor = true;
+            this.wndRunningSystems.CheckedChanged += new System.EventHandler(this.wndRunningSystems_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 338);
+            this.Controls.Add(this.wndRunningSystems);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.wndDescription);
@@ -115,5 +131,6 @@
         private System.Windows.Forms.TextBox wndDescription;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.CheckBox wndRunningSystems;
     }
 }
