@@ -152,6 +152,7 @@
     <None Include="Service References\LetsMTWebService\configuration.svcinfo" />
     <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
     <None Include="Service References\LetsMTWebService\service.disco" />
+    <None Include="setupscript.nsi" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
