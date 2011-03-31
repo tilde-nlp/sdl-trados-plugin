@@ -18,7 +18,7 @@ namespace LetsMT.MTProvider
         /// Determines whether the plug-in settings can be changed by displaying the Settings button in SDL Trados Studio.
         /// </summary>
         public bool SupportsEditing { get { return true; } }
-        public string TypeName { get { return PluginResources.Plugin_NiceName; } }
+        public string TypeName { get { return PluginResources.Plugin_NiceName + "..."; } }
         public string TypeDescription { get { return PluginResources.Plugin_Description; } }
 
         /// <summary>

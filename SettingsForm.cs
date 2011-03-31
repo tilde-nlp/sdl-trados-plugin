@@ -21,6 +21,8 @@ namespace LetsMT.MTProvider
 
             InitializeComponent();
 
+            Text = PluginResources.Plugin_NiceName + " Settings";
+
             wndTranslationDirections.DisplayMember = "text";
             wndTranslationDirections.ValueMember = "value";
 

@@ -77,7 +77,7 @@
             this.btnOk.Location = new System.Drawing.Point(150, 110);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 5;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -87,7 +87,7 @@
             this.btnCancel.Location = new System.Drawing.Point(231, 110);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -100,7 +100,7 @@
             this.wndRemember.Location = new System.Drawing.Point(15, 114);
             this.wndRemember.Name = "wndRemember";
             this.wndRemember.Size = new System.Drawing.Size(77, 17);
-            this.wndRemember.TabIndex = 6;
+            this.wndRemember.TabIndex = 4;
             this.wndRemember.Text = "Remember";
             this.wndRemember.UseVisualStyleBackColor = true;
             // 
@@ -121,7 +121,7 @@
             this.MinimizeBox = false;
             this.Name = "PasswordForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "LetsMT! Password";
+            this.Text = "LetsMT! Authentication";
             this.ResumeLayout(false);
             this.PerformLayout();
 
