@@ -1,8 +1,11 @@
 # Setup script for NSIS v2.46+ (Nullsoft Scriptable Install System - http://nsis.sourceforge.net)
 !include WinVer.nsh
 
+# define title of the setup
+Name "LetsMT! Machine Translation Provider"
+
 # define installer name
-outFile "LetsMTPlugin.exe"
+outFile "LetsMTProvider.exe"
 
 # run as user, no UAC
 RequestExecutionLevel user
@@ -19,7 +22,7 @@ ${EndIf}
 FunctionEnd 
 
 # The text to prompt the user to enter a directory
-DirText "Please select Trados plugin directory"
+DirText "Please select SDL Trados plugin directory"
 
 # default section start
 section
@@ -33,8 +36,8 @@ file C:\TFSProjects_VS10\Luke\LetsMT!\SDLTradosPlugin\LetsMT.MTProvider.sdlplugi
 # define uninstaller name
 writeUninstaller $INSTDIR\uninstaller.exe
 
-CreateDirectory "$SMPROGRAMS\LetsMT! Trados plugin"
-CreateShortCut "$SMPROGRAMS\LetsMT! Trados plugin\Uninstall.lnk" "$INSTDIR\uninstaller.exe"
+CreateDirectory "$SMPROGRAMS\LetsMT! Machine Translation Provider"
+CreateShortCut "$SMPROGRAMS\LetsMT! Machine Translation Provider\Uninstall.lnk" "$INSTDIR\uninstaller.exe"
  
 # default section end
 sectionEnd
@@ -56,7 +59,7 @@ delete $INSTDIR\..\Unpacked\LetsMT.MTProvider\LetsMT.MTProvider.plugin.xml
 delete $INSTDIR\..\Unpacked\LetsMT.MTProvider\pluginpackage.manifest.xml
 RMDIR $INSTDIR\..\Unpacked\LetsMT.MTProvider\
 
-Delete "$SMPROGRAMS\LetsMT! Trados plugin\Uninstall.lnk"
-RMDIR "$SMPROGRAMS\LetsMT! Trados plugin"
+Delete "$SMPROGRAMS\LetsMT! Machine Translation Provider\Uninstall.lnk"
+RMDIR "$SMPROGRAMS\LetsMT! Machine Translation Provider"
  
 sectionEnd
