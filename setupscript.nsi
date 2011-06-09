@@ -17,7 +17,7 @@ ${If} ${AtLeastWinVista}
 StrCpy $INSTDIR "$LOCALAPPDATA\SDL\SDL Trados Studio\9\Plugins\Packages"
 ${Else}
 # set appdata folder as install directory 
-StrCpy $INSTDIR "$APPDATA\SDL\SDL Trados Studio\9\Plugins\Packages"
+StrCpy $INSTDIR "$APPDATA\..\Local Settings\Application Data\SDL\SDL Trados Studio\9\Plugins\Packages"
 ${EndIf}
 FunctionEnd 
 
