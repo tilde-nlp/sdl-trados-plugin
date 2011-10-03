@@ -47,7 +47,7 @@ namespace LetsMT.MTProvider
             TranslationProviderInfo info = new TranslationProviderInfo(); //User friendly name and translation method entry point
 
             info.Name = PluginResources.Plugin_NiceName;
-            info.TranslationMethod = ListTranslationOptions.ProviderTranslationMethod; //TODO: get from provider, merge options and provider?
+            info.TranslationMethod = LetsMTTranslationProviderOptions.ProviderTranslationMethod; //TODO: get from provider, merge options and provider?
 
             return info;
         }

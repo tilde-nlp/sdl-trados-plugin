@@ -37,7 +37,7 @@ namespace LetsMT.MTProvider
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
 
             if(system != "")
-                return m_service.Translate(null, system, text, null);
+                return m_service.Translate("LetsMT_Trados_Plugin", system, text, null);
 
             //return "";
             throw new Exception("Default system not selected.");
@@ -84,7 +84,7 @@ namespace LetsMT.MTProvider
         {
             bool bCredentialsValid = false;
 
-            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(null, null);
+            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList("LetsMT_Trados_Plugin", null);
 
             bCredentialsValid = true;
 
@@ -101,7 +101,7 @@ namespace LetsMT.MTProvider
             if(m_profileCollection != null)
                  state = SerializeState();
 
-            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(null, null);
+            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList("LetsMT_Trados_Plugin", null);
 
             m_profileCollection = new CMtProfileCollection(mtList);
 
@@ -112,7 +112,7 @@ namespace LetsMT.MTProvider
         #region "ITranslationProvider Members"
         public ITranslationProviderLanguageDirection GetLanguageDirection(LanguagePair languageDirection)
         {
-            return new ListTranslationProviderLanguageDirection(this, languageDirection);
+            return new LetsMTTranslationProviderLanguageDirection(this, languageDirection);
         }
 
         public void LoadState(string translationProviderState)
@@ -154,7 +154,7 @@ namespace LetsMT.MTProvider
         {
             get
             {
-                Uri uri = new ListTranslationOptions().Uri;
+                Uri uri = new LetsMTTranslationProviderOptions().Uri;
                 return uri;
             }
         }
@@ -168,13 +168,13 @@ namespace LetsMT.MTProvider
         public bool SupportsFuzzySearch { get { return false; } }
         public bool SupportsMultipleResults { get { return false; } }
         public bool SupportsPenalties { get { return false; } }
-        public bool SupportsPlaceables { get { return false; } }
+        public bool SupportsPlaceables { get { return true; } }
         public bool SupportsScoring { get { return false; } }
         public bool SupportsSearchForTranslationUnits { get { return true; } }
         public bool SupportsSourceConcordanceSearch { get { return false; } }
         public bool SupportsTargetConcordanceSearch { get { return false; } }
         public bool SupportsStructureContext { get { return false; } }
-        public bool SupportsTaggedInput { get { return false; } }
+        public bool SupportsTaggedInput { get { return true; } }
         public bool SupportsTranslation { get { return true; } }
         public bool SupportsUpdate { get { return false; } }
         public bool SupportsWordCounts { get { return false; } }

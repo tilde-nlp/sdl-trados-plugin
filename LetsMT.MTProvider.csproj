@@ -100,12 +100,11 @@
     <Compile Include="SystemManagement\CMtProfile.cs" />
     <Compile Include="SystemManagement\CMtProfileCollection.cs" />
     <Compile Include="SystemManagement\CMtSystem.cs" />
-    <Compile Include="ListTranslationOptions.cs" />
+    <Compile Include="LetsMTTranslationProviderOptions.cs" />
     <Compile Include="LetsMTTranslationProvider.cs" />
-    <Compile Include="ListTranslationProviderElementVisitor.cs" />
     <Compile Include="LetsMTProviderFactory.cs" />
-    <Compile Include="ListTranslationProviderWinFormsUI.cs" />
-    <Compile Include="ListTranslationProviderLanguageDirection.cs" />
+    <Compile Include="LetsMTTranslationProviderWinFormsUI.cs" />
+    <Compile Include="LetsMTTranslationProviderLanguageDirection.cs" />
     <Compile Include="PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +138,8 @@
   <ItemGroup>
     <Content Include="band_aid.ico" />
     <Content Include="band_aid.png" />
+    <None Include="ClassDiagram3.cd" />
+    <None Include="Service References\LetsMTWebService\service1.disco" />
     <EmbeddedResource Include="PluginResources.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -151,7 +152,7 @@
     </None>
     <None Include="Service References\LetsMTWebService\configuration.svcinfo" />
     <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
-    <None Include="Service References\LetsMTWebService\service.disco" />
+    <None Include="Service References\LetsMTWebService\service1.wsdl" />
     <None Include="setupscript.nsi" />
   </ItemGroup>
   <ItemGroup>
@@ -207,7 +208,6 @@
     <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.SentenceBoundary.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\LetsMTWebService\service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

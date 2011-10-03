@@ -9,18 +9,18 @@ namespace LetsMT.MTProvider
     /// <summary>
     /// This class is used to hold the provider plug-in settings. All settings are automatically stored in a URI.
     /// </summary>
-    public class ListTranslationOptions
+    public class LetsMTTranslationProviderOptions
     {
         public static readonly TranslationMethod ProviderTranslationMethod = TranslationMethod.MachineTranslation;
         private TranslationProviderUriBuilder m_uriBuilder;
 
-        public ListTranslationOptions()
+        public LetsMTTranslationProviderOptions()
         {
             m_uriBuilder = new TranslationProviderUriBuilder(LetsMTTranslationProvider.TranslationProviderScheme);
             //SetStringParameter("param1", "value1");
         }
 
-        //public ListTranslationOptions(Uri uri)
+        //public LetsMTTranslationProviderOptions(Uri uri)
         //{
         //    m_uriBuilder = new TranslationProviderUriBuilder(uri);
         //}

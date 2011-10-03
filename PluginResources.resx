@@ -140,6 +140,6 @@
     <value>http://mt2win1:8100/TranslationService/Service.asmx</value>
   </data>
   <data name="LetsMTWebServiceUrl" xml:space="preserve">
-    <value>https://demo.letsmt.eu/ws/Service.asmx</value>
+    <value>https://usma:443/ws/Service.asmx</value>
   </data>
 </root>

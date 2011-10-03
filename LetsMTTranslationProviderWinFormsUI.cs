@@ -8,9 +8,9 @@ using Sdl.LanguagePlatform.TranslationMemoryApi;
 
 namespace LetsMT.MTProvider
 {
-    [TranslationProviderWinFormsUi(Id = "ListTranslationProviderWinFormsUI")]
+    [TranslationProviderWinFormsUi(Id = "LetsMTTranslationProviderWinFormsUI")]
 
-    public class ListTranslationProviderWinFormsUI : ITranslationProviderWinFormsUI
+    public class LetsMTTranslationProviderWinFormsUI : ITranslationProviderWinFormsUI
     {
         #region ITranslationProviderWinFormsUI Members
 
@@ -30,7 +30,7 @@ namespace LetsMT.MTProvider
         /// <returns></returns>
         public ITranslationProvider[] Browse(IWin32Window owner, LanguagePair[] languagePairs, ITranslationProviderCredentialStore credentialStore)
         {
-            ListTranslationOptions opts = new ListTranslationOptions();
+            LetsMTTranslationProviderOptions opts = new LetsMTTranslationProviderOptions();
 
             PasswordForm pf = new PasswordForm();
 
