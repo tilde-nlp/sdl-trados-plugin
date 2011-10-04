@@ -43,6 +43,93 @@ namespace LetsMT.MTProvider
             _languageDirection = languages;
         }
 
+        static string Segment2Html(Sdl.LanguagePlatform.Core.Segment segment)
+        {
+            var stringBuilder = new StringBuilder();
+            foreach (var element in segment.Elements)
+            {
+                var text = element as Sdl.LanguagePlatform.Core.Text;
+                if (text != null)
+                {
+                    stringBuilder.Append(text.Value);
+                }
+                else
+                {
+                    var tag = element as Sdl.LanguagePlatform.Core.Tag;
+                    if (tag != null)
+                    {
+                        switch (tag.Type)
+                        {
+                            case Sdl.LanguagePlatform.Core.TagType.Start:
+                                stringBuilder.AppendFormat("<span class='{0}' id='{1}'>",
+                                        tag.Type, tag.Anchor);
+                                break;
+                            case Sdl.LanguagePlatform.Core.TagType.End:
+                                stringBuilder.AppendFormat("</span>");
+                                break;
+                            case Sdl.LanguagePlatform.Core.TagType.Standalone:
+                            case Sdl.LanguagePlatform.Core.TagType.TextPlaceholder:
+                            case Sdl.LanguagePlatform.Core.TagType.LockedContent:
+                                stringBuilder.AppendFormat("<span class='{0}' id='{1}'></span>",
+                                         tag.Type, tag.Anchor);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            return stringBuilder.ToString();
+        }
+
+        static Sdl.LanguagePlatform.Core.Segment TranslatedHtml2Segment(Sdl.LanguagePlatform.Core.Segment sourceSegment, string translatedText)
+        {
+            var htmlTagName = "span"; // the only we feed for translation is span, so we expect the translation only has span tags too.
+            var xmlFragment = "<segment>" + translatedText + "</segment>";
+            var xmlReader = new System.Xml.XmlTextReader(xmlFragment, System.Xml.XmlNodeType.Element, null);
+            var tagStack = new Stack<Sdl.LanguagePlatform.Core.Tag>();
+            var translatedSegment = new Sdl.LanguagePlatform.Core.Segment();
+            while (xmlReader.Read())
+            {
+                switch (xmlReader.NodeType)
+                {
+                    case System.Xml.XmlNodeType.Element:
+                        if (xmlReader.Name == htmlTagName)
+                        {
+                            var tagClass = xmlReader.GetAttribute("class");
+                            var tagType = (Sdl.LanguagePlatform.Core.TagType)
+                                 Enum.Parse(typeof(Sdl.LanguagePlatform.Core.TagType), tagClass);
+                            int id = Convert.ToInt32(xmlReader.GetAttribute("id"));
+                            Sdl.LanguagePlatform.Core.Tag sourceTag = sourceSegment.FindTag(tagType, id);
+                            if (sourceTag.Type == Sdl.LanguagePlatform.Core.TagType.Start)
+                            {
+                                tagStack.Push(sourceTag);
+                            }
+                            translatedSegment.Add(sourceTag.Duplicate());
+                        }
+                        break;
+                    case System.Xml.XmlNodeType.EndElement:
+                        {
+                            if (xmlReader.Name == htmlTagName)
+                            {
+                                var startTag = tagStack.Pop();
+                                var endTag = sourceSegment.FindTag(
+                                   Sdl.LanguagePlatform.Core.TagType.End, startTag.Anchor);
+                                translatedSegment.Add(endTag.Duplicate());
+                            }
+                        }
+                        break;
+                    case System.Xml.XmlNodeType.Text:
+                        translatedSegment.Add(xmlReader.Value);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return translatedSegment;
+        }
+
+
         public System.Globalization.CultureInfo SourceLanguage
         {
             get { return _languageDirection.SourceCulture; }
@@ -69,173 +156,20 @@ namespace LetsMT.MTProvider
         #region "SearchSegment"
         public SearchResults SearchSegment(SearchSettings settings, Segment segment)
         {
-            string strSourceText = "";
-            foreach (var element in segment.Elements)
-            {
-                //MessageBox.Show(element.GetType().ToString());
-                strSourceText += element.ToString();
-            }
 
-            SearchResults results = new SearchResults();
-            results.SourceSegment = segment.Duplicate();
-
-            Segment translation = new Segment(_languageDirection.TargetCulture);
-
-            string input = strSourceText;
-
-
-
-
-
-            List<ReplacementFragment> rplist = new List<ReplacementFragment>();
-
-            //Regex tagregex = new Regex("</?\\w+((\\s+[-\\w]+(\\s*=\\s*(?:\".*?\"|'.*?'|[^'\">\\s]+))?)+\\s*|\\s*)/?>");
-            Regex tagregex = new Regex("<(?<closing>/)?(?<tagname>\\w+)((\\s+(?<attrname>[-\\w]+)(\\s*=\\s*(?<attrval>\".*?\"|'.*?'|[^'\">\\s]+))?)+\\s*|\\s*)(?<selfclosing>/)?>");
-
-            Match m = tagregex.Match(input);
-
-            while (m.Success)
-            {
-                TagTypeEnum curTagType = TagTypeEnum.Opening;
-
-                string strTagName = "";
-
-                if (m.Groups["closing"].Captures.Count == 1) { curTagType = TagTypeEnum.Closing; }
-                else if (m.Groups["selfclosing"].Captures.Count == 1) { curTagType = TagTypeEnum.SelfClosing; }
-
-                if (m.Groups["tagname"].Captures.Count == 1)
-                {
-                    strTagName = m.Groups["tagname"].Captures[0].Value;
-
-                    string replacement = string.Format("<{0}span{1}{2}>",
-                                                       ((curTagType == TagTypeEnum.Closing) ? "/" : ""),
-                                                       ((curTagType != TagTypeEnum.Closing) ? " id=\"" + strTagName + "\"" : ""),
-                                                       ((curTagType == TagTypeEnum.SelfClosing) ? " /" : ""));
-
-                    rplist.Add(new ReplacementFragment(m.Index, m.Length, strTagName, curTagType, m.Value, replacement));
-                }
-
-                m = m.NextMatch();
-            }
-
-            rplist.Sort((t1, t2) => t1.GetOffset() - t2.GetOffset());
-
-            StringBuilder output = new StringBuilder(input.Length);
-
-            int currentReplacement = 0;
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                if (rplist.Count > currentReplacement && rplist[currentReplacement].GetOffset() == i)
-                {
-                    output.Append(rplist[currentReplacement].GetReplacement());
-                    i += rplist[currentReplacement].GetLength() - 1;
-                    currentReplacement++;
-                    continue;
-                }
-                else
-                {
-                    output.Append(input[i]);
-                }
-            }
-
-            strSourceText = output.ToString();
-
-
-
-
+            // segments taggs ar converted to html tags
+            string strSourceText = Segment2Html(segment);
+            //segmet with translated htmlgs are translated with letsMT api
             string translText = _provider.TranslateText(_languageDirection, strSourceText);
 
-
-
-
-            input = translText;
-
-            Stack<string> openTags = new Stack<string>();
-
-            List<ReplacementFragment> rplistout = new List<ReplacementFragment>();
-
-            m = tagregex.Match(input);
-
-            while (m.Success)
-            {
-                TagTypeEnum curTagType = TagTypeEnum.Opening;
-
-                if (m.Groups["closing"].Captures.Count == 1) { curTagType = TagTypeEnum.Closing; }
-                else if (m.Groups["selfclosing"].Captures.Count == 1) { curTagType = TagTypeEnum.SelfClosing; }
-
-                if (curTagType == TagTypeEnum.SelfClosing || curTagType == TagTypeEnum.Opening)
-                {
-                    string strTagId = "";
-
-                    if (m.Groups["attrname"].Captures.Count == 1 && m.Groups["attrval"].Captures.Count == 1)
-                    {
-                        strTagId = m.Groups["attrval"].Captures[0].Value.Trim("\"".ToCharArray());
-                    }
-
-                    if (curTagType == TagTypeEnum.Opening)
-                    {
-                        openTags.Push(strTagId);
-                    }
-
-                    string replacement = "";
-                    for (int i = 0; i < rplist.Count; i++)
-                    {
-                        if (rplist[i].GetTagName() == strTagId && rplist[i].GetTagType() == curTagType)
-                        {
-                            replacement = rplist[i].GetOriginal();
-                            break;
-                        }
-                    }
-
-                    rplistout.Add(new ReplacementFragment(m.Index, m.Length, strTagId, curTagType, m.Value, replacement));
-                }
-                else if (curTagType == TagTypeEnum.Closing)
-                {
-                    string replacement = string.Format("</{0}>", openTags.Pop());
-                    rplistout.Add(new ReplacementFragment(m.Index, m.Length, "span", curTagType, m.Value, replacement));
-                }
-
-                m = m.NextMatch();
-            }
-
-            rplistout.Sort((t1, t2) => t1.GetOffset() - t2.GetOffset());
-
-            StringBuilder outputtr = new StringBuilder(input.Length);
-
-            /*int*/
-            currentReplacement = 0;
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                if (rplistout.Count > currentReplacement && rplistout[currentReplacement].GetOffset() == i)
-                {
-                    outputtr.Append(rplistout[currentReplacement].GetReplacement());
-                    i += rplistout[currentReplacement].GetLength() - 1;
-                    currentReplacement++;
-                    continue;
-                }
-                else
-                {
-                    outputtr.Append(input[i]);
-                }
-            }
-
-            translText = outputtr.ToString();
-
-
-
-
-
-            translation.Add(translText);
-
-
-
-
-
-
+            Segment translation = new Segment(_languageDirection.TargetCulture);
+            //trasnlated text with html is converted to trados text segment with trados tags 
+            translation=TranslatedHtml2Segment(segment, translText);
+            //result is stored as SearchResults
+            SearchResults results = new SearchResults();
+            results.SourceSegment = segment.Duplicate();
             results.Add(CreateSearchResult(segment, translation));
-            
+
             return results;
         }
         #endregion
@@ -465,6 +399,8 @@ namespace LetsMT.MTProvider
         public string GetOriginal() { return m_strOriginal; }
         public string GetReplacement() { return m_strReplacement; }
     }
+
+
 
 
 

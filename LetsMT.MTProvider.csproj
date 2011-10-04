@@ -97,6 +97,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service References\LetsMTWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SystemManagement\CMtProfile.cs" />
     <Compile Include="SystemManagement\CMtProfileCollection.cs" />
     <Compile Include="SystemManagement\CMtSystem.cs" />
@@ -123,11 +128,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Service References\LetsMTWebService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,21 +138,27 @@
   <ItemGroup>
     <Content Include="band_aid.ico" />
     <Content Include="band_aid.png" />
-    <None Include="ClassDiagram3.cd" />
-    <None Include="Service References\LetsMTWebService\service1.disco" />
-    <EmbeddedResource Include="PluginResources.resx">
-      <SubType>Designer</SubType>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <Content Include="pluginpackage.manifest.xml" />
+    <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.MTSystem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.SentenceBoundary.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\LetsMTWebService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\LetsMTWebService\configuration.svcinfo" />
     <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
-    <None Include="Service References\LetsMTWebService\service1.wsdl" />
+    <None Include="Service References\LetsMTWebService\Service.disco" />
+    <None Include="ClassDiagram3.cd" />
+    <EmbeddedResource Include="PluginResources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="pluginpackage.manifest.xml" />
+    <None Include="Service References\LetsMTWebService\Service.wsdl" />
     <None Include="setupscript.nsi" />
   </ItemGroup>
   <ItemGroup>
@@ -201,12 +207,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.MTSystem.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.SentenceBoundary.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
