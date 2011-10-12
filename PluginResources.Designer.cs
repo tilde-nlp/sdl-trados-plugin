@@ -75,7 +75,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://demo.letsmt.eu/ws/Service.asmx.
+        ///   Looks up a localized string similar to https://www.letsmt.eu/ws/Service.asmx.
         /// </summary>
         public static string LetsMTWebServiceUrl {
             get {

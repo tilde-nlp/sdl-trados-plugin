@@ -12,6 +12,10 @@ using LetsMT.MTProvider;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 
+using System.Security;
+using System.Security.Permissions;
+using System.Windows.Forms;
+
 namespace LetsMT.MTProvider
 {
     public class LetsMTTranslationProvider : ITranslationProvider
@@ -52,7 +56,40 @@ namespace LetsMT.MTProvider
             // create Web Service client
             string url = resourceManager.GetString("LetsMTWebServiceUrl");
             BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            //try to read Software\\Tilde\\LetsMT\\url registry string entry and it it exists replace the link
+            try
+            {
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
+                //MessageBox.Show(key.GetValue("url", "none").ToString());
+                if ( key != null)
+                {
+                    string RegUrl = key.GetValue("url", "none").ToString();
+                    if (RegUrl.Length > 3)
+                    {
+                        if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
+                    }
+                }
+
+            }
+            catch (SecurityException)
+            {
+               
+            }
+            catch (ArgumentNullException)
+            {
+              
+            }
+            catch (ObjectDisposedException)
+            {
+              
+            }
+            catch (IOException)
+            {
+              
+            }
+
 
             EndpointAddress endpoint = new EndpointAddress(url);
 
