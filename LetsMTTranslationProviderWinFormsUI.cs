@@ -36,7 +36,7 @@ namespace LetsMT.MTProvider
 
             if (pf.ShowDialog(owner) == DialogResult.OK)
             {
-                string credentials = string.Format("{0}\t{1}", pf.strUsername, pf.strPassword);
+                string credentials = string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId);
 
                 TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
 
@@ -93,7 +93,7 @@ namespace LetsMT.MTProvider
 
             if (pf.ShowDialog(owner) == DialogResult.OK)
             {
-                TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}", pf.strUsername, pf.strPassword), pf.bRemember);
+                TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId), pf.bRemember);
 
                 credentialStore.AddCredential(translationProviderUri, tc);
 

@@ -25,6 +25,7 @@ namespace LetsMT.MTProvider
         ///</summary>
         public static readonly string TranslationProviderScheme = "letsmt";
         private string m_strCredential;
+        private string m_strAppID;
         private LetsMTWebService.TranslationWebServiceSoapClient m_service;
         public CMtProfileCollection m_profileCollection;
 
@@ -41,7 +42,7 @@ namespace LetsMT.MTProvider
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
 
             if(system != "")
-                return m_service.Translate("LetsMT_Trados_Plugin", system, text, null);
+                return m_service.Translate("", system, text, null);
 
             //return "";
             throw new Exception("Default system not selected.");
@@ -56,6 +57,10 @@ namespace LetsMT.MTProvider
             // create Web Service client
             string url = resourceManager.GetString("LetsMTWebServiceUrl");
             BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            // remove buffet limmit
+            binding.MaxBufferSize = int.MaxValue;
+            binding.MaxReceivedMessageSize = int.MaxValue;
 
             //try to read Software\\Tilde\\LetsMT\\url registry string entry and it it exists replace the link
             try
@@ -98,10 +103,15 @@ namespace LetsMT.MTProvider
             string strUsername = "";
             string strPassword = "";
 
+
             if (credParams.Length > 0)
                 strUsername = credParams[0];
             if (credParams.Length > 1)
                 strPassword = credParams[1];
+            if (credParams.Length > 2)
+                m_strAppID = credParams[2];
+
+           // m_strAppID = "LetsMT_Trados_Plugin";
 
             //TODO: HACK {
             // Attach custom Certificate validator to pass validation of untrusted development certificate 
@@ -110,6 +120,7 @@ namespace LetsMT.MTProvider
             //TODO: HACK }
 
             m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+
 
             m_service.ClientCredentials.UserName.UserName = strUsername;
             m_service.ClientCredentials.UserName.Password = strPassword;
@@ -121,7 +132,7 @@ namespace LetsMT.MTProvider
         {
             bool bCredentialsValid = false;
 
-            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList("LetsMT_Trados_Plugin", null);
+            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
 
             bCredentialsValid = true;
 
@@ -138,7 +149,7 @@ namespace LetsMT.MTProvider
             if(m_profileCollection != null)
                  state = SerializeState();
 
-            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList("LetsMT_Trados_Plugin", null);
+            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
 
             m_profileCollection = new CMtProfileCollection(mtList);
 
