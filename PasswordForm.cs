@@ -53,8 +53,8 @@ namespace LetsMT.MTProvider
             }
             else if (PublicRadio.Checked == true)
             {
-                m_strUsername = "guest";
-                m_strPassword = "a";
+                m_strUsername = "g";
+                m_strPassword = "g";
                 m_bRemember = wndRemember.Checked; 
                 m_strAppId = "LetsMT_Trados_Plugin";   
             }

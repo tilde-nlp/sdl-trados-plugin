@@ -109,8 +109,9 @@ namespace LetsMT.MTProvider
             if (credParams.Length > 1)
                 strPassword = credParams[1];
             if (credParams.Length > 2)
+            {
                 m_strAppID = credParams[2];
-
+            }
            // m_strAppID = "LetsMT_Trados_Plugin";
 
             //TODO: HACK {
