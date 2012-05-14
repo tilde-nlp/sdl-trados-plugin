@@ -57,7 +57,7 @@ namespace LetsMT.MTProvider
             // create Web Service client
             string url = resourceManager.GetString("LetsMTWebServiceUrl");
             BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            
             // remove buffet limmit
             binding.MaxBufferSize = int.MaxValue;
             binding.MaxReceivedMessageSize = int.MaxValue;
@@ -68,7 +68,7 @@ namespace LetsMT.MTProvider
                 Microsoft.Win32.RegistryKey key;
                 key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
                 //MessageBox.Show(key.GetValue("url", "none").ToString());
-                if ( key != null)
+                if (key != null)
                 {
                     string RegUrl = key.GetValue("url", "none").ToString();
                     if (RegUrl.Length > 3)
@@ -78,22 +78,12 @@ namespace LetsMT.MTProvider
                 }
 
             }
-            catch (SecurityException)
-            {
-               
-            }
-            catch (ArgumentNullException)
-            {
-              
-            }
-            catch (ObjectDisposedException)
-            {
-              
-            }
-            catch (IOException)
-            {
-              
-            }
+            catch (Exception) { }
+
+            //dev link for localization evaliation
+            //url = "https://dev.letsmt.com/ws/service.asmx";
+            
+
 
 
             EndpointAddress endpoint = new EndpointAddress(url);
@@ -102,7 +92,7 @@ namespace LetsMT.MTProvider
 
             string strUsername = "";
             string strPassword = "";
-
+            m_strAppID = "";
 
             if (credParams.Length > 0)
                 strUsername = credParams[0];
@@ -120,11 +110,19 @@ namespace LetsMT.MTProvider
             ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
             //TODO: HACK }
 
+            //If app Id not empty do not send pasword
+            if (m_strAppID == "")
+            {
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            }
+           
             m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
 
-
-            m_service.ClientCredentials.UserName.UserName = strUsername;
-            m_service.ClientCredentials.UserName.Password = strPassword;
+            if (m_strAppID == "")
+            {
+                m_service.ClientCredentials.UserName.UserName = strUsername;
+                m_service.ClientCredentials.UserName.Password = strPassword;
+            }
 
             m_profileCollection = null;
         }
