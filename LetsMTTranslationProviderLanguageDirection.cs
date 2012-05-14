@@ -70,7 +70,8 @@ namespace LetsMT.MTProvider
                             case Sdl.LanguagePlatform.Core.TagType.Standalone:
                             case Sdl.LanguagePlatform.Core.TagType.TextPlaceholder:
                             case Sdl.LanguagePlatform.Core.TagType.LockedContent:
-                                stringBuilder.AppendFormat("<span class='{0}' id='{1}'></span>",
+                                //stringBuilder.AppendFormat("<span class='{0}' id='{1}'></span>",=tag.Type, tag.Anchor);
+                                stringBuilder.AppendFormat("<span class='{0}' id='{1}'></span> ",
                                          tag.Type, tag.Anchor);
                                 break;
                             default:
@@ -89,43 +90,54 @@ namespace LetsMT.MTProvider
             var xmlReader = new System.Xml.XmlTextReader(xmlFragment, System.Xml.XmlNodeType.Element, null);
             var tagStack = new Stack<Sdl.LanguagePlatform.Core.Tag>();
             var translatedSegment = new Sdl.LanguagePlatform.Core.Segment();
-            while (xmlReader.Read())
+            try
             {
-                switch (xmlReader.NodeType)
+                while (xmlReader.Read())
                 {
-                    case System.Xml.XmlNodeType.Element:
-                        if (xmlReader.Name == htmlTagName)
-                        {
-                            var tagClass = xmlReader.GetAttribute("class");
-                            var tagType = (Sdl.LanguagePlatform.Core.TagType)
-                                 Enum.Parse(typeof(Sdl.LanguagePlatform.Core.TagType), tagClass);
-                            int id = Convert.ToInt32(xmlReader.GetAttribute("id"));
-                            Sdl.LanguagePlatform.Core.Tag sourceTag = sourceSegment.FindTag(tagType, id);
-                            if (sourceTag.Type == Sdl.LanguagePlatform.Core.TagType.Start)
-                            {
-                                tagStack.Push(sourceTag);
-                            }
-                            translatedSegment.Add(sourceTag.Duplicate());
-                        }
-                        break;
-                    case System.Xml.XmlNodeType.EndElement:
-                        {
+                    switch (xmlReader.NodeType)
+                    {
+                        case System.Xml.XmlNodeType.Element:
                             if (xmlReader.Name == htmlTagName)
                             {
-                                var startTag = tagStack.Pop();
-                                var endTag = sourceSegment.FindTag(
-                                   Sdl.LanguagePlatform.Core.TagType.End, startTag.Anchor);
-                                translatedSegment.Add(endTag.Duplicate());
+                                var tagClass = xmlReader.GetAttribute("class");
+                                var tagType = (Sdl.LanguagePlatform.Core.TagType)
+                                     Enum.Parse(typeof(Sdl.LanguagePlatform.Core.TagType), tagClass);
+                                int id = Convert.ToInt32(xmlReader.GetAttribute("id"));
+                                Sdl.LanguagePlatform.Core.Tag sourceTag = sourceSegment.FindTag(tagType, id);
+                                tagStack.Push(sourceTag);
+                                translatedSegment.Add(sourceTag.Duplicate());
                             }
-                        }
-                        break;
-                    case System.Xml.XmlNodeType.Text:
-                        translatedSegment.Add(xmlReader.Value);
-                        break;
-                    default:
-                        break;
+                            break;
+                        case System.Xml.XmlNodeType.EndElement:
+                            {
+                                if (xmlReader.Name == htmlTagName)
+                                {
+                                    var startTag = tagStack.Pop();
+                                    if (startTag.Type != Sdl.LanguagePlatform.Core.TagType.Standalone)
+                                    {
+                                        var endTag = sourceSegment.FindTag(
+                                           Sdl.LanguagePlatform.Core.TagType.End, startTag.Anchor);
+                                        translatedSegment.Add(endTag.Duplicate());
+                                    }
+                                }
+                            }
+                            break;
+                        case System.Xml.XmlNodeType.Text:
+                            translatedSegment.Add(xmlReader.Value);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                var paintextSegment = new Sdl.LanguagePlatform.Core.Segment();
+                string plaitext = Regex.Replace(translatedText, "<[^>]+>", "");
+                paintextSegment.Add(plaitext);
+                return paintextSegment;
+            }
+
             return translatedSegment;
         }
 
