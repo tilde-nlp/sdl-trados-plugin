@@ -36,16 +36,22 @@ namespace LetsMT.MTProvider
 
             if (pf.ShowDialog(owner) == DialogResult.OK)
             {
+                //TODO: check how to minimize the amount odfsystem list calls
                 string credentials = string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId);
 
                 TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
 
                 credentialStore.AddCredential(opts.Uri, tc);
-
+                //TODO: Check if we need a "testProvider"
                 LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentials);// (dialog.Options);
 
                 if(testProvider.ValidateCredentials())
-                    return new ITranslationProvider[] { testProvider }; 
+                {
+                    Sdl.LanguagePlatform.TranslationMemoryApi.ITranslationProvider[] ResultProv =  new ITranslationProvider[] { testProvider };
+                    //Open system select screen emidetly for user frendlier setup
+                    Edit(owner, ResultProv[ResultProv.Length - 1], languagePairs, credentialStore);
+                    return ResultProv;
+                }
             }
 
             return null;

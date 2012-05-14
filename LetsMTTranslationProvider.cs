@@ -42,7 +42,7 @@ namespace LetsMT.MTProvider
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
 
             if(system != "")
-                return m_service.Translate("", system, text, null);
+                return m_service.Translate(m_strAppID, system, text, null);
 
             //return "";
             throw new Exception("Default system not selected.");
@@ -57,7 +57,8 @@ namespace LetsMT.MTProvider
             // create Web Service client
             string url = resourceManager.GetString("LetsMTWebServiceUrl");
             BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
             // remove buffet limmit
             binding.MaxBufferSize = int.MaxValue;
             binding.MaxReceivedMessageSize = int.MaxValue;
@@ -111,18 +112,14 @@ namespace LetsMT.MTProvider
             //TODO: HACK }
 
             //If app Id not empty do not send pasword
-            if (m_strAppID == "")
-            {
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-            }
+       
            
             m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
 
-            if (m_strAppID == "")
-            {
-                m_service.ClientCredentials.UserName.UserName = strUsername;
-                m_service.ClientCredentials.UserName.Password = strPassword;
-            }
+          
+            m_service.ClientCredentials.UserName.UserName = strUsername;
+            m_service.ClientCredentials.UserName.Password = strPassword;
+           
 
             m_profileCollection = null;
         }
