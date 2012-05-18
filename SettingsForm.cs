@@ -31,6 +31,17 @@ namespace LetsMT.MTProvider
             wndProfileProperties.ValueMember = "value";
 
             m_translationProvider = editProvider;
+            if (m_translationProvider.m_username == "Public access")
+            {
+                UsernameLable.Text = "Public access";
+                LoginLabel.Text = "Sign In";
+            }
+            else 
+            { 
+                UsernameLable.Text = "Wellcome, " + m_translationProvider.m_username + "!";
+                LoginLabel.Text = "Sign Out";
+            }
+           
             m_pairs = languagePairs;
             m_checkedState = new Dictionary<string, string>();
 
@@ -132,7 +143,7 @@ namespace LetsMT.MTProvider
 
                 string valSelected = item.Value.ToString();
 
-                wndDescription.Text = m_translationProvider.m_profileCollection.GetSystemById(valSelected).GetDescription();
+                wndDescription.Lines = m_translationProvider.m_profileCollection.GetSystemById(valSelected).GetDescription().Split('\n');
             }
         }
 
@@ -159,6 +170,7 @@ namespace LetsMT.MTProvider
         private void wndProfileProperties_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int idx = e.Index;
+            btnOk.Enabled = true;
 
             for (int i = 0; i < wndProfileProperties.Items.Count; i++)
             {
@@ -181,6 +193,14 @@ namespace LetsMT.MTProvider
         {
             FillProfileList();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            DialogResult = DialogResult.Retry;
+            Close();
+
+        }
+
     }
 
     #region "ListItem helper class"

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.ServiceModel;
+using Sdl.LanguagePlatform.Core;
 using Sdl.LanguagePlatform.Core;
 using Sdl.LanguagePlatform.TranslationMemory;
 using Sdl.LanguagePlatform.TranslationMemoryApi;
@@ -49,8 +51,10 @@ namespace LetsMT.MTProvider
                 {
                     Sdl.LanguagePlatform.TranslationMemoryApi.ITranslationProvider[] ResultProv =  new ITranslationProvider[] { testProvider };
                     //Open system select screen emidetly for user frendlier setup
-                    Edit(owner, ResultProv[ResultProv.Length - 1], languagePairs, credentialStore);
-                    return ResultProv;
+                    if (Edit(owner, ResultProv[ResultProv.Length - 1], languagePairs, credentialStore))
+                    {
+                        return ResultProv;
+                    }
                 }
             }
 
@@ -76,9 +80,95 @@ namespace LetsMT.MTProvider
             editProvider.DownloadProfileList(true);
 
             SettingsForm settings = new SettingsForm(ref editProvider, languagePairs);
-            if(settings.ShowDialog(owner) == DialogResult.OK)
+            DialogResult  dResult = settings.ShowDialog(owner);
+            if (dResult == DialogResult.OK)
             {
                 return true;
+            }
+            else if (dResult == DialogResult.Retry)
+            {
+                //TODO: change credentials and redoenlaod the list
+                string username = "";
+                string pssword = "";
+                if (editProvider.m_strAppID != "")
+                {
+                    PasswordForm pf = new PasswordForm();
+                    if (pf.ShowDialog(owner) == DialogResult.OK)
+                    {
+                        username = pf.strUsername;
+                        pssword = pf.strPassword;
+
+                        editProvider.m_strAppID = pf.strAppId;
+                        editProvider.m_username = username;
+                    }
+                    else
+                    {
+                        if (Edit(owner, translationProvider, languagePairs, credentialStore))
+                        {
+                            return true;
+                        }
+                        else { return false; }
+                    }
+                }
+                else
+                {
+                    username = "Public access";
+                    //random nonempty value
+                    pssword = "*";
+                    editProvider.m_strAppID = "LetsMT_Trados_Plugin";
+                    editProvider.m_username = username;
+
+                }
+
+
+                global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
+                // create Web Service client
+                string url = resourceManager.GetString("LetsMTWebServiceUrl");
+                
+                try
+                {
+                    Microsoft.Win32.RegistryKey key;
+                    key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
+                    if (key != null)
+                    {
+                        string RegUrl = key.GetValue("url", "none").ToString();
+                        if (RegUrl.Length > 3)
+                        {
+                            if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
+                        }
+                    }
+
+                }
+                catch (Exception) { }
+
+                EndpointAddress endpoint = new EndpointAddress(url);
+
+                BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+                binding.MaxBufferSize = int.MaxValue;
+                binding.MaxReceivedMessageSize = int.MaxValue;
+
+                if (editProvider.m_strAppID != "")
+                {
+                    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
+                }
+                else
+                {
+                    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+                }
+                editProvider.m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+
+                editProvider.m_service.ClientCredentials.UserName.UserName = username;
+                editProvider.m_service.ClientCredentials.UserName.Password = pssword;
+                editProvider.DownloadProfileList(true);
+                // Call the same function again
+                if (Edit(owner, translationProvider, languagePairs, credentialStore))
+                {
+                    return true;
+                }
+                else { return false; }
+
+               
+
             }
 
             return false;

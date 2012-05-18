@@ -24,9 +24,10 @@ namespace LetsMT.MTProvider
         /// This string needs to be a unique value. This is the string that precedes the plug-in URI.
         ///</summary>
         public static readonly string TranslationProviderScheme = "letsmt";
+        public string m_username;
         private string m_strCredential;
-        private string m_strAppID;
-        private LetsMTWebService.TranslationWebServiceSoapClient m_service;
+        public string m_strAppID;
+        public LetsMTWebService.TranslationWebServiceSoapClient m_service;
         public CMtProfileCollection m_profileCollection;
 
         private static bool ValidateRemoteCertificate(object sender,
@@ -41,11 +42,27 @@ namespace LetsMT.MTProvider
         {
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
 
-            if(system != "")
-                return m_service.Translate(m_strAppID, system, text, null);
+            if (system != "")
+            {
+                string result = "";
+                try
+                {
+                    result = m_service.Translate(m_strAppID, system, text, null);
+                }
+                catch (System.ServiceModel.FaultException)
+                {
+                    throw new Exception("Translaton system not started.");
+                }
+                catch
+                {
+                    throw new Exception("Could not connect to translation provider.");
+                }
 
-            //return "";
+                return result;
+            }
+                //return "";
             throw new Exception("Default system not selected.");
+            
         }
 
         public LetsMTTranslationProvider(string credential)
@@ -57,8 +74,7 @@ namespace LetsMT.MTProvider
             // create Web Service client
             string url = resourceManager.GetString("LetsMTWebServiceUrl");
             BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-
+            
             // remove buffet limmit
             binding.MaxBufferSize = int.MaxValue;
             binding.MaxReceivedMessageSize = int.MaxValue;
@@ -68,7 +84,6 @@ namespace LetsMT.MTProvider
             {
                 Microsoft.Win32.RegistryKey key;
                 key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
-                //MessageBox.Show(key.GetValue("url", "none").ToString());
                 if (key != null)
                 {
                     string RegUrl = key.GetValue("url", "none").ToString();
@@ -91,19 +106,18 @@ namespace LetsMT.MTProvider
 
             string[] credParams = m_strCredential.Split('\t');
 
-            string strUsername = "";
             string strPassword = "";
             m_strAppID = "";
+            m_username = "";
 
             if (credParams.Length > 0)
-                strUsername = credParams[0];
+                m_username = credParams[0];
             if (credParams.Length > 1)
                 strPassword = credParams[1];
             if (credParams.Length > 2)
             {
                 m_strAppID = credParams[2];
             }
-           // m_strAppID = "LetsMT_Trados_Plugin";
 
             //TODO: HACK {
             // Attach custom Certificate validator to pass validation of untrusted development certificate 
@@ -111,13 +125,17 @@ namespace LetsMT.MTProvider
             ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
             //TODO: HACK }
 
-            //If app Id not empty do not send pasword
-       
-           
+
+            if (m_strAppID != "") {
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
+            }
+            else {
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            }
             m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
 
-          
-            m_service.ClientCredentials.UserName.UserName = strUsername;
+
+            m_service.ClientCredentials.UserName.UserName = m_username;
             m_service.ClientCredentials.UserName.Password = strPassword;
            
 
@@ -127,14 +145,28 @@ namespace LetsMT.MTProvider
         public bool ValidateCredentials()
         {
             bool bCredentialsValid = false;
+            try
+            {
 
-            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
-
+                LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
+            }
+            catch (Exception ex)
+            {
+                if ( ex.Message.Contains("401") ) {
+                    throw new Exception("Unrecognized username or password.");
+                }
+                else{
+                     throw new Exception("Cannot connect to server.");
+                }
+            }
             bCredentialsValid = true;
 
             return bCredentialsValid;
         }
 
+     
+
+        #region "ITranslationProvider Members"
         public void DownloadProfileList(bool bForce = false)
         {
             if (m_profileCollection != null && !bForce)
@@ -142,8 +174,8 @@ namespace LetsMT.MTProvider
 
             string state = null;
 
-            if(m_profileCollection != null)
-                 state = SerializeState();
+            if (m_profileCollection != null)
+                state = SerializeState();
 
             LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
 
@@ -153,7 +185,6 @@ namespace LetsMT.MTProvider
                 LoadState(state);
         }
 
-        #region "ITranslationProvider Members"
         public ITranslationProviderLanguageDirection GetLanguageDirection(LanguagePair languageDirection)
         {
             return new LetsMTTranslationProviderLanguageDirection(this, languageDirection);

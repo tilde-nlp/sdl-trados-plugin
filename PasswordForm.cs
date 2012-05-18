@@ -48,14 +48,15 @@ namespace LetsMT.MTProvider
             {
                 m_strUsername = wndUsername.Text.Trim();
                 m_strPassword = wndPassword.Text.Trim();
-                m_bRemember = wndRemember.Checked;
+                m_bRemember = true;
                 m_strAppId = "";
             }
             else if (PublicRadio.Checked == true)
             {
-                m_strUsername = "g";
-                m_strPassword = "g";
-                m_bRemember = wndRemember.Checked; 
+                m_strUsername = "Public access";
+                //random nonemty value
+                m_strPassword = "*";
+                m_bRemember = true;
                 m_strAppId = "LetsMT_Trados_Plugin";   
             }
 

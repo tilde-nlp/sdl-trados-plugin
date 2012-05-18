@@ -57,7 +57,35 @@ namespace LetsMT.MTProvider
                 string strSysId = system.ID;
                 string strSysFriendlyName = system.Title.Value;
                 string strSysDescription = system.Description.Value;
+               // string strSysDescription = system.Metadata[0].
                 string strSysOnlineStatus = "unknown";
+                strSysDescription += "";
+                //Fill description field
+                foreach ( LetsMTWebService.ObjectProperty meta  in system.Metadata)
+                {
+                    if (meta.key == "description")
+                    {
+                        strSysDescription += "Descriptin: " + meta.Value +  "\n";
+                    }
+                    if ( meta.key.StartsWith("score") && !(meta.key.Contains("-c")))
+                    {
+                        try
+                        {
+                            double x;
+                            if (double.TryParse(meta.Value, NumberStyles.Any, CultureInfo.GetCultureInfoByIetfLanguageTag("EN-US"), out x))
+                               {
+                                   double score = x;
+                                   score = Math.Round(score, 4);
+                                   if (meta.key.Contains("bleu")) { score = score * 100; }
+                                   strSysDescription += meta.key.Replace("score-", "").ToUpper() + ":" + score.ToString() + ", ";
+                               }
+                               else { strSysDescription += meta.key.Replace("score-", "").ToUpper() + ":" + meta.Value + ", "; }
+                        }
+                        catch {continue;}
+             
+                    }
+
+                }
 
                 System.Collections.IEnumerator metaEnum = system.Metadata.GetEnumerator();
                 while(metaEnum.MoveNext())

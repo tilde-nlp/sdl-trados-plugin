@@ -35,7 +35,6 @@
             this.wndPassword = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.wndRemember = new System.Windows.Forms.CheckBox();
             this.PublicRadio = new System.Windows.Forms.RadioButton();
             this.RegisteredRadio = new System.Windows.Forms.RadioButton();
             this.Tooltip = new System.Windows.Forms.ToolTip(this.components);
@@ -98,18 +97,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // wndRemember
-            // 
-            this.wndRemember.AutoSize = true;
-            this.wndRemember.Checked = true;
-            this.wndRemember.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.wndRemember.Location = new System.Drawing.Point(27, 111);
-            this.wndRemember.Name = "wndRemember";
-            this.wndRemember.Size = new System.Drawing.Size(77, 17);
-            this.wndRemember.TabIndex = 4;
-            this.wndRemember.Text = "Remember";
-            this.wndRemember.UseVisualStyleBackColor = true;
-            // 
             // PublicRadio
             // 
             this.PublicRadio.AutoSize = true;
@@ -146,7 +133,6 @@
             this.ClientSize = new System.Drawing.Size(318, 142);
             this.Controls.Add(this.RegisteredRadio);
             this.Controls.Add(this.PublicRadio);
-            this.Controls.Add(this.wndRemember);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.wndPassword);
@@ -172,7 +158,6 @@
         private System.Windows.Forms.TextBox wndPassword;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.CheckBox wndRemember;
         private System.Windows.Forms.RadioButton PublicRadio;
         private System.Windows.Forms.RadioButton RegisteredRadio;
         private System.Windows.Forms.ToolTip Tooltip;
