@@ -68,7 +68,7 @@ namespace LetsMT.MTProvider
             }
             else
             {
-                MessageBox.Show("Password and Username cannot be empty!", "Empty field");
+                MessageBox.Show("Password and Username fields cannot be empty!", "Empty field");
             }
         }
 
