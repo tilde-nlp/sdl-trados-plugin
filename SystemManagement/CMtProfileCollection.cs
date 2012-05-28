@@ -42,11 +42,9 @@ namespace LetsMT.MTProvider
                 //No profile, create new and fill the fields
                 if (refProfile == null)
                 {
-                    CultureInfo cFrom = new CultureInfo(system.SrcLanguage.Code);
-                    CultureInfo cTo = new CultureInfo(system.TrgLanguage.Code);
-
-                    string strFriendlyName = string.Format("{0} - {1}", cFrom.DisplayName, cTo.DisplayName);
-
+                    string strFriendlyName;
+                    strFriendlyName = string.Format("{0} - {1}", system.SrcLanguage.Name.Value, system.TrgLanguage.Name.Value);
+                    
                     //Set the reference to new profile
                     refProfile = new CMtProfile(strProfileId, strFriendlyName);
 
@@ -86,6 +84,8 @@ namespace LetsMT.MTProvider
                     }
 
                 }
+                char[] charsToTrim = {',', ' '};
+                strSysDescription = strSysDescription.TrimEnd(charsToTrim);
 
                 System.Collections.IEnumerator metaEnum = system.Metadata.GetEnumerator();
                 while(metaEnum.MoveNext())
@@ -93,7 +93,28 @@ namespace LetsMT.MTProvider
                     LetsMTWebService.ObjectProperty prop = metaEnum.Current as LetsMTWebService.ObjectProperty;
                     if(prop.key == "status")
                     {
-                        strSysOnlineStatus = prop.Value;
+                        switch (prop.Value)
+                        {
+                            case "running":
+                                strSysOnlineStatus = "Running";
+                                break;
+                            case "queuingtransl":
+                                strSysOnlineStatus = "Queuing";
+                                break;
+                            case "nottrained":
+                                strSysOnlineStatus = "Not Trained";
+                                break;
+                            case "error":
+                                strSysOnlineStatus = "Not Started";
+                                break;
+                            case "training":
+                                strSysOnlineStatus = "Training";
+                                break;
+                            default:
+                                strSysOnlineStatus = prop.Value;
+                                break;
+                        }
+                        //strSysOnlineStatus = prop.Value;
                         break;
                     }
                 }

@@ -117,7 +117,8 @@ namespace LetsMT.MTProvider
                                     {
                                         var endTag = sourceSegment.FindTag(
                                            Sdl.LanguagePlatform.Core.TagType.End, startTag.Anchor);
-                                        translatedSegment.Add(endTag.Duplicate());
+                                        if (endTag != null)
+                                            translatedSegment.Add(endTag.Duplicate());
                                     }
                                 }
                             }

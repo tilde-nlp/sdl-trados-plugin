@@ -160,6 +160,7 @@
     <Content Include="pluginpackage.manifest.xml" />
     <None Include="Service References\LetsMTWebService\Service.wsdl" />
     <None Include="setupscript.nsi" />
+    <None Include="setupscript_11.nsi" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

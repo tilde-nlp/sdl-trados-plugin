@@ -38,6 +38,30 @@ namespace LetsMT.MTProvider
             return true;
         }
 
+        private static string RemoveControlCharacters(string inString)
+        {
+            if (inString == null) return null;
+
+            StringBuilder newString = new StringBuilder();
+            char ch;
+
+            for (int i = 0; i < inString.Length; i++)
+            {
+
+                ch = inString[i];
+
+                if (!char.IsControl(ch))
+                {
+                    newString.Append(ch);
+                }
+                else
+                {
+                    newString.Append(' ');
+                }
+            }
+            return newString.ToString();
+        }
+
         public string TranslateText(LanguagePair direction, string text)
         {
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
@@ -47,15 +71,19 @@ namespace LetsMT.MTProvider
                 string result = "";
                 try
                 {
-                    result = m_service.Translate(m_strAppID, system, text, null);
+                    result = m_service.Translate(m_strAppID, system,RemoveControlCharacters( text), null);
                 }
-                catch (System.ServiceModel.FaultException)
+                catch(Exception ex)
                 {
-                    throw new Exception("Translaton system not started.");
-                }
-                catch
-                {
-                    throw new Exception("Could not connect to translation provider.");
+                    if (ex.Message.Contains("is not started for translation"))
+                    {
+                        throw new Exception("Translaton system not started.");
+                    }
+                    else
+                    {
+                        throw new Exception("Could not connect to translation provider.");
+                    }
+                   
                 }
 
                 return result;
@@ -147,15 +175,27 @@ namespace LetsMT.MTProvider
             bool bCredentialsValid = false;
             try
             {
-
-                LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
+                m_service.Translate(m_strAppID, "*", "*", "*");
+                //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
             }
             catch (Exception ex)
             {
-                if ( ex.Message.Contains("401") ) {
+                //if correct error message apers user authentification has been passed
+                if (ex.Message.Contains("is not started for translation"))
+                {
+                    bCredentialsValid = true;
+                }
+                else if ( ex.Message.Contains("401") )
+                {
                     throw new Exception("Unrecognized username or password.");
                 }
-                else{
+                else if(ex.Message.Contains("User is not a member of the group"))
+                {
+                    
+                    throw new Exception("User is not member of this group");
+                } 
+                else 
+                {        
                      throw new Exception("Cannot connect to server.");
                 }
             }

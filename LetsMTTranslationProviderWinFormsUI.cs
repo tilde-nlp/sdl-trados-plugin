@@ -85,6 +85,7 @@ namespace LetsMT.MTProvider
             {
                 return true;
             }
+            // If the user 
             else if (dResult == DialogResult.Retry)
             {
                 //TODO: change credentials and redoenlaod the list
@@ -159,6 +160,7 @@ namespace LetsMT.MTProvider
 
                 editProvider.m_service.ClientCredentials.UserName.UserName = username;
                 editProvider.m_service.ClientCredentials.UserName.Password = pssword;
+                editProvider.m_profileCollection = null;
                 editProvider.DownloadProfileList(true);
                 // Call the same function again
                 if (Edit(owner, translationProvider, languagePairs, credentialStore))

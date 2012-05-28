@@ -38,7 +38,7 @@ namespace LetsMT.MTProvider
             }
             else 
             { 
-                UsernameLable.Text = "Wellcome, " + m_translationProvider.m_username + "!";
+                UsernameLable.Text = "Welcome, " + m_translationProvider.m_username + "!";
                 LoginLabel.Text = "Sign Out";
             }
            

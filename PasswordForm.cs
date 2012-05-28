@@ -44,25 +44,32 @@ namespace LetsMT.MTProvider
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (RegisteredRadio.Checked == true)
+            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
             {
-                m_strUsername = wndUsername.Text.Trim();
-                m_strPassword = wndPassword.Text.Trim();
-                m_bRemember = true;
-                m_strAppId = "";
+                if (RegisteredRadio.Checked == true)
+                {
+                    m_strUsername = wndUsername.Text.Trim();
+                    m_strPassword = wndPassword.Text.Trim();
+                    m_bRemember = true;
+                    m_strAppId = "";
+                }
+                else if (PublicRadio.Checked == true)
+                {
+                    m_strUsername = "Public access";
+                    //random nonemty value
+                    m_strPassword = "*";
+                    m_bRemember = true;
+                    m_strAppId = "LetsMT_Trados_Plugin";
+                }
+
+                DialogResult = DialogResult.OK;
+
+                Close();
             }
-            else if (PublicRadio.Checked == true)
+            else
             {
-                m_strUsername = "Public access";
-                //random nonemty value
-                m_strPassword = "*";
-                m_bRemember = true;
-                m_strAppId = "LetsMT_Trados_Plugin";   
+                MessageBox.Show("Password and Username cannot be empty!", "Empty field");
             }
-
-            DialogResult = DialogResult.OK;
-
-            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

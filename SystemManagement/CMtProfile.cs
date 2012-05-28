@@ -46,7 +46,7 @@ namespace LetsMT.MTProvider
 
             foreach (CMtSystem system in m_availableSystems)
             {
-                if (system.GetOnlineStatus() == "running")
+                if (system.GetOnlineStatus() == "Running")
                 {
                     bHasRunningSystem = true;
                     break;
@@ -113,7 +113,7 @@ namespace LetsMT.MTProvider
 
             foreach(CMtSystem system in m_availableSystems)
             {
-                if (!bFiltered || system.GetOnlineStatus() == "running")
+                if (!bFiltered || system.GetOnlineStatus() == "Running")
                     systems.Add(system.GetListItem());
             }
 

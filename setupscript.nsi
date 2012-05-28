@@ -36,8 +36,8 @@ file "C:\Users\karlis.gedins\Documents\Visual Studio 2010\Projects\LetsMT!\SDLTr
 # define uninstaller name
 writeUninstaller $INSTDIR\uninstaller.exe
 
-CreateDirectory "$SMPROGRAMS\LetsMT! Machine Translation Provider"
-CreateShortCut "$SMPROGRAMS\LetsMT! Machine Translation Provider\Uninstall.lnk" "$INSTDIR\uninstaller.exe"
+CreateDirectory "$SMPROGRAMS\LetsMT! Machine Translation Provider 2009"
+CreateShortCut "$SMPROGRAMS\LetsMT! Machine Translation Provider 2009\Uninstall.lnk" "$INSTDIR\uninstaller.exe"
  
 # default section end
 sectionEnd
@@ -59,7 +59,7 @@ delete $INSTDIR\..\Unpacked\LetsMT.MTProvider\LetsMT.MTProvider.plugin.xml
 delete $INSTDIR\..\Unpacked\LetsMT.MTProvider\pluginpackage.manifest.xml
 RMDIR $INSTDIR\..\Unpacked\LetsMT.MTProvider\
 
-Delete "$SMPROGRAMS\LetsMT! Machine Translation Provider\Uninstall.lnk"
-RMDIR "$SMPROGRAMS\LetsMT! Machine Translation Provider"
+Delete "$SMPROGRAMS\LetsMT! Machine Translation Provider 2009\Uninstall.lnk"
+RMDIR "$SMPROGRAMS\LetsMT! Machine Translation Provider 2009"
  
 sectionEnd
