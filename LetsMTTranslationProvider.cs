@@ -71,6 +71,7 @@ namespace LetsMT.MTProvider
                 string result = "";
                 try
                 {
+                    //removes control characters  to work around imperfections in the way .NET handles SOAP.
                     result = m_service.Translate(m_strAppID, system,RemoveControlCharacters( text), null);
                 }
                 catch(Exception ex)
@@ -150,8 +151,8 @@ namespace LetsMT.MTProvider
             //TODO: HACK {
             // Attach custom Certificate validator to pass validation of untrusted development certificate 
             // TODO: This should be removed when trusted CA certificate will be used (or callback method have to do harder checking)
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
-            //TODO: HACK }
+           // ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
+                    //TODO: HACK }
 
 
             if (m_strAppID != "") {
@@ -165,7 +166,8 @@ namespace LetsMT.MTProvider
 
             m_service.ClientCredentials.UserName.UserName = m_username;
             m_service.ClientCredentials.UserName.Password = strPassword;
-           
+
+           // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
 
             m_profileCollection = null;
         }

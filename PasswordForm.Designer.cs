@@ -66,6 +66,7 @@
             this.wndUsername.Size = new System.Drawing.Size(214, 20);
             this.wndUsername.TabIndex = 2;
             this.wndUsername.WordWrap = false;
+            this.wndUsername.TextChanged += new System.EventHandler(this.wndUsername_TextChanged);
             // 
             // wndPassword
             // 
@@ -76,9 +77,11 @@
             this.wndPassword.TabIndex = 3;
             this.wndPassword.UseSystemPasswordChar = true;
             this.wndPassword.WordWrap = false;
+            this.wndPassword.TextChanged += new System.EventHandler(this.wndPassword_TextChanged);
             // 
             // btnOk
             // 
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnOk.Location = new System.Drawing.Point(148, 109);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
@@ -120,9 +123,9 @@
             this.RegisteredRadio.Size = new System.Drawing.Size(112, 17);
             this.RegisteredRadio.TabIndex = 8;
             this.RegisteredRadio.Text = "Authorized access";
-            this.Tooltip.SetToolTip(this.RegisteredRadio, "Provides access to public and private SMT systems.\\nYou must be have sufficient r" +
-                    "ights to access private SMT systems.\\n Contact your LetsMT! Group Administrator " +
-                    "for more info.");
+            this.Tooltip.SetToolTip(this.RegisteredRadio, "Provides access to public and private SMT systems.\r\nYou must be have sufficient r" +
+                    "ights to access private SMT systems.\r\nContact your LetsMT! Group Administrator f" +
+                    "or more info.");
             this.RegisteredRadio.UseVisualStyleBackColor = true;
             this.RegisteredRadio.CheckedChanged += new System.EventHandler(this.RegisteredRadio_CheckedChanged);
             // 
@@ -131,7 +134,6 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(318, 142);
             this.Controls.Add(this.RegisteredRadio);
             this.Controls.Add(this.PublicRadio);

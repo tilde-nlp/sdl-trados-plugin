@@ -44,33 +44,41 @@ namespace LetsMT.MTProvider
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
+
+            if (RegisteredRadio.Checked == true)
             {
-                if (RegisteredRadio.Checked == true)
+                if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
                 {
                     m_strUsername = wndUsername.Text.Trim();
                     m_strPassword = wndPassword.Text.Trim();
                     m_bRemember = true;
                     m_strAppId = "";
+
+                    DialogResult = DialogResult.OK;
+
+                    Close();
                 }
-                else if (PublicRadio.Checked == true)
+                else
                 {
-                    m_strUsername = "Public access";
-                    //random nonemty value
-                    m_strPassword = "*";
-                    m_bRemember = true;
-                    m_strAppId = "LetsMT_Trados_Plugin";
+                    MessageBox.Show("Password and Username fields cannot be empty!", "Empty field");
                 }
+            }
+            else if (PublicRadio.Checked == true)
+            {
+                m_strUsername = "Public access";
+                //random nonemty value
+                m_strPassword = "*";
+                m_bRemember = true;
+                m_strAppId = "LetsMT_Trados_Plugin";
 
                 DialogResult = DialogResult.OK;
 
                 Close();
             }
-            else
-            {
-                MessageBox.Show("Password and Username fields cannot be empty!", "Empty field");
-            }
+
+
         }
+               
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -81,15 +89,44 @@ namespace LetsMT.MTProvider
         {
             wndPassword.Enabled = true;
             wndUsername.Enabled = true;
+            btnOk.Enabled = false;     
         }
 
         private void PublicRadio_CheckedChanged(object sender, EventArgs e)
         {
             wndPassword.Enabled = false;
             wndUsername.Enabled = false;
+            btnOk.Enabled = true;
             wndPassword.Text = "";
             wndUsername.Text = "";
            
+        }
+
+        private void wndUsername_TextChanged(object sender, EventArgs e)
+        {
+            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
+            {
+
+                btnOk.Enabled = true; 
+            }
+            else
+            {
+                btnOk.Enabled = false;
+            
+            }
+        }
+
+        private void wndPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
+            {
+                btnOk.Enabled = true;
+                
+            }
+            else
+            {
+                btnOk.Enabled = false;
+            }
         }
 
    

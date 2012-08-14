@@ -63,7 +63,7 @@ namespace LetsMT.MTProvider
                 {
                     if (meta.key == "description")
                     {
-                        strSysDescription += "Descriptin: " + meta.Value +  "\n";
+                        strSysDescription += "Description: " + meta.Value + "\n";
                     }
                     if ( meta.key.StartsWith("score") && !(meta.key.Contains("-c")))
                     {
@@ -101,11 +101,14 @@ namespace LetsMT.MTProvider
                             case "queuingtransl":
                                 strSysOnlineStatus = "Queuing";
                                 break;
+                            case "notstarted":
+                                strSysOnlineStatus = "Not Started";
+                                break;
                             case "nottrained":
                                 strSysOnlineStatus = "Not Trained";
                                 break;
                             case "error":
-                                strSysOnlineStatus = "Not Started";
+                                strSysOnlineStatus = "Not Trained";
                                 break;
                             case "training":
                                 strSysOnlineStatus = "Training";
