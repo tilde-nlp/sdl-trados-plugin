@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace LetsMT.MTProvider
 {
@@ -45,36 +46,23 @@ namespace LetsMT.MTProvider
         private void btnOk_Click(object sender, EventArgs e)
         {
 
-            if (RegisteredRadio.Checked == true)
+          
+            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
             {
-                if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
-                {
-                    m_strUsername = wndUsername.Text.Trim();
-                    m_strPassword = wndPassword.Text.Trim();
-                    m_bRemember = true;
-                    m_strAppId = "";
-
-                    DialogResult = DialogResult.OK;
-
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Password and Username fields cannot be empty!", "Empty field");
-                }
-            }
-            else if (PublicRadio.Checked == true)
-            {
-                m_strUsername = "Public access";
-                //random nonemty value
-                m_strPassword = "*";
+                m_strUsername = wndUsername.Text.Trim();
+                m_strPassword = wndPassword.Text.Trim();
                 m_bRemember = true;
-                m_strAppId = "LetsMT_Trados_Plugin";
+                m_strAppId = "";
 
                 DialogResult = DialogResult.OK;
 
                 Close();
             }
+            else
+            {
+                MessageBox.Show("Password and Username fields cannot be empty!", "Empty field");
+            }
+        
 
 
         }
@@ -85,24 +73,7 @@ namespace LetsMT.MTProvider
             Close();
         }
 
-        private void RegisteredRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            wndPassword.Enabled = true;
-            wndUsername.Enabled = true;
-            btnOk.Enabled = false;     
-        }
-
-        private void PublicRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            wndPassword.Enabled = false;
-            wndUsername.Enabled = false;
-            btnOk.Enabled = true;
-            wndPassword.Text = "";
-            wndUsername.Text = "";
-           
-        }
-
-        private void wndUsername_TextChanged(object sender, EventArgs e)
+            private void wndUsername_TextChanged(object sender, EventArgs e)
         {
             if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
             {
@@ -126,6 +97,23 @@ namespace LetsMT.MTProvider
             else
             {
                 btnOk.Enabled = false;
+            }
+        }
+
+        private void DemoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process myProcess = new Process();
+
+            try
+            {
+                // true is the default, but it is important not to set it to false
+                myProcess.StartInfo.UseShellExecute = true;
+                myProcess.StartInfo.FileName = "https://www.letsmt.eu/Start.aspx?section=register";
+                myProcess.Start();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot open link!", "Connection problem");
             }
         }
 

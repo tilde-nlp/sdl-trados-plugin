@@ -35,15 +35,14 @@
             this.wndPassword = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.PublicRadio = new System.Windows.Forms.RadioButton();
-            this.RegisteredRadio = new System.Windows.Forms.RadioButton();
             this.Tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.DemoLink = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 58);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -52,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 82);
+            this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 1;
@@ -60,20 +59,18 @@
             // 
             // wndUsername
             // 
-            this.wndUsername.Enabled = false;
-            this.wndUsername.Location = new System.Drawing.Point(87, 56);
+            this.wndUsername.Location = new System.Drawing.Point(87, 12);
             this.wndUsername.Name = "wndUsername";
-            this.wndUsername.Size = new System.Drawing.Size(214, 20);
+            this.wndUsername.Size = new System.Drawing.Size(189, 20);
             this.wndUsername.TabIndex = 2;
             this.wndUsername.WordWrap = false;
             this.wndUsername.TextChanged += new System.EventHandler(this.wndUsername_TextChanged);
             // 
             // wndPassword
             // 
-            this.wndPassword.Enabled = false;
-            this.wndPassword.Location = new System.Drawing.Point(87, 80);
+            this.wndPassword.Location = new System.Drawing.Point(87, 38);
             this.wndPassword.Name = "wndPassword";
-            this.wndPassword.Size = new System.Drawing.Size(214, 20);
+            this.wndPassword.Size = new System.Drawing.Size(189, 20);
             this.wndPassword.TabIndex = 3;
             this.wndPassword.UseSystemPasswordChar = true;
             this.wndPassword.WordWrap = false;
@@ -82,7 +79,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOk.Location = new System.Drawing.Point(148, 109);
+            this.btnOk.Location = new System.Drawing.Point(120, 97);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 5;
@@ -93,7 +90,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(227, 109);
+            this.btnCancel.Location = new System.Drawing.Point(201, 97);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -101,42 +98,24 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // PublicRadio
+            // DemoLink
             // 
-            this.PublicRadio.AutoSize = true;
-            this.PublicRadio.Checked = true;
-            this.PublicRadio.Location = new System.Drawing.Point(11, 10);
-            this.PublicRadio.Name = "PublicRadio";
-            this.PublicRadio.Size = new System.Drawing.Size(91, 17);
-            this.PublicRadio.TabIndex = 7;
-            this.PublicRadio.TabStop = true;
-            this.PublicRadio.Text = "Public access";
-            this.Tooltip.SetToolTip(this.PublicRadio, "Provides access to public SMT systems only.");
-            this.PublicRadio.UseVisualStyleBackColor = true;
-            this.PublicRadio.CheckedChanged += new System.EventHandler(this.PublicRadio_CheckedChanged);
-            // 
-            // RegisteredRadio
-            // 
-            this.RegisteredRadio.AutoSize = true;
-            this.RegisteredRadio.Location = new System.Drawing.Point(11, 32);
-            this.RegisteredRadio.Name = "RegisteredRadio";
-            this.RegisteredRadio.Size = new System.Drawing.Size(112, 17);
-            this.RegisteredRadio.TabIndex = 8;
-            this.RegisteredRadio.Text = "Authorized access";
-            this.Tooltip.SetToolTip(this.RegisteredRadio, "Provides access to public and private SMT systems.\r\nYou must be have sufficient r" +
-                    "ights to access private SMT systems.\r\nContact your LetsMT! Group Administrator f" +
-                    "or more info.");
-            this.RegisteredRadio.UseVisualStyleBackColor = true;
-            this.RegisteredRadio.CheckedChanged += new System.EventHandler(this.RegisteredRadio_CheckedChanged);
+            this.DemoLink.AutoSize = true;
+            this.DemoLink.Location = new System.Drawing.Point(12, 72);
+            this.DemoLink.Name = "DemoLink";
+            this.DemoLink.Size = new System.Drawing.Size(187, 13);
+            this.DemoLink.TabIndex = 7;
+            this.DemoLink.TabStop = true;
+            this.DemoLink.Text = "Get your free demo ceredentials here! ";
+            this.DemoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DemoLink_LinkClicked);
             // 
             // PasswordForm
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 142);
-            this.Controls.Add(this.RegisteredRadio);
-            this.Controls.Add(this.PublicRadio);
+            this.ClientSize = new System.Drawing.Size(290, 133);
+            this.Controls.Add(this.DemoLink);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.wndPassword);
@@ -162,8 +141,7 @@
         private System.Windows.Forms.TextBox wndPassword;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.RadioButton PublicRadio;
-        private System.Windows.Forms.RadioButton RegisteredRadio;
         private System.Windows.Forms.ToolTip Tooltip;
+        private System.Windows.Forms.LinkLabel DemoLink;
     }
 }

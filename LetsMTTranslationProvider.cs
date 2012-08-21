@@ -15,6 +15,7 @@ using System.ServiceModel.Channels;
 using System.Security;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace LetsMT.MTProvider
 {
@@ -61,6 +62,12 @@ namespace LetsMT.MTProvider
             }
             return newString.ToString();
         }
+        [STAThread]
+        private static void CallForm()
+        {
+            LimitationForm LimitForm = new LimitationForm("https://www.letsmt.eu/error.htm");
+            LimitForm.ShowDialog();
+        }
 
         public string TranslateText(LanguagePair direction, string text)
         {
@@ -79,6 +86,13 @@ namespace LetsMT.MTProvider
                     if (ex.Message.Contains("is not started for translation"))
                     {
                         throw new Exception("Translaton system not started.");
+                    }
+                    else if (ex.Message.Contains("Demo limmit reached!"))
+                    {
+                        var t = new Thread(new ThreadStart(CallForm));
+                        t.SetApartmentState(ApartmentState.STA);
+                        t.Start();
+                        this.StatusInfo.Available = false;
                     }
                     else
                     {
