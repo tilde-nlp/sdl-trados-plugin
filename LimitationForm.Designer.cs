@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(699, 417);
             this.Controls.Add(this.webBrowserObject);
             this.Name = "LimitationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Limit Reached";
             this.Load += new System.EventHandler(this.LimitationForm_Load);
             this.ResumeLayout(false);

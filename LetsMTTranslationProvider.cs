@@ -12,6 +12,7 @@ using LetsMT.MTProvider;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 
+using System.Text.RegularExpressions;
 using System.Security;
 using System.Security.Permissions;
 using System.Windows.Forms;
@@ -62,13 +63,24 @@ namespace LetsMT.MTProvider
             }
             return newString.ToString();
         }
-        [STAThread]
-        private static void CallForm()
+
+
+        public  Form IsFormAlreadyOpen(Type FormType)
         {
-            LimitationForm LimitForm = new LimitationForm("https://www.letsmt.eu/error.htm");
+            foreach (Form OpenForm in Application.OpenForms)
+            {
+                if (OpenForm.GetType() == FormType)
+                    return OpenForm;
+            }
+
+            return null;
+        }
+        [STAThread]
+        public  void CallForm(string url)
+        {
+            LimitationForm LimitForm = new LimitationForm(url);
             LimitForm.ShowDialog();
         }
-
         public string TranslateText(LanguagePair direction, string text)
         {
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
@@ -87,12 +99,27 @@ namespace LetsMT.MTProvider
                     {
                         throw new Exception("Translaton system not started.");
                     }
-                    else if (ex.Message.Contains("Demo limmit reached!"))
+                    else if (ex.Message.Contains("User limitation error:"))
                     {
-                        var t = new Thread(new ThreadStart(CallForm));
+                        Form UForm = null;
+                        
+                        if  ( (UForm = IsFormAlreadyOpen(typeof(LimitationForm))) != null)
+                        {
+                            //close the form if it is open
+                            UForm.Close();
+                        }
+                                                    
+                        Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                        Match m = r.Match(ex.Message);
+                        string erNum = m.Value;
+                        string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+                        var t = new Thread(() => CallForm(Error_url));
+
                         t.SetApartmentState(ApartmentState.STA);
                         t.Start();
-                        this.StatusInfo.Available = false;
+                        //TODO: It would be nice to diable the plugin afterwards
+                            
+                        
                     }
                     else
                     {
@@ -138,10 +165,6 @@ namespace LetsMT.MTProvider
 
             }
             catch (Exception) { }
-
-            //dev link for localization evaliation
-            //url = "https://dev.letsmt.com/ws/service.asmx";
-            
 
 
 
@@ -209,7 +232,31 @@ namespace LetsMT.MTProvider
                 {
                     
                     throw new Exception("User is not member of this group");
-                } 
+                }
+                else if (ex.Message.Contains("User limitation error:"))
+                {
+
+                    Form UForm = null;
+
+                    if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) != null)
+                    {
+                        //close the form if it is open
+                        UForm.Close();
+                    }
+
+                    Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                    Match m = r.Match(ex.Message);
+                    string erNum = m.Value;
+                    string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+                    var t = new Thread(() => CallForm(Error_url));
+
+                    t.SetApartmentState(ApartmentState.STA);
+                    t.Start();
+
+                    //TODO: It would be nice to diable the plugin afterwards
+                    throw new Exception("User limitation reched.");
+
+                }
                 else 
                 {        
                      throw new Exception("Cannot connect to server.");

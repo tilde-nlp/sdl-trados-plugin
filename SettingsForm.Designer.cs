@@ -35,7 +35,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.wndRunningSystems = new System.Windows.Forms.CheckBox();
             this.UsernameLable = new System.Windows.Forms.Label();
-            this.LoginLabel = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -115,22 +114,10 @@
             this.UsernameLable.Location = new System.Drawing.Point(211, 17);
             this.UsernameLable.Name = "UsernameLable";
             this.UsernameLable.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.UsernameLable.Size = new System.Drawing.Size(316, 13);
+            this.UsernameLable.Size = new System.Drawing.Size(374, 13);
             this.UsernameLable.TabIndex = 6;
             this.UsernameLable.Text = "Logged in as: User";
             this.UsernameLable.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // LoginLabel
-            // 
-            this.LoginLabel.AutoSize = true;
-            this.LoginLabel.Location = new System.Drawing.Point(533, 17);
-            this.LoginLabel.Name = "LoginLabel";
-            this.LoginLabel.Size = new System.Drawing.Size(46, 13);
-            this.LoginLabel.TabIndex = 9;
-            this.LoginLabel.TabStop = true;
-            this.LoginLabel.Text = "Sign out";
-            this.LoginLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.LoginLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // pictureBox1
             // 
@@ -148,7 +135,6 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 374);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.LoginLabel);
             this.Controls.Add(this.UsernameLable);
             this.Controls.Add(this.wndRunningSystems);
             this.Controls.Add(this.btnCancel);
@@ -161,6 +147,7 @@
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SettingsForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -177,7 +164,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox wndRunningSystems;
         private System.Windows.Forms.Label UsernameLable;
-        private System.Windows.Forms.LinkLabel LoginLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

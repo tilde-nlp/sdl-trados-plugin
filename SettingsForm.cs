@@ -31,16 +31,9 @@ namespace LetsMT.MTProvider
             wndProfileProperties.ValueMember = "value";
 
             m_translationProvider = editProvider;
-            if (m_translationProvider.m_username == "Public access")
-            {
-                UsernameLable.Text = "Public access";
-                LoginLabel.Text = "Sign In";
-            }
-            else 
-            { 
-                UsernameLable.Text = "Welcome, " + m_translationProvider.m_username + "!";
-                LoginLabel.Text = "Sign Out";
-            }
+          
+            UsernameLable.Text = "Welcome, " + m_translationProvider.m_username + "!";
+
            
             m_pairs = languagePairs;
             m_checkedState = new Dictionary<string, string>();

@@ -79,7 +79,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOk.Location = new System.Drawing.Point(120, 97);
+            this.btnOk.Location = new System.Drawing.Point(121, 89);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 5;
@@ -90,7 +90,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(201, 97);
+            this.btnCancel.Location = new System.Drawing.Point(202, 89);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -101,12 +101,12 @@
             // DemoLink
             // 
             this.DemoLink.AutoSize = true;
-            this.DemoLink.Location = new System.Drawing.Point(12, 72);
+            this.DemoLink.Location = new System.Drawing.Point(12, 69);
             this.DemoLink.Name = "DemoLink";
-            this.DemoLink.Size = new System.Drawing.Size(187, 13);
+            this.DemoLink.Size = new System.Drawing.Size(167, 13);
             this.DemoLink.TabIndex = 7;
             this.DemoLink.TabStop = true;
-            this.DemoLink.Text = "Get your free demo ceredentials here! ";
+            this.DemoLink.Text = "Get your free DEMO access here.";
             this.DemoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DemoLink_LinkClicked);
             // 
             // PasswordForm
@@ -114,7 +114,7 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 133);
+            this.ClientSize = new System.Drawing.Size(289, 124);
             this.Controls.Add(this.DemoLink);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -127,6 +127,7 @@
             this.MinimizeBox = false;
             this.Name = "PasswordForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "LetsMT! Authentication";
             this.ResumeLayout(false);
             this.PerformLayout();

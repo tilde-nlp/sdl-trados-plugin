@@ -108,7 +108,7 @@ namespace LetsMT.MTProvider
             {
                 // true is the default, but it is important not to set it to false
                 myProcess.StartInfo.UseShellExecute = true;
-                myProcess.StartInfo.FileName = "https://www.letsmt.eu/Start.aspx?section=register";
+                myProcess.StartInfo.FileName = "https://www.letsmt.eu/Register.aspx?type=demo";
                 myProcess.Start();
             }
             catch (Exception)

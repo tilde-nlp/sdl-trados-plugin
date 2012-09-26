@@ -4,9 +4,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.ServiceModel;
 using Sdl.LanguagePlatform.Core;
-using Sdl.LanguagePlatform.Core;
 using Sdl.LanguagePlatform.TranslationMemory;
 using Sdl.LanguagePlatform.TranslationMemoryApi;
+
+using System.Threading;
+using System.Text.RegularExpressions;
+
 
 namespace LetsMT.MTProvider
 {
@@ -33,11 +36,11 @@ namespace LetsMT.MTProvider
         public ITranslationProvider[] Browse(IWin32Window owner, LanguagePair[] languagePairs, ITranslationProviderCredentialStore credentialStore)
         {
             LetsMTTranslationProviderOptions opts = new LetsMTTranslationProviderOptions();
-
             PasswordForm pf = new PasswordForm();
 
-            if (pf.ShowDialog(owner) == DialogResult.OK)
+            while (pf.ShowDialog(owner) == DialogResult.OK)
             {
+           
                 //TODO: check how to minimize the amount odfsystem list calls
                 string credentials = string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId);
 
@@ -47,15 +50,16 @@ namespace LetsMT.MTProvider
                 //TODO: Check if we need a "testProvider"
                 LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentials);// (dialog.Options);
 
-                if(testProvider.ValidateCredentials())
+                if (ValidateCredentialsLocaly(testProvider))
                 {
-                    Sdl.LanguagePlatform.TranslationMemoryApi.ITranslationProvider[] ResultProv =  new ITranslationProvider[] { testProvider };
+                    Sdl.LanguagePlatform.TranslationMemoryApi.ITranslationProvider[] ResultProv = new ITranslationProvider[] { testProvider };
                     //Open system select screen emidetly for user frendlier setup
                     if (Edit(owner, ResultProv[ResultProv.Length - 1], languagePairs, credentialStore))
                     {
                         return ResultProv;
                     }
                 }
+                
             }
 
             return null;
@@ -77,6 +81,7 @@ namespace LetsMT.MTProvider
             if (editProvider == null)
                 return false;
 
+            //editProvider.
             editProvider.DownloadProfileList(true);
 
             SettingsForm settings = new SettingsForm(ref editProvider, languagePairs);
@@ -84,171 +89,7 @@ namespace LetsMT.MTProvider
             if (dResult == DialogResult.OK)
             {
                 return true;
-            }
-            //sign out/ sign in button
-            else if (dResult == DialogResult.Retry)
-            {
-
-                string username = "";
-                string pssword = "";
-                if (editProvider.m_strAppID != "")
-                {
-                    //strores the origina credentials
-                    string origUsername = editProvider.m_username;
-                    string origAppID = editProvider.m_strAppID;
-                    LetsMTWebService.TranslationWebServiceSoapClient origClient = editProvider.m_service;
-
-                    PasswordForm pf = new PasswordForm();
-                    DialogResult res = pf.ShowDialog(owner);
-                    while (res == DialogResult.OK)
-                    {
-                        username = pf.strUsername;
-                        pssword = pf.strPassword;
-
-                        editProvider.m_strAppID = pf.strAppId;
-                        editProvider.m_username = username;
-
-                        global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-                        // create Web Service client
-                        string url = resourceManager.GetString("LetsMTWebServiceUrl");
-
-                        try
-                        {
-                            Microsoft.Win32.RegistryKey key;
-                            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
-                            if (key != null)
-                            {
-                                string RegUrl = key.GetValue("url", "none").ToString();
-                                if (RegUrl.Length > 3)
-                                {
-                                    if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
-                                }
-                            }
-
-                        }
-                        catch (Exception) { }
-
-                        EndpointAddress endpoint = new EndpointAddress(url);
-
-                        BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-                        binding.MaxBufferSize = int.MaxValue;
-                        binding.MaxReceivedMessageSize = int.MaxValue;
-
-                   
-                        binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-                     
-                        editProvider.m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
-
-
-                        editProvider.m_service.ClientCredentials.UserName.UserName = username;
-                        editProvider.m_service.ClientCredentials.UserName.Password = pssword;
-                        editProvider.m_profileCollection = null;
-
-                        try
-                        {
-                            editProvider.ValidateCredentials();
-                        }
-                        catch(Exception)
-                        {
-                            MessageBox.Show("Unrecognized username or password!", "Error validating credentials");
-                            pf = new PasswordForm();
-                            res = pf.ShowDialog(owner);
-                            continue;
-                        }
-                        
-                        editProvider.DownloadProfileList(true);
-                        
-                        // Call the same function again
-                        if (Edit(owner, translationProvider, languagePairs, credentialStore))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            editProvider.m_profileCollection = null;
-                            return true;
-                        }
-                        //code never gets here
-                    }
-
-                    if (res == DialogResult.Cancel)
-                    {
-                        editProvider.m_username = origUsername;
-                        editProvider.m_strAppID = origAppID;
-                        editProvider.m_service =  origClient;
-
-                        if (Edit(owner, translationProvider, languagePairs, credentialStore))
-                        {
-                            return true;
-                        }
-                        else 
-                        {
-                            //keps the user information but clers system selection
-                            editProvider.m_service = origClient;
-                            return false; 
-                        }
-                    }
-                }
-                else
-                {
-                    username = "Public access";
-                    //random nonempty value
-                    pssword = "*";
-                    editProvider.m_strAppID = "LetsMT_Trados_Plugin";
-                    editProvider.m_username = username;
-
-
-                    global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-                    // create Web Service client
-                    string url = resourceManager.GetString("LetsMTWebServiceUrl");
-
-                    try
-                    {
-                        Microsoft.Win32.RegistryKey key;
-                        key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
-                        if (key != null)
-                        {
-                            string RegUrl = key.GetValue("url", "none").ToString();
-                            if (RegUrl.Length > 3)
-                            {
-                                if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
-                            }
-                        }
-
-                    }
-                    catch (Exception) { }
-
-                    EndpointAddress endpoint = new EndpointAddress(url);
-
-                    BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-                    binding.MaxBufferSize = int.MaxValue;
-                    binding.MaxReceivedMessageSize = int.MaxValue;
-
-                 
-                    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
-                   
-                    editProvider.m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
-
-                    editProvider.m_service.ClientCredentials.UserName.UserName = username;
-                    editProvider.m_service.ClientCredentials.UserName.Password = pssword;
-                    editProvider.m_profileCollection = null;
-                    editProvider.DownloadProfileList(true);
-                    // Call the same function again
-                    if (Edit(owner, translationProvider, languagePairs, credentialStore))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        editProvider.m_profileCollection = null;
-                        return true;
-                    }
-
-
-                }
-
-
-            }
+            }           
 
             return false;
         }
@@ -305,5 +146,65 @@ namespace LetsMT.MTProvider
         }
 
         #endregion
+
+        private bool ValidateCredentialsLocaly(LetsMTTranslationProvider testProvider)
+        {
+            bool bCredentialsValid = true;
+            try
+            {
+                testProvider.m_service.Translate(testProvider.m_strAppID, "*", "*", "*");
+                //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
+            }
+            catch (Exception ex)
+            {
+                //if correct error message apers user authentification has been passed
+                if (ex.Message.Contains("is not started for translation"))
+                {
+                    bCredentialsValid = true;
+                }
+                else if (ex.Message.Contains("401"))
+                {
+                    MessageBox.Show("Unrecognized username or password.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bCredentialsValid = false;
+                }
+                else if (ex.Message.Contains("User is not a member of the group"))
+                {
+                    MessageBox.Show("User is not member of this group", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bCredentialsValid = false;
+                }
+                else if (ex.Message.Contains("User limitation error:"))
+                {
+
+                    Form UForm = null;
+
+                    if ((UForm = testProvider.IsFormAlreadyOpen(typeof(LimitationForm))) != null)
+                    {
+                        //close the form if it is open
+                        UForm.Close();
+                    }
+
+                    Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                    Match m = r.Match(ex.Message);
+                    string erNum = m.Value;
+                    string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum,testProvider.m_service.ClientCredentials.UserName.UserName);
+                    var t = new Thread(() => testProvider.CallForm(Error_url));
+
+                    t.SetApartmentState(ApartmentState.STA);
+                    t.Start();
+                    bCredentialsValid = false;
+
+                }
+                else
+                {
+                    MessageBox.Show("Cannot connect to server.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bCredentialsValid = false;
+                }
+            }
+            
+
+            return bCredentialsValid;
+        }
+        
     }
+
 }
