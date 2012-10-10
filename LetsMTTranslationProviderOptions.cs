@@ -17,8 +17,35 @@ namespace LetsMT.MTProvider
         public LetsMTTranslationProviderOptions()
         {
             m_uriBuilder = new TranslationProviderUriBuilder(LetsMTTranslationProvider.TranslationProviderScheme);
-            //SetStringParameter("param1", "value1");
         }
+
+        //public LetsMTTranslationProviderOptions(ITranslationProviderCredentialStore credentialStore)
+        //{
+
+        //    //ad a new uri to handle multiple plugins
+        //    int letsmtNum = 1;
+        //    Uri letsmtUri = new TranslationProviderUriBuilder("letsmt" + letsmtNum.ToString()).Uri;
+
+        //    //new TranslationProviderUriBuilder("letsmt" + letsmtNum.ToString()).Uri;
+        //    //letsmtUri.
+        //    TranslationProviderCredential credentialData = credentialStore.GetCredential(letsmtUri);
+        //    while (credentialData != null)
+        //    {
+        //        letsmtNum++;
+        //        letsmtUri = new TranslationProviderUriBuilder("letsmt" + letsmtNum.ToString()).Uri ;
+        //        //letsmtUri.
+        //        credentialData = credentialStore.GetCredential(letsmtUri);
+        //    }
+
+
+
+        //    m_uriBuilder = new TranslationProviderUriBuilder(letsmtUri);
+        //    m_uriBuilder.Type = LetsMTTranslationProvider.TranslationProviderScheme;
+            
+        //    //m_uriBuilder.Uri = ;
+            
+        //    //SetStringParameter("param1", "value1");
+        //}
 
         //public LetsMTTranslationProviderOptions(Uri uri)
         //{

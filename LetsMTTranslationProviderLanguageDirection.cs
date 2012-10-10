@@ -169,6 +169,12 @@ namespace LetsMT.MTProvider
         #region "SearchSegment"
         public SearchResults SearchSegment(SearchSettings settings, Segment segment)
         {
+            //FOR DEBUg
+            //string[] credParams = _provider.GetStoreCridential().Split('\t');
+            //if (credParams[0] != _provider.m_username)
+            //{
+     
+            //}
 
             // segments taggs ar converted to html tags
             string strSourceText = Segment2Html(segment);
@@ -201,15 +207,25 @@ namespace LetsMT.MTProvider
         {                
                 TranslationUnit tu = new TranslationUnit();
                 tu.SourceSegment = searchSegment.Duplicate();
-                tu.TargetSegment = translation; 
+                tu.TargetSegment = translation;
+               
                 tu.ResourceId = new PersistentObjectToken(tu.GetHashCode(), Guid.Empty);
                 tu.Origin = TranslationUnitOrigin.MachineTranslation;
-                tu.SystemFields.CreationDate = DateTime.UtcNow;
-                tu.SystemFields.ChangeDate = tu.SystemFields.CreationDate;
+                //tu.SystemFields.CreationDate = DateTime.UtcNow;
+                //tu.SystemFields.ChangeDate = tu.SystemFields.CreationDate;
+                //List<string> info = new List<string>;
+               // FieldValue fv = new FieldValue("system");
+        
+                
                 SearchResult searchResult = new SearchResult(tu);
                 searchResult.ScoringResult = new ScoringResult();
+                
                 searchResult.TranslationProposal = tu.Duplicate();
-                //tu.ConfirmationLevel = ConfirmationLevel.Translated;
+                //TODO: Set as sotion
+                //searchResult.ScoringResult.BaseScore = 80;
+                //searchResult.ScoringResult.EditDistance.Distance = 0.84;
+                // tu.ConfirmationLevel = ConfirmationLevel.Unspecified;
+                
                 return searchResult;
         }
         #endregion
@@ -412,7 +428,6 @@ namespace LetsMT.MTProvider
         public string GetOriginal() { return m_strOriginal; }
         public string GetReplacement() { return m_strReplacement; }
     }
-
 
 
 

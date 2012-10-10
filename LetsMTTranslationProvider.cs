@@ -28,6 +28,8 @@ namespace LetsMT.MTProvider
         public static readonly string TranslationProviderScheme = "letsmt";
         public string m_username;
         private string m_strCredential;
+        private ITranslationProviderCredentialStore m_store;
+        private Uri m_uri;
         public string m_strAppID;
         public LetsMTWebService.TranslationWebServiceSoapClient m_service;
         public CMtProfileCollection m_profileCollection;
@@ -135,8 +137,16 @@ namespace LetsMT.MTProvider
             
         }
 
-        public LetsMTTranslationProvider(string credential)
+        public LetsMTTranslationProvider(ITranslationProviderCredentialStore credentialStore, Uri translationProviderUri)
         {
+            m_uri = translationProviderUri;
+            m_store = credentialStore;
+            TranslationProviderCredential credentialData = credentialStore.GetCredential(translationProviderUri); //Make sure we have credentials, if not, throw exception to ask user
+            if (credentialData == null)
+                throw new TranslationProviderAuthenticationException();
+
+            string credential = credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
+
             m_strCredential = credential;
 
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
@@ -267,7 +277,17 @@ namespace LetsMT.MTProvider
             return bCredentialsValid;
         }
 
-     
+        public string GetStoreCridential()
+        {
+
+            TranslationProviderCredential credentialData = m_store.GetCredential(m_uri); //Make sure we have credentials, if not, throw exception to ask user
+            if (credentialData == null)
+                throw new TranslationProviderAuthenticationException();
+
+            //string credential = 
+             return  credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
+        }
+
 
         #region "ITranslationProvider Members"
         public void DownloadProfileList(bool bForce = false)
@@ -332,10 +352,13 @@ namespace LetsMT.MTProvider
         {
             get
             {
-                Uri uri = new LetsMTTranslationProviderOptions().Uri;
-                return uri;
+                return m_uri;
+                //Uri uri = new LetsMTTranslationProviderOptions().Uri;
+                //return uri;
             }
         }
+
+
 
         public string Name { get { return PluginResources.Plugin_NiceName; } }
         public TranslationMethod TranslationMethod { get { return TranslationMethod.MachineTranslation; } }

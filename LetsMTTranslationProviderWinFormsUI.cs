@@ -45,13 +45,28 @@ namespace LetsMT.MTProvider
                 string credentials = string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId);
 
                 TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
+                //ad a new uri to handle multiple plugins and users
+                int letsmtNum = 1;
+                Uri letsmtUri = new Uri(opts.Uri.ToString()  + letsmtNum.ToString());
 
-                credentialStore.AddCredential(opts.Uri, tc);
-                //TODO: Check if we need a "testProvider"
-                LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentials);// (dialog.Options);
+                TranslationProviderCredential credentialData = credentialStore.GetCredential(letsmtUri);
+                while (credentialData != null)
+                {
+                    letsmtNum++;
+                    letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
+                    credentialData = credentialStore.GetCredential(letsmtUri);
+                }
+
+                credentialStore.AddCredential(letsmtUri, tc);
+                LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, letsmtUri);// (dialog.Options);
+
+                //credentialStore.AddCredential(opts.Uri, tc);
+                ////TODO: Check if we need a "testProvider"
+                //LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, opts.Uri);// (dialog.Options);
 
                 if (ValidateCredentialsLocaly(testProvider))
                 {
+                    
                     Sdl.LanguagePlatform.TranslationMemoryApi.ITranslationProvider[] ResultProv = new ITranslationProvider[] { testProvider };
                     //Open system select screen emidetly for user frendlier setup
                     if (Edit(owner, ResultProv[ResultProv.Length - 1], languagePairs, credentialStore))
@@ -59,7 +74,8 @@ namespace LetsMT.MTProvider
                         return ResultProv;
                     }
                 }
-                
+                //IF USERNAME INFOREC REMOVE DATA FROM STORE
+                credentialStore.RemoveCredential(letsmtUri);
             }
 
             return null;

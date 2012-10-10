@@ -20,13 +20,15 @@ namespace LetsMT.MTProvider
             if (!SupportsTranslationProviderUri(translationProviderUri)) //Wrong Uri, Trados is probably looking for another provider
                 throw new Exception("Cannot handle URI.");
 
-            TranslationProviderCredential credentialData = credentialStore.GetCredential(translationProviderUri); //Make sure we have credentials, if not, throw exception to ask user
-            if(credentialData == null)
-                throw new TranslationProviderAuthenticationException();
+            //TranslationProviderCredential credentialData = credentialStore.GetCredential(translationProviderUri); //Make sure we have credentials, if not, throw exception to ask user
+            //if(credentialData == null)
+            //    throw new TranslationProviderAuthenticationException();
 
-            string credential = credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
+            //string credential = credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
 
-            LetsMTTranslationProvider translationProvider = new LetsMTTranslationProvider(credential); //Create the provider passing required parameters
+            //translationProviderUri.UserInfo
+
+            LetsMTTranslationProvider translationProvider = new LetsMTTranslationProvider(credentialStore, translationProviderUri); //Create the provider passing required parameters
             
             //if(!translationProvider.ValidateCredentials()) //If credentials are incorrect, ask again
               //  throw new TranslationProviderAuthenticationException();
@@ -57,7 +59,9 @@ namespace LetsMT.MTProvider
             if (translationProviderUri == null) //Throw allowed exception if no arguments
                 throw new ArgumentNullException("Missing arguments.");
 
-            return string.Equals(translationProviderUri.Scheme, LetsMTTranslationProvider.TranslationProviderScheme, StringComparison.OrdinalIgnoreCase);
+            //return string.Equals(translationProviderUri.Scheme, LetsMTTranslationProvider.TranslationProviderScheme, StringComparison.OrdinalIgnoreCase);
+            return true;
+
         }
     }
 }
