@@ -15,9 +15,10 @@ namespace LetsMT.MTProvider
         private LetsMTTranslationProvider m_translationProvider;
         private Dictionary<string, string> m_checkedState;
         private LanguagePair[] m_pairs;
-
+        private int m_score;
         public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs)
         {
+            m_score = editProvider.m_resultScore;
             DialogResult = DialogResult.Cancel;
 
             InitializeComponent();
@@ -192,6 +193,12 @@ namespace LetsMT.MTProvider
             DialogResult = DialogResult.Retry;
             Close();
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Advanced_options advanced = new Advanced_options(ref m_translationProvider);
+            advanced.ShowDialog(this);
         }
 
     }

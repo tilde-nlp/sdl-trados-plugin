@@ -171,10 +171,8 @@ namespace LetsMT.MTProvider
         {
             //FOR DEBUg
             //string[] credParams = _provider.GetStoreCridential().Split('\t');
-            //if (credParams[0] != _provider.m_username)
-            //{
-     
-            //}
+            //if (credParams[0] != _provider.m_username) {}
+           
 
             // segments taggs ar converted to html tags
             string strSourceText = Segment2Html(segment);
@@ -187,7 +185,7 @@ namespace LetsMT.MTProvider
             //result is stored as SearchResults
             SearchResults results = new SearchResults();
             results.SourceSegment = segment.Duplicate();
-            results.Add(CreateSearchResult(segment, translation));
+            results.Add(CreateSearchResult(segment, translation, _provider.m_resultScore));
 
             return results;
         }
@@ -203,7 +201,7 @@ namespace LetsMT.MTProvider
         /// <param name="sourceSegment"></param>
         /// <returns></returns>
         #region "CreateSearchResult"
-        private SearchResult CreateSearchResult(Segment searchSegment, Segment translation)
+        private SearchResult CreateSearchResult(Segment searchSegment, Segment translation, int score)
         {                
                 TranslationUnit tu = new TranslationUnit();
                 tu.SourceSegment = searchSegment.Duplicate();
@@ -213,18 +211,12 @@ namespace LetsMT.MTProvider
                 tu.Origin = TranslationUnitOrigin.MachineTranslation;
                 //tu.SystemFields.CreationDate = DateTime.UtcNow;
                 //tu.SystemFields.ChangeDate = tu.SystemFields.CreationDate;
-                //List<string> info = new List<string>;
-               // FieldValue fv = new FieldValue("system");
-        
-                
+
                 SearchResult searchResult = new SearchResult(tu);
                 searchResult.ScoringResult = new ScoringResult();
-                
                 searchResult.TranslationProposal = tu.Duplicate();
-                //TODO: Set as sotion
-                //searchResult.ScoringResult.BaseScore = 80;
-                //searchResult.ScoringResult.EditDistance.Distance = 0.84;
-                // tu.ConfirmationLevel = ConfirmationLevel.Unspecified;
+                searchResult.ScoringResult.BaseScore = score;
+
                 
                 return searchResult;
         }

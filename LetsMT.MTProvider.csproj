@@ -97,6 +97,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advanced_options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Advanced_options.Designer.cs">
+      <DependentUpon>Advanced_options.cs</DependentUpon>
+    </Compile>
     <Compile Include="LimitationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,7 +115,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SystemManagement\CMtProfile.cs" />
-    <Compile Include="SystemManagement\CMtProfileCollection.cs" />
+    <Compile Include="CMtProfileCollection.cs" />
     <Compile Include="SystemManagement\CMtSystem.cs" />
     <Compile Include="LetsMTTranslationProviderOptions.cs" />
     <Compile Include="LetsMTTranslationProvider.cs" />
@@ -142,7 +148,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="band_aid.ico" />
     <Content Include="band_aid.png" />
     <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.MTSystem.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -158,6 +163,9 @@
     <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
     <None Include="Service References\LetsMTWebService\Service.disco" />
     <None Include="ClassDiagram3.cd" />
+    <EmbeddedResource Include="Advanced_options.resx">
+      <DependentUpon>Advanced_options.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LimitationForm.resx">
       <DependentUpon>LimitationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,7 +174,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="pluginpackage.manifest.xml" />
+    <Content Include="pluginpackage.manifest.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Service References\LetsMTWebService\Service.wsdl" />
     <None Include="setupscript.nsi" />
     <None Include="setupscript_11.nsi" />

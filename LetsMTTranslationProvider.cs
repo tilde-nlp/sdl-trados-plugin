@@ -31,6 +31,7 @@ namespace LetsMT.MTProvider
         private ITranslationProviderCredentialStore m_store;
         private Uri m_uri;
         public string m_strAppID;
+        public int m_resultScore;
         public LetsMTWebService.TranslationWebServiceSoapClient m_service;
         public CMtProfileCollection m_profileCollection;
 
@@ -43,7 +44,7 @@ namespace LetsMT.MTProvider
         }
 
         private static string RemoveControlCharacters(string inString)
-        {
+        { 
             if (inString == null) return null;
 
             StringBuilder newString = new StringBuilder();
@@ -93,7 +94,7 @@ namespace LetsMT.MTProvider
                 try
                 {
                     //removes control characters  to work around imperfections in the way .NET handles SOAP.
-                    result = m_service.Translate(m_strAppID, system,RemoveControlCharacters( text), null);
+                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), "client=SDLTradosStudio");
                 }
                 catch(Exception ex)
                 {
@@ -105,20 +106,22 @@ namespace LetsMT.MTProvider
                     {
                         Form UForm = null;
                         
-                        if  ( (UForm = IsFormAlreadyOpen(typeof(LimitationForm))) != null)
+                        if  ( (UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
                         {
-                            //close the form if it is open
-                            UForm.Close();
+
+                            Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                            Match m = r.Match(ex.Message);
+                            string erNum = m.Value;
+                            string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+                            var t = new Thread(() => CallForm(Error_url));
+
+                            t.SetApartmentState(ApartmentState.STA);
+                            t.Start();
+                            ////close the form if it is open
+                            //UForm.Close();
                         }
                                                     
-                        Regex r = new Regex(@"(?<=User limitation error: )\d+");
-                        Match m = r.Match(ex.Message);
-                        string erNum = m.Value;
-                        string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
-                        var t = new Thread(() => CallForm(Error_url));
-
-                        t.SetApartmentState(ApartmentState.STA);
-                        t.Start();
+                       
                         //TODO: It would be nice to diable the plugin afterwards
                             
                         
@@ -137,8 +140,9 @@ namespace LetsMT.MTProvider
             
         }
 
-        public LetsMTTranslationProvider(ITranslationProviderCredentialStore credentialStore, Uri translationProviderUri)
+        public LetsMTTranslationProvider(ITranslationProviderCredentialStore credentialStore, Uri translationProviderUri, int resultScore)
         {
+            m_resultScore = resultScore;
             m_uri = translationProviderUri;
             m_store = credentialStore;
             TranslationProviderCredential credentialData = credentialStore.GetCredential(translationProviderUri); //Make sure we have credentials, if not, throw exception to ask user
@@ -224,7 +228,7 @@ namespace LetsMT.MTProvider
             bool bCredentialsValid = false;
             try
             {
-                m_service.Translate(m_strAppID, "*", "*", "*");
+                m_service.Translate(m_strAppID, "*", "*", "client=SDLTradosStudio");
                 //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
             }
             catch (Exception ex)
@@ -248,20 +252,22 @@ namespace LetsMT.MTProvider
 
                     Form UForm = null;
 
-                    if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) != null)
+                    if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
                     {
-                        //close the form if it is open
-                        UForm.Close();
+
+                        Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                        Match m = r.Match(ex.Message);
+                        string erNum = m.Value;
+                        string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+                        var t = new Thread(() => CallForm(Error_url));
+
+                        t.SetApartmentState(ApartmentState.STA);
+                        t.Start();
+                        ////close the form if it is open
+                        //UForm.Close();
                     }
 
-                    Regex r = new Regex(@"(?<=User limitation error: )\d+");
-                    Match m = r.Match(ex.Message);
-                    string erNum = m.Value;
-                    string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
-                    var t = new Thread(() => CallForm(Error_url));
-
-                    t.SetApartmentState(ApartmentState.STA);
-                    t.Start();
+                   
 
                     //TODO: It would be nice to diable the plugin afterwards
                     throw new Exception("User limitation reched.");
@@ -317,7 +323,33 @@ namespace LetsMT.MTProvider
         {
             if (m_profileCollection == null)
                 DownloadProfileList();
+            if (translationProviderState.StartsWith("resultScore"))
+            {
+                int lineindex = translationProviderState.IndexOf('\n');
+                if (lineindex != -1)
+                {
+                    string scroresString = translationProviderState.Substring(0, lineindex);
+                    Regex r = new Regex(@"(?<=resultScore:)\d+");
+                    Match m = r.Match(scroresString);
+                    string Strscore = m.Value;
+                    int score;
+                    if (int.TryParse(Strscore, out score))
+                    {
+                        m_resultScore = score;
+                    }
 
+                    if (lineindex < translationProviderState.Length)
+                    {
+                        translationProviderState = translationProviderState.Remove(0, lineindex);
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+               
+            }
             m_profileCollection.DeserializeState(translationProviderState);
         }
 
@@ -326,7 +358,7 @@ namespace LetsMT.MTProvider
             if (m_profileCollection == null)
                 DownloadProfileList();
 
-            string state = m_profileCollection.SerializeState();
+            string state = "resultScore:" + m_resultScore.ToString() + "\n" + m_profileCollection.SerializeState();
             
             return state;
         }

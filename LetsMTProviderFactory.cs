@@ -28,7 +28,7 @@ namespace LetsMT.MTProvider
 
             //translationProviderUri.UserInfo
 
-            LetsMTTranslationProvider translationProvider = new LetsMTTranslationProvider(credentialStore, translationProviderUri); //Create the provider passing required parameters
+            LetsMTTranslationProvider translationProvider = new LetsMTTranslationProvider(credentialStore, translationProviderUri,85); //Create the provider passing required parameters
             
             //if(!translationProvider.ValidateCredentials()) //If credentials are incorrect, ask again
               //  throw new TranslationProviderAuthenticationException();

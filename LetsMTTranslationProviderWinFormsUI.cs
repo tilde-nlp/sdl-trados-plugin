@@ -58,7 +58,7 @@ namespace LetsMT.MTProvider
                 }
 
                 credentialStore.AddCredential(letsmtUri, tc);
-                LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, letsmtUri);// (dialog.Options);
+                LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, letsmtUri,85);// (dialog.Options);
 
                 //credentialStore.AddCredential(opts.Uri, tc);
                 ////TODO: Check if we need a "testProvider"
@@ -168,7 +168,7 @@ namespace LetsMT.MTProvider
             bool bCredentialsValid = true;
             try
             {
-                testProvider.m_service.Translate(testProvider.m_strAppID, "*", "*", "*");
+                testProvider.m_service.Translate(testProvider.m_strAppID, "*", "*", "client=SDLTradosStudio");
                 //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
             }
             catch (Exception ex)
@@ -193,21 +193,22 @@ namespace LetsMT.MTProvider
 
                     Form UForm = null;
 
-                    if ((UForm = testProvider.IsFormAlreadyOpen(typeof(LimitationForm))) != null)
+                    if ((UForm = testProvider.IsFormAlreadyOpen(typeof(LimitationForm))) == null)
                     {
-                        //close the form if it is open
-                        UForm.Close();
+                        Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                        Match m = r.Match(ex.Message);
+                        string erNum = m.Value;
+                        string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, testProvider.m_service.ClientCredentials.UserName.UserName);
+                        var t = new Thread(() => testProvider.CallForm(Error_url));
+
+                        t.SetApartmentState(ApartmentState.STA);
+                        t.Start();
+                        bCredentialsValid = false;
+                        ////close the form if it is open
+                        //UForm.Close();
                     }
 
-                    Regex r = new Regex(@"(?<=User limitation error: )\d+");
-                    Match m = r.Match(ex.Message);
-                    string erNum = m.Value;
-                    string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum,testProvider.m_service.ClientCredentials.UserName.UserName);
-                    var t = new Thread(() => testProvider.CallForm(Error_url));
-
-                    t.SetApartmentState(ApartmentState.STA);
-                    t.Start();
-                    bCredentialsValid = false;
+                    
 
                 }
                 else
