@@ -10,6 +10,7 @@ using Sdl.LanguagePlatform.TranslationMemoryApi;
 using System.Threading;
 using System.Text.RegularExpressions;
 
+using System.Web.Services.Protocols;
 
 namespace LetsMT.MTProvider
 {
@@ -145,10 +146,10 @@ namespace LetsMT.MTProvider
         {
             TranslationProviderDisplayInfo info = new TranslationProviderDisplayInfo();
 
-            info.Name = PluginResources.Plugin_NiceName;            
-            info.TranslationProviderIcon = PluginResources.band_aid_icon;
+            info.Name = PluginResources.Plugin_NiceName;
+            info.TranslationProviderIcon = PluginResources.Icon_from_Logo_71x23;
             info.TooltipText = PluginResources.Plugin_Tooltip;
-            info.SearchResultImage = PluginResources.band_aid_symbol;
+            info.SearchResultImage = PluginResources.Logo_71x23;
 
             return info;
         }
@@ -168,34 +169,24 @@ namespace LetsMT.MTProvider
             bool bCredentialsValid = true;
             try
             {
-                testProvider.m_service.Translate(testProvider.m_strAppID, "*", "*", "client=SDLTradosStudio");
-                //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
+                testProvider.m_service.GetUserInfo("");
             }
             catch (Exception ex)
             {
-                //if correct error message apers user authentification has been passed
-                if (ex.Message.Contains("is not started for translation"))
-                {
-                    bCredentialsValid = true;
-                }
-                else if (ex.Message.Contains("401"))
+
+                if (ex.Message.Contains("The HTTP request is unauthorized"))
                 {
                     MessageBox.Show("Unrecognized username or password.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     bCredentialsValid = false;
                 }
-                else if (ex.Message.Contains("User is not a member of the group"))
-                {
-                    MessageBox.Show("User is not member of this group", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    bCredentialsValid = false;
-                }
-                else if (ex.Message.Contains("User limitation error:"))
+                else if (ex.Message.Contains("code:"))
                 {
 
                     Form UForm = null;
 
                     if ((UForm = testProvider.IsFormAlreadyOpen(typeof(LimitationForm))) == null)
                     {
-                        Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                        Regex r = new Regex(@"(?<=cide: 1)\d+");
                         Match m = r.Match(ex.Message);
                         string erNum = m.Value;
                         string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, testProvider.m_service.ClientCredentials.UserName.UserName);
@@ -208,11 +199,13 @@ namespace LetsMT.MTProvider
                         //UForm.Close();
                     }
 
-                    
+
 
                 }
                 else
                 {
+                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show(ex.Message);
                     MessageBox.Show("Cannot connect to server.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     bCredentialsValid = false;
                 }

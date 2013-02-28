@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using Sdl.LanguagePlatform.Core;
+using System.Xml;
 
 namespace LetsMT.MTProvider
 {
@@ -16,6 +17,15 @@ namespace LetsMT.MTProvider
         private Dictionary<string, string> m_checkedState;
         private LanguagePair[] m_pairs;
         private int m_score;
+
+        public class UserGroup
+        {
+            public string Name { get; set; }
+            public string Value { get; set; }
+            public override string ToString() { return this.Name; }
+        }
+
+
         public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs)
         {
             m_score = editProvider.m_resultScore;
@@ -32,9 +42,37 @@ namespace LetsMT.MTProvider
             wndProfileProperties.ValueMember = "value";
 
             m_translationProvider = editProvider;
-          
-            UsernameLable.Text = "Welcome, " + m_translationProvider.m_username + "!";
+            string WelcomeName = m_translationProvider.m_username;
+            
+            
+            XmlNode node = m_translationProvider.m_service.GetUserInfo("");
 
+            XmlNode NameXML = node.SelectSingleNode("name");
+            XmlNode SurnameXML = node.SelectSingleNode("surname");
+            if (NameXML != null)
+            {
+                WelcomeName = NameXML.InnerText;
+            }
+            if (SurnameXML != null)
+            {
+                WelcomeName = WelcomeName + " " + NameXML.InnerText;
+            }
+
+
+            List<UserGroup> GoupList = new List<UserGroup>();
+
+            foreach (XmlNode n in node.SelectNodes("userGroups/group"))
+            {
+                GoupList.Add(new UserGroup() { Name = n.Attributes["name"].Value, Value = n.Attributes["id"].Value });
+
+            }
+
+            this.GroupSelectComboBox.DataSource = GoupList;
+            this.GroupSelectComboBox.DisplayMember = "Name";
+            this.GroupSelectComboBox.ValueMember = "Value";
+            this.GroupSelectComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            UsernameLable.Text = "Welcome, " + WelcomeName + "!";
            
             m_pairs = languagePairs;
             m_checkedState = new Dictionary<string, string>();
@@ -199,6 +237,13 @@ namespace LetsMT.MTProvider
         {
             Advanced_options advanced = new Advanced_options(ref m_translationProvider);
             advanced.ShowDialog(this);
+        }
+
+        private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string group = GroupSelectComboBox.SelectedValue.ToString();
+           // MessageBox.Show("not implemented yet!");
+
         }
 
     }

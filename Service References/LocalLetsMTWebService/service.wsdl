@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.letsmt.eu/translationAPI" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://www.letsmt.eu/translationAPI/AbstractTypes" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.letsmt.eu/translationAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.letsmt.eu/translationAPI">
+      <s:import namespace="http://www.w3.org/XML/1998/namespace" />
+      <s:element name="Translate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="systemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TranslateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TranslateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TranslateArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="systemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="textArray" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TranslateArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TranslateArrayResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DetectLanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="candidateList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DetectLanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DetectLanguageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BreakSentences">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BreakSentencesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BreakSentencesResult" type="tns:Sentences" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Sentences">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Sentence" type="tns:SentenceBoundary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SentenceBoundary">
+        <s:attribute name="start" type="s:int" use="required" />
+        <s:attribute name="length" type="s:int" use="required" />
+      </s:complexType>
+      <s:element name="GetSystemList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="uiLanguageID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSystemListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSystemListResult" type="tns:Systems" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Systems">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="System" type="tns:MTSystem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MTSystem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SrcLanguage" type="tns:Language" />
+          <s:element minOccurs="1" maxOccurs="1" name="TrgLanguage" type="tns:Language" />
+          <s:element minOccurs="0" maxOccurs="1" name="Domain" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Title" type="tns:LangText" />
+          <s:element minOccurs="1" maxOccurs="1" name="Description" type="tns:LangText" />
+          <s:element minOccurs="0" maxOccurs="1" name="Metadata" type="tns:ArrayOfObjectProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Language">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Name" type="tns:LangText" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LangText">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute ref="xml:lang" use="optional" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfObjectProperty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Item" type="tns:ObjectProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjectProperty">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="key" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:element name="GetUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="Sentences" nillable="true" type="tns:Sentences" />
+      <s:element name="Systems" nillable="true" type="tns:Systems" />
+    </s:schema>
+    <s:schema targetNamespace="http://www.letsmt.eu/translationAPI/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TranslateSoapIn">
+    <wsdl:part name="parameters" element="tns:Translate" />
+  </wsdl:message>
+  <wsdl:message name="TranslateSoapOut">
+    <wsdl:part name="parameters" element="tns:TranslateResponse" />
+  </wsdl:message>
+  <wsdl:message name="TranslateArraySoapIn">
+    <wsdl:part name="parameters" element="tns:TranslateArray" />
+  </wsdl:message>
+  <wsdl:message name="TranslateArraySoapOut">
+    <wsdl:part name="parameters" element="tns:TranslateArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="DetectLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:DetectLanguage" />
+  </wsdl:message>
+  <wsdl:message name="DetectLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:DetectLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="BreakSentencesSoapIn">
+    <wsdl:part name="parameters" element="tns:BreakSentences" />
+  </wsdl:message>
+  <wsdl:message name="BreakSentencesSoapOut">
+    <wsdl:part name="parameters" element="tns:BreakSentencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSystemListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSystemList" />
+  </wsdl:message>
+  <wsdl:message name="GetSystemListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSystemListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="TranslateHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="systemID" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TranslateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="TranslateArrayHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="systemID" type="s:string" />
+    <wsdl:part name="textArray" type="s1:StringArray" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TranslateArrayHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="DetectLanguageHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="candidateList" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="DetectLanguageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BreakSentencesHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BreakSentencesHttpGetOut">
+    <wsdl:part name="Body" element="tns:Sentences" />
+  </wsdl:message>
+  <wsdl:message name="GetSystemListHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="uiLanguageID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSystemListHttpGetOut">
+    <wsdl:part name="Body" element="tns:Systems" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="TranslateHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="systemID" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TranslateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="TranslateArrayHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="systemID" type="s:string" />
+    <wsdl:part name="textArray" type="s1:StringArray" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TranslateArrayHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="DetectLanguageHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="candidateList" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="DetectLanguageHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BreakSentencesHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BreakSentencesHttpPostOut">
+    <wsdl:part name="Body" element="tns:Sentences" />
+  </wsdl:message>
+  <wsdl:message name="GetSystemListHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="uiLanguageID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSystemListHttpPostOut">
+    <wsdl:part name="Body" element="tns:Systems" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="TranslationWebServiceSoap">
+    <wsdl:operation name="Translate">
+      <wsdl:input message="tns:TranslateSoapIn" />
+      <wsdl:output message="tns:TranslateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <wsdl:input message="tns:TranslateArraySoapIn" />
+      <wsdl:output message="tns:TranslateArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <wsdl:input message="tns:DetectLanguageSoapIn" />
+      <wsdl:output message="tns:DetectLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <wsdl:input message="tns:BreakSentencesSoapIn" />
+      <wsdl:output message="tns:BreakSentencesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <wsdl:input message="tns:GetSystemListSoapIn" />
+      <wsdl:output message="tns:GetSystemListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input message="tns:GetUserInfoSoapIn" />
+      <wsdl:output message="tns:GetUserInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TranslationWebServiceHttpGet">
+    <wsdl:operation name="Translate">
+      <wsdl:input message="tns:TranslateHttpGetIn" />
+      <wsdl:output message="tns:TranslateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <wsdl:input message="tns:TranslateArrayHttpGetIn" />
+      <wsdl:output message="tns:TranslateArrayHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <wsdl:input message="tns:DetectLanguageHttpGetIn" />
+      <wsdl:output message="tns:DetectLanguageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <wsdl:input message="tns:BreakSentencesHttpGetIn" />
+      <wsdl:output message="tns:BreakSentencesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <wsdl:input message="tns:GetSystemListHttpGetIn" />
+      <wsdl:output message="tns:GetSystemListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input message="tns:GetUserInfoHttpGetIn" />
+      <wsdl:output message="tns:GetUserInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TranslationWebServiceHttpPost">
+    <wsdl:operation name="Translate">
+      <wsdl:input message="tns:TranslateHttpPostIn" />
+      <wsdl:output message="tns:TranslateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <wsdl:input message="tns:TranslateArrayHttpPostIn" />
+      <wsdl:output message="tns:TranslateArrayHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <wsdl:input message="tns:DetectLanguageHttpPostIn" />
+      <wsdl:output message="tns:DetectLanguageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <wsdl:input message="tns:BreakSentencesHttpPostIn" />
+      <wsdl:output message="tns:BreakSentencesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <wsdl:input message="tns:GetSystemListHttpPostIn" />
+      <wsdl:output message="tns:GetSystemListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input message="tns:GetUserInfoHttpPostIn" />
+      <wsdl:output message="tns:GetUserInfoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TranslationWebServiceSoap" type="tns:TranslationWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Translate">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/Translate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/TranslateArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/DetectLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/BreakSentences" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/GetSystemList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TranslationWebServiceSoap12" type="tns:TranslationWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Translate">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/Translate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/TranslateArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/DetectLanguage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/BreakSentences" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/GetSystemList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TranslationWebServiceHttpGet" type="tns:TranslationWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Translate">
+      <http:operation location="/Translate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <http:operation location="/TranslateArray" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <http:operation location="/DetectLanguage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <http:operation location="/BreakSentences" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <http:operation location="/GetSystemList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <http:operation location="/GetUserInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TranslationWebServiceHttpPost" type="tns:TranslationWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Translate">
+      <http:operation location="/Translate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <http:operation location="/TranslateArray" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DetectLanguage">
+      <http:operation location="/DetectLanguage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakSentences">
+      <http:operation location="/BreakSentences" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <http:operation location="/GetSystemList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <http:operation location="/GetUserInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TranslationWebService">
+    <wsdl:port name="TranslationWebServiceSoap" binding="tns:TranslationWebServiceSoap">
+      <soap:address location="https://letsmt-logic.tilde.lv/ws/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TranslationWebServiceSoap12" binding="tns:TranslationWebServiceSoap12">
+      <soap12:address location="https://letsmt-logic.tilde.lv/ws/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TranslationWebServiceHttpGet" binding="tns:TranslationWebServiceHttpGet">
+      <http:address location="https://letsmt-logic.tilde.lv/ws/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TranslationWebServiceHttpPost" binding="tns:TranslationWebServiceHttpPost">
+      <http:address location="https://letsmt-logic.tilde.lv/ws/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

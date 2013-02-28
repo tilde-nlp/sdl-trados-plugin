@@ -32,7 +32,7 @@ namespace LetsMT.MTProvider
         private Uri m_uri;
         public string m_strAppID;
         public int m_resultScore;
-        public LetsMTWebService.TranslationWebServiceSoapClient m_service;
+        public LocalLetsMTWebService.TranslationWebServiceSoapClient m_service;
         public CMtProfileCollection m_profileCollection;
 
         private static bool ValidateRemoteCertificate(object sender,
@@ -98,18 +98,14 @@ namespace LetsMT.MTProvider
                 }
                 catch(Exception ex)
                 {
-                    if (ex.Message.Contains("is not started for translation"))
-                    {
-                        throw new Exception("Translaton system not started.");
-                    }
-                    else if (ex.Message.Contains("User limitation error:"))
+                    if (ex.Message.Contains("code: 1"))
                     {
                         Form UForm = null;
                         
                         if  ( (UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
                         {
 
-                            Regex r = new Regex(@"(?<=User limitation error: )\d+");
+                            Regex r = new Regex(@"(?<=code: )\d+");
                             Match m = r.Match(ex.Message);
                             string erNum = m.Value;
                             string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
@@ -125,6 +121,21 @@ namespace LetsMT.MTProvider
                         //TODO: It would be nice to diable the plugin afterwards
                             
                         
+                    }
+                    else if    (ex.Message.Contains("code:"))
+                    {
+                        Regex r = new Regex(@"(?<=description: ).+$");
+                        Match m = r.Match(ex.Message);
+                        string errText;
+                        if (m.Success)
+                        {
+                            errText = m.Value;
+                        }
+                        else
+                        {
+                            errText = "The service was unable to acquire a translation.";
+                        }
+                        throw new Exception(errText);
                     }
                     else
                     {
@@ -212,7 +223,7 @@ namespace LetsMT.MTProvider
             else {
                 binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             }
-            m_service = new LetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+            m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
 
 
             m_service.ClientCredentials.UserName.UserName = m_username;
@@ -228,24 +239,16 @@ namespace LetsMT.MTProvider
             bool bCredentialsValid = false;
             try
             {
-                m_service.Translate(m_strAppID, "*", "*", "client=SDLTradosStudio");
+                m_service.GetUserInfo("");
+                bCredentialsValid = true;
+                //m_service.Translate(m_strAppID, "*", "*", "client=SDLTradosStudio");
                 //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
             }
             catch (Exception ex)
             {
-                //if correct error message apers user authentification has been passed
-                if (ex.Message.Contains("is not started for translation"))
-                {
-                    bCredentialsValid = true;
-                }
-                else if ( ex.Message.Contains("401") )
+                if (ex.Message.Contains("The HTTP request is unauthorized"))
                 {
                     throw new Exception("Unrecognized username or password.");
-                }
-                else if(ex.Message.Contains("User is not a member of the group"))
-                {
-                    
-                    throw new Exception("User is not member of this group");
                 }
                 else if (ex.Message.Contains("User limitation error:"))
                 {
@@ -306,8 +309,8 @@ namespace LetsMT.MTProvider
             if (m_profileCollection != null)
                 state = SerializeState();
 
-            LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
-
+            //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
+            LocalLetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
             m_profileCollection = new CMtProfileCollection(mtList);
 
             if (state != null)

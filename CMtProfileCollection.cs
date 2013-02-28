@@ -14,14 +14,14 @@ namespace LetsMT.MTProvider
         //Contains references to all available systems inside language directions
         private List<CMtSystem> m_systemList;
 
-        public CMtProfileCollection(LetsMTWebService.MTSystem[] mtSystems)
+        public CMtProfileCollection(LocalLetsMTWebService.MTSystem[] mtSystems)
         {
             //Empty lists initialized
             m_profileList = new List<CMtProfile>();
             m_systemList = new List<CMtSystem>();
 
             //Fill the lists with data from web service
-            foreach (LetsMTWebService.MTSystem system in mtSystems)
+            foreach (LocalLetsMTWebService.MTSystem system in mtSystems)
             {
                 string strProfileId = string.Format("{0} - {1}", system.SrcLanguage.Code, system.TrgLanguage.Code);
 
@@ -59,7 +59,7 @@ namespace LetsMT.MTProvider
                 string strSysOnlineStatus = "unknown";
                 strSysDescription += "";
                 //Fill description field
-                foreach ( LetsMTWebService.ObjectProperty meta  in system.Metadata)
+                foreach (LocalLetsMTWebService.ObjectProperty meta in system.Metadata)
                 {
                     if (meta.key == "description")
                     {
@@ -90,7 +90,7 @@ namespace LetsMT.MTProvider
                 System.Collections.IEnumerator metaEnum = system.Metadata.GetEnumerator();
                 while(metaEnum.MoveNext())
                 {
-                    LetsMTWebService.ObjectProperty prop = metaEnum.Current as LetsMTWebService.ObjectProperty;
+                    LocalLetsMTWebService.ObjectProperty prop = metaEnum.Current as LocalLetsMTWebService.ObjectProperty;
                     if(prop.key == "status")
                     {
                         switch (prop.Value)

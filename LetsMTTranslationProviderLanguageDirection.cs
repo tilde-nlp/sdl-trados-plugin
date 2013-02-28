@@ -240,6 +240,8 @@ namespace LetsMT.MTProvider
 
         public SearchResults[] SearchSegmentsMasked(SearchSettings settings, Segment[] segments, bool[] mask)
         {
+
+
             if (segments == null)
             {
                 throw new ArgumentNullException("segments in SearchSegmentsMasked");
@@ -247,6 +249,48 @@ namespace LetsMT.MTProvider
             if (mask == null || mask.Length != segments.Length)
             {
                 throw new ArgumentException("mask in SearchSegmentsMasked");
+            }
+
+            bool tryAgain = true;
+            //MessageBox.Show("Waiting for system to start.");
+
+            try
+            {
+                _provider.TranslateText(_languageDirection, "test");
+                tryAgain = false;
+            }
+            catch { 
+                //System.Threading.Thread.Sleep(15000); 
+            }
+
+            while (tryAgain)
+            {
+                try
+                {
+                    _provider.TranslateText(_languageDirection, "test");
+                    tryAgain = false;
+                }
+                catch (Exception ex)
+                {
+
+                    tryAgain = false;
+                    if (ex.Message.Contains("system is starting"))
+                    {
+                        DialogResult Result = MessageBox.Show("Automated system is starting up. keep waiting?", "System starting", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        if (Result == DialogResult.Yes)
+                        {
+                            tryAgain = true;
+                            //MessageBox.Show("Waiting for system to start.(segments)");
+
+                            System.Threading.Thread.Sleep(15000);
+                        }
+                        else
+                        {
+                            tryAgain = false;
+                        }
+                    }
+
+                }
             }
 
             SearchResults[] results = new SearchResults[segments.Length];
@@ -290,6 +334,49 @@ namespace LetsMT.MTProvider
         public SearchResults[] SearchTranslationUnitsMasked(SearchSettings settings, TranslationUnit[] translationUnits, bool[] mask)
         {
             List<SearchResults> results = new List<SearchResults>();
+
+            bool tryAgain = true;
+            //MessageBox.Show("Waiting for system to start.");
+
+            try
+            {
+                _provider.TranslateText(_languageDirection, "test");
+                tryAgain = false;
+            }
+            catch
+            {
+                System.Threading.Thread.Sleep(15000); 
+            }
+
+            while (tryAgain)
+            {
+                try
+                {
+                    _provider.TranslateText(_languageDirection, "test");
+                    tryAgain = false;
+                }
+                catch (Exception ex)
+                {
+
+                    tryAgain = false;
+                    if (ex.Message.Contains("system is starting"))
+                    {
+                        DialogResult Result = MessageBox.Show("Automated system is starting up. keep waiting?", "System starting", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        if (Result == DialogResult.Yes)
+                        {
+                            tryAgain = true;
+                            //MessageBox.Show("Waiting for system to start.(segments)");
+
+                            System.Threading.Thread.Sleep(15000);
+                        }
+                        else
+                        {
+                            tryAgain = false;
+                        }
+                    }
+
+                }
+            }
 
             int i = 0;
             foreach (var tu in translationUnits)

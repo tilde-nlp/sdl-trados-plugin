@@ -35,8 +35,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.wndRunningSystems = new System.Windows.Forms.CheckBox();
             this.UsernameLable = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupLable = new System.Windows.Forms.Label();
+            this.GroupSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.BusnesText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,9 +47,9 @@
             // 
             this.wndTranslationDirections.FormattingEnabled = true;
             this.wndTranslationDirections.IntegralHeight = false;
-            this.wndTranslationDirections.Location = new System.Drawing.Point(12, 33);
+            this.wndTranslationDirections.Location = new System.Drawing.Point(12, 64);
             this.wndTranslationDirections.Name = "wndTranslationDirections";
-            this.wndTranslationDirections.Size = new System.Drawing.Size(196, 306);
+            this.wndTranslationDirections.Size = new System.Drawing.Size(196, 296);
             this.wndTranslationDirections.Sorted = true;
             this.wndTranslationDirections.TabIndex = 0;
             this.wndTranslationDirections.SelectedValueChanged += new System.EventHandler(this.wndTranslationDirections_SelectedValueChanged);
@@ -56,9 +59,9 @@
             this.wndProfileProperties.CheckOnClick = true;
             this.wndProfileProperties.FormattingEnabled = true;
             this.wndProfileProperties.IntegralHeight = false;
-            this.wndProfileProperties.Location = new System.Drawing.Point(214, 33);
+            this.wndProfileProperties.Location = new System.Drawing.Point(214, 64);
             this.wndProfileProperties.Name = "wndProfileProperties";
-            this.wndProfileProperties.Size = new System.Drawing.Size(371, 194);
+            this.wndProfileProperties.Size = new System.Drawing.Size(371, 184);
             this.wndProfileProperties.Sorted = true;
             this.wndProfileProperties.TabIndex = 1;
             this.wndProfileProperties.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.wndProfileProperties_ItemCheck);
@@ -68,7 +71,7 @@
             // 
             this.wndDescription.BackColor = System.Drawing.SystemColors.Control;
             this.wndDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.wndDescription.Location = new System.Drawing.Point(214, 233);
+            this.wndDescription.Location = new System.Drawing.Point(214, 254);
             this.wndDescription.Multiline = true;
             this.wndDescription.Name = "wndDescription";
             this.wndDescription.ReadOnly = true;
@@ -79,7 +82,7 @@
             // btnOk
             // 
             this.btnOk.Enabled = false;
-            this.btnOk.Location = new System.Drawing.Point(429, 345);
+            this.btnOk.Location = new System.Drawing.Point(429, 366);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -89,7 +92,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(510, 345);
+            this.btnCancel.Location = new System.Drawing.Point(510, 366);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -102,7 +105,7 @@
             this.wndRunningSystems.AutoSize = true;
             this.wndRunningSystems.Checked = true;
             this.wndRunningSystems.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.wndRunningSystems.Location = new System.Drawing.Point(93, 351);
+            this.wndRunningSystems.Location = new System.Drawing.Point(89, 370);
             this.wndRunningSystems.Name = "wndRunningSystems";
             this.wndRunningSystems.Size = new System.Drawing.Size(153, 17);
             this.wndRunningSystems.TabIndex = 2;
@@ -112,26 +115,17 @@
             // 
             // UsernameLable
             // 
-            this.UsernameLable.Location = new System.Drawing.Point(211, 17);
+            this.UsernameLable.Location = new System.Drawing.Point(290, 13);
             this.UsernameLable.Name = "UsernameLable";
             this.UsernameLable.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.UsernameLable.Size = new System.Drawing.Size(374, 13);
+            this.UsernameLable.Size = new System.Drawing.Size(295, 16);
             this.UsernameLable.TabIndex = 6;
             this.UsernameLable.Text = "Logged in as: User";
             this.UsernameLable.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.band_aid_symbol;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(63, 23);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 347);
+            this.button1.Location = new System.Drawing.Point(8, 366);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 11;
@@ -139,14 +133,53 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.Logo_71x23;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(71, 24);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
+            // groupLable
+            // 
+            this.groupLable.AutoSize = true;
+            this.groupLable.Location = new System.Drawing.Point(426, 40);
+            this.groupLable.Name = "groupLable";
+            this.groupLable.Size = new System.Drawing.Size(39, 13);
+            this.groupLable.TabIndex = 13;
+            this.groupLable.Text = "Group:";
+            // 
+            // GroupSelectComboBox
+            // 
+            this.GroupSelectComboBox.FormattingEnabled = true;
+            this.GroupSelectComboBox.Location = new System.Drawing.Point(468, 37);
+            this.GroupSelectComboBox.Name = "GroupSelectComboBox";
+            this.GroupSelectComboBox.Size = new System.Drawing.Size(117, 21);
+            this.GroupSelectComboBox.TabIndex = 14;
+            this.GroupSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
+            // 
+            // BusnesText
+            // 
+            this.BusnesText.AutoSize = true;
+            this.BusnesText.Location = new System.Drawing.Point(9, 32);
+            this.BusnesText.Name = "BusnesText";
+            this.BusnesText.Size = new System.Drawing.Size(248, 26);
+            this.BusnesText.TabIndex = 15;
+            this.BusnesText.Text = "To start translation, please choose a language pair \r\nand a translation system.";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(597, 374);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(597, 399);
+            this.Controls.Add(this.BusnesText);
+            this.Controls.Add(this.GroupSelectComboBox);
+            this.Controls.Add(this.groupLable);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.UsernameLable);
             this.Controls.Add(this.wndRunningSystems);
             this.Controls.Add(this.btnCancel);
@@ -176,7 +209,10 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox wndRunningSystems;
         private System.Windows.Forms.Label UsernameLable;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label groupLable;
+        private System.Windows.Forms.ComboBox GroupSelectComboBox;
+        private System.Windows.Forms.Label BusnesText;
     }
 }

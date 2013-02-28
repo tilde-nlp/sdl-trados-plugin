@@ -59,6 +59,8 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Sdl.Core.PluginFramework, Version=1.8.0.0, Culture=neutral, PublicKeyToken=c28cdb26c445c888, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ProgramFiles)\SDL\SDL Trados Studio\Studio1\Sdl.Core.PluginFramework.dll</HintPath>
@@ -114,6 +116,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\LocalLetsMTWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SystemManagement\CMtProfile.cs" />
     <Compile Include="CMtProfileCollection.cs" />
     <Compile Include="SystemManagement\CMtSystem.cs" />
@@ -148,7 +155,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="band_aid.png" />
+    <Content Include="Resources\Icon_from_Logo_71x23.ico" />
+    <None Include="Resources\Logo_71x23.png" />
+    <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
+    <None Include="Service References\LocalLetsMTWebService\LetsMT.MTProvider.LocalLetsMTWebService.MTSystem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LocalLetsMTWebService\LetsMT.MTProvider.LocalLetsMTWebService.SentenceBoundary.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LocalLetsMTWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\LocalLetsMTWebService\configuration.svcinfo" />
+    <None Include="Service References\LocalLetsMTWebService\configuration91.svcinfo" />
+    <None Include="Service References\LocalLetsMTWebService\service.disco" />
     <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.MTSystem.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -162,7 +184,6 @@
     <None Include="Service References\LetsMTWebService\configuration.svcinfo" />
     <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
     <None Include="Service References\LetsMTWebService\Service.disco" />
-    <None Include="ClassDiagram3.cd" />
     <EmbeddedResource Include="Advanced_options.resx">
       <DependentUpon>Advanced_options.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +199,7 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Service References\LetsMTWebService\Service.wsdl" />
+    <None Include="Service References\LocalLetsMTWebService\service.wsdl" />
     <None Include="setupscript.nsi" />
     <None Include="setupscript_11.nsi" />
   </ItemGroup>
@@ -234,6 +256,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\LetsMTWebService\" />
+    <WCFMetadataStorage Include="Service References\LocalLetsMTWebService\" />
   </ItemGroup>
   <PropertyGroup>
     <CreatePluginPackage>true</CreatePluginPackage>
