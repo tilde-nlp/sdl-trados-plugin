@@ -101,7 +101,7 @@ namespace LetsMT.MTProvider
             //editProvider.
             editProvider.DownloadProfileList(true);
 
-            SettingsForm settings = new SettingsForm(ref editProvider, languagePairs);
+            SettingsForm settings = new SettingsForm(ref editProvider, languagePairs, credentialStore);
             DialogResult  dResult = settings.ShowDialog(owner);
             if (dResult == DialogResult.OK)
             {
@@ -147,7 +147,7 @@ namespace LetsMT.MTProvider
             TranslationProviderDisplayInfo info = new TranslationProviderDisplayInfo();
 
             info.Name = PluginResources.Plugin_NiceName;
-            info.TranslationProviderIcon = PluginResources.Icon_from_Logo_71x23;
+            info.TranslationProviderIcon = PluginResources.LetsMT;
             info.TooltipText = PluginResources.Plugin_Tooltip;
             info.SearchResultImage = PluginResources.Logo_71x23;
 

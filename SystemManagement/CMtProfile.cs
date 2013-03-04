@@ -113,7 +113,8 @@ namespace LetsMT.MTProvider
 
             foreach(CMtSystem system in m_availableSystems)
             {
-                if (!bFiltered || system.GetOnlineStatus() == "Running")
+                string systemStatus = system.GetOnlineStatus();
+                if (!bFiltered || systemStatus == "Running" || systemStatus == "Standby" || systemStatus == "Queuing")
                     systems.Add(system.GetListItem());
             }
 

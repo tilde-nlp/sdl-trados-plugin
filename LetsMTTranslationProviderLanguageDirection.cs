@@ -335,56 +335,122 @@ namespace LetsMT.MTProvider
         {
             List<SearchResults> results = new List<SearchResults>();
 
-            bool tryAgain = true;
-            //MessageBox.Show("Waiting for system to start.");
 
-            try
-            {
-                _provider.TranslateText(_languageDirection, "test");
-                tryAgain = false;
-            }
-            catch
-            {
-                System.Threading.Thread.Sleep(15000); 
-            }
 
-            while (tryAgain)
-            {
-                try
-                {
-                    _provider.TranslateText(_languageDirection, "test");
-                    tryAgain = false;
-                }
-                catch (Exception ex)
-                {
 
-                    tryAgain = false;
-                    if (ex.Message.Contains("system is starting"))
-                    {
-                        DialogResult Result = MessageBox.Show("Automated system is starting up. keep waiting?", "System starting", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                        if (Result == DialogResult.Yes)
-                        {
-                            tryAgain = true;
-                            //MessageBox.Show("Waiting for system to start.(segments)");
+            //bool tryAgain = true;
+            ////MessageBox.Show("Waiting for system to start.");
 
-                            System.Threading.Thread.Sleep(15000);
-                        }
-                        else
-                        {
-                            tryAgain = false;
-                        }
-                    }
+            //try
+            //{
+            //    _provider.TranslateText(_languageDirection, "test");
+            //    tryAgain = false;
+            //}
+            //catch
+            //{
+            //    System.Threading.Thread.Sleep(15000); 
+            //}
 
-                }
-            }
+            //while (tryAgain)
+            //{
+            //    
+            //        _provider.TranslateText(_languageDirection, "test");
+            //        tryAgain = false;
+            //    }
+            //    catch (Exception ex)
+            //    {
+
+            //        tryAgain = false;
+            //        if (ex.Message.Contains("system is starting"))
+            //        {
+            //            DialogResult Result = MessageBox.Show("Automated system is starting up. keep waiting?", "System starting", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            //            if (Result == DialogResult.Yes)
+            //            {
+            //                tryAgain = true;
+            //                //MessageBox.Show("Waiting for system to start.(segments)");
+
+            //                System.Threading.Thread.Sleep(15000);
+            //            }
+            //            else
+            //            {
+            //                tryAgain = false;
+            //            }
+            //        }
+
+            //    }
+            //}
 
             int i = 0;
             foreach (var tu in translationUnits)
             {
                 if (mask == null || mask[i])
                 {
-                    var result = SearchTranslationUnit(settings, tu);
-                    results.Add(result);
+                    if (_provider.m_userRetryWarning)
+                    {
+                        bool tryAgain = true;
+                        while (tryAgain)
+                        {
+                            try
+                            {
+                                var result = SearchTranslationUnit(settings, tu);
+                                results.Add(result);
+                                tryAgain = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.Message.Contains("system is starting"))
+                                {
+                                     Form UForm = null;
+                                     if ((UForm = IsFormAlreadyOpen(typeof(RetryWarningForm))) != null)
+                                     {
+                                         UForm.Close();
+                                     }
+                                    RetryWarningForm warnForm = new RetryWarningForm();
+                                    DialogResult Result = warnForm.ShowDialog();
+                                    //DialogResult Result = MessageBox.Show("Automated system is starting up. Retry?", "System starting", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                                     if (Result == DialogResult.No)
+                                     {
+                                         _provider.m_userRetryWarning = false;
+                                         tryAgain = false;
+                                         results.Add(null);
+                                     }
+                                     else if (Result == DialogResult.Cancel)
+                                     {
+                                         //If user presses "X" or another process calls "close" function
+                                         //end process and return "null"
+                                         tryAgain = false;
+                                         results.Add(null);
+                                     }
+                                    
+                                }
+                                else
+                                {
+                                    throw ex;
+                                }
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var result = SearchTranslationUnit(settings, tu);
+                            results.Add(result);
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.Message.Contains("system is starting"))
+                            {
+                                results.Add(null);
+                            }
+                            else
+                            {
+                                throw ex; 
+                            }
+                        }
+
+                    }
                 }
                 else
                 {
@@ -397,6 +463,16 @@ namespace LetsMT.MTProvider
         }
 
 
+        private Form IsFormAlreadyOpen(Type FormType)
+        {
+            foreach (Form OpenForm in Application.OpenForms)
+            {
+                if (OpenForm.GetType() == FormType)
+                    return OpenForm;
+            }
+
+            return null;
+        }
 
         #region "NotForThisImplementation"
         /// <summary>

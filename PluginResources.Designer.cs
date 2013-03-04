@@ -60,9 +60,9 @@ namespace LetsMT.MTProvider {
             }
         }
         
-        public static System.Drawing.Icon Icon_from_Logo_71x23 {
+        public static System.Drawing.Icon LetsMT {
             get {
-                object obj = ResourceManager.GetObject("Icon_from_Logo_71x23", resourceCulture);
+                object obj = ResourceManager.GetObject("LetsMT", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

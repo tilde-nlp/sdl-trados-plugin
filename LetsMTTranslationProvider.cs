@@ -34,6 +34,97 @@ namespace LetsMT.MTProvider
         public int m_resultScore;
         public LocalLetsMTWebService.TranslationWebServiceSoapClient m_service;
         public CMtProfileCollection m_profileCollection;
+        public bool m_userRetryWarning;
+
+
+
+        public LetsMTTranslationProvider(ITranslationProviderCredentialStore credentialStore, Uri translationProviderUri, int resultScore)
+        {
+            m_resultScore = resultScore;
+            m_uri = translationProviderUri;
+            m_store = credentialStore;
+            m_userRetryWarning = true;
+
+            TranslationProviderCredential credentialData = credentialStore.GetCredential(translationProviderUri); //Make sure we have credentials, if not, throw exception to ask user
+            if (credentialData == null)
+                throw new TranslationProviderAuthenticationException();
+
+            string credential = credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
+
+            m_strCredential = credential;
+
+            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
+
+            // create Web Service client
+            string url = resourceManager.GetString("LetsMTWebServiceUrl");
+            BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+
+            // remove buffet limmit
+            binding.MaxBufferSize = int.MaxValue;
+            binding.MaxReceivedMessageSize = int.MaxValue;
+
+            //try to read Software\\Tilde\\LetsMT\\url registry string entry and it it exists replace the link
+            try
+            {
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
+                if (key != null)
+                {
+                    string RegUrl = key.GetValue("url", "none").ToString();
+                    if (RegUrl.Length > 3)
+                    {
+                        if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
+                    }
+                }
+
+            }
+            catch (Exception) { }
+
+
+
+            EndpointAddress endpoint = new EndpointAddress(url);
+
+            string[] credParams = m_strCredential.Split('\t');
+
+            string strPassword = "";
+            m_strAppID = "";
+            m_username = "";
+
+            if (credParams.Length > 0)
+                m_username = credParams[0];
+            if (credParams.Length > 1)
+                strPassword = credParams[1];
+            if (credParams.Length > 2)
+            {
+                m_strAppID = credParams[2];
+            }
+
+            //TODO: HACK {
+            // Attach custom Certificate validator to pass validation of untrusted development certificate 
+            // TODO: This should be removed when trusted CA certificate will be used (or callback method have to do harder checking)
+            // ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
+            //TODO: HACK }
+
+
+            if (m_strAppID != "")
+            {
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
+            }
+            else
+            {
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            }
+            m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+
+
+            m_service.ClientCredentials.UserName.UserName = m_username;
+            m_service.ClientCredentials.UserName.Password = strPassword;
+
+            // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
+
+            m_profileCollection = null;
+        }
+
 
         private static bool ValidateRemoteCertificate(object sender,
                                                       X509Certificate certificate,
@@ -151,88 +242,7 @@ namespace LetsMT.MTProvider
             
         }
 
-        public LetsMTTranslationProvider(ITranslationProviderCredentialStore credentialStore, Uri translationProviderUri, int resultScore)
-        {
-            m_resultScore = resultScore;
-            m_uri = translationProviderUri;
-            m_store = credentialStore;
-            TranslationProviderCredential credentialData = credentialStore.GetCredential(translationProviderUri); //Make sure we have credentials, if not, throw exception to ask user
-            if (credentialData == null)
-                throw new TranslationProviderAuthenticationException();
 
-            string credential = credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
-
-            m_strCredential = credential;
-
-            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-
-            // create Web Service client
-            string url = resourceManager.GetString("LetsMTWebServiceUrl");
-            BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            
-            // remove buffet limmit
-            binding.MaxBufferSize = int.MaxValue;
-            binding.MaxReceivedMessageSize = int.MaxValue;
-
-            //try to read Software\\Tilde\\LetsMT\\url registry string entry and it it exists replace the link
-            try
-            {
-                Microsoft.Win32.RegistryKey key;
-                key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
-                if (key != null)
-                {
-                    string RegUrl = key.GetValue("url", "none").ToString();
-                    if (RegUrl.Length > 3)
-                    {
-                        if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
-                    }
-                }
-
-            }
-            catch (Exception) { }
-
-
-
-            EndpointAddress endpoint = new EndpointAddress(url);
-
-            string[] credParams = m_strCredential.Split('\t');
-
-            string strPassword = "";
-            m_strAppID = "";
-            m_username = "";
-
-            if (credParams.Length > 0)
-                m_username = credParams[0];
-            if (credParams.Length > 1)
-                strPassword = credParams[1];
-            if (credParams.Length > 2)
-            {
-                m_strAppID = credParams[2];
-            }
-
-            //TODO: HACK {
-            // Attach custom Certificate validator to pass validation of untrusted development certificate 
-            // TODO: This should be removed when trusted CA certificate will be used (or callback method have to do harder checking)
-           // ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
-                    //TODO: HACK }
-
-
-            if (m_strAppID != "") {
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
-            }
-            else {
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-            }
-            m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
-
-
-            m_service.ClientCredentials.UserName.UserName = m_username;
-            m_service.ClientCredentials.UserName.Password = strPassword;
-
-           // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
-
-            m_profileCollection = null;
-        }
 
         public bool ValidateCredentials()
         {

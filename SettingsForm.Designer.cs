@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.wndTranslationDirections = new System.Windows.Forms.ListBox();
             this.wndProfileProperties = new System.Windows.Forms.CheckedListBox();
             this.wndDescription = new System.Windows.Forms.TextBox();
@@ -107,9 +108,9 @@
             this.wndRunningSystems.CheckState = System.Windows.Forms.CheckState.Checked;
             this.wndRunningSystems.Location = new System.Drawing.Point(89, 370);
             this.wndRunningSystems.Name = "wndRunningSystems";
-            this.wndRunningSystems.Size = new System.Drawing.Size(153, 17);
+            this.wndRunningSystems.Size = new System.Drawing.Size(160, 17);
             this.wndRunningSystems.TabIndex = 2;
-            this.wndRunningSystems.Text = "Show only running systems";
+            this.wndRunningSystems.Text = "Show only available systems";
             this.wndRunningSystems.UseVisualStyleBackColor = true;
             this.wndRunningSystems.CheckedChanged += new System.EventHandler(this.wndRunningSystems_CheckedChanged);
             // 
@@ -188,6 +189,7 @@
             this.Controls.Add(this.wndProfileProperties);
             this.Controls.Add(this.wndTranslationDirections);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";

@@ -8,15 +8,27 @@ using System.Windows.Forms;
 using System.Globalization;
 using Sdl.LanguagePlatform.Core;
 using System.Xml;
+using Sdl.LanguagePlatform.TranslationMemoryApi;
+using System.ServiceModel;
 
 namespace LetsMT.MTProvider
 {
+
+  
+
     public partial class SettingsForm : Form
     {
         private LetsMTTranslationProvider m_translationProvider;
         private Dictionary<string, string> m_checkedState;
         private LanguagePair[] m_pairs;
         private int m_score;
+        //used in group change function
+        private string m_activeGroup;
+        private string m_username;
+        private bool m_trackGoupChange;
+
+
+        ITranslationProviderCredentialStore m_credentialStore;
 
         public class UserGroup
         {
@@ -26,20 +38,17 @@ namespace LetsMT.MTProvider
         }
 
 
-        public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs)
+        public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs, ITranslationProviderCredentialStore credentialStore)
         {
             m_score = editProvider.m_resultScore;
+            m_credentialStore = credentialStore;
             DialogResult = DialogResult.Cancel;
-
-            InitializeComponent();
+            m_trackGoupChange = false;
+            
 
             Text = PluginResources.Plugin_NiceName + " Settings";
 
-            wndTranslationDirections.DisplayMember = "text";
-            wndTranslationDirections.ValueMember = "value";
-
-            wndProfileProperties.DisplayMember = "text";
-            wndProfileProperties.ValueMember = "value";
+            InitializeComponent();
 
             m_translationProvider = editProvider;
             string WelcomeName = m_translationProvider.m_username;
@@ -47,6 +56,30 @@ namespace LetsMT.MTProvider
             
             XmlNode node = m_translationProvider.m_service.GetUserInfo("");
 
+            // get teh username whitout group
+            string username = m_translationProvider.m_username;
+            XmlNode UsernameXMl = node.SelectSingleNode("email");
+            if (UsernameXMl != null)
+            {
+                username = UsernameXMl.InnerText;
+            }
+
+            m_username = username;
+
+
+
+
+            // get teh username whitout group
+            string activeGroup = "";
+            XmlNode activeGroupXML = node.SelectSingleNode("activeGroup");
+            if (activeGroupXML != null)
+            {
+                activeGroup = activeGroupXML.InnerText;
+            }
+
+            m_activeGroup = activeGroup;
+
+            //Get the user friendly name for welcome lable
             XmlNode NameXML = node.SelectSingleNode("name");
             XmlNode SurnameXML = node.SelectSingleNode("surname");
             if (NameXML != null)
@@ -66,19 +99,42 @@ namespace LetsMT.MTProvider
                 GoupList.Add(new UserGroup() { Name = n.Attributes["name"].Value, Value = n.Attributes["id"].Value });
 
             }
-
             this.GroupSelectComboBox.DataSource = GoupList;
             this.GroupSelectComboBox.DisplayMember = "Name";
             this.GroupSelectComboBox.ValueMember = "Value";
             this.GroupSelectComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            //select teh active group
+           
+            this.GroupSelectComboBox.SelectedValue = m_activeGroup;
+            // int selectIndex = GroupSelectComboBox.Items.IndexOf(m_activeGroup);
+            //if (selectIndex != -1)
+            //{
+            //    this.GroupSelectComboBox.SelectedIndex = selectIndex;
+            //}
+            
 
             UsernameLable.Text = "Welcome, " + WelcomeName + "!";
-           
+
+            wndTranslationDirections.DisplayMember = "text";
+            wndTranslationDirections.ValueMember = "value";
+
+            wndProfileProperties.DisplayMember = "text";
+            wndProfileProperties.ValueMember = "value";
+
+
+            //fill the system list
             m_pairs = languagePairs;
             m_checkedState = new Dictionary<string, string>();
 
             FillProfileList();
+
+            m_trackGoupChange = true;
+            
+
+
+
         }
+        
 
         private void FillProfileList()
         {
@@ -226,12 +282,6 @@ namespace LetsMT.MTProvider
             FillProfileList();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            DialogResult = DialogResult.Retry;
-            Close();
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -241,11 +291,69 @@ namespace LetsMT.MTProvider
 
         private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!(m_trackGoupChange)) { return; }
             string group = GroupSelectComboBox.SelectedValue.ToString();
-           // MessageBox.Show("not implemented yet!");
+
+            //TODO implement this
+           // MessageBox.Show("not implemented yet!" + group);
+             
+            string username = "";
+            string password = "";
+                
+				username = group + "\\" + m_username;
+                password = m_translationProvider.m_service.ClientCredentials.UserName.Password;
+
+                m_translationProvider.m_username = username;
+				
+                global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
+                // create Web Service client
+                string url = resourceManager.GetString("LetsMTWebServiceUrl");
+                
+                try
+                {
+                    Microsoft.Win32.RegistryKey key;
+                    key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
+                    if (key != null)
+                    {
+                        string RegUrl = key.GetValue("url", "none").ToString();
+                        if (RegUrl.Length > 3)
+                        {
+                            if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
+                        }
+                    }
+
+                }
+                catch (Exception) { }
+
+                EndpointAddress endpoint = new EndpointAddress(url);
+
+                BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+                binding.MaxBufferSize = int.MaxValue;
+                binding.MaxReceivedMessageSize = int.MaxValue;
+
+
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+				
+                m_translationProvider.m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+
+                m_translationProvider.m_service.ClientCredentials.UserName.UserName = username;
+                m_translationProvider.m_service.ClientCredentials.UserName.Password = password;
+                m_translationProvider.m_profileCollection = null;
+                m_translationProvider.DownloadProfileList(true);
+                m_checkedState = new Dictionary<string, string>();
+
+            //filee the new system list    
+            FillProfileList();
+                
+            //save the cerdentials
+            TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}\t{2}", username, password, m_translationProvider.m_strAppID), true);
+            m_credentialStore.AddCredential(m_translationProvider.Uri, tc);
+
 
         }
 
+    
+    
     }
 
     #region "ListItem helper class"

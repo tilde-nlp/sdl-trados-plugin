@@ -111,6 +111,12 @@
     <Compile Include="LimitationForm.Designer.cs">
       <DependentUpon>LimitationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RetryWarningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RetryWarningForm.Designer.cs">
+      <DependentUpon>RetryWarningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Service References\LetsMTWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,7 +161,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Icon_from_Logo_71x23.ico" />
+    <None Include="Resources\LetsMT.ico" />
     <None Include="Resources\Logo_71x23.png" />
     <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <None Include="Service References\LocalLetsMTWebService\LetsMT.MTProvider.LocalLetsMTWebService.MTSystem.datasource">
@@ -238,6 +244,9 @@
   <ItemGroup>
     <EmbeddedResource Include="PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RetryWarningForm.resx">
+      <DependentUpon>RetryWarningForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

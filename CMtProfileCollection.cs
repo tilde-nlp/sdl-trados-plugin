@@ -113,6 +113,9 @@ namespace LetsMT.MTProvider
                             case "training":
                                 strSysOnlineStatus = "Training";
                                 break;
+                            case "standby":
+                                strSysOnlineStatus = "Standby";
+                                break;
                             default:
                                 strSysOnlineStatus = prop.Value;
                                 break;
