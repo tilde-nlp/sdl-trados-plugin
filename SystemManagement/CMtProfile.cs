@@ -46,7 +46,7 @@ namespace LetsMT.MTProvider
 
             foreach (CMtSystem system in m_availableSystems)
             {
-                if (system.GetOnlineStatus() == "Running")
+                if (system.GetOnlineStatus() == "Running" || system.GetOnlineStatus() == "Queuing" || system.GetOnlineStatus() == "Standby")
                 {
                     bHasRunningSystem = true;
                     break;

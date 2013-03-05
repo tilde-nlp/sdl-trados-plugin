@@ -88,7 +88,7 @@ namespace LetsMT.MTProvider
             }
             if (SurnameXML != null)
             {
-                WelcomeName = WelcomeName + " " + NameXML.InnerText;
+                WelcomeName = WelcomeName + " " + SurnameXML.InnerText;
             }
 
 
