@@ -37,7 +37,12 @@ namespace LetsMT.MTProvider
         public bool m_userRetryWarning;
 
 
-
+        /// <summary>
+        /// Constructor taht get cridentals
+        /// </summary>
+        /// <param name="credentialStore"></param>
+        /// <param name="translationProviderUri"></param>
+        /// <param name="resultScore"></param>
         public LetsMTTranslationProvider(ITranslationProviderCredentialStore credentialStore, Uri translationProviderUri, int resultScore)
         {
             m_resultScore = resultScore;
@@ -169,12 +174,24 @@ namespace LetsMT.MTProvider
 
             return null;
         }
+
+        /// <summary>
+        /// Calls the notificaton form in a separet thread.
+        /// </summary>
+        /// <param name="url"></param>
         [STAThread]
         public  void CallForm(string url)
         {
             LimitationForm LimitForm = new LimitationForm(url);
             LimitForm.ShowDialog();
         }
+        
+        /// <summary>
+        /// The main method that dose translation.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public string TranslateText(LanguagePair direction, string text)
         {
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
@@ -238,7 +255,7 @@ namespace LetsMT.MTProvider
                 return result;
             }
                 //return "";
-            throw new Exception("Default system not selected.");
+            throw new Exception("Default system for this languge pair not selected.");
             
         }
 
@@ -246,6 +263,10 @@ namespace LetsMT.MTProvider
 
         public bool ValidateCredentials()
         {
+           //There is no reson to revalidate the user.
+            return true; 
+
+
             bool bCredentialsValid = false;
             try
             {
@@ -387,6 +408,9 @@ namespace LetsMT.MTProvider
 
         public bool SupportsLanguageDirection(LanguagePair languageDirection)
         {
+            //NOTE: test this
+            return true;
+            
             if (m_profileCollection == null)
                 DownloadProfileList();
 
