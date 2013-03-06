@@ -178,16 +178,23 @@ namespace LetsMT.MTProvider
             string strSourceText = Segment2Html(segment);
             //segmet with translated htmlgs are translated with letsMT api
             string translText = _provider.TranslateText(_languageDirection, strSourceText);
+            if (translText != "")
+            {
+                Segment translation = new Segment(_languageDirection.TargetCulture);
+                //trasnlated text with html is converted to trados text segment with trados tags 
+                translation = TranslatedHtml2Segment(segment, translText);
+                //result is stored as SearchResults
+                SearchResults results = new SearchResults();
+                results.SourceSegment = segment.Duplicate();
+                results.Add(CreateSearchResult(segment, translation, _provider.m_resultScore));
+                return results;
+            }
+            else
+            {
+                return null;
+            }
 
-            Segment translation = new Segment(_languageDirection.TargetCulture);
-            //trasnlated text with html is converted to trados text segment with trados tags 
-            translation=TranslatedHtml2Segment(segment, translText);
-            //result is stored as SearchResults
-            SearchResults results = new SearchResults();
-            results.SourceSegment = segment.Duplicate();
-            results.Add(CreateSearchResult(segment, translation, _provider.m_resultScore));
-
-            return results;
+            
         }
         #endregion
 
@@ -336,49 +343,6 @@ namespace LetsMT.MTProvider
             List<SearchResults> results = new List<SearchResults>();
 
 
-
-
-            //bool tryAgain = true;
-            ////MessageBox.Show("Waiting for system to start.");
-
-            //try
-            //{
-            //    _provider.TranslateText(_languageDirection, "test");
-            //    tryAgain = false;
-            //}
-            //catch
-            //{
-            //    System.Threading.Thread.Sleep(15000); 
-            //}
-
-            //while (tryAgain)
-            //{
-            //    
-            //        _provider.TranslateText(_languageDirection, "test");
-            //        tryAgain = false;
-            //    }
-            //    catch (Exception ex)
-            //    {
-
-            //        tryAgain = false;
-            //        if (ex.Message.Contains("system is starting"))
-            //        {
-            //            DialogResult Result = MessageBox.Show("Automated system is starting up. keep waiting?", "System starting", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-            //            if (Result == DialogResult.Yes)
-            //            {
-            //                tryAgain = true;
-            //                //MessageBox.Show("Waiting for system to start.(segments)");
-
-            //                System.Threading.Thread.Sleep(15000);
-            //            }
-            //            else
-            //            {
-            //                tryAgain = false;
-            //            }
-            //        }
-
-            //    }
-            //}
 
             int i = 0;
             foreach (var tu in translationUnits)

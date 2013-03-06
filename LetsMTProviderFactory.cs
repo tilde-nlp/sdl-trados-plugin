@@ -26,7 +26,6 @@ namespace LetsMT.MTProvider
 
             //string credential = credentialData.Credential; //Get the credentials in form "{0}\t{1}\t{3}", where 0 - username, 1 - password and 3 - appId
 
-            //translationProviderUri.UserInfo
 
             LetsMTTranslationProvider translationProvider = new LetsMTTranslationProvider(credentialStore, translationProviderUri,85); //Create the provider passing required parameters
             

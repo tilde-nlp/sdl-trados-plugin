@@ -245,6 +245,11 @@ namespace LetsMT.MTProvider
                         }
                         throw new Exception(errText);
                     }
+                    else if (ex.Message.Contains("The HTTP request is unauthorized"))
+                    {
+                        throw new Exception("Unrecognized username or password.");
+
+                    }
                     else
                     {
                         throw new Exception("Could not connect to translation provider.");
@@ -267,54 +272,54 @@ namespace LetsMT.MTProvider
             return true; 
 
 
-            bool bCredentialsValid = false;
-            try
-            {
-                m_service.GetUserInfo("");
-                bCredentialsValid = true;
-                //m_service.Translate(m_strAppID, "*", "*", "client=SDLTradosStudio");
-                //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.Contains("The HTTP request is unauthorized"))
-                {
-                    throw new Exception("Unrecognized username or password.");
-                }
-                else if (ex.Message.Contains("User limitation error:"))
-                {
+            //bool bCredentialsValid = false;
+            //try
+            //{
+            //    m_service.GetUserInfo("");
+            //    bCredentialsValid = true;
+            //    //m_service.Translate(m_strAppID, "*", "*", "client=SDLTradosStudio");
+            //    //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(, null);
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (ex.Message.Contains("The HTTP request is unauthorized"))
+            //    {
+            //        throw new Exception("Unrecognized username or password.");
+            //    }
+            //    else if (ex.Message.Contains("User limitation error:"))
+            //    {
 
-                    Form UForm = null;
+            //        Form UForm = null;
 
-                    if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
-                    {
+            //        if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
+            //        {
 
-                        Regex r = new Regex(@"(?<=User limitation error: )\d+");
-                        Match m = r.Match(ex.Message);
-                        string erNum = m.Value;
-                        string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
-                        var t = new Thread(() => CallForm(Error_url));
+            //            Regex r = new Regex(@"(?<=User limitation error: )\d+");
+            //            Match m = r.Match(ex.Message);
+            //            string erNum = m.Value;
+            //            string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+            //            var t = new Thread(() => CallForm(Error_url));
 
-                        t.SetApartmentState(ApartmentState.STA);
-                        t.Start();
-                        ////close the form if it is open
-                        //UForm.Close();
-                    }
+            //            t.SetApartmentState(ApartmentState.STA);
+            //            t.Start();
+            //            ////close the form if it is open
+            //            //UForm.Close();
+            //        }
 
                    
 
-                    //TODO: It would be nice to diable the plugin afterwards
-                    throw new Exception("User limitation reched.");
+            //        //TODO: It would be nice to diable the plugin afterwards
+            //        throw new Exception("User limitation reched.");
 
-                }
-                else 
-                {        
-                     throw new Exception("Cannot connect to server.");
-                }
-            }
-            bCredentialsValid = true;
+            //    }
+            //    else 
+            //    {        
+            //         throw new Exception("Cannot connect to server.");
+            //    }
+            //}
+            //bCredentialsValid = true;
 
-            return bCredentialsValid;
+            //return bCredentialsValid;
         }
 
         public string GetStoreCridential()
@@ -408,13 +413,13 @@ namespace LetsMT.MTProvider
 
         public bool SupportsLanguageDirection(LanguagePair languageDirection)
         {
-            //NOTE: test this
+            //this causes high waiting times and gives no valuabel informaion
             return true;
             
-            if (m_profileCollection == null)
-                DownloadProfileList();
+            //if (m_profileCollection == null)
+            //    DownloadProfileList();
 
-            return m_profileCollection.HasProfile(languageDirection);
+            //return m_profileCollection.HasProfile(languageDirection);
         }
 
         public Uri Uri

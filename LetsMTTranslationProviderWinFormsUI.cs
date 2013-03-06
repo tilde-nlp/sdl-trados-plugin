@@ -47,27 +47,29 @@ namespace LetsMT.MTProvider
 
                 TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
                 //ad a new uri to handle multiple plugins and users
-                int letsmtNum = 1;
-                Uri letsmtUri = new Uri(opts.Uri.ToString()  + letsmtNum.ToString());
 
+                int letsmtNum = 1;
+                Uri letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
+                
                 TranslationProviderCredential credentialData = credentialStore.GetCredential(letsmtUri);
-                while (credentialData != null)
+               while (credentialData != null)
                 {
                     letsmtNum++;
                     letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
                     credentialData = credentialStore.GetCredential(letsmtUri);
                 }
 
-                credentialStore.AddCredential(letsmtUri, tc);
+               credentialStore.AddCredential(letsmtUri, tc);
+
                 LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, letsmtUri,85);// (dialog.Options);
 
                 //credentialStore.AddCredential(opts.Uri, tc);
                 ////TODO: Check if we need a "testProvider"
                 //LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, opts.Uri);// (dialog.Options);
 
-                if (ValidateCredentialsLocaly(testProvider))
+                if (ValidateTranslationProviderLocaly(testProvider))
                 {
-                    
+
                     Sdl.LanguagePlatform.TranslationMemoryApi.ITranslationProvider[] ResultProv = new ITranslationProvider[] { testProvider };
                     //Open system select screen emidetly for user frendlier setup
                     if (Edit(owner, ResultProv[ResultProv.Length - 1], languagePairs, credentialStore))
@@ -75,8 +77,12 @@ namespace LetsMT.MTProvider
                         return ResultProv;
                     }
                 }
-                //IF USERNAME INFOREC REMOVE DATA FROM STORE
-                credentialStore.RemoveCredential(letsmtUri);
+                else
+                {
+                    //IF USERNAME INFOREC REMOVE DATA FROM STORE
+                    credentialStore.RemoveCredential(letsmtUri);
+                }
+                
             }
 
             return null;
@@ -164,12 +170,85 @@ namespace LetsMT.MTProvider
 
         #endregion
 
-        private bool ValidateCredentialsLocaly(LetsMTTranslationProvider testProvider)
+        //NOT USED FOR NOW
+
+        private bool ValidateCredentialsLocaly(string username, string password, string appID)
         {
+
+
+            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
+            // create Web Service client
+            string url = resourceManager.GetString("LetsMTWebServiceUrl");
+
+            try
+            {
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
+                if (key != null)
+                {
+                    string RegUrl = key.GetValue("url", "none").ToString();
+                    if (RegUrl.Length > 3)
+                    {
+                        if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
+                    }
+                }
+
+            }
+            catch (Exception) { }
+
+            EndpointAddress endpoint = new EndpointAddress(url);
+
+            BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            binding.MaxBufferSize = int.MaxValue;
+            binding.MaxReceivedMessageSize = int.MaxValue;
+
+
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            LocalLetsMTWebService.TranslationWebServiceSoapClient TestService = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+
+           TestService.ClientCredentials.UserName.UserName = username;
+           TestService.ClientCredentials.UserName.Password = password;
+
+
+
             bool bCredentialsValid = true;
             try
             {
-                testProvider.m_service.GetUserInfo("");
+                TestService.GetUserInfo(appID);
+            }
+            catch (Exception ex)
+            {
+
+                if (ex.Message.Contains("The HTTP request is unauthorized"))
+                {
+                    MessageBox.Show("Unrecognized username or password.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bCredentialsValid = false;
+                }
+                else
+                {
+                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Cannot connect to server.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bCredentialsValid = false;
+                }
+            }
+            
+
+            return bCredentialsValid;
+        }
+
+
+        private bool ValidateTranslationProviderLocaly(LetsMTTranslationProvider testProvider)
+        {
+
+
+
+
+            bool bCredentialsValid = true;
+            try
+            {
+                testProvider.m_service.GetUserInfo(testProvider.m_strAppID);
             }
             catch (Exception ex)
             {
@@ -210,7 +289,7 @@ namespace LetsMT.MTProvider
                     bCredentialsValid = false;
                 }
             }
-            
+
 
             return bCredentialsValid;
         }
