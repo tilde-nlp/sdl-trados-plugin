@@ -202,7 +202,7 @@ namespace LetsMT.MTProvider
                 try
                 {
                     //removes control characters  to work around imperfections in the way .NET handles SOAP.
-                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), "client=SDLTradosStudio");
+                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), "client=SDLTradosStudio,version=1.1");
                 }
                 catch(Exception ex)
                 {
