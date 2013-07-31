@@ -58,8 +58,17 @@ namespace LetsMT.MTProvider
             if (translationProviderUri == null) //Throw allowed exception if no arguments
                 throw new ArgumentNullException("Missing arguments.");
 
+            bool isLetsMT = false;
+            LetsMTTranslationProviderOptions opts = new LetsMTTranslationProviderOptions();
+            if (translationProviderUri.ToString().Contains(opts.Uri.ToString()))
+            {
+                isLetsMT = true;
+            }
+
+            return isLetsMT;
+            
             //return string.Equals(translationProviderUri.Scheme, LetsMTTranslationProvider.TranslationProviderScheme, StringComparison.OrdinalIgnoreCase);
-            return true;
+            //return true;
 
         }
     }
