@@ -67,6 +67,7 @@ namespace LetsMT.MTProvider
             // remove buffet limmit
             binding.MaxBufferSize = int.MaxValue;
             binding.MaxReceivedMessageSize = int.MaxValue;
+           // binding.ReceiveTimeout = 
 
             //try to read Software\\Tilde\\LetsMT\\url registry string entry and it it exists replace the link
             try
@@ -110,7 +111,7 @@ namespace LetsMT.MTProvider
             // ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateRemoteCertificate);
             //TODO: HACK }
 
-
+            //binding.Security.Transport.
             if (m_strAppID != "")
             {
                 binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
@@ -120,10 +121,11 @@ namespace LetsMT.MTProvider
                 binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             }
             m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
-
+            //m_service.Ti
 
             m_service.ClientCredentials.UserName.UserName = m_username;
             m_service.ClientCredentials.UserName.Password = strPassword;
+
 
             // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
 
@@ -186,8 +188,29 @@ namespace LetsMT.MTProvider
             LimitForm.ShowDialog();
         }
         
+
         /// <summary>
-        /// The main method that dose translation.
+        /// The main method that dose the translation.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public void StoreTranslation(LanguagePair direction, string sourceText, string targhetText)
+        {
+            string system = m_profileCollection.GetActiveSystemForProfile(direction);
+            if (system != "")
+            {
+                try
+                {
+                    m_service.UpdateTranslation(m_strAppID, system, RemoveControlCharacters(sourceText), RemoveControlCharacters(targhetText), "client=SDLTradosStudio,version=1.5");
+                }
+                catch
+                {
+                }
+            }
+        }
+        /// <summary>
+        /// The main method that dose the translation.
         /// </summary>
         /// <param name="direction"></param>
         /// <param name="text"></param>
@@ -201,8 +224,9 @@ namespace LetsMT.MTProvider
                 string result = "";
                 try
                 {
+                    ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10); 
                     //removes control characters  to work around imperfections in the way .NET handles SOAP.
-                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), "client=SDLTradosStudio,version=1.1");
+                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), "client=SDLTradosStudio,version=1.5");
                 }
                 catch(Exception ex)
                 {
@@ -222,11 +246,9 @@ namespace LetsMT.MTProvider
                             t.SetApartmentState(ApartmentState.STA);
                             t.Start();
                             ////close the form if it is open
-                            //UForm.Close();
                         }
                                                     
                        
-                        //TODO: It would be nice to diable the plugin afterwards
                             
                         
                     }
@@ -244,6 +266,10 @@ namespace LetsMT.MTProvider
                             errText = "The service was unable to acquire a translation.";
                         }
                         throw new Exception(errText);
+                    }
+                    else if (ex.Message.StartsWith("The request channel timed out "))
+                    {
+                        return "";
                     }
                     else if (ex.Message.Contains("The HTTP request is unauthorized"))
                     {
@@ -346,6 +372,7 @@ namespace LetsMT.MTProvider
                 state = SerializeState();
 
             //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
+            ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 1, 0);
             LocalLetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
             m_profileCollection = new CMtProfileCollection(mtList);
 
@@ -417,7 +444,7 @@ namespace LetsMT.MTProvider
             return true;
             
             //if (m_profileCollection == null)
-            //    DownloadProfileList();
+               //DownloadProfileList();
 
             //return m_profileCollection.HasProfile(languageDirection);
         }
@@ -451,7 +478,7 @@ namespace LetsMT.MTProvider
         public bool SupportsStructureContext { get { return false; } }
         public bool SupportsTaggedInput { get { return true; } }
         public bool SupportsTranslation { get { return true; } }
-        public bool SupportsUpdate { get { return false; } }
+        public bool SupportsUpdate { get { return true; } }
         public bool SupportsWordCounts { get { return false; } }
 
         #endregion

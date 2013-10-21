@@ -13,6 +13,7 @@ using System.Resources;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace LetsMT.MTProvider
 {
@@ -183,6 +184,7 @@ namespace LetsMT.MTProvider
                 Segment translation = new Segment(_languageDirection.TargetCulture);
                 //trasnlated text with html is converted to trados text segment with trados tags 
                 translation = TranslatedHtml2Segment(segment, translText);
+
                 //result is stored as SearchResults
                 SearchResults results = new SearchResults();
                 results.SourceSegment = segment.Duplicate();
@@ -315,7 +317,9 @@ namespace LetsMT.MTProvider
                             try
                             {
                                 var result = SearchTranslationUnit(settings, tu);
+
                                 results.Add(result);
+
                                 tryAgain = false;
                             }
                             catch (Exception ex)
@@ -398,7 +402,7 @@ namespace LetsMT.MTProvider
 
         #region "NotForThisImplementation"
         /// <summary>
-        /// Not required for this implementation.
+        ///Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnits"></param>
         /// <param name="settings"></param>
@@ -406,30 +410,65 @@ namespace LetsMT.MTProvider
         /// <returns></returns>
         public ImportResult[] AddTranslationUnitsMasked(TranslationUnit[] translationUnits, ImportSettings settings, bool[] mask)
         {
-            throw new NotImplementedException();
+            return UpdateTranslationUnits(translationUnits);
         }
 
         /// <summary>
-        /// Not required for this implementation.
+        /// Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnit"></param>
         /// <returns></returns>
         public ImportResult UpdateTranslationUnit(TranslationUnit translationUnit)
         {
-            throw new NotImplementedException();
+
+            ImportResult result = new ImportResult(Sdl.LanguagePlatform.TranslationMemory.Action.Add);
+
+
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                _provider.StoreTranslation(_languageDirection, translationUnit.SourceSegment.ToString(), translationUnit.TargetSegment.ToString());
+            }).Start();
+            return result;
+            
+ 
         }
 
         /// <summary>
-        /// Not required for this implementation.
+        /// Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnits"></param>
         /// <returns></returns>
         public ImportResult[] UpdateTranslationUnits(TranslationUnit[] translationUnits)
         {
-            throw new NotImplementedException();
+            int len = translationUnits.Length;
+            ImportResult[] result = new ImportResult[len];
+            int j = 0;
+            foreach (var tu in translationUnits)
+            {
+                result[j] = new ImportResult(Sdl.LanguagePlatform.TranslationMemory.Action.Add);
+                j++;
+            }
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+
+                int i = 0;
+                foreach (var tu in translationUnits)
+                {
+
+                   _provider.StoreTranslation(_languageDirection, tu.SourceSegment.ToString(), tu.TargetSegment.ToString());
+
+                    i++;
+                }
+            }).Start();
+            return result;
+
         }
         /// <summary>
-        /// Not required for this implementation.
+        /// Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnits"></param>
         /// <param name="previousTranslationHashes"></param>
@@ -438,33 +477,59 @@ namespace LetsMT.MTProvider
         /// <returns></returns>
         public ImportResult[] AddOrUpdateTranslationUnitsMasked(TranslationUnit[] translationUnits, int[] previousTranslationHashes, ImportSettings settings, bool[] mask)
         {
-            throw new NotImplementedException();
+            //Actualy gets called form SDL Studio 2009-2014
+            int len = translationUnits.Length;
+            ImportResult[] result = new ImportResult[len];
+            int j = 0;
+            foreach (var tu in translationUnits)
+            {
+                result[j] = new ImportResult(Sdl.LanguagePlatform.TranslationMemory.Action.Add);
+                j++;
+            }
+            
+            new Thread(() =>
+               {
+                    Thread.CurrentThread.IsBackground = true;
+
+            int i = 0;
+            foreach (var tu in translationUnits)
+            {
+                
+                if (mask == null || mask[i])
+                {
+                    _provider.StoreTranslation(_languageDirection, tu.SourceSegment.ToString() , tu.TargetSegment.ToString());
+                }
+                i++;
+            }
+               }).Start();
+            return result;
+
         }
 
         /// <summary>
-        /// Not required for this implementation.
+        /// Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnit"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
         public ImportResult AddTranslationUnit(TranslationUnit translationUnit, ImportSettings settings)
         {
-            throw new NotImplementedException();
+            return UpdateTranslationUnit(translationUnit);
         }
 
         /// <summary>
-        /// Not required for this implementation.
+        /// Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnits"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
         public ImportResult[] AddTranslationUnits(TranslationUnit[] translationUnits, ImportSettings settings)
         {
-            throw new NotImplementedException();
+            return UpdateTranslationUnits(translationUnits);
         }
 
         /// <summary>
-        /// Not required for this implementation.
+        /// Sends the transaltion to LetsMT.
         /// </summary>
         /// <param name="translationUnits"></param>
         /// <param name="previousTranslationHashes"></param>
@@ -472,7 +537,8 @@ namespace LetsMT.MTProvider
         /// <returns></returns>
         public ImportResult[] AddOrUpdateTranslationUnits(TranslationUnit[] translationUnits, int[] previousTranslationHashes, ImportSettings settings)
         {
-            throw new NotImplementedException();
+
+            return UpdateTranslationUnits(translationUnits);
         }
         #endregion
 

@@ -125,7 +125,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.Logo_71x23;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(15, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(71, 23);
@@ -154,7 +154,7 @@
             this.Name = "PasswordForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "LetsMT! Authentication (v 1.1.4)";
+            this.Text = "LetsMT! Authentication (v 1.2)";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

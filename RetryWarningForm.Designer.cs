@@ -45,9 +45,8 @@
             this.WrningTextLable.Name = "WrningTextLable";
             this.WrningTextLable.Size = new System.Drawing.Size(236, 52);
             this.WrningTextLable.TabIndex = 0;
-            this.WrningTextLable.Text = "Your autamated transaltion system is starting up. \r\nTranslation will be started a" +
-                "utomatically as soon \r\nas system will be ready. \r\nWould you like to try again?\r\n" +
-                "";
+            this.WrningTextLable.Text = "Your automated translation system is starting up. \r\nTranslation will start automa" +
+                "tically as soon as \r\nthe system is ready. \r\nWould you like to try again?";
             // 
             // YesButton
             // 
@@ -72,7 +71,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.Logo_71x23;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(71, 24);

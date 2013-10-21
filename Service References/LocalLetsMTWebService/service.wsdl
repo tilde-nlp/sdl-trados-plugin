@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.letsmt.eu/translationAPI" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://www.letsmt.eu/translationAPI/AbstractTypes" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.letsmt.eu/translationAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.letsmt.eu/translationAPI" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://www.letsmt.eu/logic/translator" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s2="http://www.letsmt.eu/translationAPI/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.letsmt.eu/translationAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.letsmt.eu/translationAPI">
       <s:import namespace="http://www.w3.org/XML/1998/namespace" />
+      <s:import namespace="http://www.letsmt.eu/logic/translator" />
       <s:element name="Translate">
         <s:complexType>
           <s:sequence>
@@ -160,10 +161,101 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="UpdateTranslation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="systemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="translation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTranslationResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateDocTranslation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="content" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="systemID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ignoreWarnings" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="metadata" type="tns:ArrayOfMetadataField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMetadataField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MetadataField" nillable="true" type="s1:MetadataField" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateDocTranslationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateDocTranslationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocTranslation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="docID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocTranslationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocTranslationResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDoc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="docId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveDoc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="docID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveDocResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
       <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
       <s:element name="Sentences" nillable="true" type="tns:Sentences" />
       <s:element name="Systems" nillable="true" type="tns:Systems" />
+      <s:element name="base64Binary" nillable="true" type="s:base64Binary" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.letsmt.eu/logic/translator">
+      <s:complexType name="MetadataField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
     <s:schema targetNamespace="http://www.letsmt.eu/translationAPI/AbstractTypes">
       <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
@@ -214,6 +306,36 @@
   <wsdl:message name="GetUserInfoSoapOut">
     <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="UpdateTranslationSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTranslation" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTranslationSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateDocTranslationSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateDocTranslation" />
+  </wsdl:message>
+  <wsdl:message name="CreateDocTranslationSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateDocTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocTranslationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocTranslation" />
+  </wsdl:message>
+  <wsdl:message name="GetDocTranslationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDoc" />
+  </wsdl:message>
+  <wsdl:message name="GetDocSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDocSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveDoc" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDocSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveDocResponse" />
+  </wsdl:message>
   <wsdl:message name="TranslateHttpGetIn">
     <wsdl:part name="appID" type="s:string" />
     <wsdl:part name="systemID" type="s:string" />
@@ -226,7 +348,7 @@
   <wsdl:message name="TranslateArrayHttpGetIn">
     <wsdl:part name="appID" type="s:string" />
     <wsdl:part name="systemID" type="s:string" />
-    <wsdl:part name="textArray" type="s1:StringArray" />
+    <wsdl:part name="textArray" type="s2:StringArray" />
     <wsdl:part name="options" type="s:string" />
   </wsdl:message>
   <wsdl:message name="TranslateArrayHttpGetOut">
@@ -235,7 +357,7 @@
   <wsdl:message name="DetectLanguageHttpGetIn">
     <wsdl:part name="appID" type="s:string" />
     <wsdl:part name="text" type="s:string" />
-    <wsdl:part name="candidateList" type="s1:StringArray" />
+    <wsdl:part name="candidateList" type="s2:StringArray" />
   </wsdl:message>
   <wsdl:message name="DetectLanguageHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -262,6 +384,31 @@
   <wsdl:message name="GetUserInfoHttpGetOut">
     <wsdl:part name="Body" />
   </wsdl:message>
+  <wsdl:message name="UpdateTranslationHttpGetIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="systemID" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="translation" type="s:string" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTranslationHttpGetOut" />
+  <wsdl:message name="GetDocTranslationHttpGetIn">
+    <wsdl:part name="docID" type="s:string" />
+    <wsdl:part name="filename" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocTranslationHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="GetDocHttpGetIn">
+    <wsdl:part name="docId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDocHttpGetIn">
+    <wsdl:part name="docID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDocHttpGetOut" />
   <wsdl:message name="TranslateHttpPostIn">
     <wsdl:part name="appID" type="s:string" />
     <wsdl:part name="systemID" type="s:string" />
@@ -274,7 +421,7 @@
   <wsdl:message name="TranslateArrayHttpPostIn">
     <wsdl:part name="appID" type="s:string" />
     <wsdl:part name="systemID" type="s:string" />
-    <wsdl:part name="textArray" type="s1:StringArray" />
+    <wsdl:part name="textArray" type="s2:StringArray" />
     <wsdl:part name="options" type="s:string" />
   </wsdl:message>
   <wsdl:message name="TranslateArrayHttpPostOut">
@@ -283,7 +430,7 @@
   <wsdl:message name="DetectLanguageHttpPostIn">
     <wsdl:part name="appID" type="s:string" />
     <wsdl:part name="text" type="s:string" />
-    <wsdl:part name="candidateList" type="s1:StringArray" />
+    <wsdl:part name="candidateList" type="s2:StringArray" />
   </wsdl:message>
   <wsdl:message name="DetectLanguageHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -310,6 +457,31 @@
   <wsdl:message name="GetUserInfoHttpPostOut">
     <wsdl:part name="Body" />
   </wsdl:message>
+  <wsdl:message name="UpdateTranslationHttpPostIn">
+    <wsdl:part name="appID" type="s:string" />
+    <wsdl:part name="systemID" type="s:string" />
+    <wsdl:part name="text" type="s:string" />
+    <wsdl:part name="translation" type="s:string" />
+    <wsdl:part name="options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTranslationHttpPostOut" />
+  <wsdl:message name="GetDocTranslationHttpPostIn">
+    <wsdl:part name="docID" type="s:string" />
+    <wsdl:part name="filename" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocTranslationHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="GetDocHttpPostIn">
+    <wsdl:part name="docId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDocHttpPostIn">
+    <wsdl:part name="docID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDocHttpPostOut" />
   <wsdl:portType name="TranslationWebServiceSoap">
     <wsdl:operation name="Translate">
       <wsdl:input message="tns:TranslateSoapIn" />
@@ -334,6 +506,26 @@
     <wsdl:operation name="GetUserInfo">
       <wsdl:input message="tns:GetUserInfoSoapIn" />
       <wsdl:output message="tns:GetUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <wsdl:input message="tns:UpdateTranslationSoapIn" />
+      <wsdl:output message="tns:UpdateTranslationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocTranslation">
+      <wsdl:input message="tns:CreateDocTranslationSoapIn" />
+      <wsdl:output message="tns:CreateDocTranslationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <wsdl:input message="tns:GetDocTranslationSoapIn" />
+      <wsdl:output message="tns:GetDocTranslationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <wsdl:input message="tns:GetDocSoapIn" />
+      <wsdl:output message="tns:GetDocSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <wsdl:input message="tns:RemoveDocSoapIn" />
+      <wsdl:output message="tns:RemoveDocSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="TranslationWebServiceHttpGet">
@@ -361,6 +553,22 @@
       <wsdl:input message="tns:GetUserInfoHttpGetIn" />
       <wsdl:output message="tns:GetUserInfoHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <wsdl:input message="tns:UpdateTranslationHttpGetIn" />
+      <wsdl:output message="tns:UpdateTranslationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <wsdl:input message="tns:GetDocTranslationHttpGetIn" />
+      <wsdl:output message="tns:GetDocTranslationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <wsdl:input message="tns:GetDocHttpGetIn" />
+      <wsdl:output message="tns:GetDocHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <wsdl:input message="tns:RemoveDocHttpGetIn" />
+      <wsdl:output message="tns:RemoveDocHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="TranslationWebServiceHttpPost">
     <wsdl:operation name="Translate">
@@ -386,6 +594,22 @@
     <wsdl:operation name="GetUserInfo">
       <wsdl:input message="tns:GetUserInfoHttpPostIn" />
       <wsdl:output message="tns:GetUserInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <wsdl:input message="tns:UpdateTranslationHttpPostIn" />
+      <wsdl:output message="tns:UpdateTranslationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <wsdl:input message="tns:GetDocTranslationHttpPostIn" />
+      <wsdl:output message="tns:GetDocTranslationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <wsdl:input message="tns:GetDocHttpPostIn" />
+      <wsdl:output message="tns:GetDocHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <wsdl:input message="tns:RemoveDocHttpPostIn" />
+      <wsdl:output message="tns:RemoveDocHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TranslationWebServiceSoap" type="tns:TranslationWebServiceSoap">
@@ -437,6 +661,51 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserInfo">
       <soap:operation soapAction="http://www.letsmt.eu/translationAPI/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/UpdateTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocTranslation">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/CreateDocTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/GetDocTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/GetDoc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <soap:operation soapAction="http://www.letsmt.eu/translationAPI/RemoveDoc" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -501,6 +770,51 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/UpdateTranslation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocTranslation">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/CreateDocTranslation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/GetDocTranslation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/GetDoc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <soap12:operation soapAction="http://www.letsmt.eu/translationAPI/RemoveDoc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="TranslationWebServiceHttpGet" type="tns:TranslationWebServiceHttpGet">
     <http:binding verb="GET" />
@@ -558,6 +872,38 @@
         <mime:content part="Body" type="text/xml" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <http:operation location="/UpdateTranslation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <http:operation location="/GetDocTranslation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <http:operation location="/GetDoc" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <http:operation location="/RemoveDoc" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="TranslationWebServiceHttpPost" type="tns:TranslationWebServiceHttpPost">
     <http:binding verb="POST" />
@@ -614,6 +960,38 @@
       <wsdl:output>
         <mime:content part="Body" type="text/xml" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <http:operation location="/UpdateTranslation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTranslation">
+      <http:operation location="/GetDocTranslation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoc">
+      <http:operation location="/GetDoc" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDoc">
+      <http:operation location="/RemoveDoc" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="TranslationWebService">
