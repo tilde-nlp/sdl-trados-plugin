@@ -52,16 +52,15 @@ namespace LetsMT.MTProvider
 
             m_translationProvider = editProvider;
             string WelcomeName = m_translationProvider.m_username;
-            
-            
-            XmlNode node = m_translationProvider.m_service.GetUserInfo("");
+
+            LetsMTAPI.UserData userData = m_translationProvider.m_service.GetUserInfo("");
 
             // get teh username whitout group
             string username = m_translationProvider.m_username;
-            XmlNode UsernameXMl = node.SelectSingleNode("email");
-            if (UsernameXMl != null)
+            string userEmail = userData.email;
+            if (!string.IsNullOrEmpty(userEmail))
             {
-                username = UsernameXMl.InnerText;
+                username = userEmail;
             }
 
             m_username = username;
@@ -71,32 +70,32 @@ namespace LetsMT.MTProvider
 
             // get teh username whitout group
             string activeGroup = "";
-            XmlNode activeGroupXML = node.SelectSingleNode("activeGroup");
-            if (activeGroupXML != null)
+            string userDataActiveGroup = userData.activeGroup;
+            if (userDataActiveGroup != null)
             {
-                activeGroup = activeGroupXML.InnerText;
+                activeGroup = userDataActiveGroup;
             }
 
             m_activeGroup = activeGroup;
 
             //Get the user friendly name for welcome lable
-            XmlNode NameXML = node.SelectSingleNode("name");
-            XmlNode SurnameXML = node.SelectSingleNode("surname");
-            if (NameXML != null)
+            string userDataName = userData.name;
+            string userDataSurname = userData.surname;
+            if (!string.IsNullOrEmpty(userDataName))
             {
-                WelcomeName = NameXML.InnerText;
+                WelcomeName = userDataName;
             }
-            if (SurnameXML != null)
+            if (!string.IsNullOrEmpty(userDataSurname))
             {
-                WelcomeName = WelcomeName + " " + SurnameXML.InnerText;
+                WelcomeName = WelcomeName + " " + userDataSurname;
             }
 
 
             List<UserGroup> GoupList = new List<UserGroup>();
 
-            foreach (XmlNode n in node.SelectNodes("userGroups/group"))
+            foreach (LetsMTAPI.UserGroup group in userData.userGroups)
             {
-                GoupList.Add(new UserGroup() { Name = n.Attributes["name"].Value, Value = n.Attributes["id"].Value });
+                GoupList.Add(new UserGroup() { Name = group.name, Value = group.id });
 
             }
             this.GroupSelectComboBox.DataSource = GoupList;
@@ -334,7 +333,7 @@ namespace LetsMT.MTProvider
 
                 binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
 				
-                m_translationProvider.m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+                m_translationProvider.m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
 
                 m_translationProvider.m_service.ClientCredentials.UserName.UserName = username;
                 m_translationProvider.m_service.ClientCredentials.UserName.Password = password;

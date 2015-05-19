@@ -32,7 +32,7 @@ namespace LetsMT.MTProvider
         private Uri m_uri;
         public string m_strAppID;
         public int m_resultScore;
-        public LocalLetsMTWebService.TranslationWebServiceSoapClient m_service;
+        public LetsMTAPI.TranslationServiceContractClient m_service;
         public CMtProfileCollection m_profileCollection;
         public bool m_userRetryWarning;
 
@@ -120,7 +120,7 @@ namespace LetsMT.MTProvider
             {
                 binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             }
-            m_service = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+            m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
             //m_service.Ti
 
             m_service.ClientCredentials.UserName.UserName = m_username;
@@ -373,7 +373,7 @@ namespace LetsMT.MTProvider
 
             //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
             ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 1, 0);
-            LocalLetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
+            LetsMTAPI.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null, null).System;
             m_profileCollection = new CMtProfileCollection(mtList);
 
             if (state != null)

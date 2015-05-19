@@ -205,7 +205,7 @@ namespace LetsMT.MTProvider
 
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
 
-            LocalLetsMTWebService.TranslationWebServiceSoapClient TestService = new LocalLetsMTWebService.TranslationWebServiceSoapClient(binding, endpoint);
+            LetsMTAPI.TranslationServiceContractClient TestService = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
 
            TestService.ClientCredentials.UserName.UserName = username;
            TestService.ClientCredentials.UserName.Password = password;

@@ -14,16 +14,16 @@ namespace LetsMT.MTProvider
         //Contains references to all available systems inside language directions
         private List<CMtSystem> m_systemList;
 
-        public CMtProfileCollection(LocalLetsMTWebService.MTSystem[] mtSystems)
+        public CMtProfileCollection(LetsMTAPI.MTSystem[] mtSystems)
         {
             //Empty lists initialized
             m_profileList = new List<CMtProfile>();
             m_systemList = new List<CMtSystem>();
 
             //Fill the lists with data from web service
-            foreach (LocalLetsMTWebService.MTSystem system in mtSystems)
+            foreach (LetsMTAPI.MTSystem system in mtSystems)
             {
-                string strProfileId = string.Format("{0} - {1}", system.SrcLanguage.Code, system.TrgLanguage.Code);
+                string strProfileId = string.Format("{0} - {1}", system.SourceLanguage.Code, system.TargetLanguage.Code);
 
                 //Reference to profile which has to be filled with system
                 CMtProfile refProfile = null;
@@ -43,7 +43,7 @@ namespace LetsMT.MTProvider
                 if (refProfile == null)
                 {
                     string strFriendlyName;
-                    strFriendlyName = string.Format("{0} - {1}", system.SrcLanguage.Name.Value, system.TrgLanguage.Name.Value);
+                    strFriendlyName = string.Format("{0} - {1}", system.SourceLanguage.Name.Text, system.TargetLanguage.Name.Text);  //TODO: check if this shouldn't be *.Name.Language instead
                     
                     //Set the reference to new profile
                     refProfile = new CMtProfile(strProfileId, strFriendlyName);
@@ -53,19 +53,19 @@ namespace LetsMT.MTProvider
 
                 //Add a system to profile through profile reference
                 string strSysId = system.ID;
-                string strSysFriendlyName = system.Title.Value;
-                string strSysDescription = system.Description.Value;
+                string strSysFriendlyName = system.Title.Text;
+                string strSysDescription = system.Description.Text;
                // string strSysDescription = system.Metadata[0].
                 string strSysOnlineStatus = "unknown";
                 strSysDescription += "";
                 //Fill description field
-                foreach (LocalLetsMTWebService.ObjectProperty meta in system.Metadata)
+                foreach (LetsMTAPI.ObjectProperty meta in system.Metadata)
                 {
-                    if (meta.key == "description")
+                    if (meta.Key == "description")
                     {
                         strSysDescription += "Description: " + meta.Value + "\n";
                     }
-                    if ( meta.key.StartsWith("score") && !(meta.key.Contains("-c")))
+                    if ( meta.Key.StartsWith("score") && !(meta.Key.Contains("-c")))
                     {
                         try
                         {
@@ -74,10 +74,10 @@ namespace LetsMT.MTProvider
                                {
                                    double score = x;
                                    score = Math.Round(score, 4);
-                                   if (meta.key.Contains("bleu")) { score = score * 100; }
-                                   strSysDescription += meta.key.Replace("score-", "").ToUpper() + ":" + score.ToString() + ", ";
+                                   if (meta.Key.Contains("bleu")) { score = score * 100; }
+                                   strSysDescription += meta.Key.Replace("score-", "").ToUpper() + ":" + score.ToString() + ", ";
                                }
-                               else { strSysDescription += meta.key.Replace("score-", "").ToUpper() + ":" + meta.Value + ", "; }
+                            else { strSysDescription += meta.Key.Replace("score-", "").ToUpper() + ":" + meta.Value + ", "; }
                         }
                         catch {continue;}
              
@@ -90,8 +90,9 @@ namespace LetsMT.MTProvider
                 System.Collections.IEnumerator metaEnum = system.Metadata.GetEnumerator();
                 while(metaEnum.MoveNext())
                 {
-                    LocalLetsMTWebService.ObjectProperty prop = metaEnum.Current as LocalLetsMTWebService.ObjectProperty;
-                    if(prop.key == "status")
+                    Nullable<LetsMTAPI.ObjectProperty> nullableProp = metaEnum.Current as Nullable<LetsMTAPI.ObjectProperty>;
+                    LetsMTAPI.ObjectProperty prop = nullableProp.Value;  //TODO: check if not null after cast
+                    if(prop.Key == "status")
                     {
                         switch (prop.Value)
                         {
