@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://letsmt.eu/translationAPI" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://tempuri.org/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TranslationWCFService" targetNamespace="http://letsmt.eu/translationAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_ITranslationServiceContract_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://letsmt.eu/translationAPI" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Tilde.TextProcessor" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LetsMT.Translation" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/TranslationAPILib.Classes" />
+      <xs:import namespace="http://www.tilde.com/LetsMT/SystemManager" />
+      <xs:element name="Translate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="TranslateResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateEx">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateExResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Tilde.TextProcessor" minOccurs="0" name="TranslateExResult" nillable="true" type="q1:TranslateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslatePost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslatePostResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="TranslatePostResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArray">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="textArray" nillable="true" type="q2:ArrayOfstring" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TranslateArrayResult" nillable="true" type="q3:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayPost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="textArray" nillable="true" type="q4:ArrayOfstring" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayPostResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TranslateArrayPostResult" nillable="true" type="q5:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayEx">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="textArray" nillable="true" type="q6:ArrayOfstring" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayExResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Tilde.TextProcessor" minOccurs="0" name="TranslateArrayExResult" nillable="true" type="q7:ArrayOfTranslateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayExPost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="textArray" nillable="true" type="q8:ArrayOfstring" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TranslateArrayExPostResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Tilde.TextProcessor" minOccurs="0" name="TranslateArrayExPostResult" nillable="true" type="q9:ArrayOfTranslateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetSystemList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uiLanguageID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetSystemListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/LetsMT.Translation" minOccurs="0" name="GetSystemListResult" nillable="true" type="q10:Systems" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetUserInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetUserInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/TranslationAPILib.Classes" minOccurs="0" name="GetUserInfoResult" nillable="true" type="q11:UserData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateTranslation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="translation" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateTranslationResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateTranslationPost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="translation" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateTranslationPostResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetTranslations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetTranslationsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/LetsMT.Translation" minOccurs="0" name="GetTranslationsResult" nillable="true" type="q12:ArrayOfTranslation" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveTranslation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="translation" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveTranslationResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveTranslationPost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="translation" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveTranslationPostResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="StartDocumentTranslation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="content" nillable="true" type="xs:base64Binary" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="StartDocumentTranslationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="StartDocumentTranslationResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="StartDocumentTranslationPost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="content" nillable="true" type="xs:base64Binary" />
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="StartDocumentTranslationPostResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="StartDocumentTranslationPostResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DownloadDocumentTranslation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DownloadDocumentTranslationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DownloadDocumentTranslationResult" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentTranslationState">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentTranslationStateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/LetsMT.Translation" minOccurs="0" name="GetDocumentTranslationStateResult" nillable="true" type="q13:Document" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveDocumentTranslation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveDocumentTranslationResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentTranslationList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="appID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="options" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentTranslationListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/LetsMT.Translation" minOccurs="0" name="GetDocumentTranslationListResult" nillable="true" type="q14:ArrayOfDocument" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetSystemTermCorpora">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetSystemTermCorporaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q15="http://www.tilde.com/LetsMT/SystemManager" minOccurs="0" name="GetSystemTermCorporaResult" nillable="true" type="q15:ArrayOfTermCorpus" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttachTermCorpusToSystem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusTitle" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusFileName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusFileType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusBytes" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttachTermCorpusToSystemResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AttachTermCorpusToSystemResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttachTermCorpusToSystemPost">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusTitle" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusFileName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusFileType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusBytes" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttachTermCorpusToSystemPostResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AttachTermCorpusToSystemPostResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttachPreloadedTermCorpusToSystem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusTitle" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusFileName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusFileType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uploadedFileName" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttachPreloadedTermCorpusToSystemResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AttachPreloadedTermCorpusToSystemResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveTermCorpusFromSystem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="systemID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="termCorpusID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RemoveTermCorpusFromSystemResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LetsMT" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LetsMT" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="Fault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Fault" nillable="true" type="tns:Fault" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Tilde.TextProcessor" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Tilde.TextProcessor" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="TranslateResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="countSentences" type="xs:int" />
+          <xs:element minOccurs="0" name="countTokens" type="xs:int" />
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="originalSentenceRanges" nillable="true" type="q1:ArrayOfArrayOfint" />
+          <xs:element minOccurs="0" name="translation" nillable="true" type="xs:string" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="translationSentenceRanges" nillable="true" type="q2:ArrayOfArrayOfint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TranslateResult" nillable="true" type="tns:TranslateResult" />
+      <xs:complexType name="ArrayOfTranslateResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TranslateResult" nillable="true" type="tns:TranslateResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTranslateResult" nillable="true" type="tns:ArrayOfTranslateResult" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfArrayOfint">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfint" nillable="true" type="tns:ArrayOfint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfArrayOfint" nillable="true" type="tns:ArrayOfArrayOfint" />
+      <xs:complexType name="ArrayOfint">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfint" nillable="true" type="tns:ArrayOfint" />
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LetsMT.Translation" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LetsMT.Translation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:complexType name="Systems">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="System" nillable="true" type="tns:ArrayOfMTSystem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Systems" nillable="true" type="tns:Systems" />
+      <xs:complexType name="ArrayOfMTSystem">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="MTSystem" nillable="true" type="tns:MTSystem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfMTSystem" nillable="true" type="tns:ArrayOfMTSystem" />
+      <xs:complexType name="MTSystem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" type="tns:LangText" />
+          <xs:element minOccurs="0" name="Domain" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Metadata" nillable="true" type="tns:ArrayOfObjectProperty" />
+          <xs:element minOccurs="0" name="SourceLanguage" type="tns:Language" />
+          <xs:element minOccurs="0" name="TargetLanguage" type="tns:Language" />
+          <xs:element minOccurs="0" name="Title" type="tns:LangText" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="MTSystem" nillable="true" type="tns:MTSystem" />
+      <xs:complexType name="LangText">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="LangText" nillable="true" type="tns:LangText" />
+      <xs:complexType name="ArrayOfObjectProperty">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectProperty" type="tns:ObjectProperty" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfObjectProperty" nillable="true" type="tns:ArrayOfObjectProperty" />
+      <xs:complexType name="ObjectProperty">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ObjectProperty" nillable="true" type="tns:ObjectProperty" />
+      <xs:complexType name="Language">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" type="tns:LangText" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Language" nillable="true" type="tns:Language" />
+      <xs:complexType name="ArrayOfTranslation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Translation" nillable="true" type="tns:Translation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTranslation" nillable="true" type="tns:ArrayOfTranslation" />
+      <xs:complexType name="Translation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Accepted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CanEdit" type="xs:boolean" />
+          <xs:element minOccurs="0" name="FromMyDomain" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Id" type="xs:long" />
+          <xs:element minOccurs="0" name="Origin" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Translation" nillable="true" type="tns:Translation" />
+      <xs:complexType name="Document">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Filename" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Segments" type="xs:int" />
+          <xs:element minOccurs="0" name="Size" type="xs:int" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="System" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TranslatedSegments" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Document" nillable="true" type="tns:Document" />
+      <xs:complexType name="ArrayOfDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDocument" nillable="true" type="tns:ArrayOfDocument" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TranslationAPILib.Classes" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TranslationAPILib.Classes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="UserData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="activeGroup" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="surname" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userGroups" nillable="true" type="tns:ArrayOfUserGroup" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserData" nillable="true" type="tns:UserData" />
+      <xs:complexType name="ArrayOfUserGroup">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="UserGroup" nillable="true" type="tns:UserGroup" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfUserGroup" nillable="true" type="tns:ArrayOfUserGroup" />
+      <xs:complexType name="UserGroup">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userRoles" nillable="true" type="tns:ArrayOfUserRole" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserGroup" nillable="true" type="tns:UserGroup" />
+      <xs:complexType name="ArrayOfUserRole">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="UserRole" nillable="true" type="tns:UserRole" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfUserRole" nillable="true" type="tns:ArrayOfUserRole" />
+      <xs:complexType name="UserRole">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserRole" nillable="true" type="tns:UserRole" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://www.tilde.com/LetsMT/SystemManager" elementFormDefault="qualified" targetNamespace="http://www.tilde.com/LetsMT/SystemManager" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfTermCorpus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TermCorpus" nillable="true" type="tns:TermCorpus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTermCorpus" nillable="true" type="tns:ArrayOfTermCorpus" />
+      <xs:complexType name="TermCorpus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CorpusId" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TermCorpus" nillable="true" type="tns:TermCorpus" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ITranslationServiceContract_Translate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Translate" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_Translate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_Translate_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q1:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateEx" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateExResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateEx_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q2:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateArray" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateArray_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q3:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateArrayEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateArrayEx" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateArrayEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateArrayExResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_TranslateArrayEx_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q4:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetSystemList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemList" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetSystemList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetSystemList_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q5:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetUserInfo_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q6:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_UpdateTranslation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTranslation" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_UpdateTranslation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_UpdateTranslation_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q7:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetTranslations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTranslations" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetTranslations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTranslationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetTranslations_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q8:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveTranslation_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTranslation" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveTranslation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveTranslation_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q9:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_StartDocumentTranslation_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartDocumentTranslation" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_StartDocumentTranslation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartDocumentTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_StartDocumentTranslation_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q10:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_DownloadDocumentTranslation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadDocumentTranslation" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_DownloadDocumentTranslation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadDocumentTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_DownloadDocumentTranslation_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q11:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetDocumentTranslationState_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTranslationState" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetDocumentTranslationState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTranslationStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetDocumentTranslationState_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q12:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveDocumentTranslation_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveDocumentTranslation" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveDocumentTranslation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveDocumentTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveDocumentTranslation_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q13:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetDocumentTranslationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTranslationList" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetDocumentTranslationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTranslationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetDocumentTranslationList_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q14:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetSystemTermCorpora_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemTermCorpora" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetSystemTermCorpora_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemTermCorporaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_GetSystemTermCorpora_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q15:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_AttachTermCorpusToSystem_InputMessage">
+    <wsdl:part name="parameters" element="tns:AttachTermCorpusToSystem" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_AttachTermCorpusToSystem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AttachTermCorpusToSystemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_AttachTermCorpusToSystem_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q16:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_AttachPreloadedTermCorpusToSystem_InputMessage">
+    <wsdl:part name="parameters" element="tns:AttachPreloadedTermCorpusToSystem" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_AttachPreloadedTermCorpusToSystem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AttachPreloadedTermCorpusToSystemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_AttachPreloadedTermCorpusToSystem_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q17:Fault" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveTermCorpusFromSystem_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTermCorpusFromSystem" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveTermCorpusFromSystem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTermCorpusFromSystemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslationServiceContract_RemoveTermCorpusFromSystem_FaultFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://schemas.datacontract.org/2004/07/LetsMT" name="detail" element="q18:Fault" />
+  </wsdl:message>
+  <wsdl:portType name="ITranslationServiceContract">
+    <wsdl:operation name="Translate">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/Translate" message="tns:ITranslationServiceContract_Translate_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateResponse" message="tns:ITranslationServiceContract_Translate_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_Translate_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateEx">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateEx" message="tns:ITranslationServiceContract_TranslateEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateExResponse" message="tns:ITranslationServiceContract_TranslateEx_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateExFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_TranslateEx_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArray" message="tns:ITranslationServiceContract_TranslateArray_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayResponse" message="tns:ITranslationServiceContract_TranslateArray_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_TranslateArray_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArrayEx">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayEx" message="tns:ITranslationServiceContract_TranslateArrayEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayExResponse" message="tns:ITranslationServiceContract_TranslateArrayEx_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayExFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_TranslateArrayEx_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemList" message="tns:ITranslationServiceContract_GetSystemList_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemListResponse" message="tns:ITranslationServiceContract_GetSystemList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemListFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_GetSystemList_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetUserInfo" message="tns:ITranslationServiceContract_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetUserInfoResponse" message="tns:ITranslationServiceContract_GetUserInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetUserInfoFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_GetUserInfo_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/UpdateTranslation" message="tns:ITranslationServiceContract_UpdateTranslation_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/UpdateTranslationResponse" message="tns:ITranslationServiceContract_UpdateTranslation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/UpdateTranslationFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_UpdateTranslation_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslations">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetTranslations" message="tns:ITranslationServiceContract_GetTranslations_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetTranslationsResponse" message="tns:ITranslationServiceContract_GetTranslations_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetTranslationsFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_GetTranslations_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslation">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTranslation" message="tns:ITranslationServiceContract_RemoveTranslation_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTranslationResponse" message="tns:ITranslationServiceContract_RemoveTranslation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTranslationFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_RemoveTranslation_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartDocumentTranslation">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/StartDocumentTranslation" message="tns:ITranslationServiceContract_StartDocumentTranslation_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/StartDocumentTranslationResponse" message="tns:ITranslationServiceContract_StartDocumentTranslation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/StartDocumentTranslationFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_StartDocumentTranslation_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadDocumentTranslation">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/DownloadDocumentTranslation" message="tns:ITranslationServiceContract_DownloadDocumentTranslation_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/DownloadDocumentTranslationResponse" message="tns:ITranslationServiceContract_DownloadDocumentTranslation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/DownloadDocumentTranslationFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_DownloadDocumentTranslation_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTranslationState">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationState" message="tns:ITranslationServiceContract_GetDocumentTranslationState_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationStateResponse" message="tns:ITranslationServiceContract_GetDocumentTranslationState_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationStateFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_GetDocumentTranslationState_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDocumentTranslation">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveDocumentTranslation" message="tns:ITranslationServiceContract_RemoveDocumentTranslation_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveDocumentTranslationResponse" message="tns:ITranslationServiceContract_RemoveDocumentTranslation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveDocumentTranslationFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_RemoveDocumentTranslation_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTranslationList">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationList" message="tns:ITranslationServiceContract_GetDocumentTranslationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationListResponse" message="tns:ITranslationServiceContract_GetDocumentTranslationList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationListFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_GetDocumentTranslationList_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemTermCorpora">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemTermCorpora" message="tns:ITranslationServiceContract_GetSystemTermCorpora_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemTermCorporaResponse" message="tns:ITranslationServiceContract_GetSystemTermCorpora_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemTermCorporaFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_GetSystemTermCorpora_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AttachTermCorpusToSystem">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachTermCorpusToSystem" message="tns:ITranslationServiceContract_AttachTermCorpusToSystem_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachTermCorpusToSystemResponse" message="tns:ITranslationServiceContract_AttachTermCorpusToSystem_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachTermCorpusToSystemFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_AttachTermCorpusToSystem_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AttachPreloadedTermCorpusToSystem">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachPreloadedTermCorpusToSystem" message="tns:ITranslationServiceContract_AttachPreloadedTermCorpusToSystem_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachPreloadedTermCorpusToSystemResponse" message="tns:ITranslationServiceContract_AttachPreloadedTermCorpusToSystem_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachPreloadedTermCorpusToSystemFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_AttachPreloadedTermCorpusToSystem_FaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTermCorpusFromSystem">
+      <wsdl:input wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTermCorpusFromSystem" message="tns:ITranslationServiceContract_RemoveTermCorpusFromSystem_InputMessage" />
+      <wsdl:output wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTermCorpusFromSystemResponse" message="tns:ITranslationServiceContract_RemoveTermCorpusFromSystem_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTermCorpusFromSystemFaultFault" name="FaultFault" message="tns:ITranslationServiceContract_RemoveTermCorpusFromSystem_FaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITranslationServiceContract" type="tns:ITranslationServiceContract">
+    <wsp:PolicyReference URI="#BasicHttpBinding_ITranslationServiceContract_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Translate">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/Translate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateEx">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TranslatePost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslatePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArray">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArrayPost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArrayEx">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateArrayExPost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/TranslateArrayExPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemList">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslation">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/UpdateTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranslationPost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/UpdateTranslationPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslations">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetTranslations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslation">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslationPost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTranslationPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StartDocumentTranslation">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/StartDocumentTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StartDocumentTranslationPost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/StartDocumentTranslationPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadDocumentTranslation">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/DownloadDocumentTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTranslationState">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDocumentTranslation">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveDocumentTranslation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTranslationList">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetDocumentTranslationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemTermCorpora">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/GetSystemTermCorpora" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AttachTermCorpusToSystem">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachTermCorpusToSystem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AttachTermCorpusToSystemPost">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachTermCorpusToSystemPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AttachPreloadedTermCorpusToSystem">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/AttachPreloadedTermCorpusToSystem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTermCorpusFromSystem">
+      <soap:operation soapAction="http://letsmt.eu/translationAPI/ITranslationServiceContract/RemoveTermCorpusFromSystem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultFault">
+        <soap:fault use="literal" name="FaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TranslationWCFService">
+    <wsdl:port name="BasicHttpBinding_ITranslationServiceContract" binding="tns:BasicHttpBinding_ITranslationServiceContract">
+      <soap:address location="https://www.letsmt.eu/ws/Service.svc/soap" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

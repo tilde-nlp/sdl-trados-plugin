@@ -117,12 +117,7 @@
     <Compile Include="RetryWarningForm.Designer.cs">
       <DependentUpon>RetryWarningForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Service References\LetsMTWebService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\LocalLetsMTWebService\Reference.cs">
+    <Compile Include="Service References\LetsMTAPI\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -161,35 +156,33 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Systems.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.TermCorpus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.TranslateResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Translation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.UserData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LetsMTAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\LetsMTAPI\configuration.svcinfo" />
+    <None Include="Service References\LetsMTAPI\configuration91.svcinfo" />
     <None Include="Resources\LetsMT.ico" />
     <None Include="Resources\Logo_71x23.png" />
     <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
-    <None Include="Service References\LocalLetsMTWebService\LetsMT.MTProvider.LocalLetsMTWebService.MTSystem.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\LocalLetsMTWebService\LetsMT.MTProvider.LocalLetsMTWebService.SentenceBoundary.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\LocalLetsMTWebService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\LocalLetsMTWebService\configuration.svcinfo" />
-    <None Include="Service References\LocalLetsMTWebService\configuration91.svcinfo" />
-    <None Include="Service References\LocalLetsMTWebService\service.disco" />
-    <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.MTSystem.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\LetsMTWebService\LetsMT.MTProvider.LetsMTWebService.SentenceBoundary.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\LetsMTWebService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\LetsMTWebService\configuration.svcinfo" />
-    <None Include="Service References\LetsMTWebService\configuration91.svcinfo" />
-    <None Include="Service References\LetsMTWebService\Service.disco" />
     <EmbeddedResource Include="Advanced_options.resx">
       <DependentUpon>Advanced_options.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,8 +197,7 @@
     <Content Include="pluginpackage.manifest.xml">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Service References\LetsMTWebService\Service.wsdl" />
-    <None Include="Service References\LocalLetsMTWebService\service.wsdl" />
+    <None Include="Service References\LetsMTAPI\TranslationWCFService.wsdl" />
     <None Include="setupscript.nsi" />
     <None Include="setupscript_11.nsi" />
   </ItemGroup>
@@ -264,8 +256,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\LetsMTWebService\" />
-    <WCFMetadataStorage Include="Service References\LocalLetsMTWebService\" />
+    <WCFMetadataStorage Include="Service References\LetsMTAPI\" />
   </ItemGroup>
   <PropertyGroup>
     <CreatePluginPackage>true</CreatePluginPackage>
