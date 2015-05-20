@@ -7,11 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsMT.MTProvider", "LetsMT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsMT.MTProvider_v2014_linked", "..\SDLTradosPlugin_v2014_linked\LetsMT.MTProvider_v2014_linked.csproj", "{AE9FF782-821F-4D95-817E-85FC96A4AD23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsMT.MTProvider_v2014", "..\SDLTradosPlugin_v2014\LetsMT.MTProvider_v2014.csproj", "{C82B5CD5-19D2-4547-BF85-8A0C6F741426}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -20,9 +18,6 @@ Global
 		SccProjectUniqueName2 = ..\\SDLTradosPlugin_v2014_linked\\LetsMT.MTProvider_v2014_linked.csproj
 		SccProjectName2 = ../SDLTradosPlugin_v2014_linked
 		SccLocalPath2 = ..\\SDLTradosPlugin_v2014_linked
-		SccProjectUniqueName3 = ..\\SDLTradosPlugin_v2014\\LetsMT.MTProvider_v2014.csproj
-		SccProjectName3 = ../SDLTradosPlugin_v2014
-		SccLocalPath3 = ..\\SDLTradosPlugin_v2014
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +32,6 @@ Global
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C82B5CD5-19D2-4547-BF85-8A0C6F741426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C82B5CD5-19D2-4547-BF85-8A0C6F741426}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C82B5CD5-19D2-4547-BF85-8A0C6F741426}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C82B5CD5-19D2-4547-BF85-8A0C6F741426}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
