@@ -23,7 +23,7 @@ namespace LetsMT.MTProvider
             //Fill the lists with data from web service
             foreach (LetsMTAPI.MTSystem system in mtSystems)
             {
-                string strProfileId = string.Format("{0} - {1}", system.SourceLanguage.Code, system.TargetLanguage.Code);
+                string strProfileId = CMtProfile.GenerateProfileId(system.SourceLanguage.Code, system.TargetLanguage.Code);
 
                 //Reference to profile which has to be filled with system
                 CMtProfile refProfile = null;
@@ -43,10 +43,10 @@ namespace LetsMT.MTProvider
                 if (refProfile == null)
                 {
                     string strFriendlyName;
-                    strFriendlyName = string.Format("{0} - {1}", system.SourceLanguage.Name.Text, system.TargetLanguage.Name.Text);  //TODO: check if this shouldn't be *.Name.Language instead
+                    strFriendlyName = string.Format("{0} - {1}", system.SourceLanguage.Name.Text, system.TargetLanguage.Name.Text);
                     
                     //Set the reference to new profile
-                    refProfile = new CMtProfile(strProfileId, strFriendlyName);
+                    refProfile = new CMtProfile(system.SourceLanguage.Code, system.SourceLanguage.Name.Text, system.TargetLanguage.Code, system.TargetLanguage.Name.Text);
 
                     m_profileList.Add(refProfile);
                 }

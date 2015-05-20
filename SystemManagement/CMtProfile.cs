@@ -7,19 +7,45 @@ namespace LetsMT.MTProvider
 {
     public class CMtProfile
     {
-        //Contains profile id like "en - lv"
-        private string m_profileId;
         //Default system for this profile, could be empty
         private string m_defaultSystem;
-        //Friendly name for listbox etc.
-        private string m_profileFriendlyName;
         //All systems in this profile
         private List<CMtSystem> m_availableSystems;
 
-        public CMtProfile(string strProfileId, string strProfileFriendlyName)
+
+        public string SourceLanguageId { get; set; }
+
+        public string SourceLanguageName { get; set; }
+
+        public string TargetLanguageId { get; set; }
+
+        public string TargetLanguageName { get; set; }
+
+        public static string GenerateProfileId(string sourceLanguageId, string targetLanguageId)
         {
-            m_profileId = strProfileId;
-            m_profileFriendlyName = strProfileFriendlyName;
+            return string.Format("{0} - {1}", sourceLanguageId, targetLanguageId);
+        }
+
+        //Contains profile id like "en - lv"
+        public string m_profileId
+        {
+            get { return GenerateProfileId(SourceLanguageId, TargetLanguageId); }
+        }
+
+        //Friendly name for listbox etc.
+        public string m_profileFriendlyName
+        {
+            get { return string.Format("{0} - {1}", SourceLanguageName, TargetLanguageName); }
+        }
+        
+
+        public CMtProfile(string sourceLanguageId, string sourceLanguageName, string targetLanguageId, string targetLanguageName)
+        {
+            this.SourceLanguageId = sourceLanguageId;
+            this.SourceLanguageName = sourceLanguageName;
+            this.TargetLanguageId = targetLanguageId;
+            this.TargetLanguageName = targetLanguageName;
+
             m_defaultSystem = "";
             //Empty list
             m_availableSystems = new List<CMtSystem>();
