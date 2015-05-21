@@ -188,6 +188,7 @@
             this.targetSelectComboBox.Name = "targetSelectComboBox";
             this.targetSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.targetSelectComboBox.TabIndex = 17;
+            this.targetSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.targetSelectComboBox_SelectedIndexChanged);
             // 
             // SettingsForm
             // 

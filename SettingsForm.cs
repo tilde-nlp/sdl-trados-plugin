@@ -143,26 +143,15 @@ namespace LetsMT.MTProvider
 
 
         }
-        
 
-        private void FillProfileList()
+        /// <summary>
+        /// Parses profile list in a dictionary with target language list for a given source language.
+        /// </summary>
+        /// <param name="profiles"> List of language profles. </param>
+        /// <returns> A dictionary with source language code as a key and a tuple of source language name and a list of target language code and name tuples as value. </returns>
+        private Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>> ParseLanguageChoices(List<CMtProfile> profiles)
         {
-            wndTranslationDirections.Items.Clear();
-            wndProfileProperties.Items.Clear();
-            sourceSelectComboBox.Items.Clear();
-            sourceSelectComboBox.Text = "";
-            targetSelectComboBox.Items.Clear();
-            targetSelectComboBox.Text = "";
-
-            languageChoices.Clear(); // TODO: initialisation and filling of this might belong elsewhere
-
-            List<CMtProfile> profiles = m_translationProvider.m_profileCollection.GetProfileList(wndRunningSystems.Checked);
-            List<ListItem> profileListItems = m_translationProvider.m_profileCollection.GetProfileListItems(wndRunningSystems.Checked);
-
-            foreach (ListItem item in profileListItems)
-            {
-                wndTranslationDirections.Items.Add(item);
-            }
+            Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>> languageChoices = new Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>>();
 
             foreach (CMtProfile profile in profiles)
             {
@@ -175,6 +164,30 @@ namespace LetsMT.MTProvider
                 List<MyTuple<string, string>> targetLanguageCollection = sourceAndTargetLenguageInfo.Item2;
                 targetLanguageCollection.Add(MyTuple.Create(profile.TargetLanguageId, profile.TargetLanguageName));
             }
+
+            return languageChoices;
+        }
+
+        private void FillProfileList()
+        {
+            wndTranslationDirections.Items.Clear();
+            wndProfileProperties.Items.Clear();
+            sourceSelectComboBox.Items.Clear();
+            sourceSelectComboBox.Text = "";
+            targetSelectComboBox.Items.Clear();
+            targetSelectComboBox.Text = "";
+
+
+            List<CMtProfile> profiles = m_translationProvider.m_profileCollection.GetProfileList(wndRunningSystems.Checked);
+            List<ListItem> profileListItems = m_translationProvider.m_profileCollection.GetProfileListItems(wndRunningSystems.Checked);
+
+            foreach (ListItem item in profileListItems)
+            {
+                wndTranslationDirections.Items.Add(item);
+            }
+            
+            //languageChoices.Clear(); // TODO: should we dispose of the old values or let the garbage collector do it's work? 
+            languageChoices = ParseLanguageChoices(profiles);
 
             foreach(string sourceLanguageId in languageChoices.Keys)
             {
@@ -374,20 +387,32 @@ namespace LetsMT.MTProvider
                     wndProfileProperties.SetItemCheckState(i, CheckState.Unchecked);
             }            
 
-            ListItem profile = wndTranslationDirections.SelectedItem as ListItem;
+            //ListItem profile = wndTranslationDirections.SelectedItem as ListItem;
+            ListItem sourceLanguageItem = sourceSelectComboBox.SelectedItem as ListItem;
+            ListItem targetLanguageItem = targetSelectComboBox.SelectedItem as ListItem;
+            if (sourceLanguageItem == null || targetLanguageItem == null)
+            {
+                return;
+            }
+            string sourceLanguageId = sourceLanguageItem.Value;
+            string targetLanguageId = targetLanguageItem.Value;
+
+            string progileId = CMtProfile.GenerateProfileId(sourceLanguageId, targetLanguageId);
+
             ListItem item = wndProfileProperties.Items[idx] as ListItem;
 
             string strNewValue = (e.NewValue == CheckState.Checked)?item.Value:"";
 
-            if(m_checkedState.ContainsKey(profile.Value))
-                m_checkedState[profile.Value] = strNewValue;
+            if (m_checkedState.ContainsKey(progileId))
+                m_checkedState[progileId] = strNewValue;
             else
-                m_checkedState.Add(profile.Value, strNewValue);            
+                m_checkedState.Add(progileId, strNewValue);            
         }
 
         private void wndRunningSystems_CheckedChanged(object sender, EventArgs e)
         {
             FillProfileList();
+
         }
 
 
@@ -463,6 +488,59 @@ namespace LetsMT.MTProvider
         private void sourceSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillTargetLanguageList();
+        }
+
+        private void targetSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            wndProfileProperties.Items.Clear();
+
+            if (sourceSelectComboBox.SelectedIndex != -1 && targetSelectComboBox.SelectedIndex != -1)
+            {
+                ListItem sourceLanguageItem = sourceSelectComboBox.SelectedItem as ListItem;
+                ListItem targetLanguageItem = targetSelectComboBox.SelectedItem as ListItem;
+                if (sourceLanguageItem == null || targetLanguageItem == null)
+                {
+                    return;
+                }
+
+                string sourceLanguageId = sourceLanguageItem.Value;
+                string targetLanguageId = targetLanguageItem.Value;
+
+                string profileId = CMtProfile.GenerateProfileId(sourceLanguageId, targetLanguageId);
+
+                List<ListItem> systems = m_translationProvider.m_profileCollection.GetProfileSystemList(profileId, wndRunningSystems.Checked);
+
+                foreach (ListItem system in systems)
+                {
+                    wndProfileProperties.Items.Add(system);
+                }
+
+                string defaultSystem = m_translationProvider.m_profileCollection.GetActiveSystemForProfile(profileId);
+
+                if (m_checkedState.ContainsKey(profileId))
+                {
+                    defaultSystem = m_checkedState[profileId];
+                }
+
+                //Select default system
+                bool bHasSelection = false;
+
+                for (int i = 0; i < wndProfileProperties.Items.Count; i++)
+                {
+                    if ((wndProfileProperties.Items[i] as ListItem).Value == defaultSystem)
+                    {
+                        wndProfileProperties.SetSelected(i, true);
+                        wndProfileProperties.SetItemCheckState(i, CheckState.Checked);
+                        bHasSelection = true;
+                        break;
+                    }
+                }
+
+                //Select first one
+                if (!bHasSelection && wndProfileProperties.Items.Count > 0)
+                    wndProfileProperties.SetSelected(0, true);
+            }
+
         }
 
     
