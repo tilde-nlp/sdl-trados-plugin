@@ -376,6 +376,20 @@ namespace LetsMT.MTProvider
             Close();
         }
 
+        private string getSelectedProfileId()
+        {
+            ListItem sourceLanguageItem = sourceSelectComboBox.SelectedItem as ListItem;
+            ListItem targetLanguageItem = targetSelectComboBox.SelectedItem as ListItem;
+            if (sourceLanguageItem == null || targetLanguageItem == null)
+            {
+                return null;
+            }
+            string sourceLanguageId = sourceLanguageItem.Value;
+            string targetLanguageId = targetLanguageItem.Value;
+
+            return CMtProfile.GenerateProfileId(sourceLanguageId, targetLanguageId);
+        }
+
         private void wndProfileProperties_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int idx = e.Index;
@@ -388,16 +402,11 @@ namespace LetsMT.MTProvider
             }            
 
             //ListItem profile = wndTranslationDirections.SelectedItem as ListItem;
-            ListItem sourceLanguageItem = sourceSelectComboBox.SelectedItem as ListItem;
-            ListItem targetLanguageItem = targetSelectComboBox.SelectedItem as ListItem;
-            if (sourceLanguageItem == null || targetLanguageItem == null)
+            string progileId = getSelectedProfileId();
+            if (progileId == null)
             {
                 return;
             }
-            string sourceLanguageId = sourceLanguageItem.Value;
-            string targetLanguageId = targetLanguageItem.Value;
-
-            string progileId = CMtProfile.GenerateProfileId(sourceLanguageId, targetLanguageId);
 
             ListItem item = wndProfileProperties.Items[idx] as ListItem;
 
@@ -496,17 +505,11 @@ namespace LetsMT.MTProvider
 
             if (sourceSelectComboBox.SelectedIndex != -1 && targetSelectComboBox.SelectedIndex != -1)
             {
-                ListItem sourceLanguageItem = sourceSelectComboBox.SelectedItem as ListItem;
-                ListItem targetLanguageItem = targetSelectComboBox.SelectedItem as ListItem;
-                if (sourceLanguageItem == null || targetLanguageItem == null)
+                string profileId = getSelectedProfileId();
+                if(profileId == null)
                 {
                     return;
                 }
-
-                string sourceLanguageId = sourceLanguageItem.Value;
-                string targetLanguageId = targetLanguageItem.Value;
-
-                string profileId = CMtProfile.GenerateProfileId(sourceLanguageId, targetLanguageId);
 
                 List<ListItem> systems = m_translationProvider.m_profileCollection.GetProfileSystemList(profileId, wndRunningSystems.Checked);
 
