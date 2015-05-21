@@ -133,7 +133,7 @@ namespace LetsMT.MTProvider
         }
 
         //Get profiles as listbox items
-        public List<ListItem> GetProfileList(bool bFiltered = false)
+        public List<ListItem> GetProfileListItems(bool bFiltered = false)
         {
             List<ListItem> profiles = new List<ListItem>();
 
@@ -141,6 +141,19 @@ namespace LetsMT.MTProvider
             {
                 if(!bFiltered || profile.HasOnlineSystems())
                     profiles.Add(profile.GetListItem());
+            }
+
+            return profiles;
+        }
+
+        public List<CMtProfile> GetProfileList(bool bFiltered = false)
+        {
+            List<CMtProfile> profiles = new List<CMtProfile>();
+
+            foreach (CMtProfile profile in m_profileList)
+            {
+                if (!bFiltered || profile.HasOnlineSystems())
+                    profiles.Add(profile);
             }
 
             return profiles;

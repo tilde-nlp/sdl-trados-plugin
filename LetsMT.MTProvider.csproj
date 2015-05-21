@@ -112,6 +112,7 @@
     <Compile Include="LimitationForm.Designer.cs">
       <DependentUpon>LimitationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyTuple.cs" />
     <Compile Include="RetryWarningForm.cs">
       <SubType>Form</SubType>
     </Compile>

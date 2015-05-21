@@ -28,6 +28,10 @@ namespace LetsMT.MTProvider
         private bool m_trackGoupChange;
 
 
+        // Dictionary with source language code as a key and a tuple of source language name and a list of target language code and name tuples as value.
+        private Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>> languageChoices = new Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>>();
+
+
         ITranslationProviderCredentialStore m_credentialStore;
 
         public class UserGroup
@@ -120,6 +124,12 @@ namespace LetsMT.MTProvider
             wndProfileProperties.DisplayMember = "text";
             wndProfileProperties.ValueMember = "value";
 
+            sourceSelectComboBox.DisplayMember = "Text";
+            sourceSelectComboBox.ValueMember = "Value";
+
+            targetSelectComboBox.DisplayMember = "Text";
+            targetSelectComboBox.ValueMember = "Value";
+
 
             //fill the system list
             m_pairs = languagePairs;
@@ -139,12 +149,73 @@ namespace LetsMT.MTProvider
         {
             wndTranslationDirections.Items.Clear();
             wndProfileProperties.Items.Clear();
+            sourceSelectComboBox.Items.Clear();
+            sourceSelectComboBox.Text = "";
+            targetSelectComboBox.Items.Clear();
+            targetSelectComboBox.Text = "";
 
-            List<ListItem> profiles = m_translationProvider.m_profileCollection.GetProfileList(wndRunningSystems.Checked);
+            languageChoices.Clear(); // TODO: initialisation and filling of this might belong elsewhere
 
-            foreach (ListItem item in profiles)
+            List<CMtProfile> profiles = m_translationProvider.m_profileCollection.GetProfileList(wndRunningSystems.Checked);
+            List<ListItem> profileListItems = m_translationProvider.m_profileCollection.GetProfileListItems(wndRunningSystems.Checked);
+
+            foreach (ListItem item in profileListItems)
             {
                 wndTranslationDirections.Items.Add(item);
+            }
+
+            foreach (CMtProfile profile in profiles)
+            {
+                MyTuple<string, List<MyTuple<string, string>>> sourceAndTargetLenguageInfo;
+                if (!languageChoices.TryGetValue(profile.SourceLanguageId, out sourceAndTargetLenguageInfo))
+                {
+                    sourceAndTargetLenguageInfo = MyTuple.Create(profile.SourceLanguageName, new List<MyTuple<string, string>>());
+                    languageChoices.Add(profile.SourceLanguageId, sourceAndTargetLenguageInfo);
+                }
+                List<MyTuple<string, string>> targetLanguageCollection = sourceAndTargetLenguageInfo.Item2;
+                targetLanguageCollection.Add(MyTuple.Create(profile.TargetLanguageId, profile.TargetLanguageName));
+            }
+
+            foreach(string sourceLanguageId in languageChoices.Keys)
+            {
+                MyTuple<string, List<MyTuple<string, string>>> sourceAndTargetLenguageInfo = languageChoices[sourceLanguageId];
+                string sourceLanguageName = sourceAndTargetLenguageInfo.Item1;
+                sourceSelectComboBox.Items.Add(new ListItem { Text=sourceLanguageName, Value=sourceLanguageId});
+            }
+
+            //Select the profile if only one given (settings clicked on specific profile)
+            bool sourceHasSelection = false;
+            bool targetHasSelection = false;
+
+            if (m_pairs.Length == 1)
+            {
+                string selectedSourceLanguageId = m_pairs[0].SourceCulture.TwoLetterISOLanguageName;
+                string selectedTargetLanguageId = m_pairs[0].TargetCulture.TwoLetterISOLanguageName;
+                int sourceIndex = -1;
+                int targetIndex = -1;
+                foreach (object addedSourceObject in sourceSelectComboBox.Items)
+                {
+                    sourceIndex++;
+                    ListItem addedSourceItem = addedSourceObject as ListItem;
+                    if (addedSourceItem.Value == selectedSourceLanguageId)
+                    {
+                        sourceSelectComboBox.SelectedIndex = sourceIndex;
+                        sourceHasSelection = true;
+                        break;
+                    }
+                }
+
+                foreach (object addedTargetObject in targetSelectComboBox.Items)
+                {
+                    targetIndex++;
+                    ListItem addedTargetItem = addedTargetObject as ListItem;
+                    if (addedTargetItem.Value == selectedTargetLanguageId)
+                    {
+                        targetSelectComboBox.SelectedIndex = targetIndex;
+                        targetHasSelection = true;
+                        break;
+                    }
+                }
             }
 
             //Select the profile if only one given (settings clicked on specific profile)
@@ -168,11 +239,49 @@ namespace LetsMT.MTProvider
 
             }
 
+            if (!sourceHasSelection && sourceSelectComboBox.Items.Count > 0)
+            {
+                sourceSelectComboBox.SelectedIndex = 0;
+            }
+
+            if (!targetHasSelection && targetSelectComboBox.Items.Count > 0)
+            {
+                targetSelectComboBox.SelectedIndex = 0;
+            }
+
             //Select the first profile from global settings
             if (!bHasSelection)
             {
                 if (wndTranslationDirections.Items.Count > 0)
                     wndTranslationDirections.SetSelected(0, true);
+            }
+        }
+
+        public void FillTargetLanguageList()
+        {
+            targetSelectComboBox.Items.Clear();
+            targetSelectComboBox.Text = "";
+            
+            ListItem selectedItem = sourceSelectComboBox.SelectedItem as ListItem;
+            if (selectedItem != null)
+            {
+                string sourceLanguageId = selectedItem.Value;
+                if (sourceLanguageId != null)
+                {
+                    MyTuple<string, List<MyTuple<string, string>>> sourceAndTargetLenguageInfo = languageChoices[sourceLanguageId];
+
+                    List<MyTuple<string, string>> targetLanguageList = sourceAndTargetLenguageInfo.Item2;
+
+                    foreach (MyTuple<string, string> targetLanguageInfo in targetLanguageList)
+                    {
+                        targetSelectComboBox.Items.Add(new ListItem { Text = targetLanguageInfo.Item2, Value = targetLanguageInfo.Item1 });
+                    }
+                }
+            }
+
+            if (targetSelectComboBox.Items.Count > 0)
+            {
+                targetSelectComboBox.SelectedIndex = 0;
             }
         }
 
@@ -349,6 +458,11 @@ namespace LetsMT.MTProvider
             m_credentialStore.AddCredential(m_translationProvider.Uri, tc);
 
 
+        }
+
+        private void sourceSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillTargetLanguageList();
         }
 
     

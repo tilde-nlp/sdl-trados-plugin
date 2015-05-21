@@ -41,6 +41,8 @@
             this.groupLable = new System.Windows.Forms.Label();
             this.GroupSelectComboBox = new System.Windows.Forms.ComboBox();
             this.BusnesText = new System.Windows.Forms.Label();
+            this.sourceSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.targetSelectComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,9 +50,9 @@
             // 
             this.wndTranslationDirections.FormattingEnabled = true;
             this.wndTranslationDirections.IntegralHeight = false;
-            this.wndTranslationDirections.Location = new System.Drawing.Point(12, 64);
+            this.wndTranslationDirections.Location = new System.Drawing.Point(12, 120);
             this.wndTranslationDirections.Name = "wndTranslationDirections";
-            this.wndTranslationDirections.Size = new System.Drawing.Size(196, 296);
+            this.wndTranslationDirections.Size = new System.Drawing.Size(196, 240);
             this.wndTranslationDirections.Sorted = true;
             this.wndTranslationDirections.TabIndex = 0;
             this.wndTranslationDirections.SelectedValueChanged += new System.EventHandler(this.wndTranslationDirections_SelectedValueChanged);
@@ -60,9 +62,9 @@
             this.wndProfileProperties.CheckOnClick = true;
             this.wndProfileProperties.FormattingEnabled = true;
             this.wndProfileProperties.IntegralHeight = false;
-            this.wndProfileProperties.Location = new System.Drawing.Point(214, 64);
+            this.wndProfileProperties.Location = new System.Drawing.Point(214, 120);
             this.wndProfileProperties.Name = "wndProfileProperties";
-            this.wndProfileProperties.Size = new System.Drawing.Size(371, 184);
+            this.wndProfileProperties.Size = new System.Drawing.Size(371, 128);
             this.wndProfileProperties.Sorted = true;
             this.wndProfileProperties.TabIndex = 1;
             this.wndProfileProperties.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.wndProfileProperties_ItemCheck);
@@ -170,12 +172,31 @@
             this.BusnesText.TabIndex = 15;
             this.BusnesText.Text = "To start translation, please choose a language pair \r\nand a translation system.";
             // 
+            // sourceSelectComboBox
+            // 
+            this.sourceSelectComboBox.FormattingEnabled = true;
+            this.sourceSelectComboBox.Location = new System.Drawing.Point(12, 73);
+            this.sourceSelectComboBox.Name = "sourceSelectComboBox";
+            this.sourceSelectComboBox.Size = new System.Drawing.Size(121, 21);
+            this.sourceSelectComboBox.TabIndex = 16;
+            this.sourceSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.sourceSelectComboBox_SelectedIndexChanged);
+            // 
+            // targetSelectComboBox
+            // 
+            this.targetSelectComboBox.FormattingEnabled = true;
+            this.targetSelectComboBox.Location = new System.Drawing.Point(214, 73);
+            this.targetSelectComboBox.Name = "targetSelectComboBox";
+            this.targetSelectComboBox.Size = new System.Drawing.Size(121, 21);
+            this.targetSelectComboBox.TabIndex = 17;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 399);
+            this.Controls.Add(this.targetSelectComboBox);
+            this.Controls.Add(this.sourceSelectComboBox);
             this.Controls.Add(this.BusnesText);
             this.Controls.Add(this.GroupSelectComboBox);
             this.Controls.Add(this.groupLable);
@@ -216,5 +237,7 @@
         private System.Windows.Forms.Label groupLable;
         private System.Windows.Forms.ComboBox GroupSelectComboBox;
         private System.Windows.Forms.Label BusnesText;
+        private System.Windows.Forms.ComboBox sourceSelectComboBox;
+        private System.Windows.Forms.ComboBox targetSelectComboBox;
     }
 }
