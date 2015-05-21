@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.wndTranslationDirections = new System.Windows.Forms.ListBox();
             this.wndProfileProperties = new System.Windows.Forms.CheckedListBox();
             this.wndDescription = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -43,28 +42,19 @@
             this.BusnesText = new System.Windows.Forms.Label();
             this.sourceSelectComboBox = new System.Windows.Forms.ComboBox();
             this.targetSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.sourceSelectionLabel = new System.Windows.Forms.Label();
+            this.targetSelectionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // wndTranslationDirections
-            // 
-            this.wndTranslationDirections.FormattingEnabled = true;
-            this.wndTranslationDirections.IntegralHeight = false;
-            this.wndTranslationDirections.Location = new System.Drawing.Point(12, 120);
-            this.wndTranslationDirections.Name = "wndTranslationDirections";
-            this.wndTranslationDirections.Size = new System.Drawing.Size(196, 240);
-            this.wndTranslationDirections.Sorted = true;
-            this.wndTranslationDirections.TabIndex = 0;
-            this.wndTranslationDirections.SelectedValueChanged += new System.EventHandler(this.wndTranslationDirections_SelectedValueChanged);
             // 
             // wndProfileProperties
             // 
             this.wndProfileProperties.CheckOnClick = true;
             this.wndProfileProperties.FormattingEnabled = true;
             this.wndProfileProperties.IntegralHeight = false;
-            this.wndProfileProperties.Location = new System.Drawing.Point(214, 120);
+            this.wndProfileProperties.Location = new System.Drawing.Point(12, 100);
             this.wndProfileProperties.Name = "wndProfileProperties";
-            this.wndProfileProperties.Size = new System.Drawing.Size(371, 128);
+            this.wndProfileProperties.Size = new System.Drawing.Size(573, 151);
             this.wndProfileProperties.Sorted = true;
             this.wndProfileProperties.TabIndex = 1;
             this.wndProfileProperties.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.wndProfileProperties_ItemCheck);
@@ -74,11 +64,11 @@
             // 
             this.wndDescription.BackColor = System.Drawing.SystemColors.Control;
             this.wndDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.wndDescription.Location = new System.Drawing.Point(214, 254);
+            this.wndDescription.Location = new System.Drawing.Point(12, 254);
             this.wndDescription.Multiline = true;
             this.wndDescription.Name = "wndDescription";
             this.wndDescription.ReadOnly = true;
-            this.wndDescription.Size = new System.Drawing.Size(371, 106);
+            this.wndDescription.Size = new System.Drawing.Size(573, 106);
             this.wndDescription.TabIndex = 5;
             this.wndDescription.TabStop = false;
             // 
@@ -175,7 +165,7 @@
             // sourceSelectComboBox
             // 
             this.sourceSelectComboBox.FormattingEnabled = true;
-            this.sourceSelectComboBox.Location = new System.Drawing.Point(12, 73);
+            this.sourceSelectComboBox.Location = new System.Drawing.Point(45, 73);
             this.sourceSelectComboBox.Name = "sourceSelectComboBox";
             this.sourceSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.sourceSelectComboBox.TabIndex = 16;
@@ -184,11 +174,29 @@
             // targetSelectComboBox
             // 
             this.targetSelectComboBox.FormattingEnabled = true;
-            this.targetSelectComboBox.Location = new System.Drawing.Point(214, 73);
+            this.targetSelectComboBox.Location = new System.Drawing.Point(209, 73);
             this.targetSelectComboBox.Name = "targetSelectComboBox";
             this.targetSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.targetSelectComboBox.TabIndex = 17;
             this.targetSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.targetSelectComboBox_SelectedIndexChanged);
+            // 
+            // sourceSelectionLabel
+            // 
+            this.sourceSelectionLabel.AutoSize = true;
+            this.sourceSelectionLabel.Location = new System.Drawing.Point(9, 80);
+            this.sourceSelectionLabel.Name = "sourceSelectionLabel";
+            this.sourceSelectionLabel.Size = new System.Drawing.Size(30, 13);
+            this.sourceSelectionLabel.TabIndex = 18;
+            this.sourceSelectionLabel.Text = "From";
+            // 
+            // targetSelectionLabel
+            // 
+            this.targetSelectionLabel.AutoSize = true;
+            this.targetSelectionLabel.Location = new System.Drawing.Point(183, 80);
+            this.targetSelectionLabel.Name = "targetSelectionLabel";
+            this.targetSelectionLabel.Size = new System.Drawing.Size(20, 13);
+            this.targetSelectionLabel.TabIndex = 19;
+            this.targetSelectionLabel.Text = "To";
             // 
             // SettingsForm
             // 
@@ -196,6 +204,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 399);
+            this.Controls.Add(this.targetSelectionLabel);
+            this.Controls.Add(this.sourceSelectionLabel);
             this.Controls.Add(this.targetSelectComboBox);
             this.Controls.Add(this.sourceSelectComboBox);
             this.Controls.Add(this.BusnesText);
@@ -209,7 +219,6 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.wndDescription);
             this.Controls.Add(this.wndProfileProperties);
-            this.Controls.Add(this.wndTranslationDirections);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -226,7 +235,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox wndTranslationDirections;
         private System.Windows.Forms.CheckedListBox wndProfileProperties;
         private System.Windows.Forms.TextBox wndDescription;
         private System.Windows.Forms.Button btnOk;
@@ -240,5 +248,7 @@
         private System.Windows.Forms.Label BusnesText;
         private System.Windows.Forms.ComboBox sourceSelectComboBox;
         private System.Windows.Forms.ComboBox targetSelectComboBox;
+        private System.Windows.Forms.Label sourceSelectionLabel;
+        private System.Windows.Forms.Label targetSelectionLabel;
     }
 }
