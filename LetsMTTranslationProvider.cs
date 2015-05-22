@@ -406,7 +406,7 @@ namespace LetsMT.MTProvider
 
                     if (lineindex < translationProviderState.Length)
                     {
-                        translationProviderState = translationProviderState.Remove(0, lineindex);
+                        translationProviderState = translationProviderState.Remove(0, lineindex + 1);
                     }
                     else
                     {

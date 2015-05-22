@@ -462,11 +462,12 @@ namespace LetsMT.MTProvider
                 if (!bHasSelection && wndProfileProperties.Items.Count > 0)
                     wndProfileProperties.SetSelected(0, true);
             }
-
         }
 
-    
-    
+        private void GetSystemTermCorpora()
+        {
+            LetsMTAPI.TermCorpus[] terms = m_translationProvider.m_service.GetSystemTermCorpora("");
+        }
     }
 
     #region "ListItem helper class"

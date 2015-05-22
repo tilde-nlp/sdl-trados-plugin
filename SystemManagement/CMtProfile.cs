@@ -11,6 +11,10 @@ namespace LetsMT.MTProvider
         private string m_defaultSystem;
         //All systems in this profile
         private List<CMtSystem> m_availableSystems;
+        /// <summary>
+        /// Default term corpora for each system.
+        /// </summary>
+        public Dictionary<string, string> m_defaultTermCorpora { get; set; }
 
 
         public string SourceLanguageId { get; set; }
@@ -49,6 +53,8 @@ namespace LetsMT.MTProvider
             m_defaultSystem = "";
             //Empty list
             m_availableSystems = new List<CMtSystem>();
+
+            m_defaultTermCorpora = new Dictionary<string,string>();
         }
 
         //Returns true if this is the matching profile
@@ -94,6 +100,16 @@ namespace LetsMT.MTProvider
             return m_defaultSystem;
         }
 
+        /// <summary>
+        /// Gets id of the default term corpora for a given system.
+        /// </summary>
+        /// <param name="systemId">Id of the system for which to retrieve the default corpora.</param>
+        /// <returns>Id of the default term corpora or "".</returns>
+        public string GetDefaultTermCorpora(string systemId)
+        {
+            return m_defaultTermCorpora.GetValueOrDefault(systemId, "");
+        }
+
         //Sets default system if system exists
         public void SetDefaultSystem(string strSystem)
         {
@@ -109,6 +125,17 @@ namespace LetsMT.MTProvider
                 {
                     m_defaultSystem = strSystem;
                     break;
+                }
+            }
+        }
+
+        public void SetDefaultTermCorpora(string systemId, string corporaId)
+        {
+            foreach (CMtSystem system in m_availableSystems)
+            {
+                if (system.IsSystem(systemId))
+                {
+                    m_defaultTermCorpora[systemId] = corporaId; // TODO: check if corporaId is valid
                 }
             }
         }

@@ -252,25 +252,61 @@ namespace LetsMT.MTProvider
 
         public string SerializeState()
         {
-            StringBuilder sb = new StringBuilder();
+            List<ProfileInfo> profileInfos = new List<ProfileInfo>();
 
             foreach (CMtProfile profile in m_profileList)
             {
                 string strDefaultSystem = profile.GetDefaultSystem();
-                if (!string.IsNullOrEmpty(strDefaultSystem))
+                Dictionary<string, string> defaultTermCorpora = profile.m_defaultTermCorpora;
+
+                if (!string.IsNullOrEmpty(strDefaultSystem) || defaultTermCorpora.Count > 0)
                 {
-                    sb.AppendFormat("{0}/{1}\n", profile.GetProfileId(), strDefaultSystem);
+                    SerializableDictionary<string, string> serializableDefaultTermCorpora = defaultTermCorpora as SerializableDictionary<string, string>;
+                    profileInfos.Add(new ProfileInfo { ProfileId = profile.GetProfileId(), DefaultSystemId = strDefaultSystem, DefaultTermCorpora = serializableDefaultTermCorpora });
                 }
             }
 
-            return sb.ToString();
+            return profileInfos.SerializeObject();
         }
 
         public void DeserializeState(string state)
         {
             if (string.IsNullOrEmpty(state))
                 return;
+            List<ProfileInfo> profileInfos;
+            try
+            {
+                profileInfos = Utilities.DeserializeObject<List<ProfileInfo>>(state);
+            }
+            catch
+            {
+                return;
+            }
+            foreach (ProfileInfo profileInfo in profileInfos)
+            {
+                if(string.IsNullOrEmpty(profileInfo.ProfileId) ||
+                    (string.IsNullOrEmpty(profileInfo.DefaultSystemId) && profileInfo.DefaultTermCorpora.Count == 0))
+                {
+                    continue;
+                }
 
+                foreach (CMtProfile profile in m_profileList)
+                {
+                    if (profile.IsProfile(profileInfo.ProfileId))
+                    {
+                        profile.SetDefaultSystem(profileInfo.DefaultSystemId);
+                        if (profileInfo.DefaultTermCorpora != null)
+                        {
+                            foreach (KeyValuePair<string, string> defaultCorpora in profileInfo.DefaultTermCorpora)
+                            {
+                                profile.SetDefaultTermCorpora(defaultCorpora.Key, defaultCorpora.Value); //TODO: check the running time of this. Currently each passed systemId is again checked against all available systems
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            /*
             string[] profileStates = state.Split('\n');
             foreach (string profileState in profileStates)
             {
@@ -291,7 +327,17 @@ namespace LetsMT.MTProvider
                         break;
                     }
                 }
-            }
+            }*/
         }
     }
+
+    #region serialization helper class
+    [Serializable]
+    public class ProfileInfo
+    {
+        public string ProfileId { get; set; }
+        public string DefaultSystemId { get; set; }
+        public SerializableDictionary<string, string> DefaultTermCorpora { get; set; }
+    }
+    #endregion
 }
