@@ -44,6 +44,8 @@
             this.targetSelectComboBox = new System.Windows.Forms.ComboBox();
             this.sourceSelectionLabel = new System.Windows.Forms.Label();
             this.targetSelectionLabel = new System.Windows.Forms.Label();
+            this.termCorporaSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.termsSelectionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +66,11 @@
             // 
             this.wndDescription.BackColor = System.Drawing.SystemColors.Control;
             this.wndDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.wndDescription.Location = new System.Drawing.Point(12, 254);
+            this.wndDescription.Location = new System.Drawing.Point(12, 285);
             this.wndDescription.Multiline = true;
             this.wndDescription.Name = "wndDescription";
             this.wndDescription.ReadOnly = true;
-            this.wndDescription.Size = new System.Drawing.Size(573, 106);
+            this.wndDescription.Size = new System.Drawing.Size(573, 72);
             this.wndDescription.TabIndex = 5;
             this.wndDescription.TabStop = false;
             // 
@@ -165,7 +167,7 @@
             // sourceSelectComboBox
             // 
             this.sourceSelectComboBox.FormattingEnabled = true;
-            this.sourceSelectComboBox.Location = new System.Drawing.Point(45, 73);
+            this.sourceSelectComboBox.Location = new System.Drawing.Point(54, 72);
             this.sourceSelectComboBox.Name = "sourceSelectComboBox";
             this.sourceSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.sourceSelectComboBox.TabIndex = 16;
@@ -174,7 +176,7 @@
             // targetSelectComboBox
             // 
             this.targetSelectComboBox.FormattingEnabled = true;
-            this.targetSelectComboBox.Location = new System.Drawing.Point(209, 73);
+            this.targetSelectComboBox.Location = new System.Drawing.Point(219, 72);
             this.targetSelectComboBox.Name = "targetSelectComboBox";
             this.targetSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.targetSelectComboBox.TabIndex = 17;
@@ -192,11 +194,28 @@
             // targetSelectionLabel
             // 
             this.targetSelectionLabel.AutoSize = true;
-            this.targetSelectionLabel.Location = new System.Drawing.Point(183, 80);
+            this.targetSelectionLabel.Location = new System.Drawing.Point(193, 79);
             this.targetSelectionLabel.Name = "targetSelectionLabel";
             this.targetSelectionLabel.Size = new System.Drawing.Size(20, 13);
             this.targetSelectionLabel.TabIndex = 19;
             this.targetSelectionLabel.Text = "To";
+            // 
+            // termCorporaSelectComboBox
+            // 
+            this.termCorporaSelectComboBox.FormattingEnabled = true;
+            this.termCorporaSelectComboBox.Location = new System.Drawing.Point(54, 258);
+            this.termCorporaSelectComboBox.Name = "termCorporaSelectComboBox";
+            this.termCorporaSelectComboBox.Size = new System.Drawing.Size(121, 21);
+            this.termCorporaSelectComboBox.TabIndex = 20;
+            // 
+            // termsSelectionLabel
+            // 
+            this.termsSelectionLabel.AutoSize = true;
+            this.termsSelectionLabel.Location = new System.Drawing.Point(12, 265);
+            this.termsSelectionLabel.Name = "termsSelectionLabel";
+            this.termsSelectionLabel.Size = new System.Drawing.Size(36, 13);
+            this.termsSelectionLabel.TabIndex = 21;
+            this.termsSelectionLabel.Text = "Terms";
             // 
             // SettingsForm
             // 
@@ -204,6 +223,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 399);
+            this.Controls.Add(this.termsSelectionLabel);
+            this.Controls.Add(this.termCorporaSelectComboBox);
             this.Controls.Add(this.targetSelectionLabel);
             this.Controls.Add(this.sourceSelectionLabel);
             this.Controls.Add(this.targetSelectComboBox);
@@ -250,5 +271,7 @@
         private System.Windows.Forms.ComboBox targetSelectComboBox;
         private System.Windows.Forms.Label sourceSelectionLabel;
         private System.Windows.Forms.Label targetSelectionLabel;
+        private System.Windows.Forms.ComboBox termCorporaSelectComboBox;
+        private System.Windows.Forms.Label termsSelectionLabel;
     }
 }
