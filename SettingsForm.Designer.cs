@@ -207,6 +207,7 @@
             this.termCorporaSelectComboBox.Name = "termCorporaSelectComboBox";
             this.termCorporaSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.termCorporaSelectComboBox.TabIndex = 20;
+            this.termCorporaSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.termCorporaSelectComboBox_SelectedIndexChanged);
             // 
             // termsSelectionLabel
             // 

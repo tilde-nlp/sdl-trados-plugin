@@ -250,6 +250,30 @@ namespace LetsMT.MTProvider
             return "";
         }
 
+        public void SetActiveTermCorporaForSystem(string profileId, string systemId, string termsId)
+        {
+            foreach (CMtProfile profile in m_profileList)
+            {
+                if (profile.IsProfile(profileId))
+                {
+                    profile.SetDefaultTermCorpora(systemId, termsId);
+                }
+            }
+        }
+
+        public string GetActiveTermCorporaForSystem(string profileId, string systemId, string termsId)
+        {
+            foreach (CMtProfile profile in m_profileList)
+            {
+                if (profile.IsProfile(profileId))
+                {
+                    return profile.GetDefaultTermCorpora(systemId);
+                }
+            }
+
+            return "";
+        }
+
         public string SerializeState()
         {
             List<ProfileInfo> profileInfos = new List<ProfileInfo>();

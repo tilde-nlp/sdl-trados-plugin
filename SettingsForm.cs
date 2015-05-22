@@ -20,6 +20,10 @@ namespace LetsMT.MTProvider
     {
         private LetsMTTranslationProvider m_translationProvider;
         private Dictionary<string, string> m_checkedState;
+        /// <summary>
+        /// Stores a term corpora id for a given profileId and systemId pair
+        /// </summary>
+        private Dictionary<MyTuple<string, string>, string> m_checkedTerms;
         private LanguagePair[] m_pairs;
         private int m_score;
         //used in group change function
@@ -127,18 +131,18 @@ namespace LetsMT.MTProvider
             targetSelectComboBox.DisplayMember = "Text";
             targetSelectComboBox.ValueMember = "Value";
 
+            termCorporaSelectComboBox.DisplayMember = "Text";
+            termCorporaSelectComboBox.ValueMember = "Value";
+
 
             //fill the system list
             m_pairs = languagePairs;
             m_checkedState = new Dictionary<string, string>();
+            m_checkedTerms = new Dictionary<MyTuple<string, string>, string>();
 
             FillProfileList();
 
             m_trackGoupChange = true;
-            
-
-
-
         }
 
         /// <summary>
@@ -261,6 +265,38 @@ namespace LetsMT.MTProvider
             }
         }
 
+        private void FillTermCorporaList(string profileId, string systemId)
+        {
+            termCorporaSelectComboBox.Items.Clear();
+            termCorporaSelectComboBox.Text = "";
+
+            termCorporaSelectComboBox.Items.Add(new ListItem { Text = "", Value = "" });  // allow to not select a term corpora
+
+            LetsMTAPI.TermCorpus[] termCorpora = m_translationProvider.m_service.GetSystemTermCorpora(systemId); // TODO: should make this async
+
+            if (termCorpora.Length == 0)
+            {
+                termCorporaSelectComboBox.Enabled = false;
+            }
+            else
+            {
+                termCorporaSelectComboBox.Enabled = true;
+                int toSelectIndex = 0;
+                foreach (LetsMTAPI.TermCorpus corpus in termCorpora)
+                {
+                    if (corpus.Status == "Ready" || corpus.Status == "Processing")
+                    {
+                        termCorporaSelectComboBox.Items.Add(new ListItem { Text = corpus.Title, Value = corpus.CorpusId });
+                        if (m_checkedTerms.ContainsKey(MyTuple.Create(profileId, systemId)) && corpus.CorpusId == m_checkedTerms[MyTuple.Create(profileId, systemId)])
+                        {
+                            toSelectIndex = termCorporaSelectComboBox.Items.Count - 1;
+                        }
+                    }
+                }
+                termCorporaSelectComboBox.SelectedIndex = toSelectIndex;
+            }
+        }
+
 
         //On selected system, fill the textbox with systems description etc...
         private void wndProfileProperties_SelectedIndexChanged(object sender, EventArgs e)
@@ -269,9 +305,12 @@ namespace LetsMT.MTProvider
             {
                 ListItem item = wndProfileProperties.SelectedItem as ListItem;
 
-                string valSelected = item.Value.ToString();
+                string systemId = item.Value.ToString();
+                string profileId = getSelectedProfileId();
 
-                wndDescription.Lines = m_translationProvider.m_profileCollection.GetSystemById(valSelected).GetDescription().Split('\n');
+                wndDescription.Lines = m_translationProvider.m_profileCollection.GetSystemById(systemId).GetDescription().Split('\n');
+
+                FillTermCorporaList(profileId, systemId);
             }
         }
 
@@ -309,6 +348,11 @@ namespace LetsMT.MTProvider
             return CMtProfile.GenerateProfileId(sourceLanguageId, targetLanguageId);
         }
 
+        private string getSelectedTermCorporaId()
+        {
+            throw new NotImplementedException();
+        }
+
         private void wndProfileProperties_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int idx = e.Index;
@@ -321,8 +365,8 @@ namespace LetsMT.MTProvider
             }            
 
             //ListItem profile = wndTranslationDirections.SelectedItem as ListItem;
-            string progileId = getSelectedProfileId();
-            if (progileId == null)
+            string profileId = getSelectedProfileId();
+            if (profileId == null)
             {
                 return;
             }
@@ -331,16 +375,16 @@ namespace LetsMT.MTProvider
 
             string strNewValue = (e.NewValue == CheckState.Checked)?item.Value:"";
 
-            if (m_checkedState.ContainsKey(progileId))
-                m_checkedState[progileId] = strNewValue;
+            if (m_checkedState.ContainsKey(profileId))
+                m_checkedState[profileId] = strNewValue;
             else
-                m_checkedState.Add(progileId, strNewValue);            
+                m_checkedState.Add(profileId, strNewValue);            
         }
 
+        // occurs when "Show only running systems" checkbox is checked
         private void wndRunningSystems_CheckedChanged(object sender, EventArgs e)
         {
             FillProfileList();
-
         }
 
 
@@ -420,6 +464,8 @@ namespace LetsMT.MTProvider
 
         private void targetSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            termCorporaSelectComboBox.Items.Clear();
+            termCorporaSelectComboBox.Text = "";
             wndProfileProperties.Items.Clear();
 
             if (sourceSelectComboBox.SelectedIndex != -1 && targetSelectComboBox.SelectedIndex != -1)
@@ -467,6 +513,24 @@ namespace LetsMT.MTProvider
         private void GetSystemTermCorpora()
         {
             LetsMTAPI.TermCorpus[] terms = m_translationProvider.m_service.GetSystemTermCorpora("");
+        }
+
+        private void termCorporaSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (wndProfileProperties.CheckedItems.Count == 0)
+            {
+                return;
+            }
+            ListItem selectedSystemItem = wndProfileProperties.CheckedItems[0] as ListItem;
+            string systemId = selectedSystemItem.Value;
+            string profileId = getSelectedProfileId();
+
+            ListItem selectedTermItem = termCorporaSelectComboBox.SelectedItem as ListItem;
+
+            if (!string.IsNullOrEmpty(selectedTermItem.Value) || m_checkedTerms.ContainsKey(MyTuple.Create(profileId, systemId)))  // allow also to reset chosen term corpora to none if empty string received
+            {
+                m_checkedTerms[MyTuple.Create(profileId, systemId)] = selectedTermItem.Value;
+            }
         }
     }
 
