@@ -306,28 +306,6 @@ namespace LetsMT.MTProvider
                     }
                 }
             }
-            /*
-            string[] profileStates = state.Split('\n');
-            foreach (string profileState in profileStates)
-            {
-                if (string.IsNullOrEmpty(profileState) || (profileState.IndexOf('/') == -1))
-                    continue;
-
-                string[] values = profileState.Split('/');
-                if ((values.Length == 0) ||
-                    string.IsNullOrEmpty(values[0]) ||
-                    string.IsNullOrEmpty(values[1]))
-                    continue;
-
-                foreach (CMtProfile profile in m_profileList)
-                {
-                    if (profile.IsProfile(values[0]))
-                    {
-                        profile.SetDefaultSystem(values[1]);
-                        break;
-                    }
-                }
-            }*/
         }
     }
 

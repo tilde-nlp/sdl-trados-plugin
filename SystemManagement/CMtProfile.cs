@@ -12,7 +12,7 @@ namespace LetsMT.MTProvider
         //All systems in this profile
         private List<CMtSystem> m_availableSystems;
         /// <summary>
-        /// Default term corpora for each system.
+        /// Default term corpora for each system. Shold not be modified modified using <see cref="M:SetDefaultTermCorpora(string, string)"/>.
         /// </summary>
         public Dictionary<string, string> m_defaultTermCorpora { get; set; }
 
