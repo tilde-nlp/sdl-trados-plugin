@@ -265,6 +265,15 @@ namespace LetsMT.MTProvider
             }
         }
 
+        private string getCheckedOrDefaultTermCorporaId(string profileId, string systemId)
+        {
+
+            string previousSessionDefaultTermCorporaId = m_translationProvider.m_profileCollection.GetActiveTermCorporaForSystem(profileId, systemId);
+            string defaultTermCorporaId = m_checkedTerms.GetValueOrDefault(MyTuple.Create(profileId, systemId), previousSessionDefaultTermCorporaId);
+
+            return defaultTermCorporaId;
+        }
+
         private void FillTermCorporaList(string profileId, string systemId)
         {
             termCorporaSelectComboBox.Items.Clear();
@@ -282,12 +291,15 @@ namespace LetsMT.MTProvider
             {
                 termCorporaSelectComboBox.Enabled = true;
                 int toSelectIndex = 0;
+
+                string toSelectTermCorporaId = getCheckedOrDefaultTermCorporaId(profileId, systemId);
+
                 foreach (LetsMTAPI.TermCorpus corpus in termCorpora)
                 {
                     if (corpus.Status == "Ready" || corpus.Status == "Processing")
                     {
                         termCorporaSelectComboBox.Items.Add(new ListItem { Text = corpus.Title, Value = corpus.CorpusId });
-                        if (m_checkedTerms.ContainsKey(MyTuple.Create(profileId, systemId)) && corpus.CorpusId == m_checkedTerms[MyTuple.Create(profileId, systemId)])
+                        if (corpus.CorpusId == toSelectTermCorporaId)
                         {
                             toSelectIndex = termCorporaSelectComboBox.Items.Count - 1;
                         }
@@ -323,6 +335,14 @@ namespace LetsMT.MTProvider
             while (changes.MoveNext())
             {
                 m_translationProvider.m_profileCollection.SetActiveSystemForProfile(changes.Current.Key, changes.Current.Value);
+            }
+
+            Dictionary<MyTuple<string, string>, string>.Enumerator defaultTermSelectionChages = m_checkedTerms.GetEnumerator();
+            while (defaultTermSelectionChages.MoveNext())
+            {
+                m_translationProvider.m_profileCollection.SetActiveTermCorporaForSystem(defaultTermSelectionChages.Current.Key.Item1,
+                    defaultTermSelectionChages.Current.Key.Item2,
+                    defaultTermSelectionChages.Current.Value);
             }
 
             Close();
@@ -527,7 +547,9 @@ namespace LetsMT.MTProvider
 
             ListItem selectedTermItem = termCorporaSelectComboBox.SelectedItem as ListItem;
 
-            if (!string.IsNullOrEmpty(selectedTermItem.Value) || m_checkedTerms.ContainsKey(MyTuple.Create(profileId, systemId)))  // allow also to reset chosen term corpora to none if empty string received
+            string checkedOrDefaultTermCorporaId = getCheckedOrDefaultTermCorporaId(profileId, systemId);
+
+            if (!string.IsNullOrEmpty(selectedTermItem.Value) || !string.IsNullOrEmpty(checkedOrDefaultTermCorporaId))  // allow also to reset chosen term corpora to none if empty string received
             {
                 m_checkedTerms[MyTuple.Create(profileId, systemId)] = selectedTermItem.Value;
             }

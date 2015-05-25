@@ -261,7 +261,7 @@ namespace LetsMT.MTProvider
             }
         }
 
-        public string GetActiveTermCorporaForSystem(string profileId, string systemId, string termsId)
+        public string GetActiveTermCorporaForSystem(string profileId, string systemId)
         {
             foreach (CMtProfile profile in m_profileList)
             {
@@ -285,7 +285,7 @@ namespace LetsMT.MTProvider
 
                 if (!string.IsNullOrEmpty(strDefaultSystem) || defaultTermCorpora.Count > 0)
                 {
-                    SerializableDictionary<string, string> serializableDefaultTermCorpora = defaultTermCorpora as SerializableDictionary<string, string>;
+                    SerializableDictionary<string, string> serializableDefaultTermCorpora = new SerializableDictionary<string, string>(defaultTermCorpora);
                     profileInfos.Add(new ProfileInfo { ProfileId = profile.GetProfileId(), DefaultSystemId = strDefaultSystem, DefaultTermCorpora = serializableDefaultTermCorpora });
                 }
             }
