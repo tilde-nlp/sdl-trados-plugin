@@ -11,6 +11,7 @@ using System.Xml;
 using Sdl.LanguagePlatform.TranslationMemoryApi;
 using System.ServiceModel;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 
 namespace LetsMT.MTProvider
 {
@@ -319,23 +320,9 @@ namespace LetsMT.MTProvider
                     m_translationProvider.m_profileCollection.SetActiveTermCorporaForSystem(profileId, systemId, "");
                 }
 
-                // TODO: figure out how toSelectIndex gets set to -1. Steps to reproduce:
-                // 1. open the settings form for a profile with multiple systems of which some have some term corpora available
-                // 2. switch between them really really fast
-                // (below is a workaround)
-                if (toSelectIndex >= 0 && toSelectIndex < termCorporaSelectComboBox.Items.Count)
-                {
-                    // The above workaround doesn't solve the problem in all instances though. Sometimes an exception is thrown regardlessly.
-                    // Hence, the try/catch workaround:
-                    try
-                    {
-                        termCorporaSelectComboBox.SelectedIndex = toSelectIndex;
-                    }
-                    catch
-                    {
-                        return;
-                    }
-                }
+
+                termCorporaSelectComboBox.SelectedIndex = toSelectIndex;
+
             }
         }
 
@@ -357,12 +344,15 @@ namespace LetsMT.MTProvider
 
                 Func<LetsMTAPI.TermCorpus[]> getTerms = () => m_translationProvider.m_service.GetSystemTermCorpora(systemId);
                 getTerms.BeginInvoke(x =>
-                {
+                { 
                     AsyncResult result = x as AsyncResult;
-                    //Func<LetsMTAPI.TermCorpus[]> getTermsDelegate = result.AsyncDelegate as Func<LetsMTAPI.TermCorpus[]>;
-                    //LetsMTAPI.TermCorpus[] termCorpora = getTermsDelegate.EndInvoke(result);
                     LetsMTAPI.TermCorpus[] termCorpora = getTerms.EndInvoke(result);
-                    FillTermCorporaList(profileId, systemId, termCorpora);
+
+                    // This callback is executed on a ThreadPool thraed. Filling the term corpora list must be done on the UI thread.
+                    this.BeginInvoke(new Action(() =>
+                        {
+                            FillTermCorporaList(profileId, systemId, termCorpora);
+                        }));
                 }, null);
             }
         }
