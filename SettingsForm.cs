@@ -10,6 +10,7 @@ using Sdl.LanguagePlatform.Core;
 using System.Xml;
 using Sdl.LanguagePlatform.TranslationMemoryApi;
 using System.ServiceModel;
+using System.Runtime.Remoting.Messaging;
 
 namespace LetsMT.MTProvider
 {
@@ -274,14 +275,14 @@ namespace LetsMT.MTProvider
             return defaultTermCorporaId;
         }
 
-        private void FillTermCorporaList(string profileId, string systemId)
+        private void FillTermCorporaList(string profileId, string systemId, LetsMTAPI.TermCorpus[] termCorpora)
         {
+            // Clear the comboboxes again. The onclick event that this method is attached to (which also clears the comboboxes) can get fired
+            // two succesive times with no interwineing calls to this method resulting in this method being called twice in a row afterwards.
             termCorporaSelectComboBox.Items.Clear();
             termCorporaSelectComboBox.Text = "";
 
-            termCorporaSelectComboBox.Items.Add(new ListItem { Text = "", Value = "" });  // allow to not select a term corpora
-
-            LetsMTAPI.TermCorpus[] termCorpora = m_translationProvider.m_service.GetSystemTermCorpora(systemId); // TODO: should make this async
+            termCorporaSelectComboBox.Items.Add(new ListItem { Text = "", Value = "" });  // added to allow to not select a term corpora
 
             if (termCorpora.Length == 0)
             {
@@ -335,7 +336,18 @@ namespace LetsMT.MTProvider
 
                 wndDescription.Lines = m_translationProvider.m_profileCollection.GetSystemById(systemId).GetDescription().Split('\n');
 
-                FillTermCorporaList(profileId, systemId);
+                termCorporaSelectComboBox.Items.Clear();
+                termCorporaSelectComboBox.Text = "";
+
+                Func<LetsMTAPI.TermCorpus[]> getTerms = () => m_translationProvider.m_service.GetSystemTermCorpora(systemId);
+                getTerms.BeginInvoke(x =>
+                {
+                    AsyncResult result = x as AsyncResult;
+                    //Func<LetsMTAPI.TermCorpus[]> getTermsDelegate = result.AsyncDelegate as Func<LetsMTAPI.TermCorpus[]>;
+                    //LetsMTAPI.TermCorpus[] termCorpora = getTermsDelegate.EndInvoke(result);
+                    LetsMTAPI.TermCorpus[] termCorpora = getTerms.EndInvoke(result);
+                    FillTermCorporaList(profileId, systemId, termCorpora);
+                }, null);
             }
         }
 
@@ -550,7 +562,7 @@ namespace LetsMT.MTProvider
 
         private void termCorporaSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (wndProfileProperties.CheckedItems.Count == 0)
+            if (wndProfileProperties.CheckedItems.Count == 0 || termCorporaSelectComboBox.SelectedItem == null)
             {
                 return;
             }
