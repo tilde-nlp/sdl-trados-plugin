@@ -261,6 +261,17 @@ namespace LetsMT.MTProvider
             }
         }
 
+        public void SetActiveTermCorporaForSystem(LanguagePair lpProfile, string systemId, string termsId)
+        {
+            foreach (CMtProfile profile in m_profileList)
+            {
+                if (profile.IsProfile(lpProfile))
+                {
+                    profile.SetDefaultTermCorpora(systemId, termsId);
+                }
+            }
+        }
+
         public string GetActiveTermCorporaForSystem(string profileId, string systemId)
         {
             foreach (CMtProfile profile in m_profileList)

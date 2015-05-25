@@ -305,6 +305,19 @@ namespace LetsMT.MTProvider
                         }
                     }
                 }
+
+                // if the previously saved term id isn't available now, forget it
+                if (toSelectIndex == 0 && !string.IsNullOrEmpty(toSelectTermCorporaId))
+                {
+                    MyTuple<string, string> profileAndSystemId = MyTuple.Create(profileId, systemId);
+                    if (m_checkedTerms.ContainsKey(profileAndSystemId))
+                    {
+                        m_checkedTerms.Remove(profileAndSystemId);
+                    }
+
+                    m_translationProvider.m_profileCollection.SetActiveTermCorporaForSystem(profileId, systemId, "");
+                }
+
                 termCorporaSelectComboBox.SelectedIndex = toSelectIndex;
             }
         }

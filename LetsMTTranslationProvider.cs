@@ -248,10 +248,11 @@ namespace LetsMT.MTProvider
                             t.Start();
                             ////close the form if it is open
                         }
-                                                    
-                       
-                            
-                        
+                    }
+                    else if (ex.Message.Contains("code: 41")) // Term corpora id failed validation
+                    {
+                        m_profileCollection.SetActiveTermCorporaForSystem(direction, system, ""); // This doesn't get serialized until the user opens the settings form. If Trados is closed before that the faulty term id is used again on the next run.
+                        return TranslateText(direction, text);
                     }
                     else if    (ex.Message.Contains("code:"))
                     {

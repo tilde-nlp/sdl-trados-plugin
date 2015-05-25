@@ -166,6 +166,7 @@
             // 
             // sourceSelectComboBox
             // 
+            this.sourceSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sourceSelectComboBox.FormattingEnabled = true;
             this.sourceSelectComboBox.Location = new System.Drawing.Point(54, 72);
             this.sourceSelectComboBox.Name = "sourceSelectComboBox";
@@ -175,6 +176,7 @@
             // 
             // targetSelectComboBox
             // 
+            this.targetSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.targetSelectComboBox.FormattingEnabled = true;
             this.targetSelectComboBox.Location = new System.Drawing.Point(219, 72);
             this.targetSelectComboBox.Name = "targetSelectComboBox";
@@ -202,6 +204,7 @@
             // 
             // termCorporaSelectComboBox
             // 
+            this.termCorporaSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.termCorporaSelectComboBox.FormattingEnabled = true;
             this.termCorporaSelectComboBox.Location = new System.Drawing.Point(54, 258);
             this.termCorporaSelectComboBox.Name = "termCorporaSelectComboBox";

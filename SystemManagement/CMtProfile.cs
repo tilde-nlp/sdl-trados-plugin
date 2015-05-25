@@ -135,7 +135,14 @@ namespace LetsMT.MTProvider
             {
                 if (system.IsSystem(systemId))
                 {
-                    m_defaultTermCorpora[systemId] = corporaId; // TODO: check if corporaId is valid
+                    if (string.IsNullOrEmpty(corporaId) && m_defaultTermCorpora.ContainsKey(systemId))
+                    {
+                        m_defaultTermCorpora.Remove(systemId);
+                    }
+                    else
+                    {
+                        m_defaultTermCorpora[systemId] = corporaId;
+                    }
                 }
             }
         }
