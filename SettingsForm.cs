@@ -298,7 +298,7 @@ namespace LetsMT.MTProvider
                 {
                     if (corpus.Status == "Ready" || corpus.Status == "Processing")
                     {
-                        termCorporaSelectComboBox.Items.Add(new ListItem { Text = corpus.Title, Value = corpus.CorpusId });
+                        termCorporaSelectComboBox.Items.Add(new ListItem { Text = string.Format("{0} ({1})", corpus.Title, corpus.Status), Value = corpus.CorpusId });
                         if (corpus.CorpusId == toSelectTermCorporaId)
                         {
                             toSelectIndex = termCorporaSelectComboBox.Items.Count - 1;

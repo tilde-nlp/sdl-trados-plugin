@@ -218,6 +218,7 @@ namespace LetsMT.MTProvider
         public string TranslateText(LanguagePair direction, string text)
         {
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
+            string terms = m_profileCollection.GetActiveTermCorporaForSystem(direction, system);
 
             if (system != "")
             {
@@ -226,7 +227,7 @@ namespace LetsMT.MTProvider
                 {
                     ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10); 
                     //removes control characters  to work around imperfections in the way .NET handles SOAP.
-                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), "client=SDLTradosStudio,version=1.5");
+                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
                 }
                 catch(Exception ex)
                 {
