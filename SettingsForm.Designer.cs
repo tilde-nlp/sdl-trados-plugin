@@ -205,7 +205,7 @@
             this.termCorporaSelectComboBox.FormattingEnabled = true;
             this.termCorporaSelectComboBox.Location = new System.Drawing.Point(54, 258);
             this.termCorporaSelectComboBox.Name = "termCorporaSelectComboBox";
-            this.termCorporaSelectComboBox.Size = new System.Drawing.Size(121, 21);
+            this.termCorporaSelectComboBox.Size = new System.Drawing.Size(203, 21);
             this.termCorporaSelectComboBox.TabIndex = 20;
             this.termCorporaSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.termCorporaSelectComboBox_SelectedIndexChanged);
             // 
