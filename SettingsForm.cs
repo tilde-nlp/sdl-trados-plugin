@@ -319,7 +319,23 @@ namespace LetsMT.MTProvider
                     m_translationProvider.m_profileCollection.SetActiveTermCorporaForSystem(profileId, systemId, "");
                 }
 
-                termCorporaSelectComboBox.SelectedIndex = toSelectIndex;
+                // TODO: figure out how toSelectIndex gets set to -1. Steps to reproduce:
+                // 1. open the settings form for a profile with multiple systems of which some have some term corpora available
+                // 2. switch between them really really fast
+                // (below is a workaround)
+                if (toSelectIndex >= 0 && toSelectIndex < termCorporaSelectComboBox.Items.Count)
+                {
+                    // The above workaround doesn't solve the problem in all instances though. Sometimes an exception is thrown regardlessly.
+                    // Hence, the try/catch workaround:
+                    try
+                    {
+                        termCorporaSelectComboBox.SelectedIndex = toSelectIndex;
+                    }
+                    catch
+                    {
+                        return;
+                    }
+                }
             }
         }
 
