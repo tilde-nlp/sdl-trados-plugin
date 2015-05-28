@@ -5,6 +5,8 @@ using System.Threading;
 using System.Net;
 using System.IO;
 using System.Web;
+using System.Runtime.Remoting.Messaging;
+using System.ComponentModel;
 
 namespace LetsMT.MTProvider
 {
@@ -15,12 +17,14 @@ namespace LetsMT.MTProvider
         private string m_strAppId;
         private string m_strToken;
         private bool m_bRemember;
+        private RunState serverCanceledState;
+        private bool serverRunning = false;
 
         #region "Getters & Setters"
         public string strUsername
         {
-            get { return m_strUsername;  }
-            set { m_strUsername = value;  }
+            get { return m_strUsername; }
+            set { m_strUsername = value; }
         }
 
         public string strPassword
@@ -53,11 +57,13 @@ namespace LetsMT.MTProvider
             InitializeComponent();
 
             DialogResult = DialogResult.Cancel;
+            serverCanceledState = new RunState { Canceled = false };
         }
-               
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            serverCanceledState.Canceled = true;
             Close();
         }
 
@@ -81,16 +87,35 @@ namespace LetsMT.MTProvider
 
         private void authenticateButton_Click(object sender, EventArgs e)
         {
-            m_strToken = GetCodeFromLocalHost();
+            if (serverRunning)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem((x) =>
+            {
+                serverRunning = true;
+                string token = GetCodeFromLocalHost(serverCanceledState);
+                serverRunning = false;
+                if (token != null)
+                {
+                    this.BeginInvoke(new Action(() => afterReceiveToken(token)));
+                }
+            });
+        }
+
+        private void afterReceiveToken(string token)
+        {
+            m_strToken = token;
+            m_bRemember = true;
+            DialogResult = DialogResult.OK;
+
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Normal;
             }
             this.Activate();
-            m_bRemember = true;
-            DialogResult = DialogResult.OK;
             this.Close();
-
         }
 
         private static string GetAuthorizationUrl(string redirectUrl)
@@ -118,7 +143,7 @@ namespace LetsMT.MTProvider
             return string.Format("{0}?returnUrl={1}", letsMTLoginUrl, HttpUtility.UrlEncode(redirectUrl));
         }
 
-        private static string GetCodeFromLocalHost()
+        private static string GetCodeFromLocalHost(RunState state)
         {
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
             string httpTemporaryListenAddresses = string.Format("{0}/Temporary_Listen_Addresses/", resourceManager.GetString("HttpTemporaryListenAddresses"));
@@ -130,14 +155,33 @@ namespace LetsMT.MTProvider
                 string localHostUrl = string.Format(httpTemporaryListenAddresses);
 
                 listener.Prefixes.Add(localHostUrl);
+                if (state != null)
+                {
+                    state.PropertyChanged += (sender, args) =>
+                    {
+                        if (state != null && state.Canceled && listener != null && listener.IsListening)
+                        {
+                            listener.Close();
+                        }
+                    };
+                }
+                
                 listener.Start();
 
                 using (Process.Start(GetAuthorizationUrl(redirectUrl)))
                 {
-                    while (true)
+                    while (!state.Canceled)
                     {
                         var start = DateTime.Now;
-                        var context = listener.GetContext();
+                        HttpListenerContext context;
+                        try
+                        {
+                            context = listener.GetContext();
+                        }
+                        catch
+                        {
+                            break;
+                        }
                         var usedTime = DateTime.Now.Subtract(start);
                         //timeout = timeout.Subtract(usedTime);
 
@@ -173,4 +217,26 @@ namespace LetsMT.MTProvider
 
         private const string CloseWindowResponse = "<!DOCTYPE html><html><head></head><body onload=\"closeThis();\"><h1>Authorization Successfull</h1><p>You can now close this window</p><script type=\"text/javascript\">function closeMe() { window.close(); } function closeThis() { window.close(); }</script></body></html>";
     }
+
+    #region helper class
+    public class RunState : INotifyPropertyChanged
+    {
+        private bool _canceled;
+
+        public bool Canceled
+        {
+            get { return _canceled; }
+            set
+            {
+                _canceled = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Cancel"));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+    #endregion
 }
