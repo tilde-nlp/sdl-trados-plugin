@@ -54,30 +54,6 @@ namespace LetsMT.MTProvider
 
             DialogResult = DialogResult.Cancel;
         }
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-
-          
-            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
-            {
-                m_strUsername = wndUsername.Text.Trim();
-                m_strPassword = wndPassword.Text.Trim();
-                m_bRemember = true;
-                m_strAppId = "";
-
-                DialogResult = DialogResult.OK;
-
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Password and Username fields cannot be empty!", "Empty field");
-            }
-        
-
-
-        }
                
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -85,32 +61,6 @@ namespace LetsMT.MTProvider
             Close();
         }
 
-            private void wndUsername_TextChanged(object sender, EventArgs e)
-        {
-            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
-            {
-
-                btnOk.Enabled = true; 
-            }
-            else
-            {
-                btnOk.Enabled = false;
-            
-            }
-        }
-
-        private void wndPassword_TextChanged(object sender, EventArgs e)
-        {
-            if (!(String.IsNullOrEmpty(wndUsername.Text.Trim())) && !(String.IsNullOrEmpty(wndPassword.Text.Trim())))
-            {
-                btnOk.Enabled = true;
-                
-            }
-            else
-            {
-                btnOk.Enabled = false;
-            }
-        }
 
         private void DemoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
