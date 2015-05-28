@@ -131,13 +131,6 @@ namespace LetsMT.MTProvider
 
         private void authenticateButton_Click(object sender, EventArgs e)
         {
-            /*System.Diagnostics.Process.Start(@"https://localhost:44301/Account/LoginApp");
-            Action scrape = () => scrapeNames(500);
-            scrape.BeginInvoke(x =>
-            {
-                scrape.EndInvoke(x);
-            }, null);*/
-
             m_strToken = GetCodeFromLocalHost();
             if (this.WindowState == FormWindowState.Minimized)
             {
@@ -148,39 +141,6 @@ namespace LetsMT.MTProvider
             DialogResult = DialogResult.OK;
             this.Close();
 
-        }
-
-        private bool scrapeNames(int interval)
-        {
-            bool exit = false;
-            while (!exit)
-            {
-                var windowNames = OpenWindowGetter.GetOpenWindows();
-                foreach (var item in windowNames.Values)
-                {
-                    if (item.StartsWith("token:"))
-                    {
-                        string[] parts = item.Split(' ');
-                        string token = parts[1];
-                        m_strToken = token;
-
-                        this.BeginInvoke(new Action(() =>
-                        {
-                            if (this.WindowState == FormWindowState.Minimized)
-                            {
-                                this.WindowState = FormWindowState.Normal;
-                            }
-                            this.Activate();
-                            this.Close();
-                        }));
-
-                        exit = true;
-                        break;
-                    }
-                }
-                Thread.Sleep(interval);
-            }
-            return true;
         }
 
         private static string GetAuthorizationUrl(string redirectUrl)
