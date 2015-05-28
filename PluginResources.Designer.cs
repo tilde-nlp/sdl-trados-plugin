@@ -61,12 +61,30 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://localhost:45301.
+        /// </summary>
+        public static string HttpTemporaryListenAddresses {
+            get {
+                return ResourceManager.GetString("HttpTemporaryListenAddresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon LetsMT {
             get {
                 object obj = ResourceManager.GetObject("LetsMT", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://localhost:44301/Account/LoginApp.
+        /// </summary>
+        public static string LetsMTLoginUrl {
+            get {
+                return ResourceManager.GetString("LetsMTLoginUrl", resourceCulture);
             }
         }
         

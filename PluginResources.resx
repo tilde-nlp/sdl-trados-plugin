@@ -139,4 +139,10 @@
   <data name="LetsMT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\LetsMT.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="HttpTemporaryListenAddresses" xml:space="preserve">
+    <value>http://localhost:45301</value>
+  </data>
+  <data name="LetsMTLoginUrl" xml:space="preserve">
+    <value>https://localhost:44301/Account/LoginApp</value>
+  </data>
 </root>

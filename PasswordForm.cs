@@ -95,13 +95,15 @@ namespace LetsMT.MTProvider
 
         private static string GetAuthorizationUrl(string redirectUrl)
         {
-            return string.Format("https://localhost:44301/Account/LoginApp?returnUrl={0}", HttpUtility.UrlEncode(redirectUrl));
+            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
+            return string.Format("{0}?returnUrl={1}", resourceManager.GetString("LetsMTLoginUrl"), HttpUtility.UrlEncode(redirectUrl));
         }
 
         private static string GetCodeFromLocalHost()
         {
-            const string httpTemporaryListenAddresses = "http://localhost:45301/Temporary_Listen_Addresses/";
-            const string redirectUrl = "http://localhost:45301/Temporary_Listen_Addresses/";
+            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
+            string httpTemporaryListenAddresses = string.Format("{0}/Temporary_Listen_Addresses/", resourceManager.GetString("HttpTemporaryListenAddresses"));
+            string redirectUrl = httpTemporaryListenAddresses;
 
             string code = null;
             using (var listener = new HttpListener())
@@ -122,7 +124,6 @@ namespace LetsMT.MTProvider
 
                         if (context.Request.Url.AbsolutePath == "/Temporary_Listen_Addresses/")
                         {
-                            //code = context.Request.QueryString["code"];
                             foreach (Cookie cook in context.Request.Cookies)
                             {
                                 if (cook.Name == "smts")
