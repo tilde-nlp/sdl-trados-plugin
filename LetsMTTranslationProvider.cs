@@ -92,17 +92,14 @@ namespace LetsMT.MTProvider
 
             string[] credParams = m_strCredential.Split('\t');
 
-            string strPassword = "";
+            string m_strToken = "";
             m_strAppID = "";
-            m_username = "";
 
             if (credParams.Length > 0)
-                m_username = credParams[0];
+                m_strToken = credParams[0];
             if (credParams.Length > 1)
-                strPassword = credParams[1];
-            if (credParams.Length > 2)
             {
-                m_strAppID = credParams[2];
+                m_strAppID = credParams[1];
             }
 
             //TODO: HACK {
@@ -112,20 +109,20 @@ namespace LetsMT.MTProvider
             //TODO: HACK }
 
             //binding.Security.Transport.
-            if (m_strAppID != "")
-            {
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
-            }
-            else
-            {
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-            }
+            //if (m_strAppID != "")
+            //{
+            //    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
+            //}
+            //else
+            //{
+            //    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            //}
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
             m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
-            //m_service.Ti
 
-            m_service.ClientCredentials.UserName.UserName = m_username;
-            m_service.ClientCredentials.UserName.Password = strPassword;
-
+            string cookie = m_strToken;
+            CookieManagementBehaviour addCookieBehaviour = new CookieManagementBehaviour(cookie);
+            m_service.Endpoint.Behaviors.Add(addCookieBehaviour);
 
             // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
 
@@ -275,7 +272,7 @@ namespace LetsMT.MTProvider
                     }
                     else if (ex.Message.Contains("The HTTP request is unauthorized"))
                     {
-                        throw new Exception("Unrecognized username or password.");
+                        throw new Exception("Unrecognized username or password."); // TODO: open password form to re-authenticate
 
                     }
                     else

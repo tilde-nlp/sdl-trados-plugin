@@ -93,6 +93,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="WindowsBase" />
@@ -106,6 +107,8 @@
     <Compile Include="Advanced_options.Designer.cs">
       <DependentUpon>Advanced_options.cs</DependentUpon>
     </Compile>
+    <Compile Include="CookieManagementBehaviour.cs" />
+    <Compile Include="CookieManagerMessageInspector.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="LimitationForm.cs">
       <SubType>Form</SubType>
@@ -114,6 +117,7 @@
       <DependentUpon>LimitationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MyTuple.cs" />
+    <Compile Include="OpenWindowGetter.cs" />
     <Compile Include="RetryWarningForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +245,7 @@
   <ItemGroup>
     <EmbeddedResource Include="PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="RetryWarningForm.resx">
       <DependentUpon>RetryWarningForm.cs</DependentUpon>

@@ -12,6 +12,7 @@ using Sdl.LanguagePlatform.TranslationMemoryApi;
 using System.ServiceModel;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
+using System.ServiceModel.Description;
 
 namespace LetsMT.MTProvider
 {
@@ -454,10 +455,12 @@ namespace LetsMT.MTProvider
            // MessageBox.Show("not implemented yet!" + group);
              
             string username = "";
-            string password = "";
+            string token = "";
                 
 				username = group + "\\" + m_username;
-                password = m_translationProvider.m_service.ClientCredentials.UserName.Password;
+
+                IEndpointBehavior serviceCookieManager = m_translationProvider.m_service.Endpoint.Behaviors[typeof(CookieManagementBehaviour)]; // TODO: check if for some reason empty
+                token = (serviceCookieManager as CookieManagementBehaviour).Cookie;
 
                 m_translationProvider.m_username = username;
 				
@@ -488,12 +491,11 @@ namespace LetsMT.MTProvider
                 binding.MaxReceivedMessageSize = int.MaxValue;
 
 
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
 				
                 m_translationProvider.m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
+                m_translationProvider.m_service.Endpoint.Behaviors.Add(serviceCookieManager);
 
-                m_translationProvider.m_service.ClientCredentials.UserName.UserName = username;
-                m_translationProvider.m_service.ClientCredentials.UserName.Password = password;
                 m_translationProvider.m_profileCollection = null;
                 m_translationProvider.DownloadProfileList(true);
                 m_checkedState = new Dictionary<string, string>();
@@ -502,7 +504,7 @@ namespace LetsMT.MTProvider
             FillProfileList();
                 
             //save the cerdentials
-            TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}\t{2}", username, password, m_translationProvider.m_strAppID), true);
+            TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}", token, m_translationProvider.m_strAppID), true);
             m_credentialStore.AddCredential(m_translationProvider.Uri, tc);
 
 

@@ -43,7 +43,7 @@ namespace LetsMT.MTProvider
             {
            
                 //TODO: check how to minimize the amount odfsystem list calls
-                string credentials = string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId);
+                string credentials = string.Format("{0}\t{1}", pf.strToken, pf.strAppId);
 
                 TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
                 //ad a new uri to handle multiple plugins and users
@@ -52,14 +52,14 @@ namespace LetsMT.MTProvider
                 Uri letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
                 
                 TranslationProviderCredential credentialData = credentialStore.GetCredential(letsmtUri);
-               while (credentialData != null)
+                while (credentialData != null)
                 {
                     letsmtNum++;
                     letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
                     credentialData = credentialStore.GetCredential(letsmtUri);
                 }
 
-               credentialStore.AddCredential(letsmtUri, tc);
+                credentialStore.AddCredential(letsmtUri, tc);
 
                 LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, letsmtUri,85);// (dialog.Options);
 
@@ -132,7 +132,8 @@ namespace LetsMT.MTProvider
 
             if (pf.ShowDialog(owner) == DialogResult.OK)
             {
-                TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId), pf.bRemember);
+                //TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}\t{2}", pf.strUsername, pf.strPassword,pf.strAppId), pf.bRemember);
+                TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}", pf.strToken, pf.strAppId), pf.bRemember);
 
                 credentialStore.AddCredential(translationProviderUri, tc);
 

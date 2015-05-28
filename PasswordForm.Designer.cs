@@ -40,6 +40,7 @@
             this.DemoLink = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.authenticateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,12 +133,23 @@
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
+            // authenticateButton
+            // 
+            this.authenticateButton.Location = new System.Drawing.Point(15, 51);
+            this.authenticateButton.Name = "authenticateButton";
+            this.authenticateButton.Size = new System.Drawing.Size(75, 23);
+            this.authenticateButton.TabIndex = 12;
+            this.authenticateButton.Text = "Authenticate";
+            this.authenticateButton.UseVisualStyleBackColor = true;
+            this.authenticateButton.Click += new System.EventHandler(this.authenticateButton_Click);
+            // 
             // PasswordForm
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 194);
+            this.Controls.Add(this.authenticateButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.DemoLink);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.LinkLabel DemoLink;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button authenticateButton;
     }
 }
