@@ -143,6 +143,6 @@
     <value>http://localhost:45301</value>
   </data>
   <data name="LetsMTLoginUrl" xml:space="preserve">
-    <value>https://localhost:44301/Account/LoginApp</value>
+    <value>https://readymtdevlogic.tilde.lv/Account/LoginApp</value>
   </data>
 </root>

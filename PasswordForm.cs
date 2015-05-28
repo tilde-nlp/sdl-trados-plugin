@@ -96,7 +96,26 @@ namespace LetsMT.MTProvider
         private static string GetAuthorizationUrl(string redirectUrl)
         {
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-            return string.Format("{0}?returnUrl={1}", resourceManager.GetString("LetsMTLoginUrl"), HttpUtility.UrlEncode(redirectUrl));
+            string letsMTLoginUrl = resourceManager.GetString("LetsMTLoginUrl");
+
+            //try to read Software\\Tilde\\LetsMT\\loginUrl registry string entry and it it exists replace the link
+            try
+            {
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
+                if (key != null)
+                {
+                    string RegUrl = key.GetValue("loginUrl", "none").ToString();
+                    if (RegUrl.Length > 3)
+                    {
+                        if (RegUrl.Substring(0, 4) == "http") { letsMTLoginUrl = RegUrl; }
+                    }
+                }
+
+            }
+            catch (Exception) { }
+
+            return string.Format("{0}?returnUrl={1}", letsMTLoginUrl, HttpUtility.UrlEncode(redirectUrl));
         }
 
         private static string GetCodeFromLocalHost()

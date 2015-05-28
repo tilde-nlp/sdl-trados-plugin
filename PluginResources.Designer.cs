@@ -80,7 +80,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://localhost:44301/Account/LoginApp.
+        ///   Looks up a localized string similar to https://readymtdevlogic.tilde.lv/Account/LoginApp.
         /// </summary>
         public static string LetsMTLoginUrl {
             get {
