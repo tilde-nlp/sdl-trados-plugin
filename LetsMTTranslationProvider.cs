@@ -272,8 +272,8 @@ namespace LetsMT.MTProvider
                     }
                     else if (ex.Message.Contains("The HTTP request is unauthorized"))
                     {
-                        throw new Exception("Unrecognized username or password."); // TODO: open password form to re-authenticate
-
+                        // throw new Exception("Unrecognized username or password.");
+                        throw new TranslationProviderAuthenticationException();
                     }
                     else
                     {
@@ -372,7 +372,23 @@ namespace LetsMT.MTProvider
 
             //LetsMTWebService.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null);
             ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 1, 0);
-            LetsMTAPI.MTSystem[] mtList = m_service.GetSystemList(m_strAppID, null, null).System;
+            LetsMTAPI.MTSystem[] mtList = null;
+            try
+            {
+                mtList = m_service.GetSystemList(m_strAppID, null, null).System;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("The HTTP request is unauthorized"))
+                {
+                    throw new TranslationProviderAuthenticationException();
+                }
+                else
+                {
+                    throw new Exception("Could not connect to translation provider.");
+                }
+
+            }
             m_profileCollection = new CMtProfileCollection(mtList);
 
             if (state != null)
