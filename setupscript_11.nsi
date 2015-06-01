@@ -31,7 +31,7 @@ section
 setOutPath $INSTDIR
  
 # specify file to go in output path
-file "C:\Users\karlis.gedins\Documents\Visual Studio 2010\Projects\LetsMT!\SDLTradosPlugin\LetsMT.MTProvider.sdlplugin"
+file "C:\Users\rihards.krislauks\Documents\Visual Studio 2013\Projects\LetsMT\SDLTradosPlugin\LetsMT.MTProvider.sdlplugin"
  
 # define uninstaller name
 writeUninstaller $INSTDIR\uninstaller.exe
