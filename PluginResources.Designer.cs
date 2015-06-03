@@ -108,6 +108,16 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap MT_logo {
+            get {
+                object obj = ResourceManager.GetObject("MT_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A machine translation provider plug-in for performing translation with the LetsMT! platform..
         /// </summary>
         public static string Plugin_Description {

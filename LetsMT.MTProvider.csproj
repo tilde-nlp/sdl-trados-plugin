@@ -165,6 +165,7 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\MT_logo.png" />
     <None Include="Resources\LetsMT_logo.png" />
     <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

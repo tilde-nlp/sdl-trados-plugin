@@ -45,7 +45,10 @@
             this.termsSelectionLabel = new System.Windows.Forms.Label();
             this.GroupLabel = new System.Windows.Forms.Label();
             this.logOutLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // wndProfileProperties
@@ -53,9 +56,9 @@
             this.wndProfileProperties.CheckOnClick = true;
             this.wndProfileProperties.FormattingEnabled = true;
             this.wndProfileProperties.IntegralHeight = false;
-            this.wndProfileProperties.Location = new System.Drawing.Point(12, 100);
+            this.wndProfileProperties.Location = new System.Drawing.Point(12, 113);
             this.wndProfileProperties.Name = "wndProfileProperties";
-            this.wndProfileProperties.Size = new System.Drawing.Size(573, 151);
+            this.wndProfileProperties.Size = new System.Drawing.Size(573, 136);
             this.wndProfileProperties.Sorted = true;
             this.wndProfileProperties.TabIndex = 1;
             this.wndProfileProperties.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.wndProfileProperties_ItemCheck);
@@ -69,14 +72,14 @@
             this.wndDescription.Multiline = true;
             this.wndDescription.Name = "wndDescription";
             this.wndDescription.ReadOnly = true;
-            this.wndDescription.Size = new System.Drawing.Size(573, 72);
+            this.wndDescription.Size = new System.Drawing.Size(573, 63);
             this.wndDescription.TabIndex = 5;
             this.wndDescription.TabStop = false;
             // 
             // btnOk
             // 
             this.btnOk.Enabled = false;
-            this.btnOk.Location = new System.Drawing.Point(429, 366);
+            this.btnOk.Location = new System.Drawing.Point(429, 388);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -86,7 +89,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(510, 366);
+            this.btnCancel.Location = new System.Drawing.Point(510, 388);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -99,7 +102,7 @@
             this.wndRunningSystems.AutoSize = true;
             this.wndRunningSystems.Checked = true;
             this.wndRunningSystems.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.wndRunningSystems.Location = new System.Drawing.Point(89, 370);
+            this.wndRunningSystems.Location = new System.Drawing.Point(93, 358);
             this.wndRunningSystems.Name = "wndRunningSystems";
             this.wndRunningSystems.Size = new System.Drawing.Size(160, 17);
             this.wndRunningSystems.TabIndex = 2;
@@ -109,7 +112,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 366);
+            this.button1.Location = new System.Drawing.Point(12, 354);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 11;
@@ -120,16 +123,16 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.LetsMT_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(78, 392);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(71, 24);
+            this.pictureBox1.Size = new System.Drawing.Size(57, 19);
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
             // BusnesText
             // 
             this.BusnesText.AutoSize = true;
-            this.BusnesText.Location = new System.Drawing.Point(9, 32);
+            this.BusnesText.Location = new System.Drawing.Point(9, 45);
             this.BusnesText.Name = "BusnesText";
             this.BusnesText.Size = new System.Drawing.Size(248, 26);
             this.BusnesText.TabIndex = 15;
@@ -139,7 +142,7 @@
             // 
             this.sourceSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sourceSelectComboBox.FormattingEnabled = true;
-            this.sourceSelectComboBox.Location = new System.Drawing.Point(54, 72);
+            this.sourceSelectComboBox.Location = new System.Drawing.Point(45, 85);
             this.sourceSelectComboBox.Name = "sourceSelectComboBox";
             this.sourceSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.sourceSelectComboBox.TabIndex = 16;
@@ -149,7 +152,7 @@
             // 
             this.targetSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.targetSelectComboBox.FormattingEnabled = true;
-            this.targetSelectComboBox.Location = new System.Drawing.Point(219, 72);
+            this.targetSelectComboBox.Location = new System.Drawing.Point(219, 85);
             this.targetSelectComboBox.Name = "targetSelectComboBox";
             this.targetSelectComboBox.Size = new System.Drawing.Size(121, 21);
             this.targetSelectComboBox.TabIndex = 17;
@@ -158,7 +161,7 @@
             // sourceSelectionLabel
             // 
             this.sourceSelectionLabel.AutoSize = true;
-            this.sourceSelectionLabel.Location = new System.Drawing.Point(9, 80);
+            this.sourceSelectionLabel.Location = new System.Drawing.Point(9, 92);
             this.sourceSelectionLabel.Name = "sourceSelectionLabel";
             this.sourceSelectionLabel.Size = new System.Drawing.Size(30, 13);
             this.sourceSelectionLabel.TabIndex = 18;
@@ -167,7 +170,7 @@
             // targetSelectionLabel
             // 
             this.targetSelectionLabel.AutoSize = true;
-            this.targetSelectionLabel.Location = new System.Drawing.Point(193, 79);
+            this.targetSelectionLabel.Location = new System.Drawing.Point(193, 92);
             this.targetSelectionLabel.Name = "targetSelectionLabel";
             this.targetSelectionLabel.Size = new System.Drawing.Size(20, 13);
             this.targetSelectionLabel.TabIndex = 19;
@@ -196,7 +199,7 @@
             // 
             this.GroupLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupLabel.AutoEllipsis = true;
-            this.GroupLabel.Location = new System.Drawing.Point(339, 16);
+            this.GroupLabel.Location = new System.Drawing.Point(339, 29);
             this.GroupLabel.Name = "GroupLabel";
             this.GroupLabel.Size = new System.Drawing.Size(246, 13);
             this.GroupLabel.TabIndex = 22;
@@ -207,7 +210,7 @@
             // 
             this.logOutLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.logOutLinkLabel.AutoSize = true;
-            this.logOutLinkLabel.Location = new System.Drawing.Point(542, 32);
+            this.logOutLinkLabel.Location = new System.Drawing.Point(542, 45);
             this.logOutLinkLabel.Name = "logOutLinkLabel";
             this.logOutLinkLabel.Size = new System.Drawing.Size(43, 13);
             this.logOutLinkLabel.TabIndex = 23;
@@ -215,12 +218,33 @@
             this.logOutLinkLabel.Text = "Log out";
             this.logOutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logOutLinkLabel_LinkClicked);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.label1.Location = new System.Drawing.Point(12, 394);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 12);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Powered by";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::LetsMT.MTProvider.PluginResources.MT_logo;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(133, 37);
+            this.pictureBox2.TabIndex = 25;
+            this.pictureBox2.TabStop = false;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(597, 399);
+            this.ClientSize = new System.Drawing.Size(597, 423);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.logOutLinkLabel);
             this.Controls.Add(this.GroupLabel);
             this.Controls.Add(this.termsSelectionLabel);
@@ -246,6 +270,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SettingsForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,5 +294,7 @@
         private System.Windows.Forms.Label termsSelectionLabel;
         private System.Windows.Forms.Label GroupLabel;
         private System.Windows.Forms.LinkLabel logOutLinkLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
