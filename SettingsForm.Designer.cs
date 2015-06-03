@@ -44,6 +44,7 @@
             this.termCorporaSelectComboBox = new System.Windows.Forms.ComboBox();
             this.termsSelectionLabel = new System.Windows.Forms.Label();
             this.GroupLabel = new System.Windows.Forms.Label();
+            this.logOutLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -194,12 +195,25 @@
             // GroupLabel
             // 
             this.GroupLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GroupLabel.AutoSize = true;
-            this.GroupLabel.Location = new System.Drawing.Point(486, 16);
+            this.GroupLabel.AutoEllipsis = true;
+            this.GroupLabel.Location = new System.Drawing.Point(339, 16);
             this.GroupLabel.Name = "GroupLabel";
-            this.GroupLabel.Size = new System.Drawing.Size(99, 13);
+            this.GroupLabel.Size = new System.Drawing.Size(246, 13);
             this.GroupLabel.TabIndex = 22;
             this.GroupLabel.Text = "Group: GroupName";
+            this.GroupLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // logOutLinkLabel
+            // 
+            this.logOutLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.logOutLinkLabel.AutoSize = true;
+            this.logOutLinkLabel.Location = new System.Drawing.Point(542, 32);
+            this.logOutLinkLabel.Name = "logOutLinkLabel";
+            this.logOutLinkLabel.Size = new System.Drawing.Size(43, 13);
+            this.logOutLinkLabel.TabIndex = 23;
+            this.logOutLinkLabel.TabStop = true;
+            this.logOutLinkLabel.Text = "Log out";
+            this.logOutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logOutLinkLabel_LinkClicked);
             // 
             // SettingsForm
             // 
@@ -207,6 +221,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 399);
+            this.Controls.Add(this.logOutLinkLabel);
             this.Controls.Add(this.GroupLabel);
             this.Controls.Add(this.termsSelectionLabel);
             this.Controls.Add(this.termCorporaSelectComboBox);
@@ -253,5 +268,6 @@
         private System.Windows.Forms.ComboBox termCorporaSelectComboBox;
         private System.Windows.Forms.Label termsSelectionLabel;
         private System.Windows.Forms.Label GroupLabel;
+        private System.Windows.Forms.LinkLabel logOutLinkLabel;
     }
 }

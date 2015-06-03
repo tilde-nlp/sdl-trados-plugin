@@ -488,6 +488,14 @@ namespace LetsMT.MTProvider
                 m_checkedTerms[MyTuple.Create(profileId, systemId)] = selectedTermItem.Value;
             }
         }
+
+        private void logOutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+            m_credentialStore.RemoveCredential(m_translationProvider.Uri);
+            //throw new TranslationProviderAuthenticationException(); // TODO: remove user credentials from credentialstore?
+        }
     }
 
     #region "ListItem helper class"
