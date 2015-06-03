@@ -36,6 +36,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.authenticateButton = new System.Windows.Forms.Button();
+            this.apiUserIdTextBox = new System.Windows.Forms.TextBox();
+            this.goButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +92,30 @@
             this.authenticateButton.UseVisualStyleBackColor = true;
             this.authenticateButton.Click += new System.EventHandler(this.authenticateButton_Click);
             // 
+            // apiUserIdTextBox
+            // 
+            this.apiUserIdTextBox.Location = new System.Drawing.Point(95, 109);
+            this.apiUserIdTextBox.Name = "apiUserIdTextBox";
+            this.apiUserIdTextBox.Size = new System.Drawing.Size(187, 20);
+            this.apiUserIdTextBox.TabIndex = 13;
+            // 
+            // goButton
+            // 
+            this.goButton.Location = new System.Drawing.Point(292, 109);
+            this.goButton.Name = "goButton";
+            this.goButton.Size = new System.Drawing.Size(71, 23);
+            this.goButton.TabIndex = 14;
+            this.goButton.Text = "Go";
+            this.goButton.UseVisualStyleBackColor = true;
+            this.goButton.Click += new System.EventHandler(this.goButton_Click);
+            // 
             // PasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 194);
+            this.Controls.Add(this.goButton);
+            this.Controls.Add(this.apiUserIdTextBox);
             this.Controls.Add(this.authenticateButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
@@ -122,5 +143,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button authenticateButton;
+        private System.Windows.Forms.TextBox apiUserIdTextBox;
+        private System.Windows.Forms.Button goButton;
     }
 }

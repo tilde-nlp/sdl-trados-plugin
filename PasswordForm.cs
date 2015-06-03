@@ -106,16 +106,13 @@ namespace LetsMT.MTProvider
 
         private void afterReceiveToken(string token)
         {
-            m_strToken = token;
-            m_bRemember = true;
-            DialogResult = DialogResult.OK;
+            this.apiUserIdTextBox.Text = token;
 
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Normal;
             }
             this.Activate();
-            this.Close();
         }
 
         private static string GetAuthorizationUrl(string redirectUrl)
@@ -216,6 +213,20 @@ namespace LetsMT.MTProvider
         }
 
         private const string CloseWindowResponse = "<!DOCTYPE html><html><head></head><body onload=\"closeThis();\"><h1>Authorization Successfull</h1><p>You can now close this window</p><script type=\"text/javascript\">function closeMe() { window.close(); } function closeThis() { window.close(); }</script></body></html>";
+
+        private void goButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(apiUserIdTextBox.Text))
+            {
+                return;
+            }
+            // stop listening if user hasnt finished authentication procedure and has entered the userId manually
+            serverCanceledState.Canceled = true;
+            m_strToken = apiUserIdTextBox.Text;
+            m_bRemember = true;
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 
     #region helper class
