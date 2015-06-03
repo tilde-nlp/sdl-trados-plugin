@@ -34,11 +34,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.wndRunningSystems = new System.Windows.Forms.CheckBox();
-            this.UsernameLable = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupLable = new System.Windows.Forms.Label();
-            this.GroupSelectComboBox = new System.Windows.Forms.ComboBox();
             this.BusnesText = new System.Windows.Forms.Label();
             this.sourceSelectComboBox = new System.Windows.Forms.ComboBox();
             this.targetSelectComboBox = new System.Windows.Forms.ComboBox();
@@ -46,6 +43,7 @@
             this.targetSelectionLabel = new System.Windows.Forms.Label();
             this.termCorporaSelectComboBox = new System.Windows.Forms.ComboBox();
             this.termsSelectionLabel = new System.Windows.Forms.Label();
+            this.GroupLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,16 +106,6 @@
             this.wndRunningSystems.UseVisualStyleBackColor = true;
             this.wndRunningSystems.CheckedChanged += new System.EventHandler(this.wndRunningSystems_CheckedChanged);
             // 
-            // UsernameLable
-            // 
-            this.UsernameLable.Location = new System.Drawing.Point(290, 13);
-            this.UsernameLable.Name = "UsernameLable";
-            this.UsernameLable.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.UsernameLable.Size = new System.Drawing.Size(295, 16);
-            this.UsernameLable.TabIndex = 6;
-            this.UsernameLable.Text = "Logged in as: User";
-            this.UsernameLable.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(8, 366);
@@ -136,24 +124,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(71, 24);
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
-            // 
-            // groupLable
-            // 
-            this.groupLable.AutoSize = true;
-            this.groupLable.Location = new System.Drawing.Point(426, 40);
-            this.groupLable.Name = "groupLable";
-            this.groupLable.Size = new System.Drawing.Size(39, 13);
-            this.groupLable.TabIndex = 13;
-            this.groupLable.Text = "Group:";
-            // 
-            // GroupSelectComboBox
-            // 
-            this.GroupSelectComboBox.FormattingEnabled = true;
-            this.GroupSelectComboBox.Location = new System.Drawing.Point(468, 37);
-            this.GroupSelectComboBox.Name = "GroupSelectComboBox";
-            this.GroupSelectComboBox.Size = new System.Drawing.Size(117, 21);
-            this.GroupSelectComboBox.TabIndex = 14;
-            this.GroupSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
             // 
             // BusnesText
             // 
@@ -221,12 +191,23 @@
             this.termsSelectionLabel.TabIndex = 21;
             this.termsSelectionLabel.Text = "Terms";
             // 
+            // GroupLabel
+            // 
+            this.GroupLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupLabel.AutoSize = true;
+            this.GroupLabel.Location = new System.Drawing.Point(486, 16);
+            this.GroupLabel.Name = "GroupLabel";
+            this.GroupLabel.Size = new System.Drawing.Size(99, 13);
+            this.GroupLabel.TabIndex = 22;
+            this.GroupLabel.Text = "Group: GroupName";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 399);
+            this.Controls.Add(this.GroupLabel);
             this.Controls.Add(this.termsSelectionLabel);
             this.Controls.Add(this.termCorporaSelectComboBox);
             this.Controls.Add(this.targetSelectionLabel);
@@ -234,11 +215,8 @@
             this.Controls.Add(this.targetSelectComboBox);
             this.Controls.Add(this.sourceSelectComboBox);
             this.Controls.Add(this.BusnesText);
-            this.Controls.Add(this.GroupSelectComboBox);
-            this.Controls.Add(this.groupLable);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.UsernameLable);
             this.Controls.Add(this.wndRunningSystems);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -265,11 +243,8 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox wndRunningSystems;
-        private System.Windows.Forms.Label UsernameLable;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label groupLable;
-        private System.Windows.Forms.ComboBox GroupSelectComboBox;
         private System.Windows.Forms.Label BusnesText;
         private System.Windows.Forms.ComboBox sourceSelectComboBox;
         private System.Windows.Forms.ComboBox targetSelectComboBox;
@@ -277,5 +252,6 @@
         private System.Windows.Forms.Label targetSelectionLabel;
         private System.Windows.Forms.ComboBox termCorporaSelectComboBox;
         private System.Windows.Forms.Label termsSelectionLabel;
+        private System.Windows.Forms.Label GroupLabel;
     }
 }

@@ -62,7 +62,6 @@ namespace LetsMT.MTProvider
             InitializeComponent();
 
             m_translationProvider = editProvider;
-            string WelcomeName = m_translationProvider.m_username;
 
             LetsMTAPI.UserData userData = m_translationProvider.m_service.GetUserInfo("");
 
@@ -78,7 +77,6 @@ namespace LetsMT.MTProvider
 
 
 
-
             // get teh username whitout group
             string activeGroup = "";
             string userDataActiveGroup = userData.activeGroup;
@@ -89,41 +87,8 @@ namespace LetsMT.MTProvider
 
             m_activeGroup = activeGroup;
 
-            //Get the user friendly name for welcome lable
-            string userDataName = userData.name;
-            string userDataSurname = userData.surname;
-            if (!string.IsNullOrEmpty(userDataName))
-            {
-                WelcomeName = userDataName;
-            }
-            if (!string.IsNullOrEmpty(userDataSurname))
-            {
-                WelcomeName = WelcomeName + " " + userDataSurname;
-            }
-
-
-            List<UserGroup> GoupList = new List<UserGroup>();
-
-            foreach (LetsMTAPI.UserGroup group in userData.userGroups)
-            {
-                GoupList.Add(new UserGroup() { Name = group.name, Value = group.id });
-
-            }
-            this.GroupSelectComboBox.DataSource = GoupList;
-            this.GroupSelectComboBox.DisplayMember = "Name";
-            this.GroupSelectComboBox.ValueMember = "Value";
-            this.GroupSelectComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            //select teh active group
-           
-            this.GroupSelectComboBox.SelectedValue = m_activeGroup;
-            // int selectIndex = GroupSelectComboBox.Items.IndexOf(m_activeGroup);
-            //if (selectIndex != -1)
-            //{
-            //    this.GroupSelectComboBox.SelectedIndex = selectIndex;
-            //}
-            
-
-            UsernameLable.Text = "Welcome, " + WelcomeName + "!";
+            // since we use UserIds for logging in we should have had received only one group
+            this.GroupLabel.Text = "Group: " + userData.userGroups[0].name;
 
             wndProfileProperties.DisplayMember = "text";
             wndProfileProperties.ValueMember = "value";
@@ -444,70 +409,6 @@ namespace LetsMT.MTProvider
         {
             Advanced_options advanced = new Advanced_options(ref m_translationProvider);
             advanced.ShowDialog(this);
-        }
-
-        private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!(m_trackGoupChange)) { return; }
-            string group = GroupSelectComboBox.SelectedValue.ToString();
-
-            //TODO implement this
-           // MessageBox.Show("not implemented yet!" + group);
-             
-            string username = "";
-            string token = "";
-                
-				username = group + "\\" + m_username;
-
-                IEndpointBehavior serviceHeaderManager = m_translationProvider.m_service.Endpoint.Behaviors[typeof(InspectorBehaviour)]; // TODO: check if for some reason empty
-                token = ((serviceHeaderManager as InspectorBehaviour).Inspector as HeaderManagerMessageInspector).Value;
-
-                m_translationProvider.m_username = username;
-				
-                global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-                // create Web Service client
-                string url = resourceManager.GetString("LetsMTWebServiceUrl");
-                
-                try
-                {
-                    Microsoft.Win32.RegistryKey key;
-                    key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\\Tilde\\LetsMT");
-                    if (key != null)
-                    {
-                        string RegUrl = key.GetValue("url", "none").ToString();
-                        if (RegUrl.Length > 3)
-                        {
-                            if (RegUrl.Substring(0, 4) == "http") { url = RegUrl; }
-                        }
-                    }
-
-                }
-                catch (Exception) { }
-
-                EndpointAddress endpoint = new EndpointAddress(url);
-
-                BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-                binding.MaxBufferSize = int.MaxValue;
-                binding.MaxReceivedMessageSize = int.MaxValue;
-
-
-                binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
-				
-                m_translationProvider.m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
-                m_translationProvider.m_service.Endpoint.Behaviors.Add(serviceHeaderManager);
-
-                m_translationProvider.m_profileCollection = null;
-                m_translationProvider.DownloadProfileList(true);
-                m_checkedState = new Dictionary<string, string>();
-
-            //filee the new system list    
-            FillProfileList();
-                
-            //save the cerdentials
-            TranslationProviderCredential tc = new TranslationProviderCredential(string.Format("{0}\t{1}", token, m_translationProvider.m_strAppID), true);
-            m_credentialStore.AddCredential(m_translationProvider.Uri, tc);
-
-
         }
 
         private void sourceSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
