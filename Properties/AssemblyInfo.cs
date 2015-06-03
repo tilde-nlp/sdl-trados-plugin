@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("MT Provider Plugin for SDL Trados 2009")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tilde, SIA")]
-[assembly: AssemblyProduct("LetsMT!")]
+[assembly: AssemblyProduct("LetsMT")]
 [assembly: AssemblyCopyright("Copyright © Tilde, SIA 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
