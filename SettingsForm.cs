@@ -459,8 +459,8 @@ namespace LetsMT.MTProvider
                 
 				username = group + "\\" + m_username;
 
-                IEndpointBehavior serviceCookieManager = m_translationProvider.m_service.Endpoint.Behaviors[typeof(CookieManagementBehaviour)]; // TODO: check if for some reason empty
-                token = (serviceCookieManager as CookieManagementBehaviour).Cookie;
+                IEndpointBehavior serviceHeaderManager = m_translationProvider.m_service.Endpoint.Behaviors[typeof(InspectorBehaviour)]; // TODO: check if for some reason empty
+                token = ((serviceHeaderManager as InspectorBehaviour).Inspector as HeaderManagerMessageInspector).Value;
 
                 m_translationProvider.m_username = username;
 				
@@ -494,7 +494,7 @@ namespace LetsMT.MTProvider
                 binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
 				
                 m_translationProvider.m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
-                m_translationProvider.m_service.Endpoint.Behaviors.Add(serviceCookieManager);
+                m_translationProvider.m_service.Endpoint.Behaviors.Add(serviceHeaderManager);
 
                 m_translationProvider.m_profileCollection = null;
                 m_translationProvider.DownloadProfileList(true);

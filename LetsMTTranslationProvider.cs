@@ -120,9 +120,9 @@ namespace LetsMT.MTProvider
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
             m_service = new LetsMTAPI.TranslationServiceContractClient(binding, endpoint);
 
-            string cookie = m_strToken;
-            CookieManagementBehaviour addCookieBehaviour = new CookieManagementBehaviour(cookie);
-            m_service.Endpoint.Behaviors.Add(addCookieBehaviour);
+            HeaderManagerMessageInspector inspector = new HeaderManagerMessageInspector("client-id", m_strToken);
+            InspectorBehaviour addUserIdBehaviour = new InspectorBehaviour(inspector);
+            m_service.Endpoint.Behaviors.Add(addUserIdBehaviour);
 
             // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
 

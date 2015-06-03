@@ -189,9 +189,9 @@ namespace LetsMT.MTProvider
                         {
                             foreach (Cookie cook in context.Request.Cookies)
                             {
-                                if (cook.Name == "smts")
+                                if (cook.Name == "apiUserId")
                                 {
-                                    code = cook.ToString();
+                                    code = cook.Value;
                                 }
                             }
                             if (code == null)
