@@ -119,7 +119,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.Logo_71x23;
+            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.LetsMT_logo;
             this.pictureBox1.Location = new System.Drawing.Point(12, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(71, 24);

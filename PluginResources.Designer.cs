@@ -80,6 +80,16 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap LetsMT_logo {
+            get {
+                object obj = ResourceManager.GetObject("LetsMT_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://readymtdevlogic.tilde.lv/Account/LoginApp.
         /// </summary>
         public static string LetsMTLoginUrl {
@@ -94,16 +104,6 @@ namespace LetsMT.MTProvider {
         public static string LetsMTWebServiceUrl {
             get {
                 return ResourceManager.GetString("LetsMTWebServiceUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Logo_71x23 {
-            get {
-                object obj = ResourceManager.GetObject("Logo_71x23", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -165,6 +165,7 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\LetsMT_logo.png" />
     <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -190,7 +191,6 @@
     <None Include="Service References\LetsMTAPI\configuration.svcinfo" />
     <None Include="Service References\LetsMTAPI\configuration91.svcinfo" />
     <None Include="Resources\LetsMT.ico" />
-    <None Include="Resources\Logo_71x23.png" />
     <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <EmbeddedResource Include="Advanced_options.resx">
       <DependentUpon>Advanced_options.cs</DependentUpon>
