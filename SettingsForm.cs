@@ -88,7 +88,7 @@ namespace LetsMT.MTProvider
             m_activeGroup = activeGroup;
 
             // since we use UserIds for logging in we should have had received only one group
-            this.GroupLabel.Text = "Group: " + userData.userGroups[0].name;
+            this.GroupLabel.Text = "Group: " + userData.userGroups[0].name.Trim();
 
             wndProfileProperties.DisplayMember = "text";
             wndProfileProperties.ValueMember = "value";
