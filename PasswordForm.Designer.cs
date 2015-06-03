@@ -35,18 +35,19 @@
             this.DemoLink = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.authenticateButton = new System.Windows.Forms.Button();
             this.apiUserIdTextBox = new System.Windows.Forms.TextBox();
             this.goButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.getClientIdLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(288, 161);
+            this.btnCancel.Location = new System.Drawing.Point(304, 194);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -55,7 +56,7 @@
             // DemoLink
             // 
             this.DemoLink.AutoSize = true;
-            this.DemoLink.Location = new System.Drawing.Point(12, 166);
+            this.DemoLink.Location = new System.Drawing.Point(12, 199);
             this.DemoLink.Name = "DemoLink";
             this.DemoLink.Size = new System.Drawing.Size(167, 13);
             this.DemoLink.TabIndex = 7;
@@ -65,58 +66,68 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(92, 9);
+            this.label3.Location = new System.Drawing.Point(12, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(285, 78);
+            this.label3.Size = new System.Drawing.Size(353, 76);
             this.label3.TabIndex = 10;
             this.label3.Text = resources.GetString("label3.Text");
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(15, 12);
+            this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.MT_logo;
+            this.pictureBox1.Location = new System.Drawing.Point(15, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(71, 23);
+            this.pictureBox1.Size = new System.Drawing.Size(133, 37);
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
-            // authenticateButton
-            // 
-            this.authenticateButton.Location = new System.Drawing.Point(207, 161);
-            this.authenticateButton.Name = "authenticateButton";
-            this.authenticateButton.Size = new System.Drawing.Size(75, 23);
-            this.authenticateButton.TabIndex = 12;
-            this.authenticateButton.Text = "Authenticate";
-            this.authenticateButton.UseVisualStyleBackColor = true;
-            this.authenticateButton.Click += new System.EventHandler(this.authenticateButton_Click);
-            // 
             // apiUserIdTextBox
             // 
-            this.apiUserIdTextBox.Location = new System.Drawing.Point(95, 109);
+            this.apiUserIdTextBox.Location = new System.Drawing.Point(15, 142);
             this.apiUserIdTextBox.Name = "apiUserIdTextBox";
-            this.apiUserIdTextBox.Size = new System.Drawing.Size(187, 20);
+            this.apiUserIdTextBox.Size = new System.Drawing.Size(270, 20);
             this.apiUserIdTextBox.TabIndex = 13;
             // 
             // goButton
             // 
-            this.goButton.Location = new System.Drawing.Point(292, 109);
+            this.goButton.Location = new System.Drawing.Point(304, 140);
             this.goButton.Name = "goButton";
-            this.goButton.Size = new System.Drawing.Size(71, 23);
+            this.goButton.Size = new System.Drawing.Size(61, 23);
             this.goButton.TabIndex = 14;
             this.goButton.Text = "Go";
             this.goButton.UseVisualStyleBackColor = true;
             this.goButton.Click += new System.EventHandler(this.goButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 121);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Client ID";
+            // 
+            // getClientIdLinkLabel
+            // 
+            this.getClientIdLinkLabel.AutoSize = true;
+            this.getClientIdLinkLabel.Location = new System.Drawing.Point(12, 165);
+            this.getClientIdLinkLabel.Name = "getClientIdLinkLabel";
+            this.getClientIdLinkLabel.Size = new System.Drawing.Size(83, 13);
+            this.getClientIdLinkLabel.TabIndex = 16;
+            this.getClientIdLinkLabel.TabStop = true;
+            this.getClientIdLinkLabel.Text = "Get my Client ID";
+            this.getClientIdLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.getClientIdLinkLabel_LinkClicked);
+            // 
             // PasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 194);
+            this.ClientSize = new System.Drawing.Size(375, 227);
+            this.Controls.Add(this.getClientIdLinkLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.goButton);
             this.Controls.Add(this.apiUserIdTextBox);
-            this.Controls.Add(this.authenticateButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.DemoLink);
@@ -142,8 +153,9 @@
         private System.Windows.Forms.LinkLabel DemoLink;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button authenticateButton;
         private System.Windows.Forms.TextBox apiUserIdTextBox;
         private System.Windows.Forms.Button goButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel getClientIdLinkLabel;
     }
 }

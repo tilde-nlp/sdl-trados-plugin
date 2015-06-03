@@ -85,25 +85,6 @@ namespace LetsMT.MTProvider
             }
         }
 
-        private void authenticateButton_Click(object sender, EventArgs e)
-        {
-            if (serverRunning)
-            {
-                return;
-            }
-
-            ThreadPool.QueueUserWorkItem((x) =>
-            {
-                serverRunning = true;
-                string token = GetCodeFromLocalHost(serverCanceledState);
-                serverRunning = false;
-                if (token != null)
-                {
-                    this.BeginInvoke(new Action(() => afterReceiveToken(token)));
-                }
-            });
-        }
-
         private void afterReceiveToken(string token)
         {
             this.apiUserIdTextBox.Text = token;
@@ -226,6 +207,25 @@ namespace LetsMT.MTProvider
             m_bRemember = true;
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void getClientIdLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (serverRunning)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem((x) =>
+            {
+                serverRunning = true;
+                string token = GetCodeFromLocalHost(serverCanceledState);
+                serverRunning = false;
+                if (token != null)
+                {
+                    this.BeginInvoke(new Action(() => afterReceiveToken(token)));
+                }
+            });
         }
     }
 
