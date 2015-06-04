@@ -84,7 +84,6 @@ namespace LetsMT.MTProvider
                 }
                 
             }
-
             return null;
         }
 
@@ -104,15 +103,19 @@ namespace LetsMT.MTProvider
             if (editProvider == null)
                 return false;
 
-            //editProvider.
             editProvider.DownloadProfileList(true);
 
             SettingsForm settings = new SettingsForm(ref editProvider, languagePairs, credentialStore);
+            if (!settings.TranslationProviderInitialized)
+            {
+                return false;
+            }
+
             DialogResult  dResult = settings.ShowDialog(owner);
             if (dResult == DialogResult.OK)
             {
                 return true;
-            }           
+            }
 
             return false;
         }
@@ -240,7 +243,7 @@ namespace LetsMT.MTProvider
         }
 
 
-        private bool ValidateTranslationProviderLocaly(LetsMTTranslationProvider testProvider)
+        public static bool ValidateTranslationProviderLocaly(LetsMTTranslationProvider testProvider)
         {
 
 
@@ -256,7 +259,7 @@ namespace LetsMT.MTProvider
 
                 if (ex.Message.Contains("The HTTP request is unauthorized"))
                 {
-                    MessageBox.Show("Unrecognized username or password.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Invalid Client ID.", "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     bCredentialsValid = false;
                 }
                 else if (ex.Message.Contains("code:"))

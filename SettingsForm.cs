@@ -33,6 +33,7 @@ namespace LetsMT.MTProvider
         private string m_activeGroup;
         private string m_username;
         private bool m_trackGoupChange;
+        public bool TranslationProviderInitialized { get; private set; }
 
 
         /// <summary>
@@ -53,6 +54,13 @@ namespace LetsMT.MTProvider
 
         public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs, ITranslationProviderCredentialStore credentialStore)
         {
+            if (!CheckTranslationProviderCredentials(editProvider, credentialStore))
+            {
+                return;
+            }
+
+            TranslationProviderInitialized = true;
+
             m_score = editProvider.m_resultScore;
             m_credentialStore = credentialStore;
             DialogResult = DialogResult.Cancel;
@@ -113,6 +121,48 @@ namespace LetsMT.MTProvider
             FillProfileList();
 
             m_trackGoupChange = true;
+        }
+
+        /// <summary>
+        /// Checks whether the given translation provider has a working connection to the translation API.
+        /// If not then display the password form and re-initialized the translation provider.
+        /// </summary>
+        /// <param name="editProvider">The translation provider to be checked.</param>
+        /// <param name="credentialStore">The credential store that should contain</param>
+        /// <returns>Returns true if the credential store already has the respective credentials or if the translation provider is successfully re-initialized. Returns false otherwise.</returns>
+        private bool CheckTranslationProviderCredentials(LetsMTTranslationProvider editProvider, ITranslationProviderCredentialStore credentialStore)
+        {
+            if (credentialStore.GetCredential(editProvider.Uri) != null)
+            {
+                return true;
+            }
+
+            PasswordForm pf = new PasswordForm();
+
+            while (pf.ShowDialog(this) == DialogResult.OK)
+            {
+
+                //TODO: check how to minimize the amount odfsystem list calls
+                string credentials = string.Format("{0}\t{1}", pf.strToken, pf.strAppId);
+                TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
+                credentialStore.AddCredential(editProvider.Uri, tc);
+
+                // Create a new connection to the translation API
+                editProvider.InitService(pf.strToken);
+
+                if (!LetsMTTranslationProviderWinFormsUI.ValidateTranslationProviderLocaly(editProvider))
+                {
+                    //IF USERNAME INFOREC REMOVE DATA FROM STORE
+                    credentialStore.RemoveCredential(editProvider.Uri);
+                }
+                else
+                {
+                    editProvider.DownloadProfileList(true);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -507,10 +557,9 @@ namespace LetsMT.MTProvider
 
         private void logOutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            DialogResult = DialogResult.OK;
             m_credentialStore.RemoveCredential(m_translationProvider.Uri);
-            //throw new TranslationProviderAuthenticationException(); // TODO: remove user credentials from credentialstore?
+            Close();
         }
     }
 

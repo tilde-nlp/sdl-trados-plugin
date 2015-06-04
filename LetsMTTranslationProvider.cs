@@ -58,6 +58,25 @@ namespace LetsMT.MTProvider
 
             m_strCredential = credential;
 
+            
+
+            string[] credParams = m_strCredential.Split('\t');
+
+            string m_strToken = "";
+            m_strAppID = "";
+
+            if (credParams.Length > 0)
+                m_strToken = credParams[0];
+            if (credParams.Length > 1)
+            {
+                m_strAppID = credParams[1];
+            }
+
+            InitService(m_strToken);
+        }
+
+        public void InitService(string m_strToken)
+        {
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
 
             // create Web Service client
@@ -67,7 +86,7 @@ namespace LetsMT.MTProvider
             // remove buffet limmit
             binding.MaxBufferSize = int.MaxValue;
             binding.MaxReceivedMessageSize = int.MaxValue;
-           // binding.ReceiveTimeout = 
+            // binding.ReceiveTimeout = 
 
             //try to read Software\\Tilde\\LetsMT\\url registry string entry and it it exists replace the link
             try
@@ -90,17 +109,6 @@ namespace LetsMT.MTProvider
 
             EndpointAddress endpoint = new EndpointAddress(url);
 
-            string[] credParams = m_strCredential.Split('\t');
-
-            string m_strToken = "";
-            m_strAppID = "";
-
-            if (credParams.Length > 0)
-                m_strToken = credParams[0];
-            if (credParams.Length > 1)
-            {
-                m_strAppID = credParams[1];
-            }
 
             //TODO: HACK {
             // Attach custom Certificate validator to pass validation of untrusted development certificate 
