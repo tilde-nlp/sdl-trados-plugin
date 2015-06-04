@@ -208,7 +208,7 @@ namespace LetsMT.MTProvider
             }
             // stop listening if user hasnt finished authentication procedure and has entered the userId manually
             serverCanceledState.Canceled = true;
-            m_strToken = apiUserIdTextBox.Text;
+            m_strToken = apiUserIdTextBox.Text.Trim();
             m_bRemember = true;
             DialogResult = DialogResult.OK;
             Close();
