@@ -121,10 +121,15 @@ namespace LetsMT.MTProvider
             return string.Format("{0}?returnUrl={1}", letsMTLoginUrl, HttpUtility.UrlEncode(redirectUrl));
         }
 
-        private static string GetCodeFromLocalHost(RunState state)
+        private static string GetRedirectUrl()
         {
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-            string httpTemporaryListenAddresses = string.Format("{0}/Temporary_Listen_Addresses/", resourceManager.GetString("HttpTemporaryListenAddresses"));
+            return string.Format("{0}/Temporary_Listen_Addresses/", resourceManager.GetString("HttpTemporaryListenAddresses"));
+        }
+
+        private static string GetCodeFromLocalHost(RunState state)
+        {
+            string httpTemporaryListenAddresses = GetRedirectUrl();
             string redirectUrl = httpTemporaryListenAddresses;
 
             string code = null;
@@ -213,6 +218,18 @@ namespace LetsMT.MTProvider
         {
             if (serverRunning)
             {
+                Process myProcess = new Process();
+                try
+                {
+                    // true is the default, but it is important not to set it to false
+                    myProcess.StartInfo.UseShellExecute = true;
+                    myProcess.StartInfo.FileName = GetAuthorizationUrl(GetRedirectUrl());
+                    myProcess.Start();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Cannot open link!", "Connection problem");
+                }
                 return;
             }
 
