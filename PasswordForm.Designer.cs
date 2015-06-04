@@ -39,7 +39,10 @@
             this.goButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.getClientIdLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -56,12 +59,13 @@
             // DemoLink
             // 
             this.DemoLink.AutoSize = true;
-            this.DemoLink.Location = new System.Drawing.Point(12, 199);
+            this.DemoLink.Location = new System.Drawing.Point(198, 169);
             this.DemoLink.Name = "DemoLink";
             this.DemoLink.Size = new System.Drawing.Size(167, 13);
             this.DemoLink.TabIndex = 7;
             this.DemoLink.TabStop = true;
             this.DemoLink.Text = "Get your free DEMO access here.";
+            this.DemoLink.Visible = false;
             this.DemoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DemoLink_LinkClicked);
             // 
             // label3
@@ -111,19 +115,41 @@
             // getClientIdLinkLabel
             // 
             this.getClientIdLinkLabel.AutoSize = true;
-            this.getClientIdLinkLabel.Location = new System.Drawing.Point(12, 165);
+            this.getClientIdLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.getClientIdLinkLabel.Location = new System.Drawing.Point(12, 166);
             this.getClientIdLinkLabel.Name = "getClientIdLinkLabel";
-            this.getClientIdLinkLabel.Size = new System.Drawing.Size(83, 13);
+            this.getClientIdLinkLabel.Size = new System.Drawing.Size(102, 16);
             this.getClientIdLinkLabel.TabIndex = 16;
             this.getClientIdLinkLabel.TabStop = true;
             this.getClientIdLinkLabel.Text = "Get my Client ID";
             this.getClientIdLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.getClientIdLinkLabel_LinkClicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.label2.Location = new System.Drawing.Point(12, 200);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 12);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Powered by";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::LetsMT.MTProvider.PluginResources.LetsMT_logo;
+            this.pictureBox2.Location = new System.Drawing.Point(78, 198);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(57, 19);
+            this.pictureBox2.TabIndex = 25;
+            this.pictureBox2.TabStop = false;
             // 
             // PasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 227);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.getClientIdLinkLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.goButton);
@@ -141,6 +167,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "LetsMT Authentication (v 1.2)";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +184,7 @@
         private System.Windows.Forms.Button goButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel getClientIdLinkLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
