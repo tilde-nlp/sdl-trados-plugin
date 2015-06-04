@@ -35,7 +35,9 @@ namespace LetsMT.MTProvider
         private bool m_trackGoupChange;
 
 
-        // Dictionary with source language code as a key and a tuple of source language name and a list of target language code and name tuples as value.
+        /// <summary>
+        /// Dictionary with source language code as a key and a tuple of source language name and a list of target language code and name tuples as value.
+        /// </summary>
         private Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>> languageChoices = new Dictionary<string, MyTuple<string, List<MyTuple<string, string>>>>();
 
 
@@ -150,8 +152,14 @@ namespace LetsMT.MTProvider
                         
             //languageChoices.Clear(); // TODO: should we dispose of the old values or let the garbage collector do it's work? 
             languageChoices = ParseLanguageChoices(profiles);
+            List<string> sortedKeys = new List<string>(languageChoices.Keys);
+            sortedKeys.Sort((x, y) =>
+            {
+                int firstOrder = x.CompareTo(y);
+                return firstOrder == 0 ? languageChoices[x].Item1.CompareTo(languageChoices[y].Item1) : firstOrder;
+            });
 
-            foreach(string sourceLanguageId in languageChoices.Keys)
+            foreach (string sourceLanguageId in sortedKeys)
             {
                 MyTuple<string, List<MyTuple<string, string>>> sourceAndTargetLenguageInfo = languageChoices[sourceLanguageId];
                 string sourceLanguageName = sourceAndTargetLenguageInfo.Item1;
@@ -175,6 +183,9 @@ namespace LetsMT.MTProvider
                     if (addedSourceItem.Value == selectedSourceLanguageId)
                     {
                         sourceSelectComboBox.SelectedIndex = sourceIndex;
+                        // this is when selectionChanged callback is invoked and the target language combobox is filled.
+                        // we can proceed to select the target language now
+
                         sourceHasSelection = true;
                         break;
                     }
@@ -219,6 +230,11 @@ namespace LetsMT.MTProvider
                     MyTuple<string, List<MyTuple<string, string>>> sourceAndTargetLenguageInfo = languageChoices[sourceLanguageId];
 
                     List<MyTuple<string, string>> targetLanguageList = sourceAndTargetLenguageInfo.Item2;
+                    targetLanguageList.Sort((x, y) =>
+                    {
+                        int firstOrder = x.Item1.CompareTo(y.Item1);
+                        return firstOrder == 0 ? x.Item2.CompareTo(y.Item2) : firstOrder;
+                    });
 
                     foreach (MyTuple<string, string> targetLanguageInfo in targetLanguageList)
                     {
