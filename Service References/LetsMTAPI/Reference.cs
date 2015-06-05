@@ -93,6 +93,9 @@ namespace LetsMT.MTProvider.LetsMTAPI {
         private int[][] originalSentenceRangesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double qualityEstimateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string translationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -143,6 +146,19 @@ namespace LetsMT.MTProvider.LetsMTAPI {
                 if ((object.ReferenceEquals(this.originalSentenceRangesField, value) != true)) {
                     this.originalSentenceRangesField = value;
                     this.RaisePropertyChanged("originalSentenceRanges");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double qualityEstimate {
+            get {
+                return this.qualityEstimateField;
+            }
+            set {
+                if ((this.qualityEstimateField.Equals(value) != true)) {
+                    this.qualityEstimateField = value;
+                    this.RaisePropertyChanged("qualityEstimate");
                 }
             }
         }

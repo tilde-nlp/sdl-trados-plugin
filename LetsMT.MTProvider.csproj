@@ -207,7 +207,7 @@
     <Content Include="pluginpackage.manifest.xml">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Service References\LetsMTAPI\TranslationWCFService.wsdl" />
+    <None Include="Service References\LetsMTAPI\TranslationWCFService1.wsdl" />
     <None Include="setupscript.nsi" />
     <None Include="setupscript_11.nsi" />
   </ItemGroup>

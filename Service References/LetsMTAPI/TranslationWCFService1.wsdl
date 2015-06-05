@@ -496,6 +496,7 @@
           <xs:element minOccurs="0" name="countSentences" type="xs:int" />
           <xs:element minOccurs="0" name="countTokens" type="xs:int" />
           <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="originalSentenceRanges" nillable="true" type="q1:ArrayOfArrayOfint" />
+          <xs:element minOccurs="0" name="qualityEstimate" type="xs:double" />
           <xs:element minOccurs="0" name="translation" nillable="true" type="xs:string" />
           <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="translationSentenceRanges" nillable="true" type="q2:ArrayOfArrayOfint" />
         </xs:sequence>
@@ -1283,7 +1284,7 @@
   </wsdl:binding>
   <wsdl:service name="TranslationWCFService">
     <wsdl:port name="BasicHttpBinding_ITranslationServiceContract" binding="tns:BasicHttpBinding_ITranslationServiceContract">
-      <soap:address location="https://www.letsmt.eu/ws/Service.svc/soap" />
+      <soap:address location="https://mtdevlogic.tilde.lv/ws/Service.svc/soap" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

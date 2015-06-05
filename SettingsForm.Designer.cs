@@ -47,6 +47,8 @@
             this.logOutLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.qualityEstimateCheckBox = new System.Windows.Forms.CheckBox();
+            this.qualityEstimateTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -79,7 +81,7 @@
             // btnOk
             // 
             this.btnOk.Enabled = false;
-            this.btnOk.Location = new System.Drawing.Point(429, 388);
+            this.btnOk.Location = new System.Drawing.Point(429, 422);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -89,7 +91,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(510, 388);
+            this.btnCancel.Location = new System.Drawing.Point(510, 422);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -102,7 +104,7 @@
             this.wndRunningSystems.AutoSize = true;
             this.wndRunningSystems.Checked = true;
             this.wndRunningSystems.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.wndRunningSystems.Location = new System.Drawing.Point(93, 358);
+            this.wndRunningSystems.Location = new System.Drawing.Point(425, 261);
             this.wndRunningSystems.Name = "wndRunningSystems";
             this.wndRunningSystems.Size = new System.Drawing.Size(160, 17);
             this.wndRunningSystems.TabIndex = 2;
@@ -112,7 +114,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 354);
+            this.button1.Location = new System.Drawing.Point(12, 382);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 11;
@@ -123,7 +125,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.LetsMT_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(78, 392);
+            this.pictureBox1.Location = new System.Drawing.Point(78, 426);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(57, 19);
             this.pictureBox1.TabIndex = 12;
@@ -222,7 +224,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.label1.Location = new System.Drawing.Point(12, 394);
+            this.label1.Location = new System.Drawing.Point(12, 428);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 12);
             this.label1.TabIndex = 24;
@@ -237,12 +239,33 @@
             this.pictureBox2.TabIndex = 25;
             this.pictureBox2.TabStop = false;
             // 
+            // qualityEstimateCheckBox
+            // 
+            this.qualityEstimateCheckBox.AutoSize = true;
+            this.qualityEstimateCheckBox.Location = new System.Drawing.Point(15, 359);
+            this.qualityEstimateCheckBox.Name = "qualityEstimateCheckBox";
+            this.qualityEstimateCheckBox.Size = new System.Drawing.Size(241, 17);
+            this.qualityEstimateCheckBox.TabIndex = 26;
+            this.qualityEstimateCheckBox.Text = "Don\'t show translation if its QE score is bellow";
+            this.qualityEstimateCheckBox.UseVisualStyleBackColor = true;
+            this.qualityEstimateCheckBox.CheckedChanged += new System.EventHandler(this.qualityEstimateCheckBox_CheckedChanged);
+            // 
+            // qualityEstimateTextBox
+            // 
+            this.qualityEstimateTextBox.Location = new System.Drawing.Point(263, 359);
+            this.qualityEstimateTextBox.Name = "qualityEstimateTextBox";
+            this.qualityEstimateTextBox.Size = new System.Drawing.Size(34, 20);
+            this.qualityEstimateTextBox.TabIndex = 27;
+            this.qualityEstimateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.qualityEstimateTextBox_Validating);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(597, 423);
+            this.ClientSize = new System.Drawing.Size(597, 457);
+            this.Controls.Add(this.qualityEstimateTextBox);
+            this.Controls.Add(this.qualityEstimateCheckBox);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logOutLinkLabel);
@@ -296,5 +319,7 @@
         private System.Windows.Forms.LinkLabel logOutLinkLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox qualityEstimateCheckBox;
+        private System.Windows.Forms.TextBox qualityEstimateTextBox;
     }
 }

@@ -112,6 +112,10 @@ namespace LetsMT.MTProvider
             termCorporaSelectComboBox.DisplayMember = "Text";
             termCorporaSelectComboBox.ValueMember = "Value";
 
+            qualityEstimateTextBox.Text = editProvider.m_minAllowedQualityEstimateScore.ToString();
+            qualityEstimateCheckBox.Checked = editProvider.m_useQualityEstimates;
+            qualityEstimateTextBox.Enabled = editProvider.m_useQualityEstimates;
+
 
             //fill the system list
             m_pairs = languagePairs;
@@ -378,7 +382,12 @@ namespace LetsMT.MTProvider
                 getTerms.BeginInvoke(x =>
                 { 
                     AsyncResult result = x as AsyncResult;
-                    LetsMTAPI.TermCorpus[] termCorpora = getTerms.EndInvoke(result);
+                    LetsMTAPI.TermCorpus[] termCorpora;
+                    try
+                    {
+                        termCorpora = getTerms.EndInvoke(result);
+                    }
+                    catch { return; }
 
                     // This callback is executed on a ThreadPool thraed. Filling the term corpora list must be done on the UI thread.
                     this.BeginInvoke(new Action(() =>
@@ -407,6 +416,9 @@ namespace LetsMT.MTProvider
                     defaultTermSelectionChages.Current.Key.Item2,
                     defaultTermSelectionChages.Current.Value);
             }
+
+            m_translationProvider.m_minAllowedQualityEstimateScore = double.Parse(qualityEstimateTextBox.Text);
+            m_translationProvider.m_useQualityEstimates = qualityEstimateCheckBox.Checked;
 
             Close();
         }
@@ -557,9 +569,40 @@ namespace LetsMT.MTProvider
 
         private void logOutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.Cancel;
             m_credentialStore.RemoveCredential(m_translationProvider.Uri);
             Close();
+        }
+
+        private void qualityEstimateTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            double qeScore;
+            string value = qualityEstimateTextBox.Text;
+            //Try parsing in the current culture
+            if (double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.CurrentCulture, out qeScore) ||
+                //Then try in US english
+                double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out qeScore) ||
+                //Then in neutral language
+                double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out qeScore))
+            {
+                if (qeScore < 0)
+                {
+                    qualityEstimateTextBox.Text = "0";
+                }
+                else if(qeScore > 1)
+                {
+                    qualityEstimateTextBox.Text = "1";
+                }
+            }
+            else
+            {
+                qualityEstimateTextBox.Text = "0";
+            }
+        }
+
+        private void qualityEstimateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            qualityEstimateTextBox.Enabled = qualityEstimateCheckBox.Checked;
         }
     }
 

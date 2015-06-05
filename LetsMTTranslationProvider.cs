@@ -35,6 +35,8 @@ namespace LetsMT.MTProvider
         public LetsMTAPI.TranslationServiceContractClient m_service;
         public CMtProfileCollection m_profileCollection;
         public bool m_userRetryWarning;
+        public double m_minAllowedQualityEstimateScore = 0;
+        public bool m_useQualityEstimates = false;
 
 
         /// <summary>
@@ -232,7 +234,9 @@ namespace LetsMT.MTProvider
                 {
                     ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10); 
                     //removes control characters  to work around imperfections in the way .NET handles SOAP.
-                    result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
+                    //result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
+                    var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
+                    result = translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates ? translation.translation : "";
                 }
                 catch(Exception ex)
                 {
@@ -412,34 +416,23 @@ namespace LetsMT.MTProvider
         {
             if (m_profileCollection == null)
                 DownloadProfileList();
-            if (translationProviderState.StartsWith("resultScore"))
+
+            if (string.IsNullOrEmpty(translationProviderState))
+                return;
+            TranslationProviderState state;
+            try
             {
-                int lineindex = translationProviderState.IndexOf('\n');
-                if (lineindex != -1)
-                {
-                    string scroresString = translationProviderState.Substring(0, lineindex);
-                    Regex r = new Regex(@"(?<=resultScore:)\d+");
-                    Match m = r.Match(scroresString);
-                    string Strscore = m.Value;
-                    int score;
-                    if (int.TryParse(Strscore, out score))
-                    {
-                        m_resultScore = score;
-                    }
-
-                    if (lineindex < translationProviderState.Length)
-                    {
-                        translationProviderState = translationProviderState.Remove(0, lineindex + 1);
-                    }
-                    else
-                    {
-                        return;
-                    }
-
-                }
-               
+                state = Utilities.DeserializeObject<TranslationProviderState>(translationProviderState);
             }
-            m_profileCollection.DeserializeState(translationProviderState);
+            catch
+            {
+                return;
+            }
+
+            m_resultScore = state.ResultScore;
+            m_minAllowedQualityEstimateScore = state.MinAllowedQualityEstimateScore;
+            m_useQualityEstimates = state.UseQualityEstimate;
+            m_profileCollection.SetState(state.ProfileInfos);
         }
 
         public string SerializeState()
@@ -447,9 +440,15 @@ namespace LetsMT.MTProvider
             if (m_profileCollection == null)
                 DownloadProfileList();
 
-            string state = "resultScore:" + m_resultScore.ToString() + "\n" + m_profileCollection.SerializeState();
+            TranslationProviderState state = new TranslationProviderState
+            {
+                ResultScore = m_resultScore,
+                MinAllowedQualityEstimateScore = m_minAllowedQualityEstimateScore,
+                UseQualityEstimate = m_useQualityEstimates,
+                ProfileInfos = m_profileCollection.GetState()
+            };
             
-            return state;
+            return state.SerializeObject();
         }
 
         public void RefreshStatusInfo()
@@ -504,6 +503,16 @@ namespace LetsMT.MTProvider
         public bool SupportsUpdate { get { return true; } }
         public bool SupportsWordCounts { get { return false; } }
 
+        #endregion
+
+        #region serialization helper class
+        public class TranslationProviderState
+        {
+            public int ResultScore { get; set; }
+            public bool UseQualityEstimate { get; set; }
+            public double MinAllowedQualityEstimateScore { get; set; }
+            public List<ProfileInfo> ProfileInfos { get; set; }
+        }
         #endregion
     }
 }

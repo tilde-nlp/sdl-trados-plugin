@@ -300,6 +300,12 @@ namespace LetsMT.MTProvider
 
         public string SerializeState()
         {
+            List<ProfileInfo> profileInfos = GetState();
+            return profileInfos.SerializeObject();
+        }
+
+        public List<ProfileInfo> GetState()
+        {
             List<ProfileInfo> profileInfos = new List<ProfileInfo>();
 
             foreach (CMtProfile profile in m_profileList)
@@ -313,8 +319,7 @@ namespace LetsMT.MTProvider
                     profileInfos.Add(new ProfileInfo { ProfileId = profile.GetProfileId(), DefaultSystemId = strDefaultSystem, DefaultTermCorpora = serializableDefaultTermCorpora });
                 }
             }
-
-            return profileInfos.SerializeObject();
+            return profileInfos;
         }
 
         public void DeserializeState(string state)
@@ -330,9 +335,14 @@ namespace LetsMT.MTProvider
             {
                 return;
             }
+            SetState(profileInfos);
+        }
+
+        public void SetState(List<ProfileInfo> profileInfos)
+        {
             foreach (ProfileInfo profileInfo in profileInfos)
             {
-                if(string.IsNullOrEmpty(profileInfo.ProfileId) ||
+                if (string.IsNullOrEmpty(profileInfo.ProfileId) ||
                     (string.IsNullOrEmpty(profileInfo.DefaultSystemId) && profileInfo.DefaultTermCorpora.Count == 0))
                 {
                     continue;

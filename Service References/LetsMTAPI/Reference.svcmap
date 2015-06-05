@@ -18,10 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://www.letsmt.eu/ws/service.svc?singlewsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://mtdevlogic.tilde.lv/ws/service.svc?singlewsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TranslationWCFService.wsdl" MetadataType="Wsdl" ID="00c8833f-5dc4-44ca-ada1-e2d2073ff704" SourceId="1" SourceUrl="https://www.letsmt.eu/ws/service.svc?singlewsdl" />
+    <MetadataFile FileName="TranslationWCFService1.wsdl" MetadataType="Wsdl" ID="6c271ea3-df66-4135-955a-07c72c0bde2a" SourceId="1" SourceUrl="https://mtdevlogic.tilde.lv/ws/service.svc?singlewsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
