@@ -232,9 +232,7 @@ namespace LetsMT.MTProvider
                 string result = "";
                 try
                 {
-                    ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10); 
-                    //removes control characters  to work around imperfections in the way .NET handles SOAP.
-                    //result = m_service.Translate(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
+                    ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10);
                     var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
                     result = translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates ? translation.translation : "";
                 }

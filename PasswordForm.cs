@@ -7,6 +7,7 @@ using System.IO;
 using System.Web;
 using System.Runtime.Remoting.Messaging;
 using System.ComponentModel;
+using System.Net.Sockets;
 
 namespace LetsMT.MTProvider
 {
@@ -19,6 +20,7 @@ namespace LetsMT.MTProvider
         private bool m_bRemember;
         private RunState serverCanceledState;
         private bool serverRunning = false;
+        private string httpTemporaryListenAddresses = "";
 
         #region "Getters & Setters"
         public string strUsername
@@ -96,6 +98,15 @@ namespace LetsMT.MTProvider
             this.Activate();
         }
 
+        private static int GetRandomUnusedPort()
+        {
+            var listener = new TcpListener(IPAddress.Loopback, 0);
+            listener.Start();
+            var port = ((IPEndPoint)listener.LocalEndpoint).Port;
+            listener.Stop();
+            return port;
+        }
+
         private static string GetAuthorizationUrl(string redirectUrl)
         {
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
@@ -127,9 +138,14 @@ namespace LetsMT.MTProvider
             return string.Format("{0}/Temporary_Listen_Addresses/", resourceManager.GetString("HttpTemporaryListenAddresses"));
         }
 
-        private static string GetCodeFromLocalHost(RunState state)
+        private static string GetRandomRedirectUrl()
         {
-            string httpTemporaryListenAddresses = GetRedirectUrl();
+            return string.Format("http://{0}:{1}/Temporary_Listen_Addresses/", "localhost", GetRandomUnusedPort());
+        }
+
+        private string GetCodeFromLocalHost(RunState state, bool useRandomPort = false)
+        {
+            httpTemporaryListenAddresses = useRandomPort? GetRandomRedirectUrl() : GetRedirectUrl();
             string redirectUrl = httpTemporaryListenAddresses;
 
             string code = null;
@@ -148,8 +164,19 @@ namespace LetsMT.MTProvider
                         }
                     };
                 }
-                
-                listener.Start();
+
+                // try to start listening on the address/port speciffied in the resources. if that fails retry on a random localhost port
+                try
+                {
+                    listener.Start();
+                }
+                catch (Exception)
+                {
+                    if (!useRandomPort)
+                    {
+                        return GetCodeFromLocalHost(state, true);
+                    }
+                }
 
                 using (Process.Start(GetAuthorizationUrl(redirectUrl)))
                 {
@@ -198,7 +225,57 @@ namespace LetsMT.MTProvider
             return code;
         }
 
-        private const string CloseWindowResponse = "<!DOCTYPE html><html><head></head><body onload=\"closeThis();\"><h1>Authorization Successfull</h1><p>You can now close this window</p><script type=\"text/javascript\">function closeMe() { window.close(); } function closeThis() { window.close(); }</script></body></html>";
+        //private const string CloseWindowResponse = "<!DOCTYPE html><html><head></head><body onload=\"closeThis();\"><h1>Authorization Successfull</h1><p>You can now close this window</p><script type=\"text/javascript\">function closeMe() { window.close(); } function closeThis() { window.close(); }</script></body></html>";
+        private const string CloseWindowResponse =
+            @"<!DOCTYPE html>
+            <html>
+                <head>
+                    <style>
+                        #head_logo {
+                            height: 37px;
+                            width: 133px;
+                            background-image: url('https://www.letsmt.eu/images/mt.svg');
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            margin: 0em 0 -0.3em 0.5em;
+                            display: inline-block;
+                            border-bottom: 3px solid #bf1a37;
+                        }
+                        #logo_powered {
+                            height: 19px;
+                            width: 57px;
+                            background-image: url('LetsMT_logo.png');
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            margin: 0em 0 -0.3em 0.5em;
+                            display: inline-block;
+                        }
+                        body {
+                            width: 100%;
+                        }
+                        #border {
+                            margin: 0 auto;
+                            max-width: 70em;
+                        }
+                        #content {
+                            margin: 0 0 3em 5em;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div id='border'>
+                        <div id='head_logo'></div>
+                        <div id='content'>
+                            <h1>Authorization Successfull</h1>
+                            <p>You can now close this window</p>
+                        </div>
+                        <div id='logo_powered_container'>
+                            <span>Powered by</span>
+                            <div id='logo_powered'></div>
+                        </div>
+                    </div>
+                </body>
+            </html>";
 
         private void goButton_Click(object sender, EventArgs e)
         {
@@ -223,7 +300,7 @@ namespace LetsMT.MTProvider
                 {
                     // true is the default, but it is important not to set it to false
                     myProcess.StartInfo.UseShellExecute = true;
-                    myProcess.StartInfo.FileName = GetAuthorizationUrl(GetRedirectUrl());
+                    myProcess.StartInfo.FileName = GetAuthorizationUrl(httpTemporaryListenAddresses);
                     myProcess.Start();
                 }
                 catch (Exception)
@@ -232,17 +309,19 @@ namespace LetsMT.MTProvider
                 }
                 return;
             }
-
-            ThreadPool.QueueUserWorkItem((x) =>
+            else
             {
-                serverRunning = true;
-                string token = GetCodeFromLocalHost(serverCanceledState);
-                serverRunning = false;
-                if (token != null)
+                ThreadPool.QueueUserWorkItem((x) =>
                 {
-                    this.BeginInvoke(new Action(() => afterReceiveToken(token)));
-                }
-            });
+                    serverRunning = true;
+                    string token = GetCodeFromLocalHost(serverCanceledState);
+                    serverRunning = false;
+                    if (token != null)
+                    {
+                        this.BeginInvoke(new Action(() => afterReceiveToken(token)));
+                    }
+                });
+            }
         }
     }
 

@@ -143,7 +143,7 @@
     <value>Resources\MT_logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HttpTemporaryListenAddresses" xml:space="preserve">
-    <value>http://localhost:45301</value>
+    <value>http://localhost:52232</value>
   </data>
   <data name="LetsMTLoginUrl" xml:space="preserve">
     <value>https://readymtdevlogic.tilde.lv/Account/LoginApp</value>

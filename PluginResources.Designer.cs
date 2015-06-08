@@ -61,7 +61,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:45301.
+        ///   Looks up a localized string similar to http://localhost:52232.
         /// </summary>
         public static string HttpTemporaryListenAddresses {
             get {
