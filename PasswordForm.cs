@@ -245,7 +245,7 @@ namespace LetsMT.MTProvider
                         #logo_powered {
                             height: 19px;
                             width: 57px;
-                            background-image: url('LetsMT_logo.png');
+                            background-image: url('https://readymtdevlogic.tilde.lv/Content/images/letsmt/LetsMT_logo.png');
                             background-size: contain;
                             background-repeat: no-repeat;
                             margin: 0em 0 -0.3em 0.5em;
