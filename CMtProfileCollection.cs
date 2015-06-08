@@ -91,7 +91,7 @@ namespace LetsMT.MTProvider
                 while(metaEnum.MoveNext())
                 {
                     Nullable<LetsMTAPI.ObjectProperty> nullableProp = metaEnum.Current as Nullable<LetsMTAPI.ObjectProperty>;
-                    LetsMTAPI.ObjectProperty prop = nullableProp.Value;  //TODO: check if not null after cast
+                    LetsMTAPI.ObjectProperty prop = nullableProp.Value;
                     if(prop.Key == "status")
                     {
                         switch (prop.Value)

@@ -213,6 +213,7 @@ namespace LetsMT.MTProvider
                             writer.WriteLine(CloseWindowResponse);
                             writer.Flush();
 
+                            Thread.Sleep(300); // for some reason if we don't wait IE fails to receive the HTML
                             context.Response.Close();
                             break;
                         }
