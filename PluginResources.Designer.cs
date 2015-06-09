@@ -90,7 +90,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://readymtdevlogic.tilde.lv/Account/LoginApp.
+        ///   Looks up a localized string similar to https://readymt.tilde.com/Account/LoginApp.
         /// </summary>
         public static string LetsMTLoginUrl {
             get {
