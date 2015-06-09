@@ -197,14 +197,15 @@ namespace LetsMT.MTProvider
 
                         if (context.Request.Url.AbsolutePath == "/Temporary_Listen_Addresses/")
                         {
-                            foreach (Cookie cook in context.Request.Cookies)
-                            {
-                                if (cook.Name == "apiUserId")
-                                {
-                                    code = cook.Value;
-                                }
-                            }
-                            if (code == null)
+                            //foreach (Cookie cook in context.Request.Cookies)
+                            //{
+                            //    if (cook.Name == "apiUserId")
+                            //    {
+                            //        code = cook.Value;
+                            //    }
+                            //}
+                            code = context.Request.QueryString["apiUserId"];
+                            if (string.IsNullOrEmpty(code))
                             {
                                 //throw new AuthenticationException("Access denied, no return code was returned");
                             }
