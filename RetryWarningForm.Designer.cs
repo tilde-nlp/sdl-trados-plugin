@@ -41,7 +41,7 @@
             // WrningTextLable
             // 
             this.WrningTextLable.AutoSize = true;
-            this.WrningTextLable.Location = new System.Drawing.Point(89, 9);
+            this.WrningTextLable.Location = new System.Drawing.Point(78, 9);
             this.WrningTextLable.Name = "WrningTextLable";
             this.WrningTextLable.Size = new System.Drawing.Size(236, 52);
             this.WrningTextLable.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // YesButton
             // 
-            this.YesButton.Location = new System.Drawing.Point(119, 76);
+            this.YesButton.Location = new System.Drawing.Point(110, 75);
             this.YesButton.Name = "YesButton";
             this.YesButton.Size = new System.Drawing.Size(75, 23);
             this.YesButton.TabIndex = 1;
@@ -61,7 +61,7 @@
             // NoButton
             // 
             this.NoButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.NoButton.Location = new System.Drawing.Point(200, 76);
+            this.NoButton.Location = new System.Drawing.Point(191, 75);
             this.NoButton.Name = "NoButton";
             this.NoButton.Size = new System.Drawing.Size(114, 23);
             this.NoButton.TabIndex = 2;
@@ -90,7 +90,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.NoButton;
-            this.ClientSize = new System.Drawing.Size(326, 110);
+            this.ClientSize = new System.Drawing.Size(317, 110);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.NoButton);
             this.Controls.Add(this.YesButton);
