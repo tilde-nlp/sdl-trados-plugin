@@ -281,8 +281,9 @@ namespace LetsMT.MTProvider
 
         private void goButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(apiUserIdTextBox.Text))
+            if (string.IsNullOrEmpty(apiUserIdTextBox.Text.Trim()))
             {
+                MessageBox.Show(@"Please provide a valid Client ID. To retrieve your Client ID click ""Get my Client ID"" bellow.");
                 return;
             }
             // stop listening if user hasnt finished authentication procedure and has entered the userId manually
