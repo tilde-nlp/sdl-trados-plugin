@@ -263,7 +263,8 @@ namespace LetsMT.MTProvider
                     }
                     else if    (ex.Message.Contains("code:"))
                     {
-                        Regex r = new Regex(@"(?<=description: ).+$");
+                        RegexOptions opts = RegexOptions.Multiline;
+                        Regex r = new Regex(@"(?<=description: ).+$", opts);
                         Match m = r.Match(ex.Message);
                         string errText;
                         if (m.Success)
@@ -274,7 +275,12 @@ namespace LetsMT.MTProvider
                         {
                             errText = "The service was unable to acquire a translation.";
                         }
-                        throw new Exception(errText);
+
+                        r = new Regex(@"(?<=code: )\d+");
+                        m = r.Match(ex.Message);
+                        string errNum = m.Value;
+                        
+                        throw new Exception(string.Format("{0} (code {1})", errText, errNum));
                     }
                     else if (ex.Message.StartsWith("The request channel timed out "))
                     {
