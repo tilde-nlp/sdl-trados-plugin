@@ -316,6 +316,7 @@ namespace LetsMT.MTProvider
             {
                 ThreadPool.QueueUserWorkItem((x) =>
                 {
+                    serverCanceledState.Canceled = false;
                     serverRunning = true;
                     string token = GetCodeFromLocalHost(serverCanceledState);
                     serverRunning = false;
