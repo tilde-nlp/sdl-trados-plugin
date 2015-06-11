@@ -283,7 +283,7 @@ namespace LetsMT.MTProvider
         {
             if (string.IsNullOrEmpty(apiUserIdTextBox.Text.Trim()))
             {
-                MessageBox.Show(@"Please provide a valid Client ID. To retrieve your Client ID click ""Get my Client ID"" bellow.");
+                MessageBox.Show(@"Please provide a valid Client ID. To retrieve your Client ID click ""Get my Client ID"" below.");
                 return;
             }
             // stop listening if user hasnt finished authentication procedure and has entered the userId manually

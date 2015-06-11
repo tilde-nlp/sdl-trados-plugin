@@ -246,7 +246,7 @@
             this.qualityEstimateCheckBox.Name = "qualityEstimateCheckBox";
             this.qualityEstimateCheckBox.Size = new System.Drawing.Size(241, 17);
             this.qualityEstimateCheckBox.TabIndex = 26;
-            this.qualityEstimateCheckBox.Text = "Don\'t show translation if its QE score is bellow";
+            this.qualityEstimateCheckBox.Text = "Don\'t show translation if its QE score is below";
             this.qualityEstimateCheckBox.UseVisualStyleBackColor = true;
             this.qualityEstimateCheckBox.CheckedChanged += new System.EventHandler(this.qualityEstimateCheckBox_CheckedChanged);
             // 
