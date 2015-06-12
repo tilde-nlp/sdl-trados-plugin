@@ -2,7 +2,7 @@
 !include WinVer.nsh
 
 # define title of the setup
-Name "LetsMT Machine Translation Provider"
+Name "Tilde Machine Translation Provider"
 
 # define installer name
 outFile "LetsMTProvider_2011.exe"
@@ -36,8 +36,8 @@ file "C:\Users\rihards.krislauks\Documents\Visual Studio 2013\Projects\LetsMT\SD
 # define uninstaller name
 writeUninstaller $INSTDIR\uninstaller.exe
 
-CreateDirectory "$SMPROGRAMS\LetsMT Machine Translation Provider 2011"
-CreateShortCut "$SMPROGRAMS\LetsMT Machine Translation Provider 2011\Uninstall.lnk" "$INSTDIR\uninstaller.exe"
+CreateDirectory "$SMPROGRAMS\Tilde Machine Translation Provider 2011"
+CreateShortCut "$SMPROGRAMS\Tilde Machine Translation Provider 2011\Uninstall.lnk" "$INSTDIR\uninstaller.exe"
  
 # default section end
 sectionEnd
@@ -59,7 +59,7 @@ delete $INSTDIR\..\Unpacked\LetsMT.MTProvider\LetsMT.MTProvider.plugin.xml
 delete $INSTDIR\..\Unpacked\LetsMT.MTProvider\pluginpackage.manifest.xml
 RMDIR $INSTDIR\..\Unpacked\LetsMT.MTProvider\
 
-Delete "$SMPROGRAMS\LetsMT Machine Translation Provider 2011\Uninstall.lnk"
-RMDIR "$SMPROGRAMS\LetsMT Machine Translation Provider 2011"
+Delete "$SMPROGRAMS\Tilde Machine Translation Provider 2011\Uninstall.lnk"
+RMDIR "$SMPROGRAMS\Tilde Machine Translation Provider 2011"
  
 sectionEnd

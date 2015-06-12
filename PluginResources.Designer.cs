@@ -127,7 +127,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LetsMT Machine Translation Provider.
+        ///   Looks up a localized string similar to Tilde Machine Translation Provider.
         /// </summary>
         public static string Plugin_Name {
             get {
@@ -136,7 +136,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LetsMT Machine Translation Provider.
+        ///   Looks up a localized string similar to Tilde Machine Translation Provider.
         /// </summary>
         public static string Plugin_NiceName {
             get {

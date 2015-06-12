@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LetsMT SDL Trados plugin")]
+[assembly: AssemblyTitle("Tilde MT SDL Trados plugin")]
 [assembly: AssemblyDescription("MT Provider Plugin for SDL Trados 2009")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tilde, SIA")]
-[assembly: AssemblyProduct("LetsMT")]
+[assembly: AssemblyProduct("Tilde MT")]
 [assembly: AssemblyCopyright("Copyright © Tilde, SIA 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

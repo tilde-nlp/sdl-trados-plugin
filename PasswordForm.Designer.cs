@@ -48,7 +48,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(304, 194);
+            this.btnCancel.Location = new System.Drawing.Point(304, 186);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 6;
@@ -59,7 +59,7 @@
             // DemoLink
             // 
             this.DemoLink.AutoSize = true;
-            this.DemoLink.Location = new System.Drawing.Point(198, 169);
+            this.DemoLink.Location = new System.Drawing.Point(198, 161);
             this.DemoLink.Name = "DemoLink";
             this.DemoLink.Size = new System.Drawing.Size(167, 13);
             this.DemoLink.TabIndex = 7;
@@ -73,7 +73,7 @@
             this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(12, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(353, 76);
+            this.label3.Size = new System.Drawing.Size(353, 58);
             this.label3.TabIndex = 10;
             this.label3.Text = resources.GetString("label3.Text");
             // 
@@ -88,14 +88,14 @@
             // 
             // apiUserIdTextBox
             // 
-            this.apiUserIdTextBox.Location = new System.Drawing.Point(15, 142);
+            this.apiUserIdTextBox.Location = new System.Drawing.Point(15, 134);
             this.apiUserIdTextBox.Name = "apiUserIdTextBox";
             this.apiUserIdTextBox.Size = new System.Drawing.Size(270, 20);
             this.apiUserIdTextBox.TabIndex = 13;
             // 
             // goButton
             // 
-            this.goButton.Location = new System.Drawing.Point(304, 140);
+            this.goButton.Location = new System.Drawing.Point(304, 132);
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(61, 23);
             this.goButton.TabIndex = 14;
@@ -106,7 +106,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 121);
+            this.label1.Location = new System.Drawing.Point(12, 113);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 15;
@@ -116,7 +116,7 @@
             // 
             this.getClientIdLinkLabel.AutoSize = true;
             this.getClientIdLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.getClientIdLinkLabel.Location = new System.Drawing.Point(12, 166);
+            this.getClientIdLinkLabel.Location = new System.Drawing.Point(12, 158);
             this.getClientIdLinkLabel.Name = "getClientIdLinkLabel";
             this.getClientIdLinkLabel.Size = new System.Drawing.Size(102, 16);
             this.getClientIdLinkLabel.TabIndex = 16;
@@ -128,7 +128,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.label2.Location = new System.Drawing.Point(12, 200);
+            this.label2.Location = new System.Drawing.Point(12, 192);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 12);
             this.label2.TabIndex = 26;
@@ -137,7 +137,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::LetsMT.MTProvider.PluginResources.LetsMT_logo;
-            this.pictureBox2.Location = new System.Drawing.Point(78, 198);
+            this.pictureBox2.Location = new System.Drawing.Point(78, 190);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(57, 19);
             this.pictureBox2.TabIndex = 25;
@@ -147,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 227);
+            this.ClientSize = new System.Drawing.Size(375, 218);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.getClientIdLinkLabel);
@@ -165,7 +165,7 @@
             this.Name = "PasswordForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "LetsMT Authentication (v 1.2)";
+            this.Text = "Tilde MT Authentication (v 1.3)";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
