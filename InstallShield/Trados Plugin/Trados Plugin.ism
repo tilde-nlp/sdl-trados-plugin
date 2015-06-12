@@ -225,10 +225,8 @@
 	<table name="AppSearch">
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
-		<row><td>ISSTUDIO10</td><td>Signature10</td></row>
-		<row><td>ISSTUDIO10x64</td><td>Signature10_1</td></row>
-		<row><td>ISSTUDIO9</td><td>Signature9</td></row>
-		<row><td>ISSTUDIO9x64</td><td>Signature9_1</td></row>
+		<row><td>ISSTUDIO10</td><td>NewSignature11</td></row>
+		<row><td>ISSTUDIO9</td><td>NewSignature1</td></row>
 	</table>
 
 	<table name="BBControl">
@@ -292,6 +290,8 @@
 		<row><td>ISSTUDIO10</td><td>1</td></row>
 		<row><td>ISSTUDIO9</td><td>1</td></row>
 		<row><td>LAUNCHPROGRAM</td><td>1</td></row>
+		<row><td>STUDIO10</td><td>1</td></row>
+		<row><td>STUDIO9</td><td>1</td></row>
 	</table>
 
 	<table name="Class">
@@ -458,16 +458,16 @@
 		<row><td>CustomerInformation</td><td>Branding1</td><td>Text</td><td>4</td><td>229</td><td>50</td><td>13</td><td>3</td><td/><td>##IDS_INSTALLSHIELD_FORMATTED##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>Branding2</td><td>Text</td><td>3</td><td>228</td><td>50</td><td>13</td><td>65537</td><td/><td>##IDS_INSTALLSHIELD##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>Cancel</td><td>PushButton</td><td>301</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_CANCEL##</td><td>CheckBox1</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>CheckBox1</td><td>CheckBox</td><td>21</td><td>72</td><td>185</td><td>13</td><td>3</td><td>ISSTUDIO9</td><td>##NEW_STRING1##</td><td>CheckBox2</td><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>CheckBox2</td><td>CheckBox</td><td>21</td><td>120</td><td>196</td><td>22</td><td>3</td><td>ISSTUDIO10</td><td>##NEW_STRING2##</td><td>Edit1</td><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>DlgDesc</td><td>Text</td><td>21</td><td>23</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsRegisterUserDlg_PleaseEnterInfo##</td><td/><td/><td>0</td><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>CheckBox1</td><td>CheckBox</td><td>21</td><td>80</td><td>185</td><td>13</td><td>3</td><td>ISSTUDIO9</td><td>##NEW_STRING1##</td><td>CheckBox2</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>CheckBox2</td><td>CheckBox</td><td>21</td><td>132</td><td>196</td><td>13</td><td>3</td><td>ISSTUDIO10</td><td>##NEW_STRING2##</td><td>Edit2</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>DlgDesc</td><td>Text</td><td>21</td><td>50</td><td>358</td><td>25</td><td>65539</td><td/><td>##IDS__IsRegisterUserDlg_PleaseEnterInfo##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>DlgRadioGroupText</td><td>Text</td><td>21</td><td>181</td><td>300</td><td>14</td><td>3</td><td/><td>##IDS__IsRegisterUserDlg_InstallFor##</td><td/><td/><td>0</td><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsRegisterUserDlg_CustomerInformation##</td><td/><td/><td>0</td><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>Edit1</td><td>Edit</td><td>20</td><td>92</td><td>344</td><td>17</td><td>7</td><td>PACKAGES</td><td/><td>Edit2</td><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>Edit2</td><td>Edit</td><td>21</td><td>142</td><td>344</td><td>17</td><td>7</td><td>PACKAGES2</td><td/><td>RadioGroup</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>Edit1</td><td>Edit</td><td>21</td><td>98</td><td>347</td><td>17</td><td>7</td><td>PACKAGES</td><td/><td>Back</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>Edit2</td><td>Edit</td><td>21</td><td>150</td><td>347</td><td>17</td><td>7</td><td>PACKAGES2</td><td>##NEW_STRING3##</td><td>Edit1</td><td/><td/><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>RadioGroup</td><td>RadioButtonGroup</td><td>63</td><td>190</td><td>300</td><td>50</td><td>3</td><td>ApplicationUsers</td><td>##IDS__IsRegisterUserDlg_16##</td><td>Back</td><td/><td>0</td><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>RadioGroup</td><td>RadioButtonGroup</td><td>63</td><td>190</td><td>300</td><td>50</td><td>3</td><td>ApplicationUsers</td><td>##IDS__IsRegisterUserDlg_16##</td><td/><td/><td>0</td><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>SDL Trados Studio version selection</td><td>Text</td><td>13</td><td>12</td><td>231</td><td>19</td><td>65539</td><td/><td>##NEW_STRING5##</td><td/><td/><td/><td/><td/><td/></row>
 		<row><td>DatabaseFolder</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>DatabaseFolder</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
 		<row><td>DatabaseFolder</td><td>BannerLine</td><td>Line</td><td>0</td><td>44</td><td>374</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
@@ -762,6 +762,10 @@
 		<row><td>CustomerInformation</td><td>DlgRadioGroupText</td><td>Hide</td><td>NOT Privileged</td></row>
 		<row><td>CustomerInformation</td><td>DlgRadioGroupText</td><td>Hide</td><td>ProductState &gt; 0</td></row>
 		<row><td>CustomerInformation</td><td>DlgRadioGroupText</td><td>Hide</td><td>Version9X</td></row>
+		<row><td>CustomerInformation</td><td>Edit1</td><td>Disable</td><td>Not ISSTUDIO9</td></row>
+		<row><td>CustomerInformation</td><td>Edit1</td><td>Enable</td><td>ISSTUDIO9</td></row>
+		<row><td>CustomerInformation</td><td>Edit2</td><td>Disable</td><td>not ISSTUDIO10</td></row>
+		<row><td>CustomerInformation</td><td>Edit2</td><td>Enable</td><td>ISSTUDIO10</td></row>
 		<row><td>CustomerInformation</td><td>Next</td><td>Disable</td><td>NOT (ISSTUDIO9 or ISSTUDIO10)</td></row>
 		<row><td>CustomerInformation</td><td>Next</td><td>Enable</td><td>ISSTUDIO9 or ISSTUDIO10</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>1</td></row>
@@ -855,8 +859,8 @@
 		<row><td>AdminWelcome</td><td>Next</td><td>NewDialog</td><td>AdminNetworkLocation</td><td>1</td><td>0</td></row>
 		<row><td>CancelSetup</td><td>No</td><td>EndDialog</td><td>Return</td><td>1</td><td>0</td></row>
 		<row><td>CancelSetup</td><td>Yes</td><td>EndDialog</td><td>Exit</td><td>1</td><td>2</td></row>
-		<row><td>CustomSetup</td><td>Back</td><td>NewDialog</td><td>MaintenanceType</td><td>Installed</td><td>0</td></row>
-		<row><td>CustomSetup</td><td>Back</td><td>NewDialog</td><td>SetupType</td><td>NOT Installed</td><td>0</td></row>
+		<row><td>CustomSetup</td><td>Back</td><td>NewDialog</td><td>MaintenanceType</td><td>Installed</td><td>1</td></row>
+		<row><td>CustomSetup</td><td>Back</td><td>NewDialog</td><td>SetupType</td><td>NOT Installed</td><td>2</td></row>
 		<row><td>CustomSetup</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>CustomSetup</td><td>ChangeFolder</td><td>SelectionBrowse</td><td>InstallChangeFolder</td><td>1</td><td>0</td></row>
 		<row><td>CustomSetup</td><td>Details</td><td>SelectionBrowse</td><td>DiskSpaceRequirements</td><td>1</td><td>1</td></row>
@@ -891,9 +895,9 @@
 		<row><td>InstallChangeFolder</td><td>OK</td><td>EndDialog</td><td>Return</td><td>1</td><td>3</td></row>
 		<row><td>InstallChangeFolder</td><td>OK</td><td>SetTargetPath</td><td>[_BrowseProperty]</td><td>1</td><td>2</td></row>
 		<row><td>InstallChangeFolder</td><td>Up</td><td>DirectoryListUp</td><td>0</td><td>1</td><td>0</td></row>
-		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>Display_IsBitmapDlg</td><td>0</td></row>
+		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>Display_IsBitmapDlg</td><td>1</td></row>
 		<row><td>InstallWelcome</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
-		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>CustomerInformation</td><td>1</td><td>0</td></row>
+		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>CustomerInformation</td><td>1</td><td>1</td></row>
 		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>DoAction</td><td>ISPrint</td><td>1</td><td>0</td></row>
@@ -995,8 +999,6 @@
 		<row><td>CheckForProductUpdatesOnReboot</td><td>226</td><td>ISUpdateServiceFolder</td><td>[ISUpdateServiceFolder]agent.exe "/au[ProductCode] /EndOfInstall /Reboot"</td><td>Checks for product updates on reboot</td></row>
 		<row><td>ISPreventDowngrade</td><td>19</td><td/><td>[IS_PREVENT_DOWNGRADE_EXIT]</td><td>Exits install when a newer version of this product is found</td></row>
 		<row><td>ISPrint</td><td>1</td><td>SetAllUsers.dll</td><td>PrintScrollableText</td><td>Prints the contents of a ScrollableText control on a dialog.</td></row>
-		<row><td>ISSTUDIO10</td><td>51</td><td>ISSTUDIO10</td><td>ISSTUDIO10x64</td><td/></row>
-		<row><td>ISSTUDIO9</td><td>51</td><td>ISSTUDIO9</td><td>ISSTUDIO9x64</td><td/></row>
 		<row><td>ISSelfRegisterCosting</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterCosting</td><td/></row>
 		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/></row>
 		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/></row>
@@ -1029,7 +1031,7 @@
 		<row><td>CancelSetup</td><td>50</td><td>50</td><td>260</td><td>85</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>No</td><td>No</td><td>No</td><td>Cancel</td><td/><td>0</td><td/></row>
 		<row><td>CustomSetup</td><td>50</td><td>50</td><td>374</td><td>266</td><td>35</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>Tree</td><td>Next</td><td>Cancel</td><td>Custom Selection</td><td/><td>0</td><td/></row>
 		<row><td>CustomSetupTips</td><td>50</td><td>50</td><td>374</td><td>266</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>OK</td><td>OK</td><td>OK</td><td>Custom Setup Tips</td><td/><td>0</td><td/></row>
-		<row><td>CustomerInformation</td><td>50</td><td>50</td><td>374</td><td>266</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>RadioGroup</td><td>Next</td><td>Cancel</td><td>Identification</td><td/><td>0</td><td/></row>
+		<row><td>CustomerInformation</td><td>50</td><td>50</td><td>374</td><td>266</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>Back</td><td>Next</td><td>Cancel</td><td>Identification</td><td/><td>0</td><td/></row>
 		<row><td>DatabaseFolder</td><td>50</td><td>50</td><td>374</td><td>266</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>Next</td><td>Next</td><td>Cancel</td><td>Database Folder</td><td/><td>0</td><td/></row>
 		<row><td>DestinationFolder</td><td>50</td><td>50</td><td>374</td><td>266</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>Next</td><td>Next</td><td>Cancel</td><td>Destination Folder</td><td/><td>0</td><td/></row>
 		<row><td>DiskSpaceRequirements</td><td>50</td><td>50</td><td>374</td><td>266</td><td>3</td><td>##IDS_PRODUCTNAME_INSTALLSHIELD##</td><td>OK</td><td>OK</td><td>OK</td><td>Feature Details</td><td/><td>0</td><td/></row>
@@ -1083,7 +1085,7 @@
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES</td><td>PLUGINS</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES2</td><td>PLUGINS2</td><td>Packages</td><td/><td>0</td><td/></row>
-		<row><td>PLUGINS</td><td>STUDIO9</td><td>Plugins</td><td/><td>0</td><td/></row>
+		<row><td>PLUGINS</td><td>_</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS2</td><td>STUDIO10</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
@@ -1093,7 +1095,6 @@
 		<row><td>SDL</td><td>LocalAppDataFolder</td><td>SDL</td><td/><td>0</td><td/></row>
 		<row><td>SDL_TRADOS_STUDIO</td><td>SDL</td><td>SDLTRA~1|SDL Trados Studio</td><td/><td>0</td><td/></row>
 		<row><td>STUDIO10</td><td>INSTALLDIR</td><td>10</td><td/><td>0</td><td/></row>
-		<row><td>STUDIO9</td><td>INSTALLDIR</td><td>9</td><td/><td>0</td><td/></row>
 		<row><td>SendToFolder</td><td>TARGETDIR</td><td>.:SendTo</td><td/><td>3</td><td/></row>
 		<row><td>StartMenuFolder</td><td>TARGETDIR</td><td>.:STARTM~1|Start Menu</td><td/><td>3</td><td/></row>
 		<row><td>StartupFolder</td><td>TARGETDIR</td><td>.:StartUp</td><td/><td>3</td><td/></row>
@@ -1108,6 +1109,7 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>_</td><td>INSTALLDIR</td><td>9</td><td/><td>0</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1115,6 +1117,10 @@
 		<col key="yes" def="S72">Parent</col>
 		<col key="yes" def="S255">Path</col>
 		<col def="I2">Depth</col>
+		<row><td>NewSignature1</td><td>NewSignature2</td><td>9</td><td>0</td></row>
+		<row><td>NewSignature11</td><td>NewSignature3</td><td>10</td><td>0</td></row>
+		<row><td>NewSignature2</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
+		<row><td>NewSignature3</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
 	</table>
 
 	<table name="DuplicateFile">
@@ -2360,6 +2366,7 @@
 		<row><td>ISProductFolder</td><td/><td/><td>1</td></row>
 		<row><td>ISProjectDataFolder</td><td>1</td><td/><td>1</td></row>
 		<row><td>ISProjectFolder</td><td/><td/><td>1</td></row>
+		<row><td>PATH_TO_DESKTOP_FILES</td><td>\\tld103\c$\Users\Evita.Kornejeva\Desktop</td><td/><td>2</td></row>
 		<row><td>PATH_TO_EVITA_FILES</td><td>D:\evita</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
@@ -2641,9 +2648,6 @@
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_SCREEN</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1843710508</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_SOFTWARE_SDL_STUDIO1</td><td>1033</td><td>Is9</td><td>0</td><td/><td>-1256187891</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_SOFTWARE_SDL_STUDIO2</td><td>1033</td><td>Is10</td><td>0</td><td/><td>-1256157171</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_TILDE</td><td>1033</td><td>Tilde</td><td>0</td><td/><td>-1256193907</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION__</td><td>1033</td><td>SDL Trados Studio 2009 or  SDL Trados Studio 2011 required</td><td>0</td><td/><td>-1256138070</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION__0</td><td>1033</td><td>SDL Trados Studio required</td><td>0</td><td/><td>-1256187350</td></row>
 		<row><td>IDPROP_SETUPTYPE_COMPACT</td><td>1033</td><td>Compact</td><td>0</td><td/><td>-1843710508</td></row>
@@ -3589,7 +3593,7 @@
 		<row><td>IDS__IsErrorDlg_Yes</td><td>1033</td><td>&amp;Yes</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsExitDialog_Finish</td><td>1033</td><td>&amp;Finish</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsExitDialog_InstallSuccess</td><td>1033</td><td>The InstallShield Wizard has successfully installed [ProductName]. Click Finish to exit the wizard.</td><td>0</td><td/><td>-1843710508</td></row>
-		<row><td>IDS__IsExitDialog_LaunchProgram</td><td>1033</td><td>Launch [ProductName]</td><td>0</td><td/><td>-1256194003</td></row>
+		<row><td>IDS__IsExitDialog_LaunchProgram</td><td>1033</td><td>Launch [ProductName]</td><td>0</td><td/><td>-1256188278</td></row>
 		<row><td>IDS__IsExitDialog_ShowReadMe</td><td>1033</td><td>Show the readme file</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsExitDialog_UninstallSuccess</td><td>1033</td><td>The InstallShield Wizard has successfully uninstalled [ProductName]. Click Finish to exit the wizard.</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsExitDialog_Update_InternetConnection</td><td>1033</td><td>Your Internet connection can be used to make sure that you have the latest updates.</td><td>0</td><td/><td>-1843710508</td></row>
@@ -3647,11 +3651,11 @@
 		<row><td>IDS__IsProgressDlg_2</td><td>1033</td><td/><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsProgressDlg_Hidden</td><td>1033</td><td>(Hidden for now)</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsProgressDlg_HiddenTimeRemaining</td><td>1033</td><td>)Hidden for now)Estimated time remaining:</td><td>0</td><td/><td>-1843710508</td></row>
-		<row><td>IDS__IsProgressDlg_InstallingProductName</td><td>1033</td><td>{&amp;MSSansBold8}Installing [ProductName]</td><td>0</td><td/><td>-1843710508</td></row>
+		<row><td>IDS__IsProgressDlg_InstallingProductName</td><td>1033</td><td>{&amp;MSSansBold8}[ProductName]</td><td>0</td><td/><td>-1121948916</td></row>
 		<row><td>IDS__IsProgressDlg_ProgressDone</td><td>1033</td><td>Progress done</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsProgressDlg_SecHidden</td><td>1033</td><td>(Hidden for now)Sec.</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsProgressDlg_Status</td><td>1033</td><td>Status:</td><td>0</td><td/><td>-1843710508</td></row>
-		<row><td>IDS__IsProgressDlg_Uninstalling</td><td>1033</td><td>{&amp;MSSansBold8}Uninstalling [ProductName]</td><td>0</td><td/><td>-1843710508</td></row>
+		<row><td>IDS__IsProgressDlg_Uninstalling</td><td>1033</td><td>{&amp;MSSansBold8}[ProductName]</td><td>0</td><td/><td>-1121965300</td></row>
 		<row><td>IDS__IsProgressDlg_UninstallingFeatures</td><td>1033</td><td>The program features you selected are being uninstalled.</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsProgressDlg_UninstallingFeatures2</td><td>1033</td><td>The program features you selected are being installed.</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsProgressDlg_WaitUninstall</td><td>1033</td><td>Please wait while the InstallShield Wizard uninstalls [ProductName]. This may take several minutes.</td><td>0</td><td/><td>-1843710508</td></row>
@@ -3665,7 +3669,7 @@
 		<row><td>IDS__IsRegisterUserDlg_InstallFor</td><td>1033</td><td>Install this application for:</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsRegisterUserDlg_OnlyMe</td><td>1033</td><td>Only for &amp;me ([USERNAME])</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsRegisterUserDlg_Organization</td><td>1033</td><td>&amp;Organization:</td><td>0</td><td/><td>-1843710508</td></row>
-		<row><td>IDS__IsRegisterUserDlg_PleaseEnterInfo</td><td>1033</td><td>Please enter your information.</td><td>0</td><td/><td>-1843710508</td></row>
+		<row><td>IDS__IsRegisterUserDlg_PleaseEnterInfo</td><td>1033</td><td>{\Tahoma8}Choose which SDL Trados Studio version to add the LetsMT! Machine Translation Provider to.</td><td>0</td><td/><td>-1121952916</td></row>
 		<row><td>IDS__IsRegisterUserDlg_SerialNumber</td><td>1033</td><td>&amp;Serial Number:</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsRegisterUserDlg_Tahoma50</td><td>1033</td><td>{\Tahoma8}{50}</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDS__IsRegisterUserDlg_Tahoma80</td><td>1033</td><td>{\Tahoma8}{80}</td><td>0</td><td/><td>-1843710508</td></row>
@@ -3736,8 +3740,11 @@
 		<row><td>ID_STRING8</td><td>1033</td><td>LetsMT.MTProvider.plugin.xml</td><td>0</td><td/><td>-1256145173</td></row>
 		<row><td>ID_STRING9</td><td>1033</td><td>LetsMT.MTProvider.plugin.xml</td><td>0</td><td/><td>-1256141077</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1843710508</td></row>
-		<row><td>NEW_STRING1</td><td>1033</td><td>plugin for SDL TRADOS Studio 2009</td><td>0</td><td/><td>-1256160918</td></row>
-		<row><td>NEW_STRING2</td><td>1033</td><td>plugin for SDL Trados Studio 2011</td><td>0</td><td/><td>-1256136342</td></row>
+		<row><td>NEW_STRING1</td><td>1033</td><td>SDL TRADOS Studio 2009</td><td>0</td><td/><td>-1256171730</td></row>
+		<row><td>NEW_STRING2</td><td>1033</td><td>SDL Trados Studio 2011</td><td>0</td><td/><td>-1256167634</td></row>
+		<row><td>NEW_STRING3</td><td>1033</td><td/><td>0</td><td/><td>-1256159922</td></row>
+		<row><td>NEW_STRING4</td><td>1033</td><td>Text</td><td>0</td><td/><td>-1256151378</td></row>
+		<row><td>NEW_STRING5</td><td>1033</td><td>{\TahomaBold8}SDL Trados Studio version selection</td><td>0</td><td/><td>-1256192242</td></row>
 	</table>
 
 	<table name="ISTargetImage">
@@ -4022,8 +4029,6 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>FileCost</td><td/><td>900</td><td>FileCost</td><td/></row>
 		<row><td>FindRelatedProducts</td><td/><td>430</td><td>FindRelatedProducts</td><td/></row>
 		<row><td>ISPreventDowngrade</td><td>ISFOUNDNEWERPRODUCTVERSION</td><td>450</td><td>ISPreventDowngrade</td><td/></row>
-		<row><td>ISSTUDIO10</td><td>ISSTUDIO10x64</td><td>417</td><td/><td/></row>
-		<row><td>ISSTUDIO9</td><td>ISSTUDIO9x64</td><td>415</td><td/><td/></row>
 		<row><td>InstallWelcome</td><td>Not Installed And (Not PATCH Or IS_MAJOR_UPGRADE)</td><td>1210</td><td>InstallWelcome</td><td/></row>
 		<row><td>IsolateComponents</td><td/><td>950</td><td>IsolateComponents</td><td/></row>
 		<row><td>LaunchConditions</td><td>Not Installed</td><td>410</td><td>LaunchConditions</td><td/></row>
@@ -4052,7 +4057,6 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 	<table name="LaunchCondition">
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
-		<row><td>ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO9x64 or ISSTUDIO10x64</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION__##</td></row>
 	</table>
 
 	<table name="ListBox">
@@ -4261,9 +4265,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ISENABLEDWUSFINISHDIALOG</td><td/><td/></row>
 		<row><td>ISSHOWMSILOG</td><td/><td/></row>
 		<row><td>ISSTUDIO10</td><td/><td/></row>
-		<row><td>ISSTUDIO10x64</td><td/><td/></row>
 		<row><td>ISSTUDIO9</td><td/><td/></row>
-		<row><td>ISSTUDIO9x64</td><td/><td/></row>
 		<row><td>ISVROOT_PORT_NO</td><td>0</td><td/></row>
 		<row><td>IS_COMPLUS_PROGRESSTEXT_COST</td><td>##IDS_COMPLUS_PROGRESSTEXT_COST##</td><td/></row>
 		<row><td>IS_COMPLUS_PROGRESSTEXT_INSTALL</td><td>##IDS_COMPLUS_PROGRESSTEXT_INSTALL##</td><td/></row>
@@ -4282,8 +4284,6 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>IS_SQLSERVER_USERNAME</td><td>sa</td><td/></row>
 		<row><td>InstallChoice</td><td>AR</td><td/></row>
 		<row><td>Manufacturer</td><td>##COMPANY_NAME##</td><td/></row>
-		<row><td>PACKAGES2LOC</td><td/><td/></row>
-		<row><td>PACKAGESLOC</td><td/><td/></row>
 		<row><td>PIDTemplate</td><td>12345&lt;###-%%%%%%%&gt;@@@@@</td><td/></row>
 		<row><td>PROGMSG_IIS_CREATEAPPPOOL</td><td>##IDS_PROGMSG_IIS_CREATEAPPPOOL##</td><td/></row>
 		<row><td>PROGMSG_IIS_CREATEAPPPOOLS</td><td>##IDS_PROGMSG_IIS_CREATEAPPPOOLS##</td><td/></row>
@@ -4318,7 +4318,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ReinstallModeText</td><td>omus</td><td/></row>
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SHOWLAUNCHPROGRAM</td><td>0</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;SUPPORTDIR;LAUNCHPROGRAM;ISSTUDIO9;ISSTUDIO10;ISSTUDIO9x64;ISSTUDIO10x64;PACKAGES2LOC;PACKAGESLOC;PACKAGES;PACKAGES2</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;SUPPORTDIR;LAUNCHPROGRAM;ISSTUDIO9;ISSTUDIO10;PACKAGES2;PACKAGES</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{5A844BF8-6E64-46E6-937F-98F65EA2BF46}</td><td/></row>
 		<row><td>_IsMaintenance</td><td>Change</td><td/></row>
@@ -4362,10 +4362,6 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<col def="s255">Key</col>
 		<col def="S255">Name</col>
 		<col def="I2">Type</col>
-		<row><td>Signature10</td><td>2</td><td>Software\sdl\Studio2\Installer</td><td/><td>2</td></row>
-		<row><td>Signature10_1</td><td>2</td><td>SOFTWARE\Wow6432Node\sdl\Studio2\Installer</td><td/><td>2</td></row>
-		<row><td>Signature9</td><td>2</td><td>Software\sdl\Studio1\Installer</td><td/><td>2</td></row>
-		<row><td>Signature9_1</td><td>2</td><td>SOFTWARE\Wow6432Node\sdl\Studio1\Installer</td><td/><td>2</td></row>
 	</table>
 
 	<table name="Registry">
@@ -4388,10 +4384,6 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>FileKey10</td><td>Plugin_version9</td><td/><td>MTPROVIDER9</td><td>2</td></row>
 		<row><td>FileKey11</td><td>Plugin_version10</td><td/><td>UNPACKED10</td><td>2</td></row>
 		<row><td>FileKey12</td><td>Plugin_version9</td><td/><td>UNPACKED9</td><td>2</td></row>
-		<row><td>FileKey13</td><td>Plugin_version10</td><td/><td>PLUGINS2</td><td>2</td></row>
-		<row><td>FileKey14</td><td>Plugin_version9</td><td/><td>PLUGINS</td><td>2</td></row>
-		<row><td>FileKey15</td><td>Plugin_version9</td><td/><td>STUDIO9</td><td>2</td></row>
-		<row><td>FileKey16</td><td>Plugin_version10</td><td/><td>STUDIO10</td><td>2</td></row>
 		<row><td>FileKey2</td><td>Plugin_version10</td><td>##ID_STRING4##</td><td>MTPROVIDER10</td><td>2</td></row>
 		<row><td>FileKey3</td><td>Plugin_version10</td><td>##ID_STRING8##</td><td>MTPROVIDER10</td><td>2</td></row>
 		<row><td>FileKey4</td><td>Plugin_version10</td><td>##ID_STRING10##</td><td>MTPROVIDER10</td><td>2</td></row>
