@@ -1,0 +1,39 @@
+////////////////////////////////////////////////////////////////////////////////
+//                                                                            
+//  IIIIIII SSSSSS                                                            
+//    II    SS                          InstallShield (R)                     
+//    II    SSSSSS      (c) 1996-2002, InstallShield Software Corporation     
+//    II        SS                     All rights reserved.             
+//  IIIIIII SSSSSS                  
+//                                                                            
+//                                                                            
+//  This template script provides the code necessary to build an entry-point 
+//  function to be called in an InstallScript custom action. 
+//                                                                            
+//                                                                            
+//    File Name:  Setup.rul                                                   
+//                                                                            
+//  Description:  InstallShield script                                        
+//
+////////////////////////////////////////////////////////////////////////////////
+
+// Include Ifx.h for built-in InstallScript function prototypes, for Windows 
+// Installer API function prototypes and constants, and to declare code for 
+// the OnBegin and OnEnd events.
+#include "ifx.h"
+
+    // The keyword export identifies MyFunction() as an entry-point function.
+    // The argument it accepts must be a handle to the Installer database.
+    export prototype getInstalled(HWND);  
+function getInstalled(hMSI)   
+   number DefaultRoot, nRez, ntype;
+   string sValue, srez;
+begin                
+	DefaultRoot = RegDBGetDefaultRoot();
+    RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE); 
+	sValue="Software\\sdl\\Studio1\\Installer" ;    
+	ntype=REGDB_STRING;
+	RegDBGetKeyValueEx(sValue, "",ntype, srez, nRez);
+    //RegDBGetItem(sVal, "");
+    RegDBSetDefaultRoot (DefaultRoot);
+end;
