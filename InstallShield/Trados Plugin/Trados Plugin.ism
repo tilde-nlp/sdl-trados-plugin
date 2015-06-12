@@ -226,6 +226,7 @@
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
 		<row><td>ISSTUDIO10</td><td>NewSignature11</td></row>
+		<row><td>ISSTUDIO11</td><td>NewSignature12</td></row>
 		<row><td>ISSTUDIO9</td><td>NewSignature1</td></row>
 	</table>
 
@@ -289,6 +290,7 @@
 		<row><td>ISCHECKFORPRODUCTUPDATES</td><td>1</td></row>
 		<row><td>ISSHOWMSILOG</td><td/></row>
 		<row><td>ISSTUDIO10</td><td>1</td></row>
+		<row><td>ISSTUDIO11</td><td>1</td></row>
 		<row><td>ISSTUDIO9</td><td>1</td></row>
 		<row><td>LAUNCHPROGRAM</td><td>1</td></row>
 		<row><td>LAUNCHREADME</td><td/></row>
@@ -345,8 +347,9 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>Plugin_version10</td><td>{C71D05E6-0171-40B6-ADCA-22377D7ABFB6}</td><td>PACKAGES2</td><td>8</td><td>ISSTUDIO10</td><td>letsmt.mtprovider.sdlplugin</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Plugin_version9</td><td>{3953C67B-0624-4231-8805-3F84C5C6C4D9}</td><td>PACKAGES</td><td>8</td><td>ISSTUDIO9</td><td>letsmt.mtprovider.sdlplugin1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Plugin_version10</td><td>{C71D05E6-0171-40B6-ADCA-22377D7ABFB6}</td><td>NEW_DIRECTORY1</td><td>8</td><td>ISSTUDIO10</td><td>letsmt.mtprovider.sdlplugin</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Plugin_version11</td><td>{ACF0DDE1-B016-4B72-AC03-617B59356F83}</td><td>NEW_DIRECTORY2</td><td>8</td><td>ISSTUDIO11</td><td>letsmt.mtprovider.sdlplugin2</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Plugin_version9</td><td>{3953C67B-0624-4231-8805-3F84C5C6C4D9}</td><td>NEW_DIRECTORY3</td><td>8</td><td>ISSTUDIO9</td><td>letsmt.mtprovider.sdlplugin1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -460,13 +463,15 @@
 		<row><td>CustomerInformation</td><td>Branding1</td><td>Text</td><td>4</td><td>229</td><td>50</td><td>13</td><td>3</td><td/><td>##IDS_INSTALLSHIELD_FORMATTED##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>Branding2</td><td>Text</td><td>3</td><td>228</td><td>50</td><td>13</td><td>65537</td><td/><td>##IDS_INSTALLSHIELD##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>Cancel</td><td>PushButton</td><td>301</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_CANCEL##</td><td>CheckBox1</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>CheckBox1</td><td>CheckBox</td><td>21</td><td>80</td><td>185</td><td>13</td><td>3</td><td>ISSTUDIO9</td><td>##NEW_STRING1##</td><td>CheckBox2</td><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>CheckBox2</td><td>CheckBox</td><td>21</td><td>132</td><td>196</td><td>13</td><td>3</td><td>ISSTUDIO10</td><td>##NEW_STRING2##</td><td>Edit2</td><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>DlgDesc</td><td>Text</td><td>21</td><td>50</td><td>358</td><td>25</td><td>65539</td><td/><td>##IDS__IsRegisterUserDlg_PleaseEnterInfo##</td><td/><td/><td>0</td><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>CheckBox1</td><td>CheckBox</td><td>21</td><td>62</td><td>185</td><td>13</td><td>3</td><td>ISSTUDIO9</td><td>##NEW_STRING1##</td><td>CheckBox3</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>CheckBox2</td><td>CheckBox</td><td>22</td><td>100</td><td>196</td><td>13</td><td>3</td><td>ISSTUDIO10</td><td>##NEW_STRING2##</td><td>Edit2</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>CheckBox3</td><td>CheckBox</td><td>21</td><td>138</td><td>196</td><td>13</td><td>3</td><td>ISSTUDIO11</td><td>##NEW_STRING7##</td><td>Edit3</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>DlgDesc</td><td>Text</td><td>13</td><td>30</td><td>358</td><td>25</td><td>65539</td><td/><td>##IDS__IsRegisterUserDlg_PleaseEnterInfo##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>DlgRadioGroupText</td><td>Text</td><td>26</td><td>180</td><td>300</td><td>14</td><td>3</td><td/><td>##IDS__IsRegisterUserDlg_InstallFor##</td><td/><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>Edit1</td><td>Edit</td><td>21</td><td>98</td><td>347</td><td>17</td><td>7</td><td>PACKAGES</td><td/><td>Back</td><td/><td/><td/><td/><td/></row>
-		<row><td>CustomerInformation</td><td>Edit2</td><td>Edit</td><td>21</td><td>150</td><td>347</td><td>17</td><td>7</td><td>PACKAGES2</td><td>##NEW_STRING3##</td><td>Edit1</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>Edit1</td><td>Edit</td><td>21</td><td>75</td><td>347</td><td>17</td><td>7</td><td>PACKAGES</td><td/><td>CheckBox2</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>Edit2</td><td>Edit</td><td>21</td><td>113</td><td>347</td><td>17</td><td>7</td><td>PACKAGES2</td><td>##NEW_STRING3##</td><td>Back</td><td/><td/><td/><td/><td/></row>
+		<row><td>CustomerInformation</td><td>Edit3</td><td>Edit</td><td>21</td><td>151</td><td>347</td><td>17</td><td>7</td><td>PACKAGES3</td><td>##NEW_STRING8##</td><td>Edit1</td><td/><td/><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>RadioButtonGroup</td><td>63</td><td>190</td><td>300</td><td>50</td><td>3</td><td>ApplicationUsers</td><td>##IDS__IsRegisterUserDlg_16##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>CustomerInformation</td><td>SDL Trados Studio version selection</td><td>Text</td><td>13</td><td>12</td><td>231</td><td>19</td><td>65539</td><td/><td>##NEW_STRING5##</td><td/><td/><td/><td/><td/><td/></row>
@@ -764,8 +769,10 @@
 		<row><td>CustomerInformation</td><td>Edit1</td><td>Enable</td><td>ISSTUDIO9</td></row>
 		<row><td>CustomerInformation</td><td>Edit2</td><td>Disable</td><td>not ISSTUDIO10</td></row>
 		<row><td>CustomerInformation</td><td>Edit2</td><td>Enable</td><td>ISSTUDIO10</td></row>
-		<row><td>CustomerInformation</td><td>Next</td><td>Disable</td><td>NOT (ISSTUDIO9 or ISSTUDIO10)</td></row>
-		<row><td>CustomerInformation</td><td>Next</td><td>Enable</td><td>ISSTUDIO9 or ISSTUDIO10</td></row>
+		<row><td>CustomerInformation</td><td>Edit3</td><td>Disable</td><td>not ISSTUDIO11</td></row>
+		<row><td>CustomerInformation</td><td>Edit3</td><td>Enable</td><td>ISSTUDIO11</td></row>
+		<row><td>CustomerInformation</td><td>Next</td><td>Disable</td><td>NOT (ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11)</td></row>
+		<row><td>CustomerInformation</td><td>Next</td><td>Enable</td><td>ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>1</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>NOT Privileged</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>ProductState &gt; 0</td></row>
@@ -1078,11 +1085,17 @@
 		<row><td>ISUpdateServiceFolder</td><td>ISCommonFilesFolder</td><td>UPDATE~1|UpdateService</td><td/><td>0</td><td/></row>
 		<row><td>LocalAppDataFolder</td><td>TARGETDIR</td><td>.:LocalA~1|LocalAppData</td><td/><td>0</td><td/></row>
 		<row><td>MTPROVIDER10</td><td>UNPACKED10</td><td>LETSMT~1|LetsMT.MTProvider</td><td/><td>0</td><td/></row>
+		<row><td>MTPROVIDER11</td><td>UNPACKED11</td><td>LETSMT~1|LetsMT.MTProvider</td><td/><td>0</td><td/></row>
 		<row><td>MTPROVIDER9</td><td>UNPACKED9</td><td>LETSMT~1|LetsMT.MTProvider</td><td/><td>0</td><td/></row>
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
+		<row><td>NEW_DIRECTORY1</td><td>PACKAGES2</td><td>.:PACKAG~1|PACKAGES2</td><td/><td>0</td><td/></row>
+		<row><td>NEW_DIRECTORY2</td><td>PACKAGES3</td><td>.:PACKAG~1|PACKAGES3</td><td/><td>0</td><td/></row>
+		<row><td>NEW_DIRECTORY3</td><td>PACKAGES</td><td>.:PACKAGES</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES</td><td>PLUGINS</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES2</td><td>PLUGINS2</td><td>Packages</td><td/><td>0</td><td/></row>
-		<row><td>PLUGINS</td><td>_</td><td>Plugins</td><td/><td>0</td><td/></row>
+		<row><td>PACKAGES3</td><td>PLUGINS1</td><td>Packages</td><td/><td>0</td><td/></row>
+		<row><td>PLUGINS</td><td>STUDIO9</td><td>Plugins</td><td/><td>0</td><td/></row>
+		<row><td>PLUGINS1</td><td>STUDIO11</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS2</td><td>STUDIO10</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
@@ -1092,6 +1105,8 @@
 		<row><td>SDL</td><td>LocalAppDataFolder</td><td>SDL</td><td/><td>0</td><td/></row>
 		<row><td>SDL_TRADOS_STUDIO</td><td>SDL</td><td>SDLTRA~1|SDL Trados Studio</td><td/><td>0</td><td/></row>
 		<row><td>STUDIO10</td><td>INSTALLDIR</td><td>10</td><td/><td>0</td><td/></row>
+		<row><td>STUDIO11</td><td>INSTALLDIR</td><td>11</td><td/><td>0</td><td/></row>
+		<row><td>STUDIO9</td><td>INSTALLDIR</td><td>9</td><td/><td>0</td><td/></row>
 		<row><td>SendToFolder</td><td>TARGETDIR</td><td>.:SendTo</td><td/><td>3</td><td/></row>
 		<row><td>StartMenuFolder</td><td>TARGETDIR</td><td>.:STARTM~1|Start Menu</td><td/><td>3</td><td/></row>
 		<row><td>StartupFolder</td><td>TARGETDIR</td><td>.:StartUp</td><td/><td>3</td><td/></row>
@@ -1102,11 +1117,11 @@
 		<row><td>TempFolder</td><td>TARGETDIR</td><td>.:Temp</td><td/><td>0</td><td/></row>
 		<row><td>TemplateFolder</td><td>TARGETDIR</td><td>.:ShellNew</td><td/><td>0</td><td/></row>
 		<row><td>UNPACKED10</td><td>PLUGINS2</td><td>Unpacked</td><td/><td>0</td><td/></row>
+		<row><td>UNPACKED11</td><td>PLUGINS1</td><td>Unpacked</td><td/><td>0</td><td/></row>
 		<row><td>UNPACKED9</td><td>PLUGINS</td><td>Unpacked</td><td/><td>0</td><td/></row>
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
-		<row><td>_</td><td>INSTALLDIR</td><td>9</td><td/><td>0</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1116,8 +1131,10 @@
 		<col def="I2">Depth</col>
 		<row><td>NewSignature1</td><td>NewSignature2</td><td>9</td><td>0</td></row>
 		<row><td>NewSignature11</td><td>NewSignature3</td><td>10</td><td>0</td></row>
+		<row><td>NewSignature12</td><td>NewSignature4</td><td>11</td><td>0</td></row>
 		<row><td>NewSignature2</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
 		<row><td>NewSignature3</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
+		<row><td>NewSignature4</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
 	</table>
 
 	<table name="DuplicateFile">
@@ -1802,6 +1819,7 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>Plugin</td><td>Plugin_version10</td></row>
+		<row><td>Plugin</td><td>Plugin_version11</td></row>
 		<row><td>Plugin</td><td>Plugin_version9</td></row>
 	</table>
 
@@ -1819,6 +1837,7 @@
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>letsmt.mtprovider.sdlplugin</td><td>Plugin_version10</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 		<row><td>letsmt.mtprovider.sdlplugin1</td><td>Plugin_version9</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin2</td><td>Plugin_version11</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2027,6 +2046,7 @@
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
 		<row><td>Plugin_version10</td><td/><td/><td>_E0557CDD_6252_4502_A7AA_CCC68F339B77_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Plugin_version11</td><td/><td/><td>_FD3B7EC7_B515_41A8_B876_F9AAA7E37955_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Plugin_version9</td><td/><td/><td>_9A911266_267D_48CA_96D9_055B82DE935F_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2425,6 +2445,7 @@
 		<col def="S255">MsiCommandLine</col>
 		<col def="I4">ISSetupPrerequisiteLocation</col>
 		<row><td>Release 1</td><td>Product Configuration 1</td><td>&lt;ISProjectDataFolder&gt;</td><td>PackageName</td><td>1</td><td>1033</td><td>2</td><td>1</td><td>Intel</td><td/><td>1033</td><td>0</td><td>0</td><td>0</td><td>0</td><td/><td>0</td><td/><td>MediaLocation</td><td/><td>http://</td><td/><td/><td/><td/><td>42018828</td><td/><td/><td/><td/></row>
+		<row><td>Release 2</td><td>Product Configuration 1</td><td>&lt;ISProjectDataFolder&gt;</td><td>PackageName</td><td>1</td><td>1033</td><td>2</td><td>1</td><td>Intel</td><td/><td>1033</td><td>0</td><td>0</td><td>0</td><td>0</td><td/><td>0</td><td/><td>MediaLocation</td><td/><td>http://</td><td/><td/><td/><td/><td>42018828</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISReleaseASPublishInfo">
@@ -2466,6 +2487,7 @@
 		<col def="S255">WinMsi30Url</col>
 		<col def="S255">CertPassword</col>
 		<row><td>Release 1</td><td>Product Configuration 1</td><td>0</td><td>http://</td><td>0</td><td>install</td><td>install</td><td>[LocalAppDataFolder]Downloaded Installations</td><td>0</td><td>http://www.installengine.com/Msiengine20</td><td>http://www.installengine.com/Msiengine20</td><td/><td>http://www.installengine.com/cert05/isengine</td><td/><td/><td/><td/><td>3</td><td>http://www.installengine.com/cert05/dotnetfx</td><td>0</td><td>1033</td><td/><td/><td/><td/><td>16</td><td>3</td><td>4</td><td>http://www.installengine.com/Msiengine30</td><td/></row>
+		<row><td>Release 2</td><td>Product Configuration 1</td><td>0</td><td>http://</td><td>0</td><td>install</td><td>install</td><td>[LocalAppDataFolder]Downloaded Installations</td><td>0</td><td>http://www.installengine.com/Msiengine20</td><td>http://www.installengine.com/Msiengine20</td><td/><td>http://www.installengine.com/cert05/isengine</td><td/><td/><td/><td/><td>3</td><td>http://www.installengine.com/cert05/dotnetfx</td><td>0</td><td>1033</td><td/><td/><td/><td/><td>16</td><td>3</td><td>4</td><td>http://www.installengine.com/Msiengine30</td><td/></row>
 	</table>
 
 	<table name="ISReleaseProperty">
@@ -3728,6 +3750,10 @@
 		<row><td>ID_STRING1</td><td>1033</td><td>Trados Plugin</td><td>0</td><td/><td>-1658825841</td></row>
 		<row><td>ID_STRING10</td><td>1033</td><td>pluginpackage.manifest.xml</td><td>0</td><td/><td>-1256141077</td></row>
 		<row><td>ID_STRING11</td><td>1033</td><td>pluginpackage.manifest.xml</td><td>0</td><td/><td>-1256139029</td></row>
+		<row><td>ID_STRING12</td><td>1033</td><td>LetsMT.MTProvider.plugin.resources</td><td>0</td><td/><td>1965132657</td></row>
+		<row><td>ID_STRING13</td><td>1033</td><td>pluginpackage.manifest.xml</td><td>0</td><td/><td>1965151089</td></row>
+		<row><td>ID_STRING14</td><td>1033</td><td>LetsMT.MTProvider.dll</td><td>0</td><td/><td>1965099921</td></row>
+		<row><td>ID_STRING15</td><td>1033</td><td>LetsMT.MTProvider.plugin.xml</td><td>0</td><td/><td>1965116305</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td/><td>0</td><td/><td>-1256144694</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>www.tilde.lv</td><td>0</td><td/><td>-1256156726</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LetsMT.MTProvider.dll</td><td>0</td><td/><td>-1256159509</td></row>
@@ -3743,6 +3769,8 @@
 		<row><td>NEW_STRING4</td><td>1033</td><td>Text</td><td>0</td><td/><td>-1256151378</td></row>
 		<row><td>NEW_STRING5</td><td>1033</td><td>{\TahomaBold8}SDL Trados Studio version selection</td><td>0</td><td/><td>-1256192242</td></row>
 		<row><td>NEW_STRING6</td><td>1033</td><td>Install for other user (Administrator )</td><td>0</td><td/><td>-1121946356</td></row>
+		<row><td>NEW_STRING7</td><td>1033</td><td>SDL Trados Studio 2014</td><td>0</td><td/><td>1965128305</td></row>
+		<row><td>NEW_STRING8</td><td>1033</td><td/><td>0</td><td/><td>-1792985906</td></row>
 	</table>
 
 	<table name="ISTargetImage">
@@ -3985,8 +4013,8 @@
 		<col def="S0">Value</col>
 		<row><td>ActiveLanguage</td><td>1033</td></row>
 		<row><td>Comments</td><td/></row>
-		<row><td>CurrentMedia</td><td dt:dt="bin.base64" md5="b491486f2ea923dc16dc8132d9c8c265">
-UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgADEA
+		<row><td>CurrentMedia</td><td dt:dt="bin.base64" md5="5493054ce514845ffe9939360883d571">
+UgBlAGwAZQBhAHMAZQAgADIAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgADEA
 			</td></row>
 		<row><td>ISCompilerOption_CompileBeforeBuild</td><td>1</td></row>
 		<row><td>ISCompilerOption_Debug</td><td>0</td></row>
@@ -4262,6 +4290,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ISENABLEDWUSFINISHDIALOG</td><td/><td/></row>
 		<row><td>ISSHOWMSILOG</td><td/><td/></row>
 		<row><td>ISSTUDIO10</td><td/><td/></row>
+		<row><td>ISSTUDIO11</td><td/><td/></row>
 		<row><td>ISSTUDIO9</td><td/><td/></row>
 		<row><td>ISVROOT_PORT_NO</td><td>0</td><td/></row>
 		<row><td>IS_COMPLUS_PROGRESSTEXT_COST</td><td>##IDS_COMPLUS_PROGRESSTEXT_COST##</td><td/></row>
@@ -4306,7 +4335,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ProductID</td><td>none</td><td/></row>
 		<row><td>ProductLanguage</td><td>1033</td><td/></row>
 		<row><td>ProductName</td><td>LetsMT! Machine Translation Provider for SDL Trados Studio</td><td/></row>
-		<row><td>ProductVersion</td><td>1.1</td><td/></row>
+		<row><td>ProductVersion</td><td>1.2</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4315,7 +4344,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ReinstallModeText</td><td>omus</td><td/></row>
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SHOWLAUNCHPROGRAM</td><td>0</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;SUPPORTDIR;LAUNCHPROGRAM;ISSTUDIO9;ISSTUDIO10;PACKAGES2;PACKAGES</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;SUPPORTDIR;LAUNCHPROGRAM;ISSTUDIO9;ISSTUDIO10;PACKAGES3;PACKAGES;ISSTUDIO11;PACKAGES2;ISSTUDIO11</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{5A844BF8-6E64-46E6-937F-98F65EA2BF46}</td><td/></row>
 		<row><td>_IsMaintenance</td><td>Change</td><td/></row>
@@ -4381,6 +4410,12 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>FileKey10</td><td>Plugin_version9</td><td/><td>MTPROVIDER9</td><td>2</td></row>
 		<row><td>FileKey11</td><td>Plugin_version10</td><td/><td>UNPACKED10</td><td>2</td></row>
 		<row><td>FileKey12</td><td>Plugin_version9</td><td/><td>UNPACKED9</td><td>2</td></row>
+		<row><td>FileKey13</td><td>Plugin_version11</td><td>##ID_STRING12##</td><td>MTPROVIDER11</td><td>2</td></row>
+		<row><td>FileKey14</td><td>Plugin_version11</td><td>##ID_STRING13##</td><td>MTPROVIDER11</td><td>2</td></row>
+		<row><td>FileKey15</td><td>Plugin_version11</td><td>##ID_STRING14##</td><td>MTPROVIDER11</td><td>2</td></row>
+		<row><td>FileKey16</td><td>Plugin_version11</td><td>##ID_STRING15##</td><td>MTPROVIDER11</td><td>2</td></row>
+		<row><td>FileKey17</td><td>Plugin_version11</td><td/><td>UNPACKED11</td><td>2</td></row>
+		<row><td>FileKey18</td><td>Plugin_version11</td><td/><td>MTPROVIDER11</td><td>2</td></row>
 		<row><td>FileKey2</td><td>Plugin_version10</td><td>##ID_STRING4##</td><td>MTPROVIDER10</td><td>2</td></row>
 		<row><td>FileKey3</td><td>Plugin_version10</td><td>##ID_STRING8##</td><td>MTPROVIDER10</td><td>2</td></row>
 		<row><td>FileKey4</td><td>Plugin_version10</td><td>##ID_STRING10##</td><td>MTPROVIDER10</td><td>2</td></row>
