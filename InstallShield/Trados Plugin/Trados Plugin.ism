@@ -254,7 +254,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<row><td>ISSELFREG.DLL</td><td/><td>&lt;ISProductFolder&gt;\redist\language independent\i386\isregsvr.dll</td></row>
-		<row><td>NewBinary1</td><td/><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\banner_LetsMT.jpg</td></row>
+		<row><td>NewBinary1</td><td/><td>&lt;ISProjectDataFolder&gt;\..\banner_LetsMT.jpg</td></row>
 		<row><td>NewBinary10</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CompleteSetupIco.ibd</td></row>
 		<row><td>NewBinary11</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CustomSetupIco.ibd</td></row>
 		<row><td>NewBinary12</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\DestIcon.ibd</td></row>
@@ -267,7 +267,7 @@
 		<row><td>NewBinary2</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\New.ibd</td></row>
 		<row><td>NewBinary3</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\Up.ibd</td></row>
 		<row><td>NewBinary4</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\WarningIcon.ibd</td></row>
-		<row><td>NewBinary5</td><td/><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\welcome_LetsMT.jpg</td></row>
+		<row><td>NewBinary5</td><td/><td>&lt;ISProjectDataFolder&gt;\..\welcome_LetsMT.jpg</td></row>
 		<row><td>NewBinary6</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CustomSetupIco.ibd</td></row>
 		<row><td>NewBinary7</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\ReinstIco.ibd</td></row>
 		<row><td>NewBinary8</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\RemoveIco.ibd</td></row>
@@ -559,7 +559,7 @@
 		<row><td>LicenseAgreement</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsLicenseDlg_LicenseAgreement##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>PushButton</td><td>301</td><td>188</td><td>65</td><td>17</td><td>3</td><td/><td>##IDS_PRINT_BUTTON##</td><td>Agree</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT TradosStudio Plugin License_final.rtf</td><td/></row>
+		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;ISProjectDataFolder&gt;\..\LetsMT TradosStudio Plugin License_final.rtf</td><td/></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>1</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
@@ -1835,9 +1835,9 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>letsmt.mtprovider.sdlplugin</td><td>Plugin_version10</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
-		<row><td>letsmt.mtprovider.sdlplugin1</td><td>Plugin_version9</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
-		<row><td>letsmt.mtprovider.sdlplugin2</td><td>Plugin_version11</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin</td><td>Plugin_version10</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin1</td><td>Plugin_version9</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin2</td><td>Plugin_version11</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2383,8 +2383,6 @@
 		<row><td>ISProductFolder</td><td/><td/><td>1</td></row>
 		<row><td>ISProjectDataFolder</td><td>1</td><td/><td>1</td></row>
 		<row><td>ISProjectFolder</td><td/><td/><td>1</td></row>
-		<row><td>PATH_TO_DESKTOP_FILES</td><td>\\tld103\c$\Users\Evita.Kornejeva\Desktop</td><td/><td>2</td></row>
-		<row><td>PATH_TO_EVITA_FILES</td><td>D:\evita</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
@@ -3903,7 +3901,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;PATH_TO_EVITA_FILES&gt;\trados\LetsMT.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
