@@ -794,8 +794,8 @@
 		<row><td>SplashBitmap</td><td>Branding2</td><td>Text</td><td>3</td><td>266</td><td>50</td><td>13</td><td>65537</td><td/><td>##IDS_INSTALLSHIELD##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>SplashBitmap</td><td>Cancel</td><td>PushButton</td><td>301</td><td>281</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_CANCEL##</td><td>Back</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>SplashBitmap</td><td>DlgLine</td><td>Line</td><td>48</td><td>272</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
-		<row><td>SplashBitmap</td><td>Logo_area_line</td><td>Line</td><td>117</td><td>12</td><td>1</td><td>249</td><td>1</td><td/><td/><td>Next</td><td/><td/><td/><td/><td/></row>
-		<row><td>SplashBitmap</td><td>MT_logo</td><td>Bitmap</td><td>16</td><td>6</td><td>90</td><td>25</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td>NewBinary19</td></row>
+		<row><td>SplashBitmap</td><td>Logo_area_line</td><td>Line</td><td>117</td><td>24</td><td>1</td><td>228</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>SplashBitmap</td><td>MT_logo</td><td>Bitmap</td><td>19</td><td>19</td><td>90</td><td>25</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td>NewBinary19</td></row>
 		<row><td>SplashBitmap</td><td>Next</td><td>PushButton</td><td>230</td><td>281</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>SplashBitmap</td><td>zImage</td><td>Bitmap</td><td>13</td><td>12</td><td>349</td><td>250</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary5</td></row>
 	</table>
