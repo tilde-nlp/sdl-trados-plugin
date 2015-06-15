@@ -254,7 +254,6 @@
 		<col key="yes" def="s72">Name</col>
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
-		<row><td>ISSELFREG.DLL</td><td/><td>&lt;ISProductFolder&gt;\redist\language independent\i386\isregsvr.dll</td></row>
 		<row><td>NewBinary1</td><td/><td>&lt;ISProjectDataFolder&gt;\..\banner_LetsMT.jpg</td></row>
 		<row><td>NewBinary10</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CompleteSetupIco.ibd</td></row>
 		<row><td>NewBinary11</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CustomSetupIco.ibd</td></row>
@@ -351,6 +350,7 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>Plugin_version10</td><td>{C71D05E6-0171-40B6-ADCA-22377D7ABFB6}</td><td>NEW_DIRECTORY1</td><td>8</td><td>ISSTUDIO10</td><td>letsmt.mtprovider.sdlplugin</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Plugin_version11</td><td>{ACF0DDE1-B016-4B72-AC03-617B59356F83}</td><td>NEW_DIRECTORY2</td><td>8</td><td>ISSTUDIO11</td><td>letsmt.mtprovider.sdlplugin2</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Plugin_version12</td><td>{704674BA-5D00-43B2-98BD-3AFF9299A7EA}</td><td>NEW_DIRECTORY5</td><td>8</td><td>ISSTUDIO12</td><td>letsmt.mtprovider.sdlplugin3</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Plugin_version9</td><td>{3953C67B-0624-4231-8805-3F84C5C6C4D9}</td><td>NEW_DIRECTORY3</td><td>8</td><td>ISSTUDIO9</td><td>letsmt.mtprovider.sdlplugin1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -777,8 +777,8 @@
 		<row><td>CustomerInformation</td><td>Edit3</td><td>Enable</td><td>ISSTUDIO11</td></row>
 		<row><td>CustomerInformation</td><td>Edit4</td><td>Disable</td><td>not ISSTUDIO12</td></row>
 		<row><td>CustomerInformation</td><td>Edit4</td><td>Enable</td><td>ISSTUDIO12</td></row>
-		<row><td>CustomerInformation</td><td>Next</td><td>Disable</td><td>NOT (ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11)</td></row>
-		<row><td>CustomerInformation</td><td>Next</td><td>Enable</td><td>ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11</td></row>
+		<row><td>CustomerInformation</td><td>Next</td><td>Disable</td><td>NOT (ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11 or ISSTUDIO12)</td></row>
+		<row><td>CustomerInformation</td><td>Next</td><td>Enable</td><td>ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11 or ISSTUDIO12</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>1</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>NOT Privileged</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>ProductState &gt; 0</td></row>
@@ -997,6 +997,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>Plugin_version12</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1009,10 +1010,6 @@
 		<row><td>CheckForProductUpdatesOnReboot</td><td>226</td><td>ISUpdateServiceFolder</td><td>[ISUpdateServiceFolder]agent.exe "/au[ProductCode] /EndOfInstall /Reboot"</td><td>Checks for product updates on reboot</td></row>
 		<row><td>ISPreventDowngrade</td><td>19</td><td/><td>[IS_PREVENT_DOWNGRADE_EXIT]</td><td>Exits install when a newer version of this product is found</td></row>
 		<row><td>ISPrint</td><td>1</td><td>SetAllUsers.dll</td><td>PrintScrollableText</td><td>Prints the contents of a ScrollableText control on a dialog.</td></row>
-		<row><td>ISSelfRegisterCosting</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterCosting</td><td/></row>
-		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/></row>
-		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/></row>
-		<row><td>ISUnSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISUnSelfRegisterFiles</td><td/></row>
 		<row><td>SetARPINSTALLLOCATION</td><td>51</td><td>ARPINSTALLLOCATION</td><td>[INSTALLDIR]</td><td/></row>
 		<row><td>SetAllUsersProfileNT</td><td>51</td><td>ALLUSERSPROFILE</td><td>[%SystemRoot]\Profiles\All Users</td><td/></row>
 		<row><td>ShowMsiLog</td><td>226</td><td>WindowsFolder</td><td>[WindowsFolder]notepad.exe "[MsiLogFileLocation]"</td><td>Shows Property-driven MSI Log</td></row>
@@ -1097,12 +1094,16 @@
 		<row><td>NEW_DIRECTORY1</td><td>PACKAGES2</td><td>.:PACKAG~1|PACKAGES2</td><td/><td>0</td><td/></row>
 		<row><td>NEW_DIRECTORY2</td><td>PACKAGES3</td><td>.:PACKAG~1|PACKAGES3</td><td/><td>0</td><td/></row>
 		<row><td>NEW_DIRECTORY3</td><td>PACKAGES</td><td>.:PACKAGES</td><td/><td>0</td><td/></row>
+		<row><td>NEW_DIRECTORY4</td><td>TARGETDIR</td><td>NEW_DIRECTORY4</td><td/><td>0</td><td/></row>
+		<row><td>NEW_DIRECTORY5</td><td>PACKAGES1</td><td>.:PACKAG~1|PACKAGES4</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES</td><td>PLUGINS</td><td>Packages</td><td/><td>0</td><td/></row>
+		<row><td>PACKAGES1</td><td>PLUGINS3</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES2</td><td>PLUGINS2</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES3</td><td>PLUGINS1</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS</td><td>STUDIO9</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS1</td><td>STUDIO11</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS2</td><td>STUDIO10</td><td>Plugins</td><td/><td>0</td><td/></row>
+		<row><td>PLUGINS3</td><td>_2</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
 		<row><td>ProgramFiles64Folder</td><td>TARGETDIR</td><td>.:Prog64~1|Program Files 64</td><td/><td>0</td><td/></row>
@@ -1128,6 +1129,7 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>_2</td><td>INSTALLDIR</td><td>12</td><td/><td>0</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1827,6 +1829,7 @@
 		<col key="yes" def="s72">Component_</col>
 		<row><td>Plugin</td><td>Plugin_version10</td></row>
 		<row><td>Plugin</td><td>Plugin_version11</td></row>
+		<row><td>Plugin</td><td>Plugin_version12</td></row>
 		<row><td>Plugin</td><td>Plugin_version9</td></row>
 	</table>
 
@@ -1845,6 +1848,7 @@
 		<row><td>letsmt.mtprovider.sdlplugin</td><td>Plugin_version10</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 		<row><td>letsmt.mtprovider.sdlplugin1</td><td>Plugin_version9</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 		<row><td>letsmt.mtprovider.sdlplugin2</td><td>Plugin_version11</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin3</td><td>Plugin_version12</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2054,6 +2058,7 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>Plugin_version10</td><td/><td/><td>_E0557CDD_6252_4502_A7AA_CCC68F339B77_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Plugin_version11</td><td/><td/><td>_FD3B7EC7_B515_41A8_B876_F9AAA7E37955_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Plugin_version12</td><td/><td/><td>_7FC80F3C_5780_467E_A634_F5557F4D38DC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Plugin_version9</td><td/><td/><td>_9A911266_267D_48CA_96D9_055B82DE935F_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -3954,10 +3959,6 @@
 		<row><td>FileCost</td><td/><td>900</td><td>FileCost</td><td/></row>
 		<row><td>FindRelatedProducts</td><td>NOT ISSETUPDRIVEN</td><td>420</td><td>FindRelatedProducts</td><td/></row>
 		<row><td>ISPreventDowngrade</td><td>ISFOUNDNEWERPRODUCTVERSION</td><td>450</td><td>ISPreventDowngrade</td><td/></row>
-		<row><td>ISSelfRegisterCosting</td><td/><td>2201</td><td/><td/></row>
-		<row><td>ISSelfRegisterFiles</td><td/><td>5601</td><td/><td/></row>
-		<row><td>ISSelfRegisterFinalize</td><td/><td>6601</td><td/><td/></row>
-		<row><td>ISUnSelfRegisterFiles</td><td/><td>2202</td><td/><td/></row>
 		<row><td>InstallFiles</td><td/><td>4000</td><td>InstallFiles</td><td/></row>
 		<row><td>InstallFinalize</td><td/><td>6600</td><td>InstallFinalize</td><td/></row>
 		<row><td>InstallInitialize</td><td/><td>1501</td><td>InstallInitialize</td><td/></row>
