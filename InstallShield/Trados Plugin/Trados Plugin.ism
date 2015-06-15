@@ -227,6 +227,7 @@
 		<col key="yes" def="s72">Signature_</col>
 		<row><td>ISSTUDIO10</td><td>NewSignature11</td></row>
 		<row><td>ISSTUDIO11</td><td>NewSignature12</td></row>
+		<row><td>ISSTUDIO12</td><td>NewSignature13</td></row>
 		<row><td>ISSTUDIO9</td><td>NewSignature1</td></row>
 	</table>
 
@@ -774,6 +775,8 @@
 		<row><td>CustomerInformation</td><td>Edit2</td><td>Enable</td><td>ISSTUDIO10</td></row>
 		<row><td>CustomerInformation</td><td>Edit3</td><td>Disable</td><td>not ISSTUDIO11</td></row>
 		<row><td>CustomerInformation</td><td>Edit3</td><td>Enable</td><td>ISSTUDIO11</td></row>
+		<row><td>CustomerInformation</td><td>Edit4</td><td>Disable</td><td>not ISSTUDIO12</td></row>
+		<row><td>CustomerInformation</td><td>Edit4</td><td>Enable</td><td>ISSTUDIO12</td></row>
 		<row><td>CustomerInformation</td><td>Next</td><td>Disable</td><td>NOT (ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11)</td></row>
 		<row><td>CustomerInformation</td><td>Next</td><td>Enable</td><td>ISSTUDIO9 or ISSTUDIO10 or ISSTUDIO11</td></row>
 		<row><td>CustomerInformation</td><td>RadioGroup</td><td>Hide</td><td>1</td></row>
@@ -1135,6 +1138,7 @@
 		<row><td>NewSignature1</td><td>NewSignature2</td><td>9</td><td>0</td></row>
 		<row><td>NewSignature11</td><td>NewSignature3</td><td>10</td><td>0</td></row>
 		<row><td>NewSignature12</td><td>NewSignature4</td><td>11</td><td>0</td></row>
+		<row><td>NewSignature13</td><td>NewSignature4</td><td>12</td><td>0</td></row>
 		<row><td>NewSignature2</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
 		<row><td>NewSignature3</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
 		<row><td>NewSignature4</td><td></td><td>[LocalAppDataFolder]SDL\SDL Trados Studio</td><td/></row>
