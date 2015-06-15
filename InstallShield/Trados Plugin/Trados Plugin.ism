@@ -254,6 +254,7 @@
 		<col key="yes" def="s72">Name</col>
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
+		<row><td>ISSELFREG.DLL</td><td/><td>&lt;ISProductFolder&gt;\redist\language independent\i386\isregsvr.dll</td></row>
 		<row><td>NewBinary1</td><td/><td>&lt;ISProjectDataFolder&gt;\..\banner_LetsMT.jpg</td></row>
 		<row><td>NewBinary10</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CompleteSetupIco.ibd</td></row>
 		<row><td>NewBinary11</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CustomSetupIco.ibd</td></row>
@@ -350,7 +351,7 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>Plugin_version10</td><td>{C71D05E6-0171-40B6-ADCA-22377D7ABFB6}</td><td>NEW_DIRECTORY1</td><td>8</td><td>ISSTUDIO10</td><td>letsmt.mtprovider.sdlplugin</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Plugin_version11</td><td>{ACF0DDE1-B016-4B72-AC03-617B59356F83}</td><td>NEW_DIRECTORY2</td><td>8</td><td>ISSTUDIO11</td><td>letsmt.mtprovider.sdlplugin2</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Plugin_version12</td><td>{704674BA-5D00-43B2-98BD-3AFF9299A7EA}</td><td>NEW_DIRECTORY5</td><td>8</td><td>ISSTUDIO12</td><td>letsmt.mtprovider.sdlplugin3</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Plugin_version12</td><td>{704674BA-5D00-43B2-98BD-3AFF9299A7EA}</td><td>NEW_DIRECTORY4</td><td>8</td><td>ISSTUDIO12</td><td>letsmt.mtprovider.sdlplugin3</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Plugin_version9</td><td>{3953C67B-0624-4231-8805-3F84C5C6C4D9}</td><td>NEW_DIRECTORY3</td><td>8</td><td>ISSTUDIO9</td><td>letsmt.mtprovider.sdlplugin1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -553,7 +554,7 @@
 		<row><td>InstallWelcome</td><td>Next</td><td>PushButton</td><td>230</td><td>281</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>InstallWelcome</td><td>TextLine1</td><td>Text</td><td>135</td><td>8</td><td>225</td><td>45</td><td>196611</td><td/><td>##IDS__IsWelcomeDlg_WelcomeProductName##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>InstallWelcome</td><td>TextLine2</td><td>Text</td><td>135</td><td>55</td><td>228</td><td>45</td><td>196611</td><td/><td>##IDS__IsWelcomeDlg_InstallProductName##</td><td/><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Agree</td><td>RadioButtonGroup</td><td>8</td><td>190</td><td>291</td><td>40</td><td>3</td><td>AgreeToLicense</td><td/><td>Next</td><td/><td>0</td><td/><td/><td/></row>
+		<row><td>LicenseAgreement</td><td>Agree</td><td>RadioButtonGroup</td><td>8</td><td>228</td><td>291</td><td>40</td><td>3</td><td>AgreeToLicense</td><td/><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
 		<row><td>LicenseAgreement</td><td>BannerLine</td><td>Line</td><td>0</td><td>44</td><td>374</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>Branding1</td><td>Text</td><td>4</td><td>267</td><td>50</td><td>13</td><td>3</td><td/><td>##IDS_INSTALLSHIELD_FORMATTED##</td><td/><td/><td>0</td><td/><td/><td/></row>
@@ -1010,6 +1011,10 @@
 		<row><td>CheckForProductUpdatesOnReboot</td><td>226</td><td>ISUpdateServiceFolder</td><td>[ISUpdateServiceFolder]agent.exe "/au[ProductCode] /EndOfInstall /Reboot"</td><td>Checks for product updates on reboot</td></row>
 		<row><td>ISPreventDowngrade</td><td>19</td><td/><td>[IS_PREVENT_DOWNGRADE_EXIT]</td><td>Exits install when a newer version of this product is found</td></row>
 		<row><td>ISPrint</td><td>1</td><td>SetAllUsers.dll</td><td>PrintScrollableText</td><td>Prints the contents of a ScrollableText control on a dialog.</td></row>
+		<row><td>ISSelfRegisterCosting</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterCosting</td><td/></row>
+		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/></row>
+		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/></row>
+		<row><td>ISUnSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISUnSelfRegisterFiles</td><td/></row>
 		<row><td>SetARPINSTALLLOCATION</td><td>51</td><td>ARPINSTALLLOCATION</td><td>[INSTALLDIR]</td><td/></row>
 		<row><td>SetAllUsersProfileNT</td><td>51</td><td>ALLUSERSPROFILE</td><td>[%SystemRoot]\Profiles\All Users</td><td/></row>
 		<row><td>ShowMsiLog</td><td>226</td><td>WindowsFolder</td><td>[WindowsFolder]notepad.exe "[MsiLogFileLocation]"</td><td>Shows Property-driven MSI Log</td></row>
@@ -1094,16 +1099,15 @@
 		<row><td>NEW_DIRECTORY1</td><td>PACKAGES2</td><td>.:PACKAG~1|PACKAGES2</td><td/><td>0</td><td/></row>
 		<row><td>NEW_DIRECTORY2</td><td>PACKAGES3</td><td>.:PACKAG~1|PACKAGES3</td><td/><td>0</td><td/></row>
 		<row><td>NEW_DIRECTORY3</td><td>PACKAGES</td><td>.:PACKAGES</td><td/><td>0</td><td/></row>
-		<row><td>NEW_DIRECTORY4</td><td>TARGETDIR</td><td>NEW_DIRECTORY4</td><td/><td>0</td><td/></row>
-		<row><td>NEW_DIRECTORY5</td><td>PACKAGES1</td><td>.:PACKAG~1|PACKAGES4</td><td/><td>0</td><td/></row>
+		<row><td>NEW_DIRECTORY4</td><td>PACKAGES4</td><td>.:PACKAG~1|PACKAGES4</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES</td><td>PLUGINS</td><td>Packages</td><td/><td>0</td><td/></row>
-		<row><td>PACKAGES1</td><td>PLUGINS3</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES2</td><td>PLUGINS2</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PACKAGES3</td><td>PLUGINS1</td><td>Packages</td><td/><td>0</td><td/></row>
+		<row><td>PACKAGES4</td><td>PLUGINS3</td><td>Packages</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS</td><td>STUDIO9</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS1</td><td>STUDIO11</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PLUGINS2</td><td>STUDIO10</td><td>Plugins</td><td/><td>0</td><td/></row>
-		<row><td>PLUGINS3</td><td>_2</td><td>Plugins</td><td/><td>0</td><td/></row>
+		<row><td>PLUGINS3</td><td>STUDIO12</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
 		<row><td>ProgramFiles64Folder</td><td>TARGETDIR</td><td>.:Prog64~1|Program Files 64</td><td/><td>0</td><td/></row>
@@ -1113,6 +1117,7 @@
 		<row><td>SDL_TRADOS_STUDIO</td><td>SDL</td><td>SDLTRA~1|SDL Trados Studio</td><td/><td>0</td><td/></row>
 		<row><td>STUDIO10</td><td>INSTALLDIR</td><td>10</td><td/><td>0</td><td/></row>
 		<row><td>STUDIO11</td><td>INSTALLDIR</td><td>11</td><td/><td>0</td><td/></row>
+		<row><td>STUDIO12</td><td>INSTALLDIR</td><td>12</td><td/><td>0</td><td/></row>
 		<row><td>STUDIO9</td><td>INSTALLDIR</td><td>9</td><td/><td>0</td><td/></row>
 		<row><td>SendToFolder</td><td>TARGETDIR</td><td>.:SendTo</td><td/><td>3</td><td/></row>
 		<row><td>StartMenuFolder</td><td>TARGETDIR</td><td>.:STARTM~1|Start Menu</td><td/><td>3</td><td/></row>
@@ -1129,7 +1134,6 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
-		<row><td>_2</td><td>INSTALLDIR</td><td>12</td><td/><td>0</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1845,10 +1849,10 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>letsmt.mtprovider.sdlplugin</td><td>Plugin_version10</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
-		<row><td>letsmt.mtprovider.sdlplugin1</td><td>Plugin_version9</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
-		<row><td>letsmt.mtprovider.sdlplugin2</td><td>Plugin_version11</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
-		<row><td>letsmt.mtprovider.sdlplugin3</td><td>Plugin_version12</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin</td><td>Plugin_version10</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\Plugin\9-10\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin1</td><td>Plugin_version9</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\Plugin\9-10\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin2</td><td>Plugin_version11</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\Plugin\11\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
+		<row><td>letsmt.mtprovider.sdlplugin3</td><td>Plugin_version12</td><td>LETSMT~1.SDL|LetsMT.MTProvider.sdlplugin</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ISProjectDataFolder&gt;\..\Plugin\12\LetsMT.MTProvider.sdlplugin</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -3959,6 +3963,10 @@
 		<row><td>FileCost</td><td/><td>900</td><td>FileCost</td><td/></row>
 		<row><td>FindRelatedProducts</td><td>NOT ISSETUPDRIVEN</td><td>420</td><td>FindRelatedProducts</td><td/></row>
 		<row><td>ISPreventDowngrade</td><td>ISFOUNDNEWERPRODUCTVERSION</td><td>450</td><td>ISPreventDowngrade</td><td/></row>
+		<row><td>ISSelfRegisterCosting</td><td/><td>2201</td><td/><td/></row>
+		<row><td>ISSelfRegisterFiles</td><td/><td>5601</td><td/><td/></row>
+		<row><td>ISSelfRegisterFinalize</td><td/><td>6601</td><td/><td/></row>
+		<row><td>ISUnSelfRegisterFiles</td><td/><td>2202</td><td/><td/></row>
 		<row><td>InstallFiles</td><td/><td>4000</td><td>InstallFiles</td><td/></row>
 		<row><td>InstallFinalize</td><td/><td>6600</td><td>InstallFinalize</td><td/></row>
 		<row><td>InstallInitialize</td><td/><td>1501</td><td>InstallInitialize</td><td/></row>
@@ -4381,8 +4389,8 @@ UgBlAGwAZQBhAHMAZQAgADIAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<col def="L64">Text</col>
 		<col def="L50">Help</col>
 		<col def="I4">ISControlId</col>
-		<row><td>AgreeToLicense</td><td>1</td><td>No</td><td>0</td><td>53</td><td>291</td><td>15</td><td>##IDS__AgreeToLicense_0##</td><td/><td>0</td></row>
-		<row><td>AgreeToLicense</td><td>2</td><td>Yes</td><td>0</td><td>37</td><td>291</td><td>15</td><td>##IDS__AgreeToLicense_1##</td><td/><td>0</td></row>
+		<row><td>AgreeToLicense</td><td>1</td><td>No</td><td>0</td><td>15</td><td>291</td><td>15</td><td>##IDS__AgreeToLicense_0##</td><td/><td>0</td></row>
+		<row><td>AgreeToLicense</td><td>2</td><td>Yes</td><td>0</td><td>1</td><td>291</td><td>15</td><td>##IDS__AgreeToLicense_1##</td><td/><td>0</td></row>
 		<row><td>ApplicationUsers</td><td>1</td><td>AllUsers</td><td>1</td><td>6</td><td>290</td><td>14</td><td>##IDS__IsRegisterUserDlg_Anyone##</td><td/><td>0</td></row>
 		<row><td>ApplicationUsers</td><td>2</td><td>OnlyCurrentUser</td><td>1</td><td>22</td><td>290</td><td>14</td><td>##IDS__IsRegisterUserDlg_OnlyMe##</td><td/><td>0</td></row>
 		<row><td>RestartManagerOption</td><td>1</td><td>CloseRestart</td><td>6</td><td>9</td><td>331</td><td>14</td><td>##IDS__IsMsiRMFilesInUse_CloseRestart##</td><td/><td>0</td></row>
