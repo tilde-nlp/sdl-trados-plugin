@@ -52,7 +52,7 @@ namespace LetsMT.MTProvider
                 var text = element as Sdl.LanguagePlatform.Core.Text;
                 if (text != null)
                 {
-                    stringBuilder.Append(text.Value);
+                    stringBuilder.Append(text.Value.XmlEscape());
                 }
                 else
                 {

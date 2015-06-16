@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace LetsMT.MTProvider
@@ -27,6 +28,22 @@ namespace LetsMT.MTProvider
                 xmlSerializer.Serialize(textWriter, toSerialize);
                 return textWriter.ToString();
             }
+        }
+
+        public static string XmlEscape(this string unescaped)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlNode node = doc.CreateElement("root");
+            node.InnerText = unescaped;
+            return node.InnerXml;
+        }
+
+        public static string XmlUnescape(this string escaped)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlNode node = doc.CreateElement("root");
+            node.InnerXml = escaped;
+            return node.InnerText;
         }
     }
 }
