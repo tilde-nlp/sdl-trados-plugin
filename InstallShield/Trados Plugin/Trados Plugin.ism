@@ -52,7 +52,7 @@
 	<summary>
 		<codepage>1252</codepage>
 		<title>Installation Database</title>
-		<subject>LetsMT! Machine Translation Provider for SDL Trados Studio</subject>
+		<subject>Tilde Machine Translation Provider for SDL Trados Studio</subject>
 		<author>Macrovision Corporation</author>
 		<keywords>Installer,MSI,Database</keywords>
 		<comments>Contact:  Your local administrator</comments>
@@ -4372,7 +4372,7 @@ UgBlAGwAZQBhAHMAZQAgADIAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ProductCode</td><td>{70C4062B-84B7-48A7-A680-7029C850676B}</td><td/></row>
 		<row><td>ProductID</td><td>none</td><td/></row>
 		<row><td>ProductLanguage</td><td>1033</td><td/></row>
-		<row><td>ProductName</td><td>LetsMT! Machine Translation Provider for SDL Trados Studio</td><td/></row>
+		<row><td>ProductName</td><td>Tilde Machine Translation Provider for SDL Trados Studio</td><td/></row>
 		<row><td>ProductVersion</td><td>1.2</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
