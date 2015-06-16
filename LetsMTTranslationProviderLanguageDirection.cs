@@ -127,6 +127,9 @@ namespace LetsMT.MTProvider
                         case System.Xml.XmlNodeType.Text:
                             translatedSegment.Add(xmlReader.Value);
                             break;
+                        case System.Xml.XmlNodeType.Whitespace:
+                            translatedSegment.Add(xmlReader.Value);
+                            break;
                         default:
                             break;
                     }
