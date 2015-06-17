@@ -58,7 +58,7 @@
 		<comments>Contact:  Your local administrator</comments>
 		<template>Intel;1033</template>
 		<lastauthor>Administrator</lastauthor>
-		<revnumber>{2C412960-C3A6-42F4-A141-730D7FE3DDCE}</revnumber>
+		<revnumber>{EC7E392F-AF8E-4620-BCFD-C123FE61EA15}</revnumber>
 		<lastprinted/>
 		<createdtm>06/21/1999 11:00</createdtm>
 		<lastsavedtm>07/14/2000 14:50</lastsavedtm>
@@ -4432,7 +4432,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ProductID</td><td>none</td><td/></row>
 		<row><td>ProductLanguage</td><td>1033</td><td/></row>
 		<row><td>ProductName</td><td>Tilde Machine Translation Provider for SDL Trados Studio</td><td/></row>
-		<row><td>ProductVersion</td><td>1.3.0</td><td/></row>
+		<row><td>ProductVersion</td><td>1.3.1</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
