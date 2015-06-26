@@ -54,10 +54,14 @@ namespace LetsMT.MTProvider
         }
         #endregion
 
-        public PasswordForm()
+        public PasswordForm(string lastUsedToken = null)
         {
             InitializeComponent();
 
+            if (lastUsedToken != null)
+            {
+                this.apiUserIdTextBox.Text = lastUsedToken;
+            }
             DialogResult = DialogResult.Cancel;
             serverCanceledState = new RunState { Canceled = false };
         }

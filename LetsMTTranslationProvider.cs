@@ -64,17 +64,10 @@ namespace LetsMT.MTProvider
 
             string[] credParams = m_strCredential.Split('\t');
 
-            string m_strToken = "";
-            m_strAppID = "";
+            ApiCredential apiCredential = ApiCredential.ParseCredential(m_strCredential);
+            m_strAppID = apiCredential.AppId == null ? "" : apiCredential.AppId;
 
-            if (credParams.Length > 0)
-                m_strToken = credParams[0];
-            if (credParams.Length > 1)
-            {
-                m_strAppID = credParams[1];
-            }
-
-            InitService(m_strToken);
+            InitService(apiCredential.Token == null ? "" : apiCredential.Token);
         }
 
         public void InitService(string m_strToken)
@@ -516,6 +509,30 @@ namespace LetsMT.MTProvider
             public bool UseQualityEstimate { get; set; }
             public double MinAllowedQualityEstimateScore { get; set; }
             public List<ProfileInfo> ProfileInfos { get; set; }
+        }
+        #endregion
+
+        #region credential helper class
+        public class ApiCredential
+        {
+            public string Token { get; set; }
+            public string AppId { get; set; }
+
+            public static ApiCredential ParseCredential(string strCredential)
+            {
+                string token = null;
+                string appId = null;
+
+                string[] credParams = strCredential.Split('\t');
+
+                if (credParams.Length > 0)
+                    token = credParams[0];
+                if (credParams.Length > 1)
+                {
+                    appId = credParams[1];
+                }
+                return new ApiCredential { Token = token, AppId = appId };
+            }
         }
         #endregion
     }

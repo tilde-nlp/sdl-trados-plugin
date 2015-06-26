@@ -37,29 +37,48 @@ namespace LetsMT.MTProvider
         public ITranslationProvider[] Browse(IWin32Window owner, LanguagePair[] languagePairs, ITranslationProviderCredentialStore credentialStore)
         {
             LetsMTTranslationProviderOptions opts = new LetsMTTranslationProviderOptions();
-            PasswordForm pf = new PasswordForm();
+
+            int letsmtNum = 0;
+            Uri letsmtUri = null;
+
+            TranslationProviderCredential credentialData = null;
+
+            do
+            {
+                letsmtNum++;
+                letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
+                credentialData = credentialStore.GetCredential(letsmtUri);
+            } while (credentialData != null);
+
+            int lastUsedLetsmtNum = letsmtNum - 1;
+            Uri lastUsedLetsmtUri = new Uri(opts.Uri.ToString() + lastUsedLetsmtNum.ToString());
+            string lastUsedToken = null;
+            if (lastUsedLetsmtNum > 0)
+            {
+                credentialData = credentialStore.GetCredential(lastUsedLetsmtUri);
+                LetsMTTranslationProvider.ApiCredential apiCredentaial = LetsMTTranslationProvider.ApiCredential.ParseCredential(credentialData.Credential);
+                lastUsedToken = apiCredentaial.Token;
+            }
+
+            PasswordForm pf = new PasswordForm(lastUsedToken);
 
             while (pf.ShowDialog(owner) == DialogResult.OK)
             {
-           
-                //TODO: check how to minimize the amount odfsystem list calls
-                string credentials = string.Format("{0}\t{1}", pf.strToken, pf.strAppId);
 
-                TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
-                //ad a new uri to handle multiple plugins and users
-
-                int letsmtNum = 1;
-                Uri letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
-                
-                TranslationProviderCredential credentialData = credentialStore.GetCredential(letsmtUri);
-                while (credentialData != null)
+                if (lastUsedToken != pf.strToken)
                 {
-                    letsmtNum++;
-                    letsmtUri = new Uri(opts.Uri.ToString() + letsmtNum.ToString());
-                    credentialData = credentialStore.GetCredential(letsmtUri);
-                }
+                    //TODO: check how to minimize the amount odfsystem list calls
+                    string credentials = string.Format("{0}\t{1}", pf.strToken, pf.strAppId);
 
-                credentialStore.AddCredential(letsmtUri, tc);
+                    TranslationProviderCredential tc = new TranslationProviderCredential(credentials, pf.bRemember);
+                    //ad a new uri to handle multiple plugins and users
+
+                    credentialStore.AddCredential(letsmtUri, tc);
+                }
+                else
+                {
+                    letsmtUri = lastUsedLetsmtUri;
+                }
 
                 LetsMTTranslationProvider testProvider = new LetsMTTranslationProvider(credentialStore, letsmtUri,85);// (dialog.Options);
 
