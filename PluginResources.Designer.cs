@@ -61,6 +61,16 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ajax_loader {
+            get {
+                object obj = ResourceManager.GetObject("ajax_loader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://localhost:52232.
         /// </summary>
         public static string HttpTemporaryListenAddresses {
@@ -127,7 +137,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tilde Machine Translation Provider.
+        ///   Looks up a localized string similar to LetsMT Machine Translation Provider.
         /// </summary>
         public static string Plugin_Name {
             get {
@@ -136,7 +146,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tilde Machine Translation Provider.
+        ///   Looks up a localized string similar to LetsMT Machine Translation Provider.
         /// </summary>
         public static string Plugin_NiceName {
             get {
