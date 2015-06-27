@@ -13,6 +13,7 @@ using System.ServiceModel;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.ServiceModel.Description;
+using System.Diagnostics;
 
 namespace LetsMT.MTProvider
 {
@@ -603,6 +604,11 @@ namespace LetsMT.MTProvider
         private void qualityEstimateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             qualityEstimateTextBox.Enabled = qualityEstimateCheckBox.Checked;
+        }
+
+        private void qeInfoPictureBox_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://tilde.com/mt/tools/trados");
         }
     }
 

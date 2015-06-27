@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.wndProfileProperties = new System.Windows.Forms.CheckedListBox();
             this.wndDescription = new System.Windows.Forms.TextBox();
@@ -49,8 +50,11 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.qualityEstimateCheckBox = new System.Windows.Forms.CheckBox();
             this.qualityEstimateTextBox = new System.Windows.Forms.TextBox();
+            this.qeToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.qeInfoPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qeInfoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // wndProfileProperties
@@ -244,7 +248,7 @@
             this.qualityEstimateCheckBox.AutoSize = true;
             this.qualityEstimateCheckBox.Location = new System.Drawing.Point(15, 359);
             this.qualityEstimateCheckBox.Name = "qualityEstimateCheckBox";
-            this.qualityEstimateCheckBox.Size = new System.Drawing.Size(241, 17);
+            this.qualityEstimateCheckBox.Size = new System.Drawing.Size(239, 17);
             this.qualityEstimateCheckBox.TabIndex = 26;
             this.qualityEstimateCheckBox.Text = "Don\'t show translation if its QE score is below";
             this.qualityEstimateCheckBox.UseVisualStyleBackColor = true;
@@ -258,12 +262,29 @@
             this.qualityEstimateTextBox.TabIndex = 27;
             this.qualityEstimateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.qualityEstimateTextBox_Validating);
             // 
+            // qeToolTip
+            // 
+            this.qeToolTip.IsBalloon = true;
+            // 
+            // qeInfoPictureBox
+            // 
+            this.qeInfoPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.qeInfoPictureBox.Image = global::LetsMT.MTProvider.PluginResources.info_small;
+            this.qeInfoPictureBox.Location = new System.Drawing.Point(303, 361);
+            this.qeInfoPictureBox.Name = "qeInfoPictureBox";
+            this.qeInfoPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.qeInfoPictureBox.TabIndex = 28;
+            this.qeInfoPictureBox.TabStop = false;
+            this.qeToolTip.SetToolTip(this.qeInfoPictureBox, "For more information refer to http://tilde.com/mt/tools/trados");
+            this.qeInfoPictureBox.Click += new System.EventHandler(this.qeInfoPictureBox_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 457);
+            this.Controls.Add(this.qeInfoPictureBox);
             this.Controls.Add(this.qualityEstimateTextBox);
             this.Controls.Add(this.qualityEstimateCheckBox);
             this.Controls.Add(this.pictureBox2);
@@ -294,6 +315,7 @@
             this.Text = "SettingsForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qeInfoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,5 +343,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.CheckBox qualityEstimateCheckBox;
         private System.Windows.Forms.TextBox qualityEstimateTextBox;
+        private System.Windows.Forms.ToolTip qeToolTip;
+        private System.Windows.Forms.PictureBox qeInfoPictureBox;
     }
 }
