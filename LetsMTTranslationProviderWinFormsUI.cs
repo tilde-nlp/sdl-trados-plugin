@@ -178,7 +178,8 @@ namespace LetsMT.MTProvider
             info.Name = PluginResources.Plugin_NiceName;
             info.TranslationProviderIcon = PluginResources.LetsMT;
             info.TooltipText = PluginResources.Plugin_Tooltip;
-            info.SearchResultImage = PluginResources.LetsMT_logo;
+            info.SearchResultImage = PluginResources.LetsMT.ToBitmap();
+
 
             return info;
         }

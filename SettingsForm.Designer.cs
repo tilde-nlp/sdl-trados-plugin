@@ -275,9 +275,9 @@
             this.qeInfoPictureBox.Size = new System.Drawing.Size(16, 16);
             this.qeInfoPictureBox.TabIndex = 28;
             this.qeInfoPictureBox.TabStop = false;
-            this.qeToolTip.SetToolTip(this.qeInfoPictureBox, "You will see the translation only for segments with QE beta (Quality Estimation) " +
-        "score above the selected.\r\nFor more information refer to http://tilde.com/mt/too" +
-        "ls/trados");
+            this.qeToolTip.SetToolTip(this.qeInfoPictureBox, "You will see a translation only for segments with a QE (Quality Estimation) beta " +
+        "score above the selected figure.\r\nFor more information, please visit: http://til" +
+        "de.com/mt/tools/trados");
             this.qeInfoPictureBox.Click += new System.EventHandler(this.qeInfoPictureBox_Click);
             // 
             // SettingsForm
