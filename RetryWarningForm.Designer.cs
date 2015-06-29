@@ -90,7 +90,7 @@
             // 
             this.waitingLabel.AutoSize = true;
             this.waitingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.waitingLabel.Location = new System.Drawing.Point(104, 64);
+            this.waitingLabel.Location = new System.Drawing.Point(104, 55);
             this.waitingLabel.Name = "waitingLabel";
             this.waitingLabel.Size = new System.Drawing.Size(53, 16);
             this.waitingLabel.TabIndex = 29;
@@ -100,7 +100,7 @@
             // 
             this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.ajax_loader;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(163, 64);
+            this.pictureBox1.Location = new System.Drawing.Point(163, 55);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(16, 16);
             this.pictureBox1.TabIndex = 30;

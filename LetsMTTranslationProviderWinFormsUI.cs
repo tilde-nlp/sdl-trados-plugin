@@ -178,7 +178,7 @@ namespace LetsMT.MTProvider
             info.Name = PluginResources.Plugin_NiceName;
             info.TranslationProviderIcon = PluginResources.LetsMT;
             info.TooltipText = PluginResources.Plugin_Tooltip;
-            info.SearchResultImage = PluginResources.LetsMT.ToBitmap();
+            info.SearchResultImage = PluginResources.logo_small;
 
 
             return info;
@@ -233,7 +233,6 @@ namespace LetsMT.MTProvider
 
            TestService.ClientCredentials.UserName.UserName = username;
            TestService.ClientCredentials.UserName.Password = password;
-
 
 
             bool bCredentialsValid = true;

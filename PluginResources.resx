@@ -148,6 +148,9 @@
   <data name="info_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\info_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\logo_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="HttpTemporaryListenAddresses" xml:space="preserve">
     <value>http://localhost:52232</value>
   </data>
