@@ -60,9 +60,6 @@ namespace LetsMT.MTProvider
 
             m_strCredential = credential;
 
-            
-
-            string[] credParams = m_strCredential.Split('\t');
 
             ApiCredential apiCredential = ApiCredential.ParseCredential(m_strCredential);
             m_strAppID = apiCredential.AppId == null ? "" : apiCredential.AppId;
@@ -512,28 +509,5 @@ namespace LetsMT.MTProvider
         }
         #endregion
 
-        #region credential helper class
-        public class ApiCredential
-        {
-            public string Token { get; set; }
-            public string AppId { get; set; }
-
-            public static ApiCredential ParseCredential(string strCredential)
-            {
-                string token = null;
-                string appId = null;
-
-                string[] credParams = strCredential.Split('\t');
-
-                if (credParams.Length > 0)
-                    token = credParams[0];
-                if (credParams.Length > 1)
-                {
-                    appId = credParams[1];
-                }
-                return new ApiCredential { Token = token, AppId = appId };
-            }
-        }
-        #endregion
     }
 }

@@ -56,7 +56,7 @@ namespace LetsMT.MTProvider
             if (lastUsedLetsmtNum > 0)
             {
                 credentialData = credentialStore.GetCredential(lastUsedLetsmtUri);
-                LetsMTTranslationProvider.ApiCredential apiCredentaial = LetsMTTranslationProvider.ApiCredential.ParseCredential(credentialData.Credential);
+                ApiCredential apiCredentaial = ApiCredential.ParseCredential(credentialData.Credential);
                 lastUsedToken = apiCredentaial.Token;
             }
 

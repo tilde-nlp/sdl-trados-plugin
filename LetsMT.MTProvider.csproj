@@ -107,6 +107,7 @@
     <Compile Include="Advanced_options.Designer.cs">
       <DependentUpon>Advanced_options.cs</DependentUpon>
     </Compile>
+    <Compile Include="ApiCredential.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HeaderManagerMessageInspector.cs" />
     <Compile Include="InspectorBehaviour.cs" />
