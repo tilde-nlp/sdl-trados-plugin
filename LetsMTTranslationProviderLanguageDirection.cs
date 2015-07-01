@@ -30,7 +30,7 @@ namespace LetsMT.MTProvider
         private LetsMTTranslationProvider _provider;
         private LanguagePair _languageDirection;
         private static bool systemIsStarting = false;
-        private static AutoResetEvent startingResetEvent = new AutoResetEvent(true);
+        private static Object startingLocker = new Object();
         #endregion
 
         #region "ITranslationProviderLanguageDirection Members"
@@ -323,9 +323,14 @@ namespace LetsMT.MTProvider
                             {
                                 var result = SearchTranslationUnit(settings, tu);
 
+                                // the system is up. don't allow any more RetryWarningForms to be shown
                                 systemIsStarting = false;
-                                // there was no "system is starting" exception. the system is up, allow other threads to continue
-                                startingResetEvent.Set();
+                                // and if any form is still left open, close it.
+                                Form UForm = null;
+                                if ((UForm = IsFormAlreadyOpen(typeof(RetryWarningForm))) != null)
+                                {
+                                    UForm.Close();
+                                }
 
                                 results.Add(result);
 
@@ -338,45 +343,41 @@ namespace LetsMT.MTProvider
                                     systemIsStarting = true;
 
                                     // allow only one thread to proceed displaying the RetryWarningForm. all other threads must wait
-                                    startingResetEvent.WaitOne();
-
-                                    /* for completeness sake:
-                                     * a race condition may arise when one thread sets the systemIsStarting flag to false indicating that the next thread that passes here doesn't have to
-                                     * display the RetryWarningForm but another thread sets it to false again just before the following 'if (systemIsStarting)...' check.
-                                     * a fix might be to not trust the flag and ckeck again whether the system is starting up or not exclusively in this thread before displaying the
-                                     * RetryWarningForm, but this would amount to other changes in the code so we don't do that here. nothing bad happens anyway.
-                                     */
-
-                                    // check if the translation system hasn't been brought up by some other thread while this thread was waiting for the startingResetEvent to reset.
-                                    // only the first thread that passes here has systemIsStarting set to true. the threads that follow don't have to display the RetryWarningForm again
-                                    if (systemIsStarting)
+                                    lock (startingLocker)
                                     {
-                                        Form UForm = null;
-                                        if ((UForm = IsFormAlreadyOpen(typeof(RetryWarningForm))) != null)
+                                        /* for completeness sake:
+                                         * a race condition may arise when one thread sets the systemIsStarting flag to false indicating that the next thread that passes here doesn't have to
+                                         * display the RetryWarningForm but another thread sets it back to true again just before the following 'if (systemIsStarting)...' check.
+                                         * a fix might be to not trust the flag and ckeck again whether the system is starting up or not exclusively in this thread before displaying the
+                                         * RetryWarningForm, but this would amount to other changes in the code so we don't do that here. nothing bad happens anyway.
+                                         */
+
+                                        // check if the translation system hasn't been brought up by some other thread while this thread was waiting on the lock.
+                                        // only the first thread that passes here has systemIsStarting set to true. the threads that follow don't have to display the RetryWarningForm again
+                                        if (systemIsStarting)
                                         {
-                                            UForm.Close();
+                                            Form UForm = null;
+                                            if ((UForm = IsFormAlreadyOpen(typeof(RetryWarningForm))) != null)
+                                            {
+                                                UForm.Close();
+                                            }
+                                            RetryWarningForm warnForm = new RetryWarningForm();
+                                            DialogResult Result = warnForm.ShowDialog();
+                                            //DialogResult Result = MessageBox.Show("Automated system is starting up. Retry?", "System starting", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                                            if (Result == DialogResult.No)
+                                            {
+                                                _provider.m_userRetryWarning = false;
+                                                tryAgain = false;
+                                                results.Add(null);
+                                            }
+                                            else if (Result == DialogResult.Cancel)
+                                            {
+                                                //If user presses "X" or another process calls "close" function
+                                                //end process and return "null"
+                                                tryAgain = false;
+                                                results.Add(null);
+                                            }
                                         }
-                                        RetryWarningForm warnForm = new RetryWarningForm();
-                                        DialogResult Result = warnForm.ShowDialog();
-                                        //DialogResult Result = MessageBox.Show("Automated system is starting up. Retry?", "System starting", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                                         if (Result == DialogResult.No)
-                                         {
-                                             _provider.m_userRetryWarning = false;
-                                             tryAgain = false;
-                                             results.Add(null);
-                                         }
-                                         else if (Result == DialogResult.Cancel)
-                                         {
-                                             //If user presses "X" or another process calls "close" function
-                                             //end process and return "null"
-                                             tryAgain = false;
-                                             results.Add(null);
-                                         }
-                                    }
-                                    else
-                                    {
-                                        // there was no need to show the RetryWarningForm. allow the next thread to proceed
-                                        startingResetEvent.Set();
                                     }
                                 }
                                 else
