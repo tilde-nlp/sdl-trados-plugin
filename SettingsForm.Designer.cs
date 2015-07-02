@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.wndProfileProperties = new System.Windows.Forms.CheckedListBox();
-            this.wndDescription = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.wndRunningSystems = new System.Windows.Forms.CheckBox();
@@ -64,28 +63,16 @@
             this.wndProfileProperties.IntegralHeight = false;
             this.wndProfileProperties.Location = new System.Drawing.Point(12, 113);
             this.wndProfileProperties.Name = "wndProfileProperties";
-            this.wndProfileProperties.Size = new System.Drawing.Size(573, 136);
+            this.wndProfileProperties.Size = new System.Drawing.Size(573, 154);
             this.wndProfileProperties.Sorted = true;
             this.wndProfileProperties.TabIndex = 1;
             this.wndProfileProperties.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.wndProfileProperties_ItemCheck);
             this.wndProfileProperties.SelectedIndexChanged += new System.EventHandler(this.wndProfileProperties_SelectedIndexChanged);
             // 
-            // wndDescription
-            // 
-            this.wndDescription.BackColor = System.Drawing.SystemColors.Control;
-            this.wndDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.wndDescription.Location = new System.Drawing.Point(12, 285);
-            this.wndDescription.Multiline = true;
-            this.wndDescription.Name = "wndDescription";
-            this.wndDescription.ReadOnly = true;
-            this.wndDescription.Size = new System.Drawing.Size(573, 63);
-            this.wndDescription.TabIndex = 5;
-            this.wndDescription.TabStop = false;
-            // 
             // btnOk
             // 
             this.btnOk.Enabled = false;
-            this.btnOk.Location = new System.Drawing.Point(429, 422);
+            this.btnOk.Location = new System.Drawing.Point(429, 372);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -95,7 +82,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(510, 422);
+            this.btnCancel.Location = new System.Drawing.Point(510, 372);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -108,7 +95,7 @@
             this.wndRunningSystems.AutoSize = true;
             this.wndRunningSystems.Checked = true;
             this.wndRunningSystems.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.wndRunningSystems.Location = new System.Drawing.Point(425, 261);
+            this.wndRunningSystems.Location = new System.Drawing.Point(425, 276);
             this.wndRunningSystems.Name = "wndRunningSystems";
             this.wndRunningSystems.Size = new System.Drawing.Size(160, 17);
             this.wndRunningSystems.TabIndex = 2;
@@ -118,7 +105,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 382);
+            this.button1.Location = new System.Drawing.Point(12, 332);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 11;
@@ -129,7 +116,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LetsMT.MTProvider.PluginResources.LetsMT_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(78, 426);
+            this.pictureBox1.Location = new System.Drawing.Point(78, 376);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(57, 19);
             this.pictureBox1.TabIndex = 12;
@@ -186,7 +173,7 @@
             // 
             this.termCorporaSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.termCorporaSelectComboBox.FormattingEnabled = true;
-            this.termCorporaSelectComboBox.Location = new System.Drawing.Point(54, 258);
+            this.termCorporaSelectComboBox.Location = new System.Drawing.Point(54, 273);
             this.termCorporaSelectComboBox.Name = "termCorporaSelectComboBox";
             this.termCorporaSelectComboBox.Size = new System.Drawing.Size(203, 21);
             this.termCorporaSelectComboBox.TabIndex = 20;
@@ -195,7 +182,7 @@
             // termsSelectionLabel
             // 
             this.termsSelectionLabel.AutoSize = true;
-            this.termsSelectionLabel.Location = new System.Drawing.Point(12, 265);
+            this.termsSelectionLabel.Location = new System.Drawing.Point(12, 280);
             this.termsSelectionLabel.Name = "termsSelectionLabel";
             this.termsSelectionLabel.Size = new System.Drawing.Size(36, 13);
             this.termsSelectionLabel.TabIndex = 21;
@@ -228,7 +215,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.label1.Location = new System.Drawing.Point(12, 428);
+            this.label1.Location = new System.Drawing.Point(12, 378);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 12);
             this.label1.TabIndex = 24;
@@ -246,7 +233,7 @@
             // qualityEstimateCheckBox
             // 
             this.qualityEstimateCheckBox.AutoSize = true;
-            this.qualityEstimateCheckBox.Location = new System.Drawing.Point(15, 359);
+            this.qualityEstimateCheckBox.Location = new System.Drawing.Point(15, 309);
             this.qualityEstimateCheckBox.Name = "qualityEstimateCheckBox";
             this.qualityEstimateCheckBox.Size = new System.Drawing.Size(239, 17);
             this.qualityEstimateCheckBox.TabIndex = 26;
@@ -256,7 +243,7 @@
             // 
             // qualityEstimateTextBox
             // 
-            this.qualityEstimateTextBox.Location = new System.Drawing.Point(263, 359);
+            this.qualityEstimateTextBox.Location = new System.Drawing.Point(263, 309);
             this.qualityEstimateTextBox.Name = "qualityEstimateTextBox";
             this.qualityEstimateTextBox.Size = new System.Drawing.Size(34, 20);
             this.qualityEstimateTextBox.TabIndex = 27;
@@ -270,7 +257,7 @@
             // 
             this.qeInfoPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.qeInfoPictureBox.Image = global::LetsMT.MTProvider.PluginResources.info_small;
-            this.qeInfoPictureBox.Location = new System.Drawing.Point(303, 361);
+            this.qeInfoPictureBox.Location = new System.Drawing.Point(303, 311);
             this.qeInfoPictureBox.Name = "qeInfoPictureBox";
             this.qeInfoPictureBox.Size = new System.Drawing.Size(16, 16);
             this.qeInfoPictureBox.TabIndex = 28;
@@ -285,7 +272,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(597, 457);
+            this.ClientSize = new System.Drawing.Size(597, 406);
             this.Controls.Add(this.qeInfoPictureBox);
             this.Controls.Add(this.qualityEstimateTextBox);
             this.Controls.Add(this.qualityEstimateCheckBox);
@@ -305,7 +292,6 @@
             this.Controls.Add(this.wndRunningSystems);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.wndDescription);
             this.Controls.Add(this.wndProfileProperties);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -326,7 +312,6 @@
         #endregion
 
         private System.Windows.Forms.CheckedListBox wndProfileProperties;
-        private System.Windows.Forms.TextBox wndDescription;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox wndRunningSystems;

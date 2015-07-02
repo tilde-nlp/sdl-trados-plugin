@@ -374,8 +374,6 @@ namespace LetsMT.MTProvider
                 string systemId = item.Value.ToString();
                 string profileId = getSelectedProfileId();
 
-                wndDescription.Lines = m_translationProvider.m_profileCollection.GetSystemById(systemId).GetDescription().Split('\n');
-
                 termCorporaSelectComboBox.Items.Clear();
                 termCorporaSelectComboBox.Text = "";
 
