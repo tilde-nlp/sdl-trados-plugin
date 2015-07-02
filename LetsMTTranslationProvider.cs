@@ -37,6 +37,7 @@ namespace LetsMT.MTProvider
         public bool m_userRetryWarning;
         public double m_minAllowedQualityEstimateScore = 0;
         public bool m_useQualityEstimates = false;
+        private static Object limitFormLocker = new Object();
 
 
         /// <summary>
@@ -232,19 +233,23 @@ namespace LetsMT.MTProvider
                     if (ex.Message.Contains("code: 1"))
                     {
                         Form UForm = null;
-                        
-                        if  ( (UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
+
+                        // don't allow multiple threads in this block. otherwise there is a race condition when two threads check that the LimitationForm is closed
+                        // and only then both of them proceed to open the form leading to two (or more) open forms
+                        lock (limitFormLocker)
                         {
+                            if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
+                            {
+                                Regex r = new Regex(@"(?<=code: )\d+");
+                                Match m = r.Match(ex.Message);
+                                string erNum = m.Value;
+                                string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+                                var t = new Thread(() => CallForm(Error_url));
 
-                            Regex r = new Regex(@"(?<=code: )\d+");
-                            Match m = r.Match(ex.Message);
-                            string erNum = m.Value;
-                            string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
-                            var t = new Thread(() => CallForm(Error_url));
-
-                            t.SetApartmentState(ApartmentState.STA);
-                            t.Start();
-                            ////close the form if it is open
+                                t.SetApartmentState(ApartmentState.STA);
+                                t.Start();
+                                ////close the form if it is open
+                            }
                         }
                     }
                     else if (ex.Message.Contains("code: 41")) // Term corpora id failed validation
