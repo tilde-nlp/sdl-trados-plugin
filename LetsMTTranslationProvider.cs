@@ -223,7 +223,8 @@ namespace LetsMT.MTProvider
                 try
                 {
                     ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10);
-                    var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}", terms));
+                    string qeParam = m_useQualityEstimates ? ",qe" : "";
+                    var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}" + qeParam, terms));
                     result = translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates ? translation.translation : "";
                 }
                 catch(Exception ex)
