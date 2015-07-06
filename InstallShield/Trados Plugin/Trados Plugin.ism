@@ -58,7 +58,7 @@
 		<comments>Contact:  Your local administrator</comments>
 		<template>Intel;1033</template>
 		<lastauthor>Administrator</lastauthor>
-		<revnumber>{55C8A778-286F-4216-A5A7-C8C739D53F9E}</revnumber>
+		<revnumber>{22A228E5-FB60-4B7F-871B-51DADC89A3D2}</revnumber>
 		<lastprinted/>
 		<createdtm>06/21/1999 11:00</createdtm>
 		<lastsavedtm>07/14/2000 14:50</lastsavedtm>
@@ -2754,7 +2754,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>SIA Tilde</td><td>0</td><td/><td>-1658834129</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Tilde SIA</td><td>0</td><td/><td>-1658834129</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1843710508</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-1843710508</td></row>
@@ -4138,8 +4138,8 @@
 		<col def="S0">Value</col>
 		<row><td>ActiveLanguage</td><td>1033</td></row>
 		<row><td>Comments</td><td/></row>
-		<row><td>CurrentMedia</td><td dt:dt="bin.base64" md5="b491486f2ea923dc16dc8132d9c8c265">
-UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgADEA
+		<row><td>CurrentMedia</td><td dt:dt="bin.base64" md5="5493054ce514845ffe9939360883d571">
+UgBlAGwAZQBhAHMAZQAgADIAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgADEA
 			</td></row>
 		<row><td>ISCompilerOption_CompileBeforeBuild</td><td>1</td></row>
 		<row><td>ISCompilerOption_Debug</td><td>0</td></row>
@@ -4462,7 +4462,7 @@ UgBlAGwAZQBhAHMAZQAgADEAAQBQAHIAbwBkAHUAYwB0ACAAQwBvAG4AZgBpAGcAdQByAGEAdABpAG8A
 		<row><td>ProductID</td><td>none</td><td/></row>
 		<row><td>ProductLanguage</td><td>1033</td><td/></row>
 		<row><td>ProductName</td><td>Tilde Machine Translation Provider for SDL Trados Studio</td><td/></row>
-		<row><td>ProductVersion</td><td>1.3.2</td><td/></row>
+		<row><td>ProductVersion</td><td>1.3.3</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
