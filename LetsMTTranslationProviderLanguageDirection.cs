@@ -387,7 +387,7 @@ namespace LetsMT.MTProvider
                                         }
                                     }
                                 }
-                                if (ex.Message.StartsWith("Default system for this languge pair not selected."))
+                                else if (ex.Message.StartsWith("Default system for this languge pair not selected."))
                                 {
                                     systemNotSelected = true;
                                     lock (messageLocker)
