@@ -30,7 +30,9 @@ namespace LetsMT.MTProvider
         private LetsMTTranslationProvider _provider;
         private LanguagePair _languageDirection;
         private static bool systemIsStarting = false;
-        private static Object startingLocker = new Object();
+        private static Object messageLocker = new Object();
+        private static bool systemNotSelected = false;
+        private static bool systemCannotWake = false;
         #endregion
 
         #region "ITranslationProviderLanguageDirection Members"
@@ -182,8 +184,11 @@ namespace LetsMT.MTProvider
 
             // segments taggs ar converted to html tags
             string strSourceText = Segment2Html(segment);
+            string translText = "";
+
             //segmet with translated htmlgs are translated with letsMT api
-            string translText = _provider.TranslateText(_languageDirection, strSourceText);
+            translText = _provider.TranslateText(_languageDirection, strSourceText);
+
             if (translText != "")
             {
                 Segment translation = new Segment(_languageDirection.TargetCulture);
@@ -325,6 +330,8 @@ namespace LetsMT.MTProvider
 
                                 // the system is up. don't allow any more RetryWarningForms to be shown
                                 systemIsStarting = false;
+                                systemNotSelected = false;
+                                systemCannotWake = false;
                                 // and if any form is still left open, close it.
                                 Form UForm = null;
                                 if ((UForm = IsFormAlreadyOpen(typeof(RetryWarningForm))) != null)
@@ -343,7 +350,7 @@ namespace LetsMT.MTProvider
                                     systemIsStarting = true;
 
                                     // allow only one thread to proceed displaying the RetryWarningForm. all other threads must wait
-                                    lock (startingLocker)
+                                    lock (messageLocker)
                                     {
                                         /* for completeness sake:
                                          * a race condition may arise when one thread sets the systemIsStarting flag to false indicating that the next thread that passes here doesn't have to
@@ -380,12 +387,66 @@ namespace LetsMT.MTProvider
                                         }
                                     }
                                 }
+                                if (ex.Message.StartsWith("Default system for this languge pair not selected."))
+                                {
+                                    systemNotSelected = true;
+                                    lock (messageLocker)
+                                    {
+                                        // TODO: race condition (similar as in the large comment above)
+                                        if (systemNotSelected)
+                                        {
+                                            // we don't pass a credential store. it is assumed that the credentials are correct.
+                                            // TODO: double check if there isn't a situation when the _provider.m_profileCollection.GetProfileList() is called and the credentials are invalid
+                                            DialogResult Result = MessageBox.Show("A system is not selected. Please select the default system for this language pair.", "System not selected.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                                            if (Result == DialogResult.OK)
+                                            {
+                                                _provider.DownloadProfileList(true);
+                                                SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
+
+                                                settingsForm.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                //If user presses "X" or another process calls "close" function
+                                                //end process and return "null"
+                                                tryAgain = false;
+                                                results.Add(null);
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (ex.Message.StartsWith("Unable to wake the system up."))
+                                {
+                                    systemCannotWake = true;
+                                    lock (messageLocker)
+                                    {
+                                        // TODO: race condition (similar as in the large comment above)
+                                        if (systemCannotWake)
+                                        {
+                                            DialogResult Result = MessageBox.Show("The selected system is not started. Please select a different system or start the system manually.", "Cannot wake the system.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                                            if (Result == DialogResult.OK)
+                                            {
+                                                _provider.DownloadProfileList(true);
+                                                SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
+
+                                                settingsForm.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                //If user presses "X" or another process calls "close" function
+                                                //end process and return "null"
+                                                tryAgain = false;
+                                                results.Add(null);
+                                            }
+                                        }
+                                    }
+                                }
                                 else
                                 {
                                     throw ex;
                                 }
                             }
-                            
+
                         }
                     }
                     else
@@ -403,7 +464,7 @@ namespace LetsMT.MTProvider
                             }
                             else
                             {
-                                throw ex; 
+                                throw ex;
                             }
                         }
 

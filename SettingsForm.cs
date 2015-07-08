@@ -55,7 +55,9 @@ namespace LetsMT.MTProvider
 
         public SettingsForm(ref LetsMTTranslationProvider editProvider, LanguagePair[] languagePairs, ITranslationProviderCredentialStore credentialStore)
         {
-            if (!CheckTranslationProviderCredentials(editProvider, credentialStore))
+            // we allow to skip the check if credential store == null. there is code other than LetsMTTranslationProviderWinFormsUI.Edit() method that calls SettingsForm
+            // and it does not have easy access to the credentialStore. the alternative would be to save credentialStore somewhare and make it available ouside the method
+            if (credentialStore != null && !CheckTranslationProviderCredentials(editProvider, credentialStore))
             {
                 return;
             }
@@ -225,7 +227,7 @@ namespace LetsMT.MTProvider
             bool sourceHasSelection = false;
             bool targetHasSelection = false;
 
-            if (m_pairs.Length == 1)
+            if (m_pairs != null && m_pairs.Length == 1)
             {
                 string selectedSourceLanguageId = m_pairs[0].SourceCulture.TwoLetterISOLanguageName;
                 string selectedTargetLanguageId = m_pairs[0].TargetCulture.TwoLetterISOLanguageName;
