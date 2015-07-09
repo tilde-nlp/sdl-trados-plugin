@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tilde, SIA")]
 [assembly: AssemblyProduct("Tilde MT")]
-[assembly: AssemblyCopyright("Copyright © Tilde, SIA 2011")]
+[assembly: AssemblyCopyright("Copyright © Tilde, SIA 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
