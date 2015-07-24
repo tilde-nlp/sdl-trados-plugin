@@ -150,7 +150,9 @@
             this.ClientSize = new System.Drawing.Size(375, 218);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
+#if (!MTPRO)
             this.Controls.Add(this.getClientIdLinkLabel);
+#endif
             this.Controls.Add(this.label1);
             this.Controls.Add(this.goButton);
             this.Controls.Add(this.apiUserIdTextBox);
