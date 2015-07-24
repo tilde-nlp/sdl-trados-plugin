@@ -148,6 +148,15 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://mtprologic.tilde.lv/ws/service.svc/soap.
+        /// </summary>
+        public static string MTProWebServiceUrl {
+            get {
+                return ResourceManager.GetString("MTProWebServiceUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A machine translation provider plug-in for performing translation with the LetsMT platform..
         /// </summary>
         public static string Plugin_Description {

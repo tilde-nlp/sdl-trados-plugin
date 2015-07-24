@@ -70,10 +70,8 @@ namespace LetsMT.MTProvider
 
         public void InitService(string m_strToken)
         {
-            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-
             // create Web Service client
-            string url = resourceManager.GetString("LetsMTWebServiceUrl");
+            string url = Properties.Settings.Default.WebServiceUrl;
             BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
 
             // remove buffet limmit

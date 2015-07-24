@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsMT.MTProvider", "LetsMT.MTProvider.csproj", "{5DF3208A-65A1-4988-B997-C361FC9C5A0A}"
 EndProject
@@ -25,20 +25,34 @@ Global
 		SccLocalPath3 = ..\\SDLTradosPlugin_v2015_linked
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug.Mtpro|Any CPU = Debug.Mtpro|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		Release.Mtpro|Any CPU = Release.Mtpro|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug.Mtpro|Any CPU.ActiveCfg = Debug.Mtpro|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug.Mtpro|Any CPU.Build.0 = Debug.Mtpro|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release.Mtpro|Any CPU.ActiveCfg = Release.Mtpro|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release.Mtpro|Any CPU.Build.0 = Release.Mtpro|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Debug.Mtpro|Any CPU.ActiveCfg = Debug.Mtpro|Any CPU
+		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Debug.Mtpro|Any CPU.Build.0 = Debug.Mtpro|Any CPU
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Release.Mtpro|Any CPU.ActiveCfg = Release.Mtpro|Any CPU
+		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Release.Mtpro|Any CPU.Build.0 = Release.Mtpro|Any CPU
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE9FF782-821F-4D95-817E-85FC96A4AD23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Debug.Mtpro|Any CPU.ActiveCfg = Debug.Mtpro|Any CPU
+		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Debug.Mtpro|Any CPU.Build.0 = Debug.Mtpro|Any CPU
 		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Release.Mtpro|Any CPU.ActiveCfg = Release.Mtpro|Any CPU
+		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Release.Mtpro|Any CPU.Build.0 = Release.Mtpro|Any CPU
 		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{880DD933-D860-465F-8E79-8DB2D3AD2196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

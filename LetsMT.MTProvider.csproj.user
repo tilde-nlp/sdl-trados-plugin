@@ -19,4 +19,12 @@
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files (x86)\SDL\SDL Trados Studio\Studio1\SDLTradosStudio.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'mtpro|AnyCPU'">
+    <StartProgram>C:\Program Files %28x86%29\SDL\SDL Trados Studio\Studio1\SDLTradosStudio.exe</StartProgram>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Mtpro|AnyCPU'">
+    <StartProgram>C:\Program Files %28x86%29\SDL\SDL Trados Studio\Studio1\SDLTradosStudio.exe</StartProgram>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
 </Project>

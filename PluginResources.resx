@@ -157,4 +157,7 @@
   <data name="LetsMTLoginUrl" xml:space="preserve">
     <value>https://readymt.tilde.com/Account/LoginApp</value>
   </data>
+  <data name="MTProWebServiceUrl" xml:space="preserve">
+    <value>https://mtprologic.tilde.lv/ws/service.svc/soap</value>
+  </data>
 </root>
