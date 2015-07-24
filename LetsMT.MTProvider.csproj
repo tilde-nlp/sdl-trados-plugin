@@ -171,6 +171,7 @@
     <Content Include="Resources\info_small.png" />
     <Content Include="Resources\logo_small.png" />
     <Content Include="Resources\MT_logo.png" />
+    <Content Include="Resources\MTPro_logo.png" />
     <None Include="Resources\LetsMT_logo.png" />
     <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

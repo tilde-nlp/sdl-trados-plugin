@@ -148,6 +148,16 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap MTPro_logo {
+            get {
+                object obj = ResourceManager.GetObject("MTPro_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://mtprologic.tilde.lv/ws/service.svc/soap.
         /// </summary>
         public static string MTProWebServiceUrl {

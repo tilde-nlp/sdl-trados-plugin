@@ -51,9 +51,15 @@
             this.qualityEstimateTextBox = new System.Windows.Forms.TextBox();
             this.qeToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.qeInfoPictureBox = new System.Windows.Forms.PictureBox();
+#if MTPRO
+            this.mtProPictureBox = new System.Windows.Forms.PictureBox();
+#endif
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qeInfoPictureBox)).BeginInit();
+#if MTPRO
+            ((System.ComponentModel.ISupportInitialize)(this.mtProPictureBox)).BeginInit();
+#endif
             this.SuspendLayout();
             // 
             // wndProfileProperties
@@ -266,6 +272,17 @@
         "score above the selected figure.\r\nFor more information, please visit: http://til" +
         "de.com/mt/tools/trados");
             this.qeInfoPictureBox.Click += new System.EventHandler(this.qeInfoPictureBox_Click);
+#if MTPRO
+            // 
+            // mtProPictureBox
+            // 
+            this.mtProPictureBox.Image = global::LetsMT.MTProvider.PluginResources.MTPro_logo;
+            this.mtProPictureBox.Location = new System.Drawing.Point(332, 309);
+            this.mtProPictureBox.Name = "mtProPictureBox";
+            this.mtProPictureBox.Size = new System.Drawing.Size(48, 20);
+            this.mtProPictureBox.TabIndex = 29;
+            this.mtProPictureBox.TabStop = false;
+#endif
             // 
             // SettingsForm
             // 
@@ -273,6 +290,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(597, 406);
+#if MTPRO
+            this.Controls.Add(this.mtProPictureBox);
+#endif
             this.Controls.Add(this.qeInfoPictureBox);
             this.Controls.Add(this.qualityEstimateTextBox);
             this.Controls.Add(this.qualityEstimateCheckBox);
@@ -304,6 +324,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qeInfoPictureBox)).EndInit();
+#if MTPRO
+            ((System.ComponentModel.ISupportInitialize)(this.mtProPictureBox)).EndInit();
+#endif
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,5 +355,8 @@
         private System.Windows.Forms.TextBox qualityEstimateTextBox;
         private System.Windows.Forms.ToolTip qeToolTip;
         private System.Windows.Forms.PictureBox qeInfoPictureBox;
+#if MTPRO
+        private System.Windows.Forms.PictureBox mtProPictureBox;
+#endif
     }
 }
