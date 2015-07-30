@@ -231,7 +231,7 @@ namespace LetsMT.MTProvider
             return code;
         }
 
-        //private const string CloseWindowResponse = "<!DOCTYPE html><html><head></head><body onload=\"closeThis();\"><h1>Authorization Successfull</h1><p>You can now close this window</p><script type=\"text/javascript\">function closeMe() { window.close(); } function closeThis() { window.close(); }</script></body></html>";
+        //private const string CloseWindowResponse = "<!DOCTYPE html><html><head></head><body onload=\"closeThis();\"><h1>Authorization Successful</h1><p>You can now close this window</p><script type=\"text/javascript\">function closeMe() { window.close(); } function closeThis() { window.close(); }</script></body></html>";
         private const string CloseWindowResponse =
             @"<!DOCTYPE html>
             <html>
@@ -272,7 +272,7 @@ namespace LetsMT.MTProvider
                     <div id='border'>
                         <div id='head_logo'></div>
                         <div id='content'>
-                            <h1>Authorization Successfull</h1>
+                            <h1>Authorization Successful</h1>
                             <p>You can now close this window</p>
                         </div>
                         <div id='logo_powered_container'>
