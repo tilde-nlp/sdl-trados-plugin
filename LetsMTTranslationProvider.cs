@@ -63,7 +63,7 @@ namespace LetsMT.MTProvider
 
 
             ApiCredential apiCredential = ApiCredential.ParseCredential(m_strCredential);
-            m_strAppID = apiCredential.AppId == null ? "" : apiCredential.AppId;
+            m_strAppID = string.IsNullOrEmpty(apiCredential.AppId) ? "sdl-studio" : apiCredential.AppId;
 
             InitService(apiCredential.Token == null ? "" : apiCredential.Token);
         }

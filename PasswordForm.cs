@@ -15,7 +15,7 @@ namespace LetsMT.MTProvider
     {
         private string m_strUsername;
         private string m_strPassword;
-        private string m_strAppId;
+        private string m_strAppId = "sdl-studio";
         private string m_strToken;
         private bool m_bRemember;
         private RunState serverCanceledState;
