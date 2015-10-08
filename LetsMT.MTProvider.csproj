@@ -38,38 +38,14 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2011_Release_Mtpro'">
-		<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2014_Release_Mtpro'">
-		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2015_Release' Or '$(Configuration)'=='v2015_Release_Mtpro'">
-		<TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>.\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;LETSMT</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>.\</OutputPath>
-    <DefineConstants>TRACE;LETSMT</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -290,21 +266,6 @@
   <PropertyGroup>
     <CreatePluginPackage>true</CreatePluginPackage>
     <ProjectGuid>{5DF3208A-65A1-4988-B997-C361FC9C5A0A}</ProjectGuid>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Mtpro|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug.Mtpro\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;MTPRO</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Mtpro|AnyCPU'">
-    <OutputPath>bin\Release.Mtpro\</OutputPath>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE;MTPRO</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2011_Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

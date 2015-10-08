@@ -15,10 +15,6 @@ Global
 		SccLocalPath1 = .
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug.Mtpro|Any CPU = Debug.Mtpro|Any CPU
-		Debug|Any CPU = Debug|Any CPU
-		Release.Mtpro|Any CPU = Release.Mtpro|Any CPU
-		Release|Any CPU = Release|Any CPU
 		v2011_Debug_Mtpro|Any CPU = v2011_Debug_Mtpro|Any CPU
 		v2011_Debug|Any CPU = v2011_Debug|Any CPU
 		v2011_Release_Mtpro|Any CPU = v2011_Release_Mtpro|Any CPU
@@ -33,14 +29,6 @@ Global
 		v2015_Release|Any CPU = v2015_Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug.Mtpro|Any CPU.ActiveCfg = Debug.Mtpro|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug.Mtpro|Any CPU.Build.0 = Debug.Mtpro|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release.Mtpro|Any CPU.ActiveCfg = Release.Mtpro|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release.Mtpro|Any CPU.Build.0 = Release.Mtpro|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2011_Debug_Mtpro|Any CPU.ActiveCfg = v2011_Debug_Mtpro|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2011_Debug_Mtpro|Any CPU.Build.0 = v2011_Debug_Mtpro|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2011_Debug|Any CPU.ActiveCfg = v2011_Debug|Any CPU
