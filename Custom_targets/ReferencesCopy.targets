@@ -11,15 +11,15 @@
       <![CDATA[
 System.IO.File.WriteAllText("terms-build.log", BuildVersion);
 string sourcefolder = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-if(BuildVersion.Equals("v2015_Debug") || BuildVersion.Equals("v2015_Release"))
+if(BuildVersion.StartsWith("v2015_Debug") || BuildVersion.StartsWith("v2015_Release"))
 {
   sourcefolder += @"\SDL\SDL Trados Studio\Studio4\";
 }
-else if(BuildVersion.Equals("v2014_Debug") || BuildVersion.Equals("v2014_Release"))
+else if(BuildVersion.StartsWith("v2014_Debug") || BuildVersion.StartsWith("v2014_Release"))
 {
   sourcefolder += @"\SDL\SDL Trados Studio\Studio3\";
 }
-else if(BuildVersion.Equals("v2011_Debug") || BuildVersion.Equals("v2011_Release"))
+else if(BuildVersion.StartsWith("v2011_Debug") || BuildVersion.StartsWith("v2011_Release"))
 {
   sourcefolder += @"\SDL\SDL Trados Studio\Studio2\";
 }
