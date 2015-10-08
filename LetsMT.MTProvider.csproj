@@ -355,6 +355,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CreatePluginPackage>true</CreatePluginPackage>
+    <ProjectGuid>{5DF3208A-65A1-4988-B997-C361FC9C5A0A}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Mtpro|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -480,7 +481,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\9\Sdl.Core.PluginFramework.Build.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\11\Sdl.Core.PluginFramework.Build.targets" />
   <Import Project="$(MSBuildProjectDirectory)\Custom_targets\ReferencesCopy.targets" />
   <Import Project="$(MSBuildProjectDirectory)\Custom_targets\ManifestUpdateFile.targets" />
   <Import Project="$(MSBuildProjectDirectory)\Custom_targets\ManifestCompress.targets" />
