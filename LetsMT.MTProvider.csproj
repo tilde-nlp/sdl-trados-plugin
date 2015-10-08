@@ -197,8 +197,6 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Service References\LetsMTAPI\TranslationWCFService1.wsdl" />
-    <None Include="setupscript.nsi" />
-    <None Include="setupscript_11.nsi" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
