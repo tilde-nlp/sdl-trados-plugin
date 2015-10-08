@@ -372,9 +372,9 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;MTPRO</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'v2009_Debug|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2011_Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\v2009_Debug\</OutputPath>
+    <OutputPath>bin\v2011_Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;LETSMT</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -382,8 +382,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'v2009_Release|AnyCPU'">
-    <OutputPath>bin\v2009_Release\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2011_Release|AnyCPU' ">
+    <OutputPath>bin\v2011_Release\</OutputPath>
     <DefineConstants>TRACE;LETSMT</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -429,9 +429,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'v2009_Debug_Mtpro|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2011_Debug_Mtpro|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\v2009_Debug_Mtpro\</OutputPath>
+    <OutputPath>bin\v2011_Debug_Mtpro\</OutputPath>
     <DefineConstants>TRACE;DEBUG;MTPRO</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -439,8 +439,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'v2009_Release_Mtpro|AnyCPU'">
-    <OutputPath>bin\v2009_Release_Mtpro\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2011_Release_Mtpro|AnyCPU' ">
+    <OutputPath>bin\v2011_Release_Mtpro\</OutputPath>
     <DefineConstants>TRACE;MTPRO</DefineConstants>
     <Optimize>true</Optimize>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -479,6 +479,18 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\11\Sdl.Core.PluginFramework.Build.targets" />
