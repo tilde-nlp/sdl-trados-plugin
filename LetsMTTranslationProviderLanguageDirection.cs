@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using LetsMT.MTProvider.LetsMTAPI;
 
 namespace LetsMT.MTProvider
 {
@@ -343,9 +344,44 @@ namespace LetsMT.MTProvider
 
                                 tryAgain = false;
                             }
-                            catch (Exception ex)
+                            catch (InvalidOperationException ex)
                             {
-                                if (ex.Message.Contains("system is starting"))
+                                if (ex.Message.StartsWith("Default system for this languge pair not selected."))
+                                {
+                                    systemNotSelected = true;
+                                    lock (messageLocker)
+                                    {
+                                        // TODO: race condition (similar as in the large comment above)
+                                        if (systemNotSelected)
+                                        {
+                                            // we don't pass a credential store. it is assumed that the credentials are correct.
+                                            // TODO: double check if there isn't a situation when the _provider.m_profileCollection.GetProfileList() is called and the credentials are invalid
+                                            DialogResult Result = MessageBox.Show("A system is not selected. Please select the default system for this language pair.", "System not selected.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                                            if (Result == DialogResult.OK)
+                                            {
+                                                _provider.DownloadProfileList(true);
+                                                SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
+
+                                                settingsForm.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                //If user presses "X" or another process calls "close" function
+                                                //end process and return "null"
+                                                tryAgain = false;
+                                                results.Add(null);
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    throw;
+                                }
+                            }
+                            catch (FaultException<Fault> ex)
+                            {
+                                if (ex.Detail.ErrorCode == "21") // system is starting
                                 {
                                     systemIsStarting = true;
 
@@ -387,35 +423,7 @@ namespace LetsMT.MTProvider
                                         }
                                     }
                                 }
-                                else if (ex.Message.StartsWith("Default system for this languge pair not selected."))
-                                {
-                                    systemNotSelected = true;
-                                    lock (messageLocker)
-                                    {
-                                        // TODO: race condition (similar as in the large comment above)
-                                        if (systemNotSelected)
-                                        {
-                                            // we don't pass a credential store. it is assumed that the credentials are correct.
-                                            // TODO: double check if there isn't a situation when the _provider.m_profileCollection.GetProfileList() is called and the credentials are invalid
-                                            DialogResult Result = MessageBox.Show("A system is not selected. Please select the default system for this language pair.", "System not selected.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-                                            if (Result == DialogResult.OK)
-                                            {
-                                                _provider.DownloadProfileList(true);
-                                                SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
-
-                                                settingsForm.ShowDialog();
-                                            }
-                                            else
-                                            {
-                                                //If user presses "X" or another process calls "close" function
-                                                //end process and return "null"
-                                                tryAgain = false;
-                                                results.Add(null);
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (ex.Message.StartsWith("Unable to wake the system up."))
+                                else if (ex.Detail.ErrorCode == "23") // Unable to wake the system up
                                 {
                                     systemCannotWake = true;
                                     lock (messageLocker)
@@ -443,7 +451,7 @@ namespace LetsMT.MTProvider
                                 }
                                 else
                                 {
-                                    throw ex;
+                                    throw;
                                 }
                             }
 

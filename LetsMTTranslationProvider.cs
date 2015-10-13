@@ -17,6 +17,8 @@ using System.Security;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Threading;
+using System.ServiceModel.Security;
+using LetsMT.MTProvider.LetsMTAPI;
 
 namespace LetsMT.MTProvider
 {
@@ -226,7 +228,7 @@ namespace LetsMT.MTProvider
                     var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}" + qeParam, terms));
                     result = translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates ? translation.translation : "";
                 }
-                catch(Exception ex)
+                catch (FaultException ex)
                 {
                     if (ex.Message.Contains("code: 1"))
                     {
@@ -255,7 +257,7 @@ namespace LetsMT.MTProvider
                         m_profileCollection.SetActiveTermCorporaForSystem(direction, system, ""); // This doesn't get serialized until the user opens the settings form. If Trados is closed before that the faulty term id is used again on the next run.
                         return TranslateText(direction, text);
                     }
-                    else if    (ex.Message.Contains("code:"))
+                    else if (ex.Message.Contains("code:"))
                     {
                         RegexOptions opts = RegexOptions.Multiline;
                         Regex r = new Regex(@"(?<=description: ).+$", opts);
@@ -273,29 +275,35 @@ namespace LetsMT.MTProvider
                         r = new Regex(@"(?<=code: )\d+");
                         m = r.Match(ex.Message);
                         string errNum = m.Value;
-                        
-                        throw new Exception(string.Format("{0} (code {1})", errText, errNum));
+
+                        Fault requestFault = new Fault(){ErrorCode = errNum, ErrorMessage = errText };
+                        string reason = string.Format("{0} (code {1})", errText, errNum);
+                        throw new FaultException<Fault>(requestFault, reason);  // Ideally we would have received a FaultException<Fault> from the API, but the API doesn't do that for backward compatability.
+                                                                                // We use it here so that atleast we don't have to parse the message a second time in the calling methods catch block.
                     }
-                    else if (ex.Message.StartsWith("The request channel timed out "))
-                    {
-                        return "";
-                    }
-                    else if (ex.Message.Contains("The HTTP request is unauthorized"))
+                }
+                catch (TimeoutException ex)
+                //else if (ex.Message.StartsWith("The request channel timed out "))
+                {
+                    return "";
+                }
+                catch (MessageSecurityException ex)
+                {
+                    if (ex.Message.Contains("The HTTP request is unauthorized"))
                     {
                         // throw new Exception("Unrecognized username or password.");
                         throw new TranslationProviderAuthenticationException();
                     }
-                    else
-                    {
-                        throw new Exception("Could not connect to translation provider.");
-                    }
-                   
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Could not connect to translation provider.", ex);
                 }
 
                 return result;
             }
                 //return "";
-            throw new Exception("Default system for this languge pair not selected.");
+            throw new InvalidOperationException("Default system for this languge pair not selected.");
             
         }
 
