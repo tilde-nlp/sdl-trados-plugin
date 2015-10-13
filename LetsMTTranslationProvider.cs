@@ -124,6 +124,8 @@ namespace LetsMT.MTProvider
             HeaderManagerMessageInspector inspector = new HeaderManagerMessageInspector("client-id", m_strToken);
             InspectorBehaviour addUserIdBehaviour = new InspectorBehaviour(inspector);
             m_service.Endpoint.Behaviors.Add(addUserIdBehaviour);
+            ReaderQuotaExtensionBehaviour increaseQuotaBehaviour = new ReaderQuotaExtensionBehaviour();
+            m_service.Endpoint.Behaviors.Add(increaseQuotaBehaviour);
 
             // m_service.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerTrust;
 

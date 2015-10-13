@@ -112,6 +112,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ReaderQuotaExtensionBehaviour.cs" />
     <Compile Include="RetryWarningForm.cs">
       <SubType>Form</SubType>
     </Compile>

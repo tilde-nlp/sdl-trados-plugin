@@ -472,7 +472,7 @@ namespace LetsMT.MTProvider
                             }
                             else
                             {
-                                throw ex;
+                                throw;
                             }
                         }
 
