@@ -464,9 +464,9 @@ namespace LetsMT.MTProvider
                             var result = SearchTranslationUnit(settings, tu);
                             results.Add(result);
                         }
-                        catch (Exception ex)
+                        catch (FaultException<Fault> ex)
                         {
-                            if (ex.Message.Contains("system is starting"))
+                            if (ex.Detail.ErrorCode == "21")
                             {
                                 results.Add(null);
                             }
