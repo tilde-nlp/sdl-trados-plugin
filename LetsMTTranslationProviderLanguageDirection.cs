@@ -362,8 +362,10 @@ namespace LetsMT.MTProvider
                                                 _provider.DownloadProfileList(true);
                                                 SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
 
-                                                settingsForm.ShowDialog();
-                                                systemNotSelected = false;
+                                                if (settingsForm.ShowDialog() == DialogResult.OK)
+                                                {
+                                                    systemNotSelected = false;
+                                                }
                                             }
                                             else
                                             {
@@ -442,8 +444,10 @@ namespace LetsMT.MTProvider
                                                 _provider.DownloadProfileList(true);
                                                 SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
 
-                                                settingsForm.ShowDialog();
-                                                systemCannotWake = false;
+                                                if (settingsForm.ShowDialog() == DialogResult.OK)
+                                                {
+                                                    systemCannotWake = false;
+                                                }
                                             }
                                             else
                                             {
