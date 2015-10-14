@@ -363,6 +363,7 @@ namespace LetsMT.MTProvider
                                                 SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
 
                                                 settingsForm.ShowDialog();
+                                                systemNotSelected = false;
                                             }
                                             else
                                             {
@@ -420,6 +421,10 @@ namespace LetsMT.MTProvider
                                                 tryAgain = false;
                                                 results.Add(null);
                                             }
+                                            else
+                                            {
+                                                systemIsStarting = false;
+                                            }
                                         }
                                     }
                                 }
@@ -438,6 +443,7 @@ namespace LetsMT.MTProvider
                                                 SettingsForm settingsForm = new SettingsForm(ref _provider, new LanguagePair[] { _languageDirection }, null);
 
                                                 settingsForm.ShowDialog();
+                                                systemCannotWake = false;
                                             }
                                             else
                                             {
