@@ -8,6 +8,7 @@ using System.Web;
 using System.Runtime.Remoting.Messaging;
 using System.ComponentModel;
 using System.Net.Sockets;
+using System.Reflection;
 
 namespace LetsMT.MTProvider
 {
@@ -330,6 +331,11 @@ namespace LetsMT.MTProvider
                     }
                 });
             }
+        }
+
+        private void PasswordForm_Load(object sender, EventArgs e)
+        {
+            this.Text = string.Format("Tilde MT Authentication (v {0})", Assembly.GetExecutingAssembly().GetName().Version);
         }
     }
 

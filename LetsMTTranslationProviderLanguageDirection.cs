@@ -464,7 +464,10 @@ namespace LetsMT.MTProvider
                                     throw;
                                 }
                             }
-
+                            //catch (Exception ex)
+                            //{
+                            //    throw new Exception("Could not connect to translation provider.", ex);
+                            //}
                         }
                     }
                     else
