@@ -182,10 +182,16 @@ namespace LetsMT.MTProvider
         /// </summary>
         /// <param name="url"></param>
         [STAThread]
-        public  void CallForm(string url)
+        public void CallForm(string url, AutoResetEvent formLoadedEvent)
         {
             LimitationForm LimitForm = new LimitationForm(url);
+            LimitForm.Load += (sender, e) => formLoadedEvent.Set();
             LimitForm.ShowDialog();
+        }
+
+        void LimitForm_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
         
 
@@ -228,7 +234,7 @@ namespace LetsMT.MTProvider
                     ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10);
                     string qeParam = m_useQualityEstimates ? ",qe" : "";
                     var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}" + qeParam, terms));
-                    result = translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates ? translation.translation : "";
+                    result = translation != null && (translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates) ? translation.translation : "";
                 }
                 catch (FaultException ex)
                 {
@@ -246,11 +252,23 @@ namespace LetsMT.MTProvider
                                 Match m = r.Match(ex.Message);
                                 string erNum = m.Value;
                                 string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
-                                var t = new Thread(() => CallForm(Error_url));
+                                AutoResetEvent formLoadedEvent = new AutoResetEvent(false);
+                                var t = new Thread(() => CallForm(Error_url, formLoadedEvent));
 
                                 t.SetApartmentState(ApartmentState.STA);
                                 t.Start();
+
+                                // wait until the limitationForm has loaded
+                                try
+                                {
+                                    formLoadedEvent.WaitOne();
+                                }
+                                catch(AbandonedMutexException aex)
+                                {
+                                    // the limitform crashed or something. continue
+                                }
                                 ////close the form if it is open
+                                // TODO: we should wait until the form has loaded. otherwise the next IsFormAlreadyOpen check cannot be relied upon. two (or more) forms could open
                             }
                         }
                     }
@@ -297,10 +315,10 @@ namespace LetsMT.MTProvider
                         throw new TranslationProviderAuthenticationException();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Could not connect to translation provider.", ex);
-                }
+                //catch (Exception ex)
+                //{
+                //    throw new Exception("Could not connect to translation provider.", ex);
+                //}
 
                 return result;
             }

@@ -292,11 +292,22 @@ namespace LetsMT.MTProvider
                         Match m = r.Match(ex.Message);
                         string erNum = m.Value;
                         string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, testProvider.m_service.ClientCredentials.UserName.UserName);
-                        var t = new Thread(() => testProvider.CallForm(Error_url));
+                        AutoResetEvent formLoadedEvent = new AutoResetEvent(false);
+                        var t = new Thread(() => testProvider.CallForm(Error_url, formLoadedEvent));
 
                         t.SetApartmentState(ApartmentState.STA);
                         t.Start();
                         bCredentialsValid = false;
+
+                        // wait until the limitationForm has loaded
+                        try
+                        {
+                            formLoadedEvent.WaitOne();
+                        }
+                        catch (AbandonedMutexException aex)
+                        {
+                            // the limitform crashed or something. continue
+                        }
                         ////close the form if it is open
                         //UForm.Close();
                     }
