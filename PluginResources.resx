@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Plugin_Name" xml:space="preserve">
-    <value>LetsMT Machine Translation Provider</value>
+    <value>Tilde Machine Translation Provider</value>
   </data>
   <data name="LetsMTWebServiceUrl" xml:space="preserve">
     <value>https://www.letsmt.eu/ws/service.svc/soap</value>
   </data>
   <data name="Plugin_Tooltip" xml:space="preserve">
-    <value>This provider retrieves machine translated text from the LetsMT platform.</value>
+    <value>This provider retrieves machine translated text from the Tilde MT platform.</value>
   </data>
   <data name="Plugin_Description" xml:space="preserve">
-    <value>A machine translation provider plug-in for performing translation with the LetsMT platform.</value>
+    <value>A machine translation provider plug-in for performing translation with the Tilde MT platform.</value>
   </data>
   <data name="Plugin_NiceName" xml:space="preserve">
-    <value>LetsMT Machine Translation Provider</value>
+    <value>Tilde Machine Translation Provider</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="LetsMT_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">

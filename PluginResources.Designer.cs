@@ -167,7 +167,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A machine translation provider plug-in for performing translation with the LetsMT platform..
+        ///   Looks up a localized string similar to A machine translation provider plug-in for performing translation with the Tilde MT platform..
         /// </summary>
         public static string Plugin_Description {
             get {
@@ -176,7 +176,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LetsMT Machine Translation Provider.
+        ///   Looks up a localized string similar to Tilde Machine Translation Provider.
         /// </summary>
         public static string Plugin_Name {
             get {
@@ -185,7 +185,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LetsMT Machine Translation Provider.
+        ///   Looks up a localized string similar to Tilde Machine Translation Provider.
         /// </summary>
         public static string Plugin_NiceName {
             get {
@@ -194,7 +194,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This provider retrieves machine translated text from the LetsMT platform..
+        ///   Looks up a localized string similar to This provider retrieves machine translated text from the Tilde MT platform..
         /// </summary>
         public static string Plugin_Tooltip {
             get {
