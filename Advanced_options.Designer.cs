@@ -34,11 +34,14 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.mascedScoreBox = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maskedTimeoutBox = new System.Windows.Forms.MaskedTextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(25, 74);
+            this.okButton.Location = new System.Drawing.Point(44, 90);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -57,7 +60,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(106, 74);
+            this.cancelButton.Location = new System.Drawing.Point(125, 90);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;
@@ -86,11 +89,44 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "%";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Response wait time:";
+            // 
+            // maskedTimeoutBox
+            // 
+            this.maskedTimeoutBox.Culture = new System.Globalization.CultureInfo("");
+            this.maskedTimeoutBox.Location = new System.Drawing.Point(135, 50);
+            this.maskedTimeoutBox.Mask = "000";
+            this.maskedTimeoutBox.Name = "maskedTimeoutBox";
+            this.maskedTimeoutBox.PromptChar = ' ';
+            this.maskedTimeoutBox.Size = new System.Drawing.Size(25, 20);
+            this.maskedTimeoutBox.TabIndex = 7;
+            this.maskedTimeoutBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maskedTimeoutBox.Validating += new System.ComponentModel.CancelEventHandler(this.maskedTimeoutBox_Validating);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(166, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(12, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "s";
+            // 
             // Advanced_options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(193, 109);
+            this.ClientSize = new System.Drawing.Size(212, 125);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.maskedTimeoutBox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.mascedScoreBox);
             this.Controls.Add(this.cancelButton);
@@ -112,5 +148,8 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.MaskedTextBox mascedScoreBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.MaskedTextBox maskedTimeoutBox;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -17,6 +17,7 @@ namespace LetsMT.MTProvider
             m_editProvider = editProvider;     
             InitializeComponent();
             mascedScoreBox.Text = m_editProvider.m_resultScore.ToString();
+            maskedTimeoutBox.Text = m_editProvider.m_timeout.ToString();
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -26,6 +27,12 @@ namespace LetsMT.MTProvider
                 int score = int.Parse(mascedScoreBox.Text);
                 if (score > 99) { score = 99; }
                 m_editProvider.m_resultScore = score;
+            }
+            if (!string.IsNullOrEmpty(maskedTimeoutBox.Text))
+            {
+                int score = int.Parse(maskedTimeoutBox.Text);
+                if (score <= 0) { score = 1; }
+                m_editProvider.m_timeout = score;
             }
             Close();
         }
@@ -49,6 +56,23 @@ namespace LetsMT.MTProvider
             else
             {
                 mascedScoreBox.Text = "0";
+            }
+        }
+
+        private void maskedTimeoutBox_Validating(object sender, CancelEventArgs e)
+        {
+            int num;
+            if (Int32.TryParse(maskedTimeoutBox.Text, out num) == true)
+            {
+                if (num <= 0)
+                {
+                    maskedTimeoutBox.Text = "1";
+                }
+
+            }
+            else
+            {
+                maskedTimeoutBox.Text = "30";
             }
         }
 

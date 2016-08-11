@@ -34,6 +34,7 @@ namespace LetsMT.MTProvider
         private Uri m_uri;
         public string m_strAppID;
         public int m_resultScore;
+        public int m_timeout;  // in seconds
         public LetsMTAPI.TranslationServiceContractClient m_service;
         public CMtProfileCollection m_profileCollection;
         public bool m_userRetryWarning;
@@ -231,7 +232,7 @@ namespace LetsMT.MTProvider
                 string result = "";
                 try
                 {
-                    ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, 10);
+                    ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, m_timeout);
                     string qeParam = m_useQualityEstimates ? ",qe" : "";
                     var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}" + qeParam, terms));
                     result = translation != null && (translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates) ? translation.translation : "";
@@ -451,6 +452,7 @@ namespace LetsMT.MTProvider
                 return;
             }
 
+            m_timeout = state.Timeout > 0 ? state.Timeout : 30;
             m_resultScore = state.ResultScore;
             m_minAllowedQualityEstimateScore = state.MinAllowedQualityEstimateScore;
             m_useQualityEstimates = state.UseQualityEstimate;
@@ -464,6 +466,7 @@ namespace LetsMT.MTProvider
 
             TranslationProviderState state = new TranslationProviderState
             {
+                Timeout = m_timeout,
                 ResultScore = m_resultScore,
                 MinAllowedQualityEstimateScore = m_minAllowedQualityEstimateScore,
                 UseQualityEstimate = m_useQualityEstimates,
@@ -530,6 +533,7 @@ namespace LetsMT.MTProvider
         #region serialization helper class
         public class TranslationProviderState
         {
+            public int Timeout { get; set; }  // in seconds
             public int ResultScore { get; set; }
             public bool UseQualityEstimate { get; set; }
             public double MinAllowedQualityEstimateScore { get; set; }
