@@ -21,7 +21,7 @@ namespace LetsMT.MTProvider
     /// <typeparam name="T1">First item type.</typeparam>
     /// <typeparam name="T2">Second item type.</typeparam>
     [DebuggerDisplay("Item1={Item1};Item2={Item2}")]
-    class MyTuple<T1, T2> : IFormattable
+    public class MyTuple<T1, T2> : IFormattable
     {
         public T1 Item1 { get; private set; }
         public T2 Item2 { get; private set; }

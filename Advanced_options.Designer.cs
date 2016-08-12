@@ -37,11 +37,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.maskedTimeoutBox = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(44, 90);
+            this.okButton.Location = new System.Drawing.Point(25, 121);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -60,7 +61,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(125, 90);
+            this.cancelButton.Location = new System.Drawing.Point(106, 121);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;
@@ -92,7 +93,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 53);
+            this.label3.Location = new System.Drawing.Point(12, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 6;
@@ -101,7 +102,7 @@
             // maskedTimeoutBox
             // 
             this.maskedTimeoutBox.Culture = new System.Globalization.CultureInfo("");
-            this.maskedTimeoutBox.Location = new System.Drawing.Point(135, 50);
+            this.maskedTimeoutBox.Location = new System.Drawing.Point(135, 72);
             this.maskedTimeoutBox.Mask = "000";
             this.maskedTimeoutBox.Name = "maskedTimeoutBox";
             this.maskedTimeoutBox.PromptChar = ' ';
@@ -113,17 +114,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(166, 53);
+            this.label4.Location = new System.Drawing.Point(166, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "s";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 45);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(169, 17);
+            this.checkBox1.TabIndex = 10;
+            this.checkBox1.Text = "Use QE to score AT proposals";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Advanced_options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 125);
+            this.ClientSize = new System.Drawing.Size(206, 156);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.maskedTimeoutBox);
             this.Controls.Add(this.label3);
@@ -151,5 +164,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox maskedTimeoutBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

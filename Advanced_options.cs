@@ -18,6 +18,9 @@ namespace LetsMT.MTProvider
             InitializeComponent();
             mascedScoreBox.Text = m_editProvider.m_resultScore.ToString();
             maskedTimeoutBox.Text = m_editProvider.m_timeout.ToString();
+            checkBox1.Checked = m_editProvider.m_dynamicResultScore;
+            mascedScoreBox.Enabled = !checkBox1.Checked;
+            label1.Enabled = mascedScoreBox.Enabled;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -34,6 +37,7 @@ namespace LetsMT.MTProvider
                 if (score <= 0) { score = 1; }
                 m_editProvider.m_timeout = score;
             }
+            m_editProvider.m_dynamicResultScore = checkBox1.Checked;
             Close();
         }
 
@@ -74,6 +78,12 @@ namespace LetsMT.MTProvider
             {
                 maskedTimeoutBox.Text = "30";
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            mascedScoreBox.Enabled = !(sender as CheckBox).Checked;
+            label1.Enabled = mascedScoreBox.Enabled;
         }
 
    

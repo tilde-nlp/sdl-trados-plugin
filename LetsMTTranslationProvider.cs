@@ -41,6 +41,7 @@ namespace LetsMT.MTProvider
         public double m_minAllowedQualityEstimateScore = 0;
         public bool m_useQualityEstimates = false;
         private static Object limitFormLocker = new Object();
+        public bool m_dynamicResultScore;
 
 
         /// <summary>
@@ -222,7 +223,7 @@ namespace LetsMT.MTProvider
         /// <param name="direction"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public string TranslateText(LanguagePair direction, string text)
+        public MyTuple<string, double?> TranslateText(LanguagePair direction, string text)
         {
             string system = m_profileCollection.GetActiveSystemForProfile(direction);
             string terms = m_profileCollection.GetActiveTermCorporaForSystem(direction, system);
@@ -230,12 +231,14 @@ namespace LetsMT.MTProvider
             if (system != "")
             {
                 string result = "";
+                double? score = null;
                 try
                 {
                     ((IContextChannel)m_service.InnerChannel).OperationTimeout = new TimeSpan(0, 0, m_timeout);
-                    string qeParam = m_useQualityEstimates ? ",qe" : "";
+                    string qeParam = m_useQualityEstimates || m_dynamicResultScore ? ",qe" : "";
                     var translation = m_service.TranslateEx(m_strAppID, system, RemoveControlCharacters(text), string.Format("client=SDLTradosStudio,version=1.5,termCorpusId={0}" + qeParam, terms));
                     result = translation != null && (translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates) ? translation.translation : "";
+                    score = m_dynamicResultScore? translation.qualityEstimate : (double?)null;
                 }
                 catch (FaultException ex)
                 {
@@ -306,7 +309,7 @@ namespace LetsMT.MTProvider
                 catch (TimeoutException ex)
                 //else if (ex.Message.StartsWith("The request channel timed out "))
                 {
-                    return "";
+                    return MyTuple.Create("", (double?)null);
                 }
                 catch (MessageSecurityException ex)
                 {
@@ -317,7 +320,7 @@ namespace LetsMT.MTProvider
                     }
                 }
 
-                return result;
+                return MyTuple.Create(result, score);
             }
                 //return "";
             throw new InvalidOperationException("Default system for this languge pair not selected.");
@@ -452,6 +455,7 @@ namespace LetsMT.MTProvider
                 return;
             }
 
+            m_dynamicResultScore = state.DynamicResultScore;
             m_timeout = state.Timeout > 0 ? state.Timeout : 30;
             m_resultScore = state.ResultScore;
             m_minAllowedQualityEstimateScore = state.MinAllowedQualityEstimateScore;
@@ -466,6 +470,7 @@ namespace LetsMT.MTProvider
 
             TranslationProviderState state = new TranslationProviderState
             {
+                DynamicResultScore = m_dynamicResultScore,
                 Timeout = m_timeout,
                 ResultScore = m_resultScore,
                 MinAllowedQualityEstimateScore = m_minAllowedQualityEstimateScore,
@@ -538,6 +543,7 @@ namespace LetsMT.MTProvider
             public bool UseQualityEstimate { get; set; }
             public double MinAllowedQualityEstimateScore { get; set; }
             public List<ProfileInfo> ProfileInfos { get; set; }
+            public bool DynamicResultScore { get; set; }
         }
         #endregion
 

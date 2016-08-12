@@ -186,9 +186,13 @@ namespace LetsMT.MTProvider
             // segments taggs ar converted to html tags
             string strSourceText = Segment2Html(segment);
             string translText = "";
+            double? translScore = null;
 
             //segmet with translated htmlgs are translated with letsMT api
-            translText = _provider.TranslateText(_languageDirection, strSourceText);
+            var translResult = _provider.TranslateText(_languageDirection, strSourceText);
+            translText = translResult.Item1;
+            translScore = translResult.Item2;
+
 
             if (translText != "")
             {
@@ -199,7 +203,8 @@ namespace LetsMT.MTProvider
                 //result is stored as SearchResults
                 SearchResults results = new SearchResults();
                 results.SourceSegment = segment.Duplicate();
-                results.Add(CreateSearchResult(segment, translation, _provider.m_resultScore));
+                int score = _provider.m_dynamicResultScore && translScore != null ? (int)Math.Round((double)translScore * 100) : _provider.m_resultScore;
+                results.Add(CreateSearchResult(segment, translation, score));
                 return results;
             }
             else
