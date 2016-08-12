@@ -384,7 +384,7 @@ namespace LetsMT.MTProvider
                                 }
                                 else
                                 {
-                                    //throw;
+                                    throw;
                                 }
                             }
                             catch (FaultException<Fault> ex)
@@ -466,12 +466,12 @@ namespace LetsMT.MTProvider
                                 }
                                 else
                                 {
-                                    //throw;
+                                    throw;
                                 }
                             }
                             catch (Exception ex)
                             {
-                                //throw new Exception("Could not connect to translation provider.", ex);
+                                throw new Exception("Could not connect to translation provider.", ex);
                             }
                         }
                     }

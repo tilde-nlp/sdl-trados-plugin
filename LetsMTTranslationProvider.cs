@@ -240,9 +240,10 @@ namespace LetsMT.MTProvider
                     result = translation != null && (translation.qualityEstimate >= m_minAllowedQualityEstimateScore || !m_useQualityEstimates) ? translation.translation : "";
                     score = m_dynamicResultScore? translation.qualityEstimate : (double?)null;
                 }
-                catch (FaultException ex)
+                catch (FaultException<Fault> ex)
                 {
-                    if (ex.Message.Contains("code: 1"))
+                    string errNum = ex.Detail.ErrorCode;
+                    if (errNum.StartsWith("1"))
                     {
                         Form UForm = null;
 
@@ -252,10 +253,7 @@ namespace LetsMT.MTProvider
                         {
                             if ((UForm = IsFormAlreadyOpen(typeof(LimitationForm))) == null)
                             {
-                                Regex r = new Regex(@"(?<=code: )\d+");
-                                Match m = r.Match(ex.Message);
-                                string erNum = m.Value;
-                                string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", erNum, m_service.ClientCredentials.UserName.UserName);
+                                string Error_url = string.Format("https://www.letsmt.eu/Error.aspx?code={0}&user={1}", errNum, m_service.ClientCredentials.UserName.UserName);
                                 AutoResetEvent formLoadedEvent = new AutoResetEvent(false);
                                 var t = new Thread(() => CallForm(Error_url, formLoadedEvent));
 
@@ -276,34 +274,14 @@ namespace LetsMT.MTProvider
                             }
                         }
                     }
-                    else if (ex.Message.Contains("code: 41")) // Term corpora id failed validation
+                    else if (errNum == "41") // Term corpora id failed validation
                     {
                         m_profileCollection.SetActiveTermCorporaForSystem(direction, system, ""); // This doesn't get serialized until the user opens the settings form. If Trados is closed before that the faulty term id is used again on the next run.
                         return TranslateText(direction, text);
                     }
-                    else if (ex.Message.Contains("code:"))
+                    else
                     {
-                        RegexOptions opts = RegexOptions.Multiline;
-                        Regex r = new Regex(@"(?<=description: ).+$", opts);
-                        Match m = r.Match(ex.Message);
-                        string errText;
-                        if (m.Success)
-                        {
-                            errText = m.Value;
-                        }
-                        else
-                        {
-                            errText = "The service was unable to acquire a translation.";
-                        }
-
-                        r = new Regex(@"(?<=code: )\d+");
-                        m = r.Match(ex.Message);
-                        string errNum = m.Value;
-
-                        Fault requestFault = new Fault(){ErrorCode = errNum, ErrorMessage = errText };
-                        string reason = string.Format("{0} (code {1})", errText, errNum);
-                        throw new FaultException<Fault>(requestFault, reason);  // Ideally we would have received a FaultException<Fault> from the API, but the API doesn't do that for backward compatability.
-                                                                                // We use it here so that atleast we don't have to parse the message a second time in the calling methods catch block.
+                        throw;
                     }
                 }
                 catch (TimeoutException ex)
