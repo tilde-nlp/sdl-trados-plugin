@@ -293,7 +293,10 @@ namespace LetsMT.MTProvider
                 {
                     if (ex.Message.Contains("The HTTP request is unauthorized"))
                     {
-                        // throw new Exception("Unrecognized username or password.");
+                        // The Client ID is probably invalid. There is no immediate reason to throw a
+                        // TranslationProviderAuthenticationException since it does not get handled like
+                        // in the rest of the code by re-opening the plugin authentication form, but we'll
+                        // use it anyway.
                         throw new TranslationProviderAuthenticationException();
                     }
                 }
