@@ -258,21 +258,20 @@
             // qeToolTip
             // 
             this.qeToolTip.AutoPopDelay = 32767;
+            this.qeToolTip.InitialDelay = 500;
             this.qeToolTip.IsBalloon = true;
+            this.qeToolTip.ReshowDelay = 100;
             // 
             // qeInfoPictureBox
             // 
-            this.qeInfoPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.qeInfoPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.qeInfoPictureBox.Image = global::LetsMT.MTProvider.PluginResources.info_small;
             this.qeInfoPictureBox.Location = new System.Drawing.Point(303, 311);
             this.qeInfoPictureBox.Name = "qeInfoPictureBox";
             this.qeInfoPictureBox.Size = new System.Drawing.Size(16, 16);
             this.qeInfoPictureBox.TabIndex = 28;
             this.qeInfoPictureBox.TabStop = false;
-            this.qeToolTip.SetToolTip(this.qeInfoPictureBox, "You will see a translation only for segments with a QE (Quality Estimation) beta " +
-            "score above the selected figure.\r\nNote: the interval of the figure is [0-1]. When translating/post-editing, the QE score for a " +
-            "given segment will be expressed in percentage (i.e., in the interval [0-100]).");
-            this.qeInfoPictureBox.Click += new System.EventHandler(this.qeInfoPictureBox_Click);
+            this.qeToolTip.SetToolTip(this.qeInfoPictureBox, resources.GetString("qeInfoPictureBox.ToolTip"));
 #if MTPRO
             // 
             // mtProPictureBox

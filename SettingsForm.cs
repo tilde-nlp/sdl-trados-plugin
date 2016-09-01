@@ -605,11 +605,6 @@ namespace LetsMT.MTProvider
         {
             qualityEstimateTextBox.Enabled = qualityEstimateCheckBox.Checked;
         }
-
-        private void qeInfoPictureBox_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://tilde.com/mt/tools/trados");
-        }
     }
 
     #region "ListItem helper class"
