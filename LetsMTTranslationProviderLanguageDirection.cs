@@ -110,7 +110,10 @@ namespace LetsMT.MTProvider
                                      Enum.Parse(typeof(Sdl.LanguagePlatform.Core.TagType), tagClass);
                                 int id = Convert.ToInt32(xmlReader.GetAttribute("id"));
                                 Sdl.LanguagePlatform.Core.Tag sourceTag = sourceSegment.FindTag(tagType, id);
-                                tagStack.Push(sourceTag);
+                                if (tagType != Sdl.LanguagePlatform.Core.TagType.Standalone)
+                                {
+                                    tagStack.Push(sourceTag);
+                                }
                                 translatedSegment.Add(sourceTag.Duplicate());
                             }
                             break;
