@@ -110,11 +110,18 @@ namespace LetsMT.MTProvider
                                      Enum.Parse(typeof(Sdl.LanguagePlatform.Core.TagType), tagClass);
                                 int id = Convert.ToInt32(xmlReader.GetAttribute("id"));
                                 Sdl.LanguagePlatform.Core.Tag sourceTag = sourceSegment.FindTag(tagType, id);
-                                if (tagType != Sdl.LanguagePlatform.Core.TagType.Standalone)
+                                if (tagType != Sdl.LanguagePlatform.Core.TagType.Standalone &&  !xmlReader.IsEmptyElement)
                                 {
                                     tagStack.Push(sourceTag);
                                 }
                                 translatedSegment.Add(sourceTag.Duplicate());
+                                if (tagType != Sdl.LanguagePlatform.Core.TagType.Standalone && xmlReader.IsEmptyElement) 
+                                    // the API translated <span></span> to <span/> (it does that if the tag is empty).
+                                    // must fetch the end tag as there is no EndElement to triger the next case block.
+                                {
+                                    var endTag = sourceSegment.FindTag(Sdl.LanguagePlatform.Core.TagType.End, id);
+                                    translatedSegment.Add(endTag.Duplicate());
+                                }
                             }
                             break;
                         case System.Xml.XmlNodeType.EndElement:
