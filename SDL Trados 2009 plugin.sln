@@ -1,19 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsMT.MTProvider", "LetsMT.MTProvider.csproj", "{5DF3208A-65A1-4988-B997-C361FC9C5A0A}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = LetsMT.MTProvider.csproj
-		SccLocalPath1 = .
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		v2011_Debug_Mtpro|Any CPU = v2011_Debug_Mtpro|Any CPU
 		v2011_Debug|Any CPU = v2011_Debug|Any CPU
@@ -24,8 +16,10 @@ Global
 		v2014_Release_Mtpro|Any CPU = v2014_Release_Mtpro|Any CPU
 		v2014_Release|Any CPU = v2014_Release|Any CPU
 		v2015_Debug_Mtpro|Any CPU = v2015_Debug_Mtpro|Any CPU
+		v2015_Debug_presidency|Any CPU = v2015_Debug_presidency|Any CPU
 		v2015_Debug|Any CPU = v2015_Debug|Any CPU
 		v2015_Release_Mtpro|Any CPU = v2015_Release_Mtpro|Any CPU
+		v2015_Release_presidency|Any CPU = v2015_Release_presidency|Any CPU
 		v2015_Release|Any CPU = v2015_Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -47,10 +41,14 @@ Global
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2014_Release|Any CPU.Build.0 = v2014_Release|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Debug_Mtpro|Any CPU.ActiveCfg = v2015_Debug_Mtpro|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Debug_Mtpro|Any CPU.Build.0 = v2015_Debug_Mtpro|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Debug_presidency|Any CPU.ActiveCfg = v2015_Debug_presidency|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Debug_presidency|Any CPU.Build.0 = v2015_Debug_presidency|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Debug|Any CPU.ActiveCfg = v2015_Debug|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Debug|Any CPU.Build.0 = v2015_Debug|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Release_Mtpro|Any CPU.ActiveCfg = v2015_Release_Mtpro|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Release_Mtpro|Any CPU.Build.0 = v2015_Release_Mtpro|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Release_presidency|Any CPU.ActiveCfg = v2015_Release_presidency|Any CPU
+		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Release_presidency|Any CPU.Build.0 = v2015_Release_presidency|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Release|Any CPU.ActiveCfg = v2015_Release|Any CPU
 		{5DF3208A-65A1-4988-B997-C361FC9C5A0A}.v2015_Release|Any CPU.Build.0 = v2015_Release|Any CPU
 	EndGlobalSection
