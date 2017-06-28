@@ -14,7 +14,7 @@ building a specific configuration, then the build fails with
 an arror message.
 
 For convenience, the Trados 2015/2017 library files are included in
-the [Custom\_targets.back](../Custom_targets.back) folder. To use
+the [Custom\_targets.back](../SDL_references.back/) folder. To use
 them you should probably copy them to the appropriate SDK location.
 Check the
 [ReferencesCopy.targets](../Custom_targets/ReferencesCopy.targets)
