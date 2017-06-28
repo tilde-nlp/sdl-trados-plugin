@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- TODO: For some reason the MSBuildExtensionsPath variable changes to a wrong value when this custom target is imported.
+    We re-define it here as a workaround, but this will break when compiled on a 32-bit machine. -->
+    <MSBuildExtensionsPath>C:\Program Files (x86)\MSBuild</MSBuildExtensionsPath>
+  </PropertyGroup>
+  <UsingTask TaskName="Sdl.Core.PluginFramework.Build.CreatePluginManifestTask" AssemblyFile="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\11\Sdl.Core.PluginFramework.BuildTasks.dll" />
+
+  <PropertyGroup>
+    <BuildDependsOn>
+      $(BuildDependsOn);
+      GeneratePluginManifestTarget
+    </BuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="GeneratePluginManifestTarget">
+    <CreatePluginManifestTask 
+      ProjectDirectory="$(ProjectDir)" 
+      AssemblyFilePath="$(TargetPath)" 
+      PluginResxFilePath="$(ProjectDir)PluginResources.resx"
+      ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+      ReferenceSatellitePaths="@(ReferenceSatellitePaths)"
+      CreatePluginPackage="$(CreatePluginPackage)"
+      DeployPluginPackage="$(DeployPluginPackage)"
+      />
+  </Target>
+</Project>
