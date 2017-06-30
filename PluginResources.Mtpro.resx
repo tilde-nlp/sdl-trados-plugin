@@ -120,9 +120,6 @@
   <data name="Plugin_Name" xml:space="preserve">
     <value>Tilde Machine Translation Provider</value>
   </data>
-  <data name="LetsMTWebServiceUrl" xml:space="preserve">
-    <value>https://www.letsmt.eu/ws/service.svc/soap</value>
-  </data>
   <data name="Plugin_Tooltip" xml:space="preserve">
     <value>This provider retrieves machine translated text from the Tilde MT platform.</value>
   </data>
@@ -160,7 +157,7 @@
   <data name="LetsMTLoginUrl" xml:space="preserve">
     <value>https://readymt.tilde.com/Account/LoginApp</value>
   </data>
-  <data name="MTProWebServiceUrl" xml:space="preserve">
+  <data name="WebServiceUrl" xml:space="preserve">
     <value>https://mtprologic.tilde.lv/ws/service.svc/soap</value>
   </data>
 </root>

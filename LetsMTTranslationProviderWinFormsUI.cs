@@ -202,7 +202,7 @@ namespace LetsMT.MTProvider
 
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
             // create Web Service client
-            string url = resourceManager.GetString("LetsMTWebServiceUrl");
+            string url = resourceManager.GetString("WebServiceUrl");
 
             try
             {

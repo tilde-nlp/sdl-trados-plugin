@@ -17,21 +17,12 @@ namespace LetsMT.MTProvider.Properties {
             // this.SettingsSaving += this.SettingsSavingEventHandler;
             //
             this.SetLetsMTApplicationSettings();
-            this.SetMTProApplicationSettings();
         }
 
-        [Conditional("LETSMT")]
         private void SetLetsMTApplicationSettings()
         {
             global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-            this["WebServiceUrl"] = resourceManager.GetString("LetsMTWebServiceUrl");
-        }
-
-        [Conditional("MTPRO")]
-        private void SetMTProApplicationSettings()
-        {
-            global::System.Resources.ResourceManager resourceManager = new global::System.Resources.ResourceManager("LetsMT.MTProvider.PluginResources", typeof(PluginResources).Assembly);
-            this["WebServiceUrl"] = resourceManager.GetString("MTProWebServiceUrl");
+            this["WebServiceUrl"] = resourceManager.GetString("WebServiceUrl");
         }
         
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
