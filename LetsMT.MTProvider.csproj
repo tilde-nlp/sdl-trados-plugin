@@ -47,6 +47,15 @@
   <PropertyGroup Condition="'$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2015_Release' Or '$(Configuration)'=='v2015_Release_Mtpro'">
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2015_Release'">
+    <PluginResourcesPath>PluginResources.Tildemt.resx</PluginResourcesPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release_Mtpro' Or '$(Configuration)'=='v2014_Release_Mtpro' Or '$(Configuration)'=='v2015_Release_Mtpro'">
+    <PluginResourcesPath>PluginResources.Mtpro.resx</PluginResourcesPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2011_Release_presidency' Or '$(Configuration)'=='v2014_Release_presidency' Or '$(Configuration)'=='v2015_Release_presidency'">
+    <PluginResourcesPath>PluginResources.Presidency.resx</PluginResourcesPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -171,6 +180,11 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
+    <Compile Include="PluginResources.Designer.cs">
+      <DependentUpon>PluginResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <!--
@@ -252,6 +266,11 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PluginResources.Tildemt.resx" />
+    <None Include="PluginResources.Mtpro.resx" />
+    <None Include="PluginResources.Presidency.resx" />
+  </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2015_Release'">
     <Content Include="Resources\Tildemt\ajax-loader.gif" />
     <Content Include="Resources\Tildemt\info_small.png" />
@@ -260,16 +279,6 @@
     <Content Include="Resources\Tildemt\MTPro_logo.png" />
     <None Include="Resources\Tildemt\LetsMT_logo.png" />
     <None Include="Resources\Tildemt\LetsMT.ico" />
-    <Compile Include="Resources\Tildemt\PluginResources.Designer.cs">
-      <DependentUpon>PluginResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Resources\Tildemt\PluginResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release_Mtpro' Or '$(Configuration)'=='v2014_Release_Mtpro' Or '$(Configuration)'=='v2015_Release_Mtpro'">
     <Content Include="Resources\Mtpro\ajax-loader.gif" />
@@ -279,16 +288,6 @@
     <Content Include="Resources\Mtpro\MTPro_logo.png" />
     <None Include="Resources\Mtpro\LetsMT_logo.png" />
     <None Include="Resources\Mtpro\LetsMT.ico" />
-    <Compile Include="Resources\Mtpro\PluginResources.Designer.cs">
-      <DependentUpon>PluginResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Resources\Mtpro\PluginResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2011_Release_presidency' Or '$(Configuration)'=='v2014_Release_presidency' Or '$(Configuration)'=='v2015_Release_presidency'">
     <Content Include="Resources\Presidency\ajax-loader.gif" />
@@ -298,16 +297,6 @@
     <Content Include="Resources\Presidency\MTPro_logo.png" />
     <None Include="Resources\Presidency\LetsMT_logo.png" />
     <None Include="Resources\Presidency\LetsMT.ico" />
-    <Compile Include="Resources\Presidency\PluginResources.Designer.cs">
-      <DependentUpon>PluginResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Resources\Presidency\PluginResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PasswordForm.resx">
@@ -331,6 +320,11 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 -->
+    <EmbeddedResource Include="PluginResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -488,10 +482,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!--Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\11\Sdl.Core.PluginFramework.Build.targets" /-->
+  <Import Project="$(MSBuildExtensionsPath)\SDL\SDLTradosStudio\11\Sdl.Core.PluginFramework.Build.targets" />
   <!--TODO: Note that the Sdl.Core.PluginFramework.Build.Custom.targets overrides the MSBuildExtensionsPath variable
   and as a result the build will fail on 32 bit machines. See the file for details.-->
-  <Import Project="$(MSBuildProjectDirectory)\Custom_targets\Sdl.Core.PluginFramework.Build.Custom.targets" />
   <Import Project="$(MSBuildProjectDirectory)\Custom_targets\ReferencesCopy.targets" />
   <Import Project="$(MSBuildProjectDirectory)\Custom_targets\ManifestUpdateFile.targets" />
   <Import Project="$(MSBuildProjectDirectory)\Custom_targets\ManifestCompress.targets" />
@@ -504,6 +497,7 @@ rem copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trado
   <Target Name="BeforeBuild">
     <!-- Copy the appropriate SDL references in SDL_references folder to match the Studio version we are building for. -->
     <CopyReferences BuildVersion="$(ConfigurationName)" DestinationFolder="$(ProjectDir)\SDL_references\" />
+    <Copy SourceFiles="$(PluginResourcesPath)" DestinationFiles="PluginResources.resx" />
   </Target>
   <Target Name="AfterBuild" DependsOnTargets="GeneratePluginManifestTarget">
     <!-- Modify the minversion and maxversion values in pluginpackage.manifest.xml to match the Studio version we are building for. -->

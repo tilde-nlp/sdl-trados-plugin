@@ -297,3 +297,6 @@ __pycache__/
 # Don't include .dll files in the SDL_references folder
 # as they are copied there automatically by the build process.
 SDL_references/*.dll
+
+# The PluginResources.resx file is created automatically by the build process
+PluginResources.resx
