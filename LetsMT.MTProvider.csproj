@@ -116,23 +116,6 @@
     </Compile>
     <Compile Include="MyTuple.cs" />
     <Compile Include="OpenWindowGetter.cs" />
-    <!--
-    <Compile Include="Resources\Tildemt\PluginResources.Designer.cs" Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2015_Release'">
-      <DependentUpon>PluginResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Mtpro\PluginResources.Designer.cs" Condition="'$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release_Mtpro' Or '$(Configuration)'=='v2014_Release_Mtpro' Or '$(Configuration)'=='v2015_Release_Mtpro'">
-      <DependentUpon>PluginResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Presidency\PluginResources.Designer.cs" Condition="'$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2011_Release_presidency' Or '$(Configuration)'=='v2014_Release_presidency' Or '$(Configuration)'=='v2015_Release_presidency'">
-      <DependentUpon>PluginResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
--->
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,14 +170,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <!--
-    <Content Include="Resources\ajax-loader.gif" />
-    <Content Include="Resources\info_small.png" />
-    <Content Include="Resources\logo_small.png" />
-    <Content Include="Resources\MT_logo.png" />
-    <Content Include="Resources\MTPro_logo.png" />
-    <None Include="Resources\LetsMT_logo.png" />
--->
     <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -303,23 +278,6 @@
       <DependentUpon>PasswordForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <!--
-    <EmbeddedResource Include="Resources\Tildemt\PluginResources.resx" Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2015_Release'">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Mtpro\PluginResources.resx" Condition="'$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release_Mtpro' Or '$(Configuration)'=='v2014_Release_Mtpro' Or '$(Configuration)'=='v2015_Release_Mtpro'">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Presidency\PluginResources.resx" Condition="'$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2011_Release_presidency' Or '$(Configuration)'=='v2014_Release_presidency' Or '$(Configuration)'=='v2015_Release_presidency'">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PluginResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
--->
     <EmbeddedResource Include="PluginResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
