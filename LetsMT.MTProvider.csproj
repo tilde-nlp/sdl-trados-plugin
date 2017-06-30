@@ -170,6 +170,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Custom_targets\ReferencesCopy.targets" />
     <None Include="README.md" />
     <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
