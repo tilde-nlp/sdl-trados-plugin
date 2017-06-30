@@ -38,13 +38,13 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2011_Release_Mtpro'">
+  <PropertyGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2011_Release_Mtpro' Or '$(Configuration)'=='v2011_Release_presidency'">
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2014_Release_Mtpro'">
+  <PropertyGroup Condition="'$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2014_Release_Mtpro' Or '$(Configuration)'=='v2014_Release_presidency'">
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2015_Release' Or '$(Configuration)'=='v2015_Release_Mtpro'">
+  <PropertyGroup Condition="'$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2015_Release' Or '$(Configuration)'=='v2015_Release_Mtpro' Or '$(Configuration)'=='v2015_Release_presidency'">
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2015_Release'">
