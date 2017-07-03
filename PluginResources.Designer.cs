@@ -119,15 +119,6 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.letsmt.eu/ws/service.svc/soap.
-        /// </summary>
-        public static string LetsMTWebServiceUrl {
-            get {
-                return ResourceManager.GetString("LetsMTWebServiceUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap logo_small {
@@ -154,15 +145,6 @@ namespace LetsMT.MTProvider {
             get {
                 object obj = ResourceManager.GetObject("MTPro_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://mtprologic.tilde.lv/ws/service.svc/soap.
-        /// </summary>
-        public static string MTProWebServiceUrl {
-            get {
-                return ResourceManager.GetString("MTProWebServiceUrl", resourceCulture);
             }
         }
         
@@ -199,6 +181,24 @@ namespace LetsMT.MTProvider {
         public static string Plugin_Tooltip {
             get {
                 return ResourceManager.GetString("Plugin_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.letsmt.eu/ws/service.svc/soap.
+        /// </summary>
+        public static string WebServiceUrl {
+            get {
+                return ResourceManager.GetString("WebServiceUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translate 2017 is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union. The Translate 2017 plug-in features the world’s best MT systems for Estonian, developed by Tilde. For technical support, contact us at support@translate2017.eu..
+        /// </summary>
+        public static string WelcomeText {
+            get {
+                return ResourceManager.GetString("WelcomeText", resourceCulture);
             }
         }
     }

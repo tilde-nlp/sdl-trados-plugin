@@ -160,4 +160,7 @@
   <data name="WebServiceUrl" xml:space="preserve">
     <value>https://mtprologic.tilde.lv/ws/service.svc/soap</value>
   </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>Tilde MT systems are customized for your language pair and domain. To boost translation accuracy and quality, Tilde MT systems can also integrate your terminology. To develop a custom MT system, contact Tilde at: mt@tilde.com</value>
+  </data>
 </root>

@@ -75,7 +75,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(353, 58);
             this.label3.TabIndex = 10;
-            this.label3.Text = resources.GetString("label3.Text");
+            this.label3.Text = global::LetsMT.MTProvider.PluginResources.WelcomeText;
             // 
             // pictureBox1
             // 
