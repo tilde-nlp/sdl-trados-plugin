@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="PluginResources.Designer.cs">
+      <AutoGen>True</AutoGen>
       <DependentUpon>PluginResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
