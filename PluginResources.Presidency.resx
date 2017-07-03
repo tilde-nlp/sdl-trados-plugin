@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Plugin_Name" xml:space="preserve">
-    <value>Tilde Machine Translation Provider</value>
+    <value>Translate 2017</value>
   </data>
   <data name="WebServiceUrl" xml:space="preserve">
     <value>https://www.letsmt.eu/ws/service.svc/soap</value>
   </data>
   <data name="Plugin_Tooltip" xml:space="preserve">
-    <value>This provider retrieves machine translated text from the Tilde MT platform.</value>
+    <value>Translate 2017 is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union.</value>
   </data>
   <data name="Plugin_Description" xml:space="preserve">
     <value>A machine translation provider plug-in for performing translation with the Tilde MT platform.</value>
   </data>
   <data name="Plugin_NiceName" xml:space="preserve">
-    <value>Tilde Machine Translation Provider</value>
+    <value>Translate 2017</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="LetsMT_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
