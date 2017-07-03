@@ -148,9 +148,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 218);
+
+#if PRESIDENCY
+            this.label3.Location = new System.Drawing.Point(102, 10);
+            this.label3.Size = new System.Drawing.Size(263, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(80, 105);
+#endif
+#if (!PRESIDENCY)
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
-#if (!MTPRO)
+            this.Controls.Add(this.DemoLink);
+#endif
+#if LETSMT
             this.Controls.Add(this.getClientIdLinkLabel);
 #endif
             this.Controls.Add(this.label1);
@@ -158,7 +167,6 @@
             this.Controls.Add(this.apiUserIdTextBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.DemoLink);
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

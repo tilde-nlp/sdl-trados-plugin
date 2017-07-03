@@ -233,6 +233,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(12, 5);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(133, 37);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 25;
             this.pictureBox2.TabStop = false;
             // 
@@ -286,6 +287,14 @@
             // 
             // SettingsForm
             // 
+#if PRESIDENCY
+            this.pictureBox2.Size = new System.Drawing.Size(61, 75);
+            this.BusnesText.Location = new System.Drawing.Point(80, 29);
+#endif
+#if (!PRESIDENCY)
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
+#endif
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -297,7 +306,6 @@
             this.Controls.Add(this.qualityEstimateTextBox);
             this.Controls.Add(this.qualityEstimateCheckBox);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.logOutLinkLabel);
             this.Controls.Add(this.GroupLabel);
             this.Controls.Add(this.termsSelectionLabel);
@@ -307,7 +315,6 @@
             this.Controls.Add(this.targetSelectComboBox);
             this.Controls.Add(this.sourceSelectComboBox);
             this.Controls.Add(this.BusnesText);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.wndRunningSystems);
             this.Controls.Add(this.btnCancel);
