@@ -119,7 +119,7 @@
             this.Controls.Add(this.NoButton);
             this.Controls.Add(this.WrningTextLable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon)(global::LetsMT.MTProvider.PluginResources.LetsMT));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RetryWarningForm";
