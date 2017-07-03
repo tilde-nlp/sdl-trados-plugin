@@ -300,3 +300,6 @@ SDL_references/*.dll
 
 # The PluginResources.resx file is created automatically by the build process
 PluginResources.resx
+
+# Same for the pluginpackage.manifest.xml file
+pluginpackage.manifest.xml

@@ -49,12 +49,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == '' Or '$(Configuration)'=='v2011_Debug' Or '$(Configuration)'=='v2014_Debug' Or '$(Configuration)'=='v2015_Debug' Or '$(Configuration)'=='v2011_Release' Or '$(Configuration)'=='v2014_Release' Or '$(Configuration)'=='v2015_Release'">
     <PluginResourcesPath>PluginResources.Tildemt.resx</PluginResourcesPath>
+    <PluginManifestPath>pluginpackage.manifest.Tildemt.xml</PluginManifestPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='v2011_Debug_Mtpro' Or '$(Configuration)'=='v2014_Debug_Mtpro' Or '$(Configuration)'=='v2015_Debug_Mtpro' Or '$(Configuration)'=='v2011_Release_Mtpro' Or '$(Configuration)'=='v2014_Release_Mtpro' Or '$(Configuration)'=='v2015_Release_Mtpro'">
     <PluginResourcesPath>PluginResources.Mtpro.resx</PluginResourcesPath>
+    <PluginManifestPath>pluginpackage.manifest.Mtpro.xml</PluginManifestPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2011_Release_presidency' Or '$(Configuration)'=='v2014_Release_presidency' Or '$(Configuration)'=='v2015_Release_presidency'">
     <PluginResourcesPath>PluginResources.Presidency.resx</PluginResourcesPath>
+    <PluginManifestPath>pluginpackage.manifest.Presidency.xml</PluginManifestPath>
     <AssemblyName>Translate2017.MTProvider</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
@@ -211,6 +214,9 @@
     <Content Include="pluginpackage.manifest.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="pluginpackage.manifest.Tildemt.xml"/>
+    <None Include="pluginpackage.manifest.Mtpro.xml"/>
+    <None Include="pluginpackage.manifest.Presidency.xml"/>
     <None Include="Service References\LetsMTAPI\TranslationWCFService1.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -463,6 +469,7 @@ rem copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trado
     <!-- Copy the appropriate SDL references in SDL_references folder to match the Studio version we are building for. -->
     <CopyReferences BuildVersion="$(ConfigurationName)" DestinationFolder="$(ProjectDir)\SDL_references\" />
     <Copy SourceFiles="$(PluginResourcesPath)" DestinationFiles="PluginResources.resx" />
+    <Copy SourceFiles="$(PluginManifestPath)" DestinationFiles="pluginpackage.manifest.xml" />
   </Target>
   <Target Name="AfterBuild" DependsOnTargets="GeneratePluginManifestTarget">
     <!-- Modify the minversion and maxversion values in pluginpackage.manifest.xml to match the Studio version we are building for. -->
