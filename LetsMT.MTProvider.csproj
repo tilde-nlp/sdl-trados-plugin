@@ -475,7 +475,7 @@ rem copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trado
     <!-- Modify the minversion and maxversion values in pluginpackage.manifest.xml to match the Studio version we are building for. -->
     <!-- <UpdateManifest ManifestFile="$(ProjectDir)\pluginpackage.manifest.xml" BuildVersion="$(ConfigurationName)" />
     <CompressManifest ManifestFile="$(ProjectDir)\pluginpackage.manifest.xml" PluginFile="$(OutDir)\$(AssemblyName).sdlplugin" /> -->
-    <Exec Command="del &quot;%userprofile%\Virtualbox-shared\LetsMT.MTProvider.sdlplugin&quot;" />
-    <Exec Command="copy &quot;$(TargetDir)LetsMT.MTProvider.sdlplugin&quot; &quot;%userprofile%\Virtualbox-shared\&quot;" />
+    <!--<Exec Command="del &quot;%userprofile%\Virtualbox-shared\LetsMT.MTProvider.sdlplugin&quot;" />
+    <Exec Command="copy &quot;$(TargetDir)LetsMT.MTProvider.sdlplugin&quot; &quot;%userprofile%\Virtualbox-shared\&quot;" />-->
   </Target>
 </Project>
