@@ -175,6 +175,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Custom_targets\ManifestUpdateFile.targets" />
     <None Include="Custom_targets\ReferencesCopy.targets" />
     <None Include="README.md" />
     <None Include="Service References\LetsMTAPI\LetsMT.MTProvider.LetsMTAPI.Document.datasource">
@@ -470,6 +471,7 @@ rem copy $(ProjectDir)*.sdlplugin "%25userprofile%25\AppData\Local\SDL\SDL Trado
     <CopyReferences BuildVersion="$(ConfigurationName)" DestinationFolder="$(ProjectDir)\SDL_references\" />
     <Copy SourceFiles="$(PluginResourcesPath)" DestinationFiles="PluginResources.resx" />
     <Copy SourceFiles="$(PluginManifestPath)" DestinationFiles="pluginpackage.manifest.xml" />
+    <UpdateManifest ManifestFile="pluginpackage.manifest.xml" BuildVersion="$(ConfigurationName)" />
   </Target>
   <Target Name="AfterBuild" DependsOnTargets="GeneratePluginManifestTarget">
     <!-- Modify the minversion and maxversion values in pluginpackage.manifest.xml to match the Studio version we are building for. -->
