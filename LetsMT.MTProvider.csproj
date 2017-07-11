@@ -215,9 +215,9 @@
     <Content Include="pluginpackage.manifest.xml">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="pluginpackage.manifest.Tildemt.xml"/>
-    <None Include="pluginpackage.manifest.Mtpro.xml"/>
-    <None Include="pluginpackage.manifest.Presidency.xml"/>
+    <None Include="pluginpackage.manifest.Tildemt.xml" />
+    <None Include="pluginpackage.manifest.Mtpro.xml" />
+    <None Include="pluginpackage.manifest.Presidency.xml" />
     <None Include="Service References\LetsMTAPI\TranslationWCFService1.wsdl" />
   </ItemGroup>
   <ItemGroup>
