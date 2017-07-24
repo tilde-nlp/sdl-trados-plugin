@@ -58,7 +58,7 @@
   <PropertyGroup Condition="'$(Configuration)'=='v2011_Debug_presidency' Or '$(Configuration)'=='v2014_Debug_presidency' Or '$(Configuration)'=='v2015_Debug_presidency' Or '$(Configuration)'=='v2011_Release_presidency' Or '$(Configuration)'=='v2014_Release_presidency' Or '$(Configuration)'=='v2015_Release_presidency'">
     <PluginResourcesPath>PluginResources.Presidency.resx</PluginResourcesPath>
     <PluginManifestPath>pluginpackage.manifest.Presidency.xml</PluginManifestPath>
-    <AssemblyName>Translate2017.MTProvider</AssemblyName>
+    <AssemblyName>EUPresidencyTranslator.MTProvider</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
