@@ -335,7 +335,7 @@ namespace LetsMT.MTProvider
 
         private void PasswordForm_Load(object sender, EventArgs e)
         {
-            this.Text = string.Format("Tilde MT Authentication (v {0})", Assembly.GetExecutingAssembly().GetName().Version);
+            this.Text = string.Format("{0} (v {1})", PluginResources.PasswordFormTitle, Assembly.GetExecutingAssembly().GetName().Version);
         }
     }
 

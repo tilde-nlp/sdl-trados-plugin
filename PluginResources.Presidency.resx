@@ -163,4 +163,7 @@
   <data name="WelcomeText" xml:space="preserve">
     <value>EU Presidency Translator is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union. The EU Presidency Translator plug-in features the world’s best MT systems for Estonian, developed by Tilde. For technical support, contact us at support@translate2017.eu.</value>
   </data>
+  <data name="PasswordFormTitle" xml:space="preserve">
+    <value>Authentication</value>
+  </data>
 </root>
