@@ -149,6 +149,15 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tilde MT Authentication.
+        /// </summary>
+        public static string PasswordFormTitle {
+            get {
+                return ResourceManager.GetString("PasswordFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A machine translation provider plug-in for performing translation with the Tilde MT platform..
         /// </summary>
         public static string Plugin_Description {
@@ -194,7 +203,7 @@ namespace LetsMT.MTProvider {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Translate 2017 is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union. The Translate 2017 plug-in features the world’s best MT systems for Estonian, developed by Tilde. For technical support, contact us at support@translate2017.eu..
+        ///   Looks up a localized string similar to Tilde MT systems are customized for your language pair and domain. To boost translation accuracy and quality, Tilde MT systems can also integrate your terminology. To develop a custom MT system, contact Tilde at: mt@tilde.com.
         /// </summary>
         public static string WelcomeText {
             get {

@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Plugin_Name" xml:space="preserve">
-    <value>Translate 2017</value>
+    <value>EU Presidency Translator</value>
   </data>
   <data name="WebServiceUrl" xml:space="preserve">
     <value>https://www.letsmt.eu/ws/service.svc/soap</value>
   </data>
   <data name="Plugin_Tooltip" xml:space="preserve">
-    <value>Translate 2017 is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union.</value>
+    <value>EU Presidency Translator is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union.</value>
   </data>
   <data name="Plugin_Description" xml:space="preserve">
-    <value>A machine translation provider plug-in for performing translation with the Tilde MT platform.</value>
+    <value>A machine translation provider plug-in for EU Presidency.</value>
   </data>
   <data name="Plugin_NiceName" xml:space="preserve">
-    <value>Translate 2017</value>
+    <value>EU Presidency Translator</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="LetsMT_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -161,6 +161,9 @@
     <value>https://readymt.tilde.com/Account/LoginApp</value>
   </data>
   <data name="WelcomeText" xml:space="preserve">
-    <value>Translate 2017 is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union. The Translate 2017 plug-in features the world’s best MT systems for Estonian, developed by Tilde. For technical support, contact us at support@translate2017.eu.</value>
+    <value>EU Presidency Translator is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union. The EU Presidency Translator plug-in features the world’s best MT systems for Estonian, developed by Tilde. For technical support, contact us at support@translate2017.eu.</value>
+  </data>
+  <data name="PasswordFormTitle" xml:space="preserve">
+    <value>Authentication</value>
   </data>
 </root>

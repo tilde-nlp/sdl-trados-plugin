@@ -154,9 +154,9 @@ namespace LetsMT.MTProvider
         }
 
         //Adds a system to available system list for this profile, returns reference to the system
-        public CMtSystem AddSystem(string strSystemId, string strFriendlyName, string strFriendlyDescription, string strOnlineStatus)
+        public CMtSystem AddSystem(string strSystemId, string strFriendlyName, string strFriendlyDescription, string strOnlineStatus, bool qeAvailable)
         {
-            CMtSystem system = new CMtSystem(strSystemId, strFriendlyName, strFriendlyDescription, strOnlineStatus);
+            CMtSystem system = new CMtSystem(strSystemId, strFriendlyName, strFriendlyDescription, strOnlineStatus, qeAvailable);
 
             m_availableSystems.Add(system);
 

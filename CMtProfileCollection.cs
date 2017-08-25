@@ -58,14 +58,16 @@ namespace LetsMT.MTProvider
                // string strSysDescription = system.Metadata[0].
                 string strSysOnlineStatus = "unknown";
                 strSysDescription += "";
-                //Fill description field
+                bool qeTrained = false;
+                bool qeEnabled = false;
+                //Fill description field and find out whether QE is available
                 foreach (LetsMTAPI.ObjectProperty meta in system.Metadata)
                 {
                     if (meta.Key == "description")
                     {
                         strSysDescription += "Description: " + meta.Value + "\n";
                     }
-                    if ( meta.Key.StartsWith("score") && !(meta.Key.Contains("-c")))
+                    else if ( meta.Key.StartsWith("score") && !(meta.Key.Contains("-c")))
                     {
                         try
                         {
@@ -82,8 +84,17 @@ namespace LetsMT.MTProvider
                         catch {continue;}
              
                     }
+                    else if (meta.Key == "train-qe-model" && meta.Value == "true")
+                    {
+                        qeTrained = true;
+                    }
+                    else if (meta.Key == "enable-qe" && meta.Value == "true")
+                    {
+                        qeEnabled = true;
+                    }
 
                 }
+                bool qeAvailable = qeTrained && qeEnabled;
                 char[] charsToTrim = {',', ' '};
                 strSysDescription = strSysDescription.TrimEnd(charsToTrim);
 
@@ -126,7 +137,7 @@ namespace LetsMT.MTProvider
                     }
                 }
 
-                CMtSystem refSystem = refProfile.AddSystem(strSysId, strSysFriendlyName, strSysDescription, strSysOnlineStatus);
+                CMtSystem refSystem = refProfile.AddSystem(strSysId, strSysFriendlyName, strSysDescription, strSysOnlineStatus, qeAvailable);
 
                 m_systemList.Add(refSystem);
             }

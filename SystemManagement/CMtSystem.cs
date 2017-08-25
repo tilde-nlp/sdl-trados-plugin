@@ -14,13 +14,16 @@ namespace LetsMT.MTProvider
         private string m_systemFriendlyDescription;
         //Online status
         private string m_systemOnlineStatus;
+        //Shows whether the Quality Estimation feature is trained and enabled for the system
+        private bool m_qeAvailable;
 
-        public CMtSystem(string strSystemId, string strFriendlyName, string strFriendlyDescription, string strOnlineStatus)
+        public CMtSystem(string strSystemId, string strFriendlyName, string strFriendlyDescription, string strOnlineStatus, bool qeAvailable)
         {
             m_systemId = strSystemId;
             m_systemFriendlyName = strFriendlyName;
             m_systemFriendlyDescription = strFriendlyDescription;
             m_systemOnlineStatus = strOnlineStatus;
+            m_qeAvailable = qeAvailable;
         }
 
         //Returns true if this system has the needed id
@@ -45,6 +48,11 @@ namespace LetsMT.MTProvider
         public string GetOnlineStatus()
         {
             return m_systemOnlineStatus;
+        }
+
+        public bool GetQeAvailability()
+        {
+            return m_qeAvailable;
         }
 
         //Returns system as list item for listbox

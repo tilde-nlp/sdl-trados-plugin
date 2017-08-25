@@ -36,6 +36,25 @@ namespace LetsMT.MTProvider
         private bool m_trackGoupChange;
         public bool TranslationProviderInitialized { get; private set; }
 
+        /// <summary>
+        /// Indicates whether qe checkbox should be checked for systems
+        /// that support the feature. To ilustrate -
+        /// 1) qe is available for a system;
+        /// 2) user checks qe, qeWasCheckedWhenAvailable is set to true;
+        /// 3) user switches to another system for which qe is not available, qe gets un-checked;
+        /// 4) user switches to another system for which qe is available;
+        /// 5) qe gets checked because qeWasCheckedWhenAvailable is true;
+        /// 6) if user un-checks qe, qeWasCheckedWhenAvailable gets set to false.
+        ///
+        /// All this is done because the qe setting is global (instead of per-system), but
+        /// we still wan't to enable some persistence for the setting when switching among systems.
+        /// </summary>
+        private bool qeWasCheckedWhenAvailable;
+        /// <summary>
+        /// While dealing with <see cref="qeWasCheckedWhenAvailable"/> allows to distunguish when the qe checkbox was checked by the user.
+        /// </summary>
+        private bool qeCheckedProgrammatically;
+
 
         /// <summary>
         /// Dictionary with source language code as a key and a tuple of source language name and a list of target language code and name tuples as value.
@@ -118,6 +137,7 @@ namespace LetsMT.MTProvider
             qualityEstimateTextBox.Text = editProvider.m_minAllowedQualityEstimateScore.ToString();
             qualityEstimateCheckBox.Checked = editProvider.m_useQualityEstimates;
             qualityEstimateTextBox.Enabled = editProvider.m_useQualityEstimates;
+            qeWasCheckedWhenAvailable = editProvider.m_useQualityEstimates;
 
 
             //fill the system list
@@ -376,6 +396,14 @@ namespace LetsMT.MTProvider
                 string systemId = item.Value.ToString();
                 string profileId = getSelectedProfileId();
 
+                CMtSystem selectedSystem = m_translationProvider.m_profileCollection.GetSystemById(systemId);
+                bool qeAvailable = selectedSystem.GetQeAvailability();
+                qualityEstimateCheckBox.Enabled = qeAvailable;
+                qualityEstimateTextBox.Enabled = qeAvailable;
+                qeCheckedProgrammatically = true;
+                qualityEstimateCheckBox.Checked = qeAvailable && qeWasCheckedWhenAvailable;
+                qeCheckedProgrammatically = false;
+
                 termCorporaSelectComboBox.Items.Clear();
                 termCorporaSelectComboBox.Text = "";
 
@@ -469,7 +497,7 @@ namespace LetsMT.MTProvider
 
             ListItem item = wndProfileProperties.Items[idx] as ListItem;
 
-            string strNewValue = (e.NewValue == CheckState.Checked)?item.Value:"";
+            string strNewValue = (e.NewValue == CheckState.Checked) ? item.Value : "";
 
             if (m_checkedState.ContainsKey(profileId))
                 m_checkedState[profileId] = strNewValue;
@@ -604,6 +632,10 @@ namespace LetsMT.MTProvider
         private void qualityEstimateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             qualityEstimateTextBox.Enabled = qualityEstimateCheckBox.Checked;
+            if (!qeCheckedProgrammatically)
+            {
+                qeWasCheckedWhenAvailable = qualityEstimateCheckBox.Checked;
+            }
         }
     }
 
