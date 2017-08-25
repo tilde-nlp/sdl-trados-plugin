@@ -288,7 +288,11 @@ namespace LetsMT.MTProvider
         {
             if (string.IsNullOrEmpty(apiUserIdTextBox.Text.Trim()))
             {
-                MessageBox.Show(@"Please provide a valid Client ID. To retrieve your Client ID click ""Get my Client ID"" below.");
+#if PRESIDENCY
+                MessageBox.Show("Please provide a valid Client ID. To retrieve your Client ID please contact support@translate2017.eu");
+#else
+                MessageBox.Show("Please provide a valid Client ID. To retrieve your Client ID click \"Get my Client ID\" below.");
+#endif
                 return;
             }
             // stop listening if user hasnt finished authentication procedure and has entered the userId manually
@@ -339,7 +343,7 @@ namespace LetsMT.MTProvider
         }
     }
 
-    #region helper class
+#region helper class
     public class RunState : INotifyPropertyChanged
     {
         private bool _canceled;
@@ -359,5 +363,5 @@ namespace LetsMT.MTProvider
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
-    #endregion
+#endregion
 }
