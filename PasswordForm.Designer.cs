@@ -153,7 +153,7 @@
             this.label3.Location = new System.Drawing.Point(102, 25);
             this.label3.Size = new System.Drawing.Size(263, 100);
             this.pictureBox1.Location = new System.Drawing.Point(15, 25);
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.Size = new System.Drawing.Size(80, 61);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.apiUserIdTextBox.Location = new System.Drawing.Point(15, 144);
             this.label1.Location = new System.Drawing.Point(12, 123);
