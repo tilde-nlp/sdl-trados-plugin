@@ -124,7 +124,7 @@
     <value>https://www.letsmt.eu/ws/service.svc/soap</value>
   </data>
   <data name="Plugin_Tooltip" xml:space="preserve">
-    <value>EU Presidency Translator is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union.</value>
+    <value>EU Presidency Translator is an automated translation service specially designed for the 2018 Bulgarian Presidency of the Council of the European Union.</value>
   </data>
   <data name="Plugin_Description" xml:space="preserve">
     <value>A machine translation provider plug-in for EU Presidency.</value>
@@ -161,7 +161,7 @@
     <value>https://readymt.tilde.com/Account/LoginApp</value>
   </data>
   <data name="WelcomeText" xml:space="preserve">
-    <value>EU Presidency Translator is an automated translation service specially designed for the 2017 Estonian Presidency of the Council of the European Union. The EU Presidency Translator plug-in features the world’s best MT systems for Estonian, developed by Tilde. For technical support, contact us at support@translate2017.eu.</value>
+    <value>EU Presidency Translator is an automated translation service specially designed for the 2018 Bulgarian Presidency of the Council of the European Union. The EU Presidency Translator plug-in provides AI-powered automated translation through custom translation engines developed by Tilde, backed up by the European Commission's eTranslation system. For technical support, contact us at info@translate2018.eu.</value>
   </data>
   <data name="PasswordFormTitle" xml:space="preserve">
     <value>Authentication</value>

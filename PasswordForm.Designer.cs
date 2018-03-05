@@ -48,7 +48,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(304, 186);
+            this.btnCancel.Location = new System.Drawing.Point(344, 186);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 6;
@@ -73,7 +73,7 @@
             this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(12, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(353, 58);
+            this.label3.Size = new System.Drawing.Size(393, 58);
             this.label3.TabIndex = 10;
             this.label3.Text = global::LetsMT.MTProvider.PluginResources.WelcomeText;
             // 
@@ -90,12 +90,12 @@
             // 
             this.apiUserIdTextBox.Location = new System.Drawing.Point(15, 134);
             this.apiUserIdTextBox.Name = "apiUserIdTextBox";
-            this.apiUserIdTextBox.Size = new System.Drawing.Size(270, 20);
+            this.apiUserIdTextBox.Size = new System.Drawing.Size(310, 20);
             this.apiUserIdTextBox.TabIndex = 13;
             // 
             // goButton
             // 
-            this.goButton.Location = new System.Drawing.Point(304, 132);
+            this.goButton.Location = new System.Drawing.Point(344, 132);
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(61, 23);
             this.goButton.TabIndex = 14;
@@ -147,17 +147,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 218);
+            this.ClientSize = new System.Drawing.Size(415, 218);
 
 #if PRESIDENCY
             this.label3.Location = new System.Drawing.Point(102, 25);
-            this.label3.Size = new System.Drawing.Size(263, 100);
+            this.label3.Size = new System.Drawing.Size(303, 100);
             this.pictureBox1.Location = new System.Drawing.Point(15, 25);
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.Size = new System.Drawing.Size(80, 61);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.apiUserIdTextBox.Location = new System.Drawing.Point(15, 144);
             this.label1.Location = new System.Drawing.Point(12, 123);
-            this.goButton.Location = new System.Drawing.Point(304, 142);
+            this.goButton.Location = new System.Drawing.Point(344, 142);
 #endif
 #if (!PRESIDENCY)
             this.Controls.Add(this.label2);
